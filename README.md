@@ -26,274 +26,209 @@
 
 ---
 
-## Why ASIT?
+## Overview
 
-Starting a new aircraft development program requires transforming engineering knowledge into **certifiable, configuration-aware technical publications**. ASIT provides:
+**AEROSPACEMODEL-ASIT-ASIGT** is a **standards-native aerospace information framework** that transforms **validated engineering knowledge** into **operational, certifiable digital information**.
 
-| Challenge | ASIT Capability |
-|-----------|------------------|
-| S1000D compliance is complex | Templates + schema validation + BREX-style rule enforcement |
-| Certification traceability | Deterministic trace matrices and evidence bundles |
-| Multiple publication types (AMM, SRM, CMM, IPC, SB) | Unified pipeline + contract model |
-| Reproducible builds for audits | Immutable run evidence with hashes/manifests |
-| Program-specific business rules | Extensible rule engine (applicability, naming, quality gates) |
-| ATA chapter organization | ATA iSpec 2200-aligned scoping and mapping |
+It is composed of two strictly separated but tightly integrated layers:
 
-### Who Is This For?
+- **ASIT — Aircraft Systems Information Transponder**  
+  The **structural, governance, and lifecycle authority layer**
 
-- OEMs starting new aircraft programs
-- MROs building publication + sustainment pipelines
-- Tier-1 suppliers delivering component documentation
-- Startups in eVTOL/UAM/hydrogen aviation
-- Certification and compliance engineering teams
+- **ASIGT — Aircraft Systems Information Generative Transponder**  
+  The **content generation layer**, operating *exclusively under ASIT control*
+
+> **ASIT defines the information universe.  
+> ASIGT generates content inside it.**
 
 ---
 
-## Key Principles
+## What Problem It Solves
 
-### 1) Authority Boundary (Non-Authoritative by Design)
+Aerospace programs struggle not with *lack of data*, but with:
 
-ASIT is a **non-authoritative transformer**. It must never corrupt or overwrite your truth sources.
+- Loss of traceability between engineering and operations  
+- Manual, error-prone publication generation  
+- Governance gaps between design, certification, and MRO  
+- Reinterpretation of engineering intent in downstream documents  
 
-**ASIT MUST NOT**
-- write to `KDB/LM/SSOT/**`
-- bypass governance by running ad-hoc transforms outside contracts
-
-**ASIT MAY**
-- read from `KDB/LM/SSOT/**` (authoritative inputs)
-- read contextual inputs from `IDB/OPS/LM/**` (operator/config/MRO context)
-- write only to:
-  - `IDB/**` (projections)
-  - `runs/**` (immutable evidence)
-
-### 2) Contract-First Execution
-
-ASIT runs only what a contract authorizes:
-
-- **Contract** = what to transform, what inputs are allowed, what outputs are produced, what gates must pass, what evidence is required
-- **Pipeline** = how steps execute
-- **Rules** = applicability, mapping, validations, naming constraints
-
-### 3) Deterministic Evidence
-
-Every run produces an immutable evidence package:
-
-- INPUT_MANIFEST (hashes, counts, lineage)
-- OUTPUT_MANIFEST (artifacts + hashes)
-- TRACE_MATRIX (trace coverage)
-- VALIDATION_REPORT (BREX/schema/quality gates)
-- METRICS + logs
+**ASIT-ASIGT eliminates these breaks** by enforcing a single, governed digital thread from **SSOT engineering truth** to **operational information products**.
 
 ---
 
-## Quick Start
+## Core Principle
 
-### Install
+> **No content is generated unless the structure, authority, and lifecycle state are defined.**
 
-```bash
-pip install aerospacemodel-asit
-asit --version
-asit doctor
+ASIGT **cannot operate standalone**.  
+It executes **only** through ASIT contracts, baselines, and governance rules.
+
+---
+
+## Architecture at a Glance
+
+```text
+Validated Engineering Knowledge (SSOT)
+        │
+        ▼
+┌──────────────────────────┐
+│          ASIT            │
+│  Governance · Structure  │
+│  Lifecycle · Contracts   │
+│  Authority & Baselines   │
+└───────────┬──────────────┘
+            │ invokes
+            ▼
+┌──────────────────────────┐
+│         ASIGT            │
+│  Governed Content        │
+│  Generation Engine       │
+│  (S1000D / IETP / Ops)   │
+└───────────┬──────────────┘
+            │ produces
+            ▼
+Operational Digital Information
+(AMM, SRM, CMM, IPC, SB, IETP, Ops Data)
 ````
 
-### Initialize a Program Workspace
+---
 
-```bash
-asit init \
-  --program "MyAircraft" \
-  --model-code "MA" \
-  --s1000d-issue "5.0" \
-  --ata-scope "21-80" \
-  --output ./MyAircraft-ASIT
-```
+## ASIT — Aircraft Systems Information Transponder
 
-### Execute a Contract (Example)
+**ASIT is the authoritative layer.**
 
-```bash
-cd MyAircraft-ASIT
-asit run --contract KITDM-CTR-LM-CSDB_ATA28-10-00 --verbose
-```
+It defines:
+
+* ATA iSpec 2200–aligned **system structure**
+* Lifecycle partitioning (LC01–LC14)
+* SSOT ownership and baselining
+* Contract-driven transformations
+* Change control, approvals, and traceability rules
+
+ASIT answers the questions:
+
+* *What is allowed to propagate?*
+* *From which baseline?*
+* *Under which authority?*
+* *For which lifecycle state?*
 
 ---
 
-## Architecture
+## ASIGT — Aircraft Systems Information Generative Transponder
 
-### The KDB → IDB Model
+**ASIGT is the content materialization layer.**
 
-ASIT implements a governed transformation model:
+It performs **governed generation** of:
 
-* **KDB (Knowledge Data Base)**: authoritative truth
-* **IDB (Information Data Base)**: projections for consumption (PUB/OPS/INDEX)
-* **ASIT**: contract-driven transformer + evidence generator
+* S1000D Data Modules (DM, PM, DML)
+* Publication structures (AMM, SRM, CMM, IPC, SB)
+* IETP runtime packages
+* Applicability-filtered operational views
 
-```
-KDB/LM/SSOT/PLM (Truth) ──▶ ASIT (Contracts + Pipelines + Rules) ──▶ IDB (Projections)
-                                   │
-                                   └────────▶ runs/ (Immutable Evidence)
-```
+ASIGT answers the question:
 
-### Two Deployment Modes
+* *How is approved knowledge transformed into executable information?*
 
-1. **Product Mode (this repo/package):** provides engine, CLI, templates, schemas, validators
-2. **Subject Mode (inside an ATA subject):** `.../<subject>/ASIT/` executes transformations for that subject with strict authority boundaries
+### Key Constraint (certification-safe)
+
+> **ASIGT does not define scope, structure, or configuration.
+> It executes only within ASIT-approved contracts and baselines.**
 
 ---
 
-## Repository Structure (Product Mode)
+## Standards Alignment
 
-```
-AEROSPACEMODEL-ASIT/
-├── README.md
-├── LICENSE
-├── pyproject.toml
+| Domain                 | Standard                           |
+| ---------------------- | ---------------------------------- |
+| Technical Publications | **S1000D (Issue 4.x / 5.0)**       |
+| System Structure       | **ATA iSpec 2200**                 |
+| Systems Engineering    | **ARP4754A**                       |
+| Safety                 | **ARP4761**                        |
+| Software Assurance     | **DO-178C (traceability support)** |
+| Quality                | **AS9100-compatible governance**   |
+
+---
+
+## What ASIT-ASIGT Produces
+
+* **Audit-ready S1000D CSDB content**
+* **Traceable operational procedures**
+* **Configuration-specific publications**
+* **IETP-ready digital information**
+* **Certification and MRO evidence continuity**
+
+All outputs carry:
+
+* Provenance
+* Baseline reference
+* Contract ID
+* Traceability metadata
+
+---
+
+## Repository Structure (Canonical)
+
+```text
+AEROSPACEMODEL-ASIT-ASIGT/
 │
-├── src/
-│   └── asit/
-│       ├── cli.py
-│       ├── engine.py
-│       ├── contracts.py
-│       ├── pipelines.py
-│       ├── rules.py
-│       ├── validators/
-│       │   ├── brex.py
-│       │   ├── schema.py
-│       │   └── trace.py
-│       ├── generators/
-│       │   ├── dm.py
-│       │   ├── pm.py
-│       │   └── dml.py
-│       └── utils/
-│           ├── hashing.py
-│           ├── xml.py
-│           └── archive.py
+├── ASIT/                 # Governance, structure, lifecycle authority
+│   ├── GOVERNANCE/
+│   ├── INDEX/
+│   ├── CONTRACTS/
+│   └── ASIT_CORE.md
 │
-├── schemas/
-│   ├── s1000d/
-│   │   ├── 5.0/
-│   │   ├── 4.2/
-│   │   └── 4.1/
-│   └── ata/
-│       └── ispec2200/
+├── ASIGT/                # Content generation layer (invoked by ASIT)
+│   ├── generators/
+│   ├── brex/
+│   ├── s1000d_templates/
+│   └── ASIGT_CORE.md
 │
-├── templates/
-│   ├── program/
-│   ├── pipelines/
-│   ├── rules/
-│   ├── s1000d/
-│   └── ata/
-│
-├── examples/
+├── pipelines/            # ASIT-controlled pipelines invoking ASIGT
+├── schemas/              # S1000D / ATA references
 ├── docs/
-├── tests/
-└── .github/workflows/
+└── README.md
 ```
 
 ---
 
-## Configuration
+## Who This Is For
 
-### Master Configuration (`asit_config.yaml`)
-
-`asit_config.yaml` defines: program identifiers, S1000D issue, ATA scope, source roots, output targets, validation thresholds, archival policy.
-
-Key requirements for audit-safe operation:
-
-* all source roots are **read-only**
-* outputs are restricted to **IDB/** (or configured output root)
-* `runs/` evidence is immutable
+* Aircraft OEMs (new or derivative programs)
+* Advanced air mobility and hydrogen aircraft developers
+* MRO organizations modernizing digital publications
+* Tier-1 suppliers delivering certifiable documentation
+* Certification and compliance engineering teams
 
 ---
 
-## Contracts
+## Key Differentiator
 
-Contracts define **what** gets transformed and the governance constraints.
+**ASIT-ASIGT is not content generation.
+It is generation under authority.**
 
-### Canonical Contract Naming (Recommended)
+There is no reinterpretation layer, no manual rewrite, no uncontrolled propagation.
 
-Subject-level (ATAxx-yy-00 scope):
-
-* `KITDM-CTR-LM-CSDB_ATA28-10-00.yaml`
-* `KITDM-CTR-LM-EXPORT_ATA28-10-00.yaml`
-* `KITDM-CTR-LM-IETP_ATA28-10-00.yaml`
-* `KITDM-CTR-OPS-SB_ATA28-10-00.yaml`
-* `KITDM-CTR-OPS-REPAIR_ATA28-10-00.yaml`
-
-System-level aggregators (optional, if you define them explicitly):
-
-* `KITDM-CTR-LM-CSDB_ATA28.yaml` (aggregates subject outputs)
-
-### Contract Lifecycle
-
-```
-DRAFT → REVIEW → APPROVED → SUPERSEDED
-```
-
-ASIT executes **only APPROVED** contracts unless explicitly overridden in a controlled environment.
-
----
-
-## Pipelines
-
-Pipelines define **how** transformations execute: load → resolve refs → applicability → transform → validate → trace → archive.
-
-Pipelines are deterministic when:
-
-* inputs are fixed (by contract)
-* ordering is stable
-* hashing is enforced
-* outputs are produced via templates/rules only
-
----
-
-## BREX / Rules Customization
-
-ASIT supports a BREX-style rule structure for:
-
-* structure constraints
-* naming constraints
-* reference resolution requirements
-* program custom rules (e.g., H2 safety warnings)
-
-Rule outcomes must be captured in `VALIDATION_REPORT`.
-
----
-
-## Examples
-
-* `examples/minimal/` minimal traceable AMM output
-* `examples/regional_jet/` multi-chapter pipeline
-* `examples/evtol/` custom chapter extensions
-* `examples/hydrogen_aircraft/` H2 safety rules and cryogenic procedures
-
----
-
-## CLI Reference
-
-```bash
-asit init --program <name> --model-code <code> [options]
-asit run --contract <contract-id> [--dry-run] [--verbose]
-asit validate --contract <contract-id>
-asit list contracts|pipelines|runs|chapters
-asit show contract|pipeline|run <id>
-asit export --run <run-id> --format csv|json|pdf
-asit verify --run <run-id>
-asit doctor
-```
+What operations consume is a **direct, governed projection of validated engineering knowledge**.
 
 ---
 
 ## License
 
-Creative Commons Zero v1.0 Universal — See `LICENSE`.
+Apache License 2.0
 
 ---
 
-## Support
+## Final Statement
 
-Project support channels are intentionally not hardcoded here unless the endpoints are operational.
-If you publish official support endpoints, list them in `docs/getting-started.md` and keep this section minimal.
+**AEROSPACEMODEL-ASIT-ASIGT** establishes a new category:
 
----
+> **The aerospace information transponder stack**
+> — structure by ASIT, content by ASIGT, truth preserved end-to-end.
+
+```
+```
+
+
 
 <p align="center">
   <strong>AEROSPACEMODEL-ASIT</strong><br/>
