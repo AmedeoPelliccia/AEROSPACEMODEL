@@ -100,7 +100,7 @@ Operational Digital Information
 It defines:
 
 * ATA iSpec 2200–aligned **system structure**
-* Lifecycle partitioning (LC01–LC14)
+* Lifecycle partitioning 
 * SSOT ownership and baselining
 * Contract-driven transformations
 * Change control, approvals, and traceability rules
