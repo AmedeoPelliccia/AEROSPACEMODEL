@@ -502,7 +502,7 @@ pipeline:
           inputs:
             dt_state: "${dt_state}"
             dt_health_status: "${dt_health_status}"
-            thresholds: "${config.health_thresholds}"
+            thresholds: "${pipeline.digital_twin.health_thresholds}"
           outputs:
             - "health_evaluation"
             - "components_requiring_attention"
