@@ -205,7 +205,7 @@ ASIT-controlled pipelines define complete transformation workflows for generatin
 
 ### Digital Twin Documentation Pipeline
 
-The **DT Documentation Pipeline** (`dt_documentation_pipeline.yaml`) integrates Digital Twin capabilities with documentation generation, supporting:
+The **DT Documentation Pipeline** (`pipelines/dt_documentation_pipeline.yaml`) integrates Digital Twin capabilities with documentation generation, supporting:
 
 **Condition-Based Documentation**
 - Dynamic Maintenance Tasks — Maintenance procedures generated based on real-time health status
