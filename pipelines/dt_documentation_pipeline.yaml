@@ -51,7 +51,7 @@ pipeline:
     s1000d_issue: "5.0"
     
     # Pipeline ownership
-    owner: "STK_DT"
+    owner: "STK_ENG"
     maintainer: "Digital Twin Engineering"
     
     # Timestamps
@@ -82,15 +82,12 @@ pipeline:
       - "baseline_ref"
       - "scope.ata_chapters"
       - "scope.effectivity"
-      - "scope.dt_integration"
       - "authority.approved_by"
-      - "authority.dt_authority"
     
     # Contract validation
     validation:
       check_baseline_exists: true
       check_authority_valid: true
-      check_dt_authority: true
       check_scope_coverage: true
 
   # ---------------------------------------------------------------------------
@@ -175,8 +172,10 @@ pipeline:
           name: "Initialize Digital Twin Connection"
           action: "dt.connect"
           inputs:
-            endpoint: "${config.dt_endpoint}"
-            credentials: "${config.dt_credentials}"
+            endpoint: "${pipeline.digital_twin.connection.endpoint}"
+            protocol: "${pipeline.digital_twin.connection.protocol}"
+            authentication: "${pipeline.digital_twin.connection.authentication}"
+            timeout_seconds: "${pipeline.digital_twin.connection.timeout_seconds}"
           outputs:
             - "dt_connection"
             - "dt_session_id"
@@ -1047,11 +1046,21 @@ pipeline:
           action: "trace.export"
           inputs:
             trace_matrix: "${trace_matrix}"
-            dt_trace_matrix: "${dt_trace_matrix}"
             output_path: "${run_directory}/TRACE_MATRIX.csv"
             format: "csv"
           outputs:
             - "trace_matrix_file"
+          on_failure: "warn"
+          
+        - step: "export_dt_trace_matrix"
+          name: "Export Digital Twin Trace Matrix"
+          action: "trace.export"
+          inputs:
+            trace_matrix: "${dt_trace_matrix}"
+            output_path: "${run_directory}/DT_TRACE_MATRIX.csv"
+            format: "csv"
+          outputs:
+            - "dt_trace_matrix_file"
           on_failure: "warn"
 
     # -------------------------------------------------------------------------
