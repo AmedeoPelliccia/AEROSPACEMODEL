@@ -226,7 +226,7 @@ def run_certification_demo() -> dict:
     # Load requirements and contract
     print_section("Loading Certification Context")
     contract_file = DEMO_DIR / "ASIT" / "CONTRACTS" / "active" / "DT-CTR-CERT-001.yaml"
-    contract_data = load_yaml_file(contract_file)
+    load_yaml_file(contract_file)
     
     req_file = DEMO_DIR / "KDB" / "requirements" / "digital_twin_requirements.yaml"
     req_data = load_yaml_file(req_file)
