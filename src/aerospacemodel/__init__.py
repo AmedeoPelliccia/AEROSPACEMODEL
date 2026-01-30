@@ -12,6 +12,8 @@ Architecture:
             Governance, structure, lifecycle authority
     - ASIGT: Aircraft Systems Information Generative Transponder
              Content generation under ASIT control
+    - TDMS: Total Document Management System
+            Hybrid human+machine dual-plane representation
 
 Quick Start:
     >>> from aerospacemodel import ASIT, ASIGT, Contract
@@ -28,10 +30,22 @@ Quick Start:
     ...     print(f"Generated {result.output_count} artifacts")
     ...     print(f"Trace coverage: {result.trace_coverage}%")
 
+TDMS Usage (Total Document Management System):
+    >>> from aerospacemodel.tdms import HumanPlane, MachinePlane, TDMSConverter
+    >>> 
+    >>> # Load from human-readable YAML (source of truth)
+    >>> human = HumanPlane.load("contract.yaml")
+    >>> 
+    >>> # Convert to token-efficient format for AI agents
+    >>> converter = TDMSConverter()
+    >>> machine = converter.to_machine_plane(human)
+    >>> machine.to_tsv("contract_compact.tsv")
+
 CLI Usage:
     $ aerospacemodel init --program "MyAircraft" --model-code "MA"
     $ aerospacemodel run --contract KITDM-CTR-LM-CSDB_ATA28
     $ aerospacemodel validate --contract KITDM-CTR-LM-CSDB_ATA28
+    $ aerospacemodel tdms convert --input contract.yaml --output compact.tsv
 
 Constraint:
     ASIGT cannot operate standalone. It executes ONLY through
@@ -93,6 +107,27 @@ from aerospacemodel.exceptions import (
 )
 
 # ═══════════════════════════════════════════════════════════════════════════
+# TDMS — Total Document Management System (Human + Machine Planes)
+# ═══════════════════════════════════════════════════════════════════════════
+
+from aerospacemodel.tdms import (
+    HumanPlane,
+    MachinePlane,
+    PlaneType,
+    TDMSConverter,
+    ConversionResult,
+    ConversionStatus,
+    TDMSDictionary,
+    DictionaryRegistry,
+    DictionaryType,
+    TSVFormat,
+    CSVFormat,
+    LineProtocolFormat,
+    FormatType,
+    TDMSError,
+)
+
+# ═══════════════════════════════════════════════════════════════════════════
 # PUBLIC API
 # ═══════════════════════════════════════════════════════════════════════════
 
@@ -118,6 +153,22 @@ __all__ = [
     "RunStatus",
     "ValidationReport",
     "TraceMatrix",
+    
+    # TDMS (Total Document Management System)
+    "HumanPlane",
+    "MachinePlane",
+    "PlaneType",
+    "TDMSConverter",
+    "ConversionResult",
+    "ConversionStatus",
+    "TDMSDictionary",
+    "DictionaryRegistry",
+    "DictionaryType",
+    "TSVFormat",
+    "CSVFormat",
+    "LineProtocolFormat",
+    "FormatType",
+    "TDMSError",
     
     # Exceptions
     "AerospaceModelError",
