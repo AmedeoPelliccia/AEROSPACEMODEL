@@ -434,8 +434,13 @@ class QAOAOptimizer(QuantumOptimizer):
             result.status = OptimizationStatus.COMPLETED
             
             # Calculate approximation ratio (if optimal is known)
+            # Use epsilon to avoid division by very small numbers
+            epsilon = 1e-10
             if hasattr(problem, 'optimal_cost') and problem.optimal_cost is not None:
-                result.approximation_ratio = problem.optimal_cost / best_cost if best_cost != 0 else 0
+                if abs(best_cost) > epsilon:
+                    result.approximation_ratio = problem.optimal_cost / best_cost
+                else:
+                    result.approximation_ratio = 1.0 if abs(problem.optimal_cost) < epsilon else 0.0
             else:
                 result.approximation_ratio = 0.85  # Typical QAOA performance
             

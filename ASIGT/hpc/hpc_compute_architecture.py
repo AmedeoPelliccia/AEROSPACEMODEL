@@ -550,23 +550,35 @@ class AgenticHPCScheduler:
         return allocated
 
     def _topological_sort_stages(self, stages: List[WorkflowStage]) -> List[WorkflowStage]:
-        """Topologically sort workflow stages based on dependencies."""
-        # Simple implementation - could be optimized
+        """
+        Topologically sort workflow stages based on dependencies.
+        
+        Raises:
+            ValueError: If circular dependency is detected
+        """
         sorted_stages = []
         remaining = list(stages)
         completed_ids: Set[str] = set()
 
         while remaining:
+            # Find a stage with all dependencies satisfied
+            found = False
             for stage in remaining:
                 if all(dep in completed_ids for dep in stage.dependencies):
                     sorted_stages.append(stage)
                     completed_ids.add(stage.stage_id)
                     remaining.remove(stage)
+                    found = True
                     break
-            else:
-                # Circular dependency detected
-                logger.error("Circular dependency detected in workflow stages")
-                break
+            
+            if not found:
+                # Circular dependency or missing dependency
+                remaining_ids = [s.stage_id for s in remaining]
+                logger.error(f"Circular dependency detected. Remaining stages: {remaining_ids}")
+                raise ValueError(
+                    f"Circular dependency detected in workflow stages. "
+                    f"Cannot schedule: {remaining_ids}"
+                )
 
         return sorted_stages
 

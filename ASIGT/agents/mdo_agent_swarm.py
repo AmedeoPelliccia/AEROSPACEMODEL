@@ -920,14 +920,16 @@ class MDOSwarmOrchestrator:
 
     def _select_next_generation(self) -> None:
         """Select configurations for next generation using tournament selection."""
+        import random
+        
         # Keep top Pareto front
         next_gen = [c for c in self.population if c.pareto_rank == 1]
 
         # Fill remaining slots with tournament selection
         while len(next_gen) < self.population_size:
-            # Tournament selection
-            candidates = [self.population[i] for i in
-                          [int(len(self.population) * (j / 4)) for j in range(4)]]
+            # Tournament selection with proper random sampling
+            tournament_size = min(4, len(self.population))
+            candidates = random.sample(self.population, tournament_size)
             winner = min(candidates, key=lambda c: c.pareto_rank)
             next_gen.append(winner)
 
@@ -947,8 +949,37 @@ class MDOSwarmOrchestrator:
                         break
 
     def _check_convergence(self, threshold: float) -> bool:
-        """Check if optimization has converged."""
-        # Simplified convergence check - could be enhanced
+        """
+        Check if optimization has converged based on Pareto front stability.
+        
+        Args:
+            threshold: Minimum change in best fitness to continue
+            
+        Returns:
+            True if converged, False otherwise
+        """
+        if len(self.pareto_front) == 0:
+            return False
+            
+        # Check if Pareto front is stable
+        current_front = [c for c in self.population if c.pareto_rank == 1]
+        
+        if len(current_front) > 0:
+            # Calculate average fitness of current front
+            avg_fitness = sum(c.fitness for c in current_front) / len(current_front)
+            
+            # Store for comparison if not yet stored
+            if not hasattr(self, '_last_avg_fitness'):
+                self._last_avg_fitness = avg_fitness
+                return False
+            
+            # Check for convergence
+            change = abs(avg_fitness - self._last_avg_fitness)
+            self._last_avg_fitness = avg_fitness
+            
+            if change < threshold:
+                return True
+                
         return False
 
     def _log_orchestrator_decision(self, action: str, reasoning: str) -> None:
