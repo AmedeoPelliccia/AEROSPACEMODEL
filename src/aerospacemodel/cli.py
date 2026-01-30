@@ -399,6 +399,280 @@ def doctor(ctx: click.Context) -> None:
     console.print()
     console.print("[dim]ASIT  — Governance layer ready[/dim]")
     console.print("[dim]ASIGT — Generation layer ready (requires ASIT contract)[/dim]")
+    console.print("[dim]TDMS  — Total Document Management System ready[/dim]")
+    console.print()
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# TDMS COMMAND GROUP (Total Document Management System)
+# ═══════════════════════════════════════════════════════════════════════════
+
+@cli.group()
+@click.pass_context
+def tdms(ctx: click.Context) -> None:
+    """
+    TDMS — Total Document Management System
+    
+    Hybrid human + machine dual-plane document representation.
+    
+    \b
+    Two Planes:
+      Human Plane   — YAML/JSON/XML (authoritative, editable)
+      Machine Plane — TSV/CSV (token-efficient, for AI agents)
+    
+    \b
+    Key Principle:
+      Human Plane = Source of Truth
+      Machine Plane = Derived View for loops and agents
+    """
+    pass
+
+
+@tdms.command("convert")
+@click.option("--input", "-i", "input_path", required=True, type=click.Path(exists=True, path_type=Path), help="Input file (YAML/JSON/TSV/CSV).")
+@click.option("--output", "-o", "output_path", required=True, type=click.Path(path_type=Path), help="Output file.")
+@click.option("--format", "-f", "output_format", type=click.Choice(["tsv", "csv", "yaml", "json"]), help="Output format (inferred from extension if not provided).")
+@click.option("--compact/--no-compact", default=True, help="Use compact IDs (default: true).")
+@click.pass_context
+def tdms_convert(ctx: click.Context, input_path: Path, output_path: Path, output_format: Optional[str], compact: bool) -> None:
+    """
+    Convert between human and machine plane formats.
+    
+    \b
+    Examples:
+      # Human to Machine (YAML → TSV)
+      $ aerospacemodel tdms convert -i contract.yaml -o contract.tsv
+      
+      # Machine to Human (TSV → YAML)
+      $ aerospacemodel tdms convert -i agent_output.tsv -o updated.yaml
+    """
+    console.print(Panel.fit(
+        "[bold blue]TDMS Conversion[/bold blue]",
+        border_style="blue"
+    ))
+    
+    from aerospacemodel.tdms import HumanPlane, MachinePlane, TDMSConverter
+    from aerospacemodel.tdms.converter import ConversionConfig
+    
+    # Determine formats
+    input_ext = input_path.suffix.lower()
+    output_ext = output_path.suffix.lower() if output_format is None else f".{output_format}"
+    
+    human_formats = [".yaml", ".yml", ".json"]
+    machine_formats = [".tsv", ".csv"]
+    
+    # Apply the compact flag to converter configuration
+    config = ConversionConfig(compact_ids=compact)
+    converter = TDMSConverter(config=config)
+    
+    try:
+        # Human → Machine conversion
+        if input_ext in human_formats and output_ext in machine_formats:
+            console.print(f"[dim]Direction: Human Plane → Machine Plane[/dim]")
+            console.print(f"[dim]Input: {input_path}[/dim]")
+            console.print(f"[dim]Output: {output_path}[/dim]")
+            console.print(f"[dim]Compact IDs: {compact}[/dim]")
+            console.print()
+            
+            human = HumanPlane.load(input_path)
+            machine = converter.to_machine_plane(human)
+            
+            if output_ext == ".tsv":
+                machine.to_tsv(output_path)
+            else:
+                machine.to_csv(output_path)
+            
+            console.print(f"[green]✓[/green] Converted {len(machine.columns)} fields")
+            console.print(f"[green]✓[/green] Token estimate: ~{machine.token_count_estimate()} tokens")
+        
+        # Machine → Human conversion
+        elif input_ext in machine_formats and output_ext in human_formats:
+            console.print(f"[dim]Direction: Machine Plane → Human Plane[/dim]")
+            console.print(f"[dim]Input: {input_path}[/dim]")
+            console.print(f"[dim]Output: {output_path}[/dim]")
+            console.print()
+            
+            if input_ext == ".tsv":
+                machine = MachinePlane.from_tsv(input_path)
+            else:
+                machine = MachinePlane.from_csv(input_path)
+            
+            result = converter.to_human_plane(machine, validate=True)
+            
+            if result.success:
+                result.human_plane.save(output_path, format=output_ext[1:])
+                console.print(f"[green]✓[/green] Converted successfully")
+                if result.warnings:
+                    console.print(f"[yellow]![/yellow] {len(result.warnings)} warnings")
+            else:
+                console.print(f"[red]✗[/red] Conversion failed:")
+                for error in result.errors:
+                    console.print(f"  - {error}")
+                sys.exit(1)
+        
+        else:
+            error_console.print(f"Unsupported conversion: {input_ext} → {output_ext}")
+            sys.exit(1)
+        
+    except Exception as e:
+        error_console.print(f"Error: {str(e)}")
+        sys.exit(1)
+    
+    console.print()
+
+
+@tdms.command("dict")
+@click.argument("action", type=click.Choice(["list", "create", "show"]))
+@click.option("--type", "-t", "dict_type", type=click.Choice(["ata", "publication", "status", "stakeholder", "baseline"]), help="Dictionary type.")
+@click.option("--output", "-o", "output_path", type=click.Path(path_type=Path), help="Output file for 'create' action.")
+@click.pass_context
+def tdms_dict(ctx: click.Context, action: str, dict_type: Optional[str], output_path: Optional[Path]) -> None:
+    """
+    Manage TDMS dictionaries for ID disambiguation.
+    
+    \b
+    Examples:
+      # List available dictionaries
+      $ aerospacemodel tdms dict list
+      
+      # Show ATA dictionary
+      $ aerospacemodel tdms dict show --type ata
+      
+      # Create default dictionaries
+      $ aerospacemodel tdms dict create --output ./dictionaries/
+    """
+    from aerospacemodel.tdms import TDMSDictionary, DictionaryType, DictionaryRegistry
+    
+    console.print(Panel.fit(
+        "[bold blue]TDMS Dictionaries[/bold blue]",
+        border_style="blue"
+    ))
+    
+    if action == "list":
+        table = Table(title="Available Dictionaries")
+        table.add_column("Type", style="cyan")
+        table.add_column("Name", style="green")
+        table.add_column("Entries")
+        table.add_column("Description")
+        
+        for dtype in [DictionaryType.ATA, DictionaryType.PUBLICATION, DictionaryType.STATUS, 
+                      DictionaryType.STAKEHOLDER, DictionaryType.BASELINE]:
+            if dtype == DictionaryType.ATA:
+                d = TDMSDictionary.create_ata_dictionary()
+            elif dtype == DictionaryType.PUBLICATION:
+                d = TDMSDictionary.create_publication_dictionary()
+            elif dtype == DictionaryType.STATUS:
+                d = TDMSDictionary.create_status_dictionary()
+            elif dtype == DictionaryType.STAKEHOLDER:
+                d = TDMSDictionary.create_stakeholder_dictionary()
+            else:
+                d = TDMSDictionary.create_baseline_dictionary()
+            
+            table.add_row(dtype.value, d.name, str(len(d)), d.description[:50] + "...")
+        
+        console.print(table)
+    
+    elif action == "show" and dict_type:
+        dtype = DictionaryType(dict_type)
+        
+        if dtype == DictionaryType.ATA:
+            d = TDMSDictionary.create_ata_dictionary()
+        elif dtype == DictionaryType.PUBLICATION:
+            d = TDMSDictionary.create_publication_dictionary()
+        elif dtype == DictionaryType.STATUS:
+            d = TDMSDictionary.create_status_dictionary()
+        elif dtype == DictionaryType.STAKEHOLDER:
+            d = TDMSDictionary.create_stakeholder_dictionary()
+        else:
+            d = TDMSDictionary.create_baseline_dictionary()
+        
+        table = Table(title=f"{d.name} ({len(d)} entries)")
+        table.add_column("ID", style="cyan")
+        table.add_column("Value", style="green")
+        
+        for entry in d:
+            table.add_row(entry.id, entry.value)
+        
+        console.print(table)
+    
+    elif action == "create" and output_path:
+        output_path.mkdir(parents=True, exist_ok=True)
+        registry = DictionaryRegistry.create_with_defaults()
+        registry.save_all(output_path)
+        console.print(f"[green]✓[/green] Created dictionaries in {output_path}")
+    
+    else:
+        error_console.print("Invalid arguments. Use --help for usage.")
+        sys.exit(1)
+    
+    console.print()
+
+
+@tdms.command("info")
+@click.argument("file_path", type=click.Path(exists=True, path_type=Path))
+@click.pass_context
+def tdms_info(ctx: click.Context, file_path: Path) -> None:
+    """
+    Show information about a TDMS file.
+    
+    \b
+    Example:
+      $ aerospacemodel tdms info contract.yaml
+      $ aerospacemodel tdms info compact.tsv
+    """
+    from aerospacemodel.tdms import HumanPlane, MachinePlane
+    
+    console.print(Panel.fit(
+        "[bold blue]TDMS File Info[/bold blue]",
+        border_style="blue"
+    ))
+    
+    ext = file_path.suffix.lower()
+    
+    table = Table()
+    table.add_column("Property", style="cyan")
+    table.add_column("Value", style="green")
+    
+    table.add_row("File", str(file_path))
+    table.add_row("Size", f"{file_path.stat().st_size:,} bytes")
+    
+    try:
+        if ext in [".yaml", ".yml", ".json"]:
+            plane = HumanPlane.load(file_path)
+            table.add_row("Plane Type", "Human (authoritative)")
+            table.add_row("Format", ext[1:].upper())
+            table.add_row("Hash", plane.metadata.source_hash)
+            
+            flat = plane.flatten()
+            table.add_row("Fields", str(len(flat)))
+            
+            # Show top-level structure
+            top_keys = list(plane.data.keys())[:10]
+            table.add_row("Top Keys", ", ".join(top_keys))
+        
+        elif ext in [".tsv", ".csv"]:
+            if ext == ".tsv":
+                plane = MachinePlane.from_tsv(file_path)
+            else:
+                plane = MachinePlane.from_csv(file_path)
+            
+            table.add_row("Plane Type", "Machine (derived view)")
+            table.add_row("Format", ext[1:].upper())
+            table.add_row("Hash", plane.metadata.source_hash)
+            table.add_row("Records", str(len(plane.records)))
+            table.add_row("Columns", str(len(plane.columns)))
+            table.add_row("Token Estimate", f"~{plane.token_count_estimate()} tokens")
+        
+        else:
+            error_console.print(f"Unsupported file type: {ext}")
+            sys.exit(1)
+        
+        console.print(table)
+    
+    except Exception as e:
+        error_console.print(f"Error reading file: {str(e)}")
+        sys.exit(1)
+    
     console.print()
 
 
