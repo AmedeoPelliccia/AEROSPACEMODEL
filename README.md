@@ -392,6 +392,123 @@ If the agent reaches an unruled situation:
 
 ---
 
+## HPC + Quantum + Agentic Aerospace Design Architecture
+
+**Version 2.0.0** introduces the **HPC + Quantum + Agentic Architecture** for massive simultaneous integrated aerospace design optimization.
+
+### Overview
+
+A **multi-agent ASIT-governed aerospace design intelligence system** running on HPC clusters with hybrid classical-quantum acceleration, capable of evaluating **millions of aircraft configurations in parallel** under strict deterministic **BREX decision rules**.
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           ASIT GOVERNANCE LAYER                             │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐        │
+│  │  Contracts  │  │  Baselines  │  │ BREX Rules  │  │   Safety    │        │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘        │
+└───────────────────────────────────────┬─────────────────────────────────────┘
+                                        │
+┌───────────────────────────────────────▼─────────────────────────────────────┐
+│                     MULTI-AGENT MDO ORCHESTRATION                           │
+│           Aerodynamics | Structures | Propulsion | Economics                │
+│                     ↓ Pareto Front Construction ↓                           │
+└───────────────────────────────────────┬─────────────────────────────────────┘
+                                        │
+┌───────────────────────────────────────▼─────────────────────────────────────┐
+│                          HPC COMPUTE LAYER                                  │
+│  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐                │
+│  │  CPU Cluster   │  │  GPU Cluster   │  │    Quantum     │                │
+│  │  (CFD, FEM)    │  │  (AI/ML)       │  │  (QAOA, VQE)   │                │
+│  └────────────────┘  └────────────────┘  └────────────────┘                │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Key Capabilities
+
+| Capability | Description |
+|------------|-------------|
+| **Agentic HPC** | AI-powered job scheduling with memory prediction and resource optimization |
+| **Multi-Agent MDO** | Swarm of specialized agents (Aero, Struct, Prop, Econ) exploring design trade-spaces |
+| **Quantum Acceleration** | QAOA, VQE for global optimization and configuration selection |
+| **BREX Governance** | Deterministic, auditable reasoning at every decision point |
+| **Certification-Ready** | Full traceability for DO-178C/ARP4754A compliance |
+
+### Multi-Agent MDO Swarm
+
+Specialized agents collaborate to optimize aircraft design:
+
+| Agent | Specialization | Objectives |
+|-------|----------------|------------|
+| **Aerodynamics** | CFD analysis, L/D optimization | Max L/D, Min drag |
+| **Structures** | FEM analysis, weight estimation | Min weight, safety margins |
+| **Propulsion** | Engine sizing, efficiency | Min SFC, emissions |
+| **Economics** | DOC, ROI analysis | Min operating cost |
+| **Synthesizer** | Multi-objective optimization | Pareto front construction |
+
+### Quantum Algorithms
+
+| Algorithm | Use Case | Quantum Advantage |
+|-----------|----------|-------------------|
+| **QAOA** | Configuration selection, MaxCut | Polynomial speedup |
+| **VQE** | Ground state, continuous opt | Potential exponential |
+| **QML** | Surrogate models | Enhanced learning |
+
+### Usage Example
+
+```python
+from ASIGT.hpc import create_aerospace_hpc_cluster
+from ASIGT.agents import create_aircraft_mdo_swarm, OptimizationObjective
+from ASIGT.quantum import create_aerospace_quantum_optimizer
+
+# Initialize HPC cluster
+cluster = create_aerospace_hpc_cluster(
+    cluster_id="AEROSPACE-HPC-01",
+    cpu_nodes=100,
+    gpu_nodes=20,
+    quantum_qubits=127
+)
+
+# Create MDO agent swarm
+swarm = create_aircraft_mdo_swarm(
+    swarm_id="MDO-SWARM-001",
+    contract_id="KITDM-CTR-MDO-001",
+    baseline_id="FBL-2026-Q1-003"
+)
+
+# Run optimization
+result = swarm.run_optimization(
+    objectives=[
+        OptimizationObjective.MAXIMIZE_L_D,
+        OptimizationObjective.MINIMIZE_WEIGHT,
+        OptimizationObjective.MINIMIZE_FUEL_BURN
+    ],
+    constraints=[],
+    generations=100
+)
+
+# Quantum refinement on Pareto front
+quantum = create_aerospace_quantum_optimizer(contract_id="KITDM-CTR-MDO-001")
+quantum_result = quantum.hybrid_optimize(result["pareto_front"])
+
+print(f"Optimal configurations: {len(quantum_result.best_solution)}")
+```
+
+### HPC Components
+
+| Component | Location | Purpose |
+|-----------|----------|---------|
+| **HPC Compute Architecture** | `ASIGT/hpc/hpc_compute_architecture.py` | Cluster management, agentic scheduling |
+| **MDO Agent Swarm** | `ASIGT/agents/mdo_agent_swarm.py` | Multi-agent optimization |
+| **Quantum Optimizer** | `ASIGT/quantum/quantum_optimizer.py` | QAOA, VQE implementations |
+| **HPC MDO Pipeline** | `pipelines/hpc_mdo_pipeline.yaml` | Complete MDO workflow definition |
+| **HPC Agentic BREX** | `ASIT/GOVERNANCE/hpc_agentic_brex.yaml` | BREX rules for HPC operations |
+
+### Documentation
+
+For complete architecture documentation, see: [`docs/HPC_QUANTUM_AGENTIC_ARCHITECTURE.md`](docs/HPC_QUANTUM_AGENTIC_ARCHITECTURE.md)
+
+---
+
 ## Who This Is For
 
 * Aircraft OEMs (new or derivative programs)
