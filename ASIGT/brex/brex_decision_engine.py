@@ -36,7 +36,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Set, Union
+from typing import Any, Callable, Dict, List, Optional, Set, Tuple, Union
 import yaml
 import json
 
@@ -510,7 +510,7 @@ class BREXDecisionEngine:
                 rule = self._parse_rule(rule_data)
                 self.add_rule(rule)
                 count += 1
-            except Exception as e:
+            except (KeyError, ValueError, TypeError) as e:
                 logger.error(f"Failed to parse BREX rule: {e}")
 
         logger.info(f"Loaded {count} BREX decision rules from {path}")
@@ -571,7 +571,7 @@ class BREXDecisionEngine:
         self,
         condition: BREXCondition,
         context: Dict[str, Any],
-    ) -> tuple[bool, Dict[str, Any]]:
+    ) -> Tuple[bool, Dict[str, Any]]:
         """Evaluate a single condition against context."""
         evidence = {
             "condition_type": condition.condition_type.value,
@@ -587,7 +587,7 @@ class BREXDecisionEngine:
                 evidence["validator"] = condition.custom_validator
                 evidence["passed"] = passed
                 return passed, evidence
-            except Exception as e:
+            except (KeyError, ValueError, TypeError, AttributeError) as e:
                 logger.error(f"Custom validator '{condition.custom_validator}' failed: {e}")
                 evidence["error"] = str(e)
                 return False, evidence
@@ -604,11 +604,8 @@ class BREXDecisionEngine:
 
         elif condition.condition_type == BREXConditionType.ATA_DOMAIN_VALID:
             # Validate ATA domain format (e.g., "ATA 27", "ATA 28")
-            if actual_value:
-                passed = (
-                    isinstance(actual_value, str) and
-                    actual_value.upper().startswith("ATA")
-                )
+            if isinstance(actual_value, str) and actual_value:
+                passed = actual_value.upper().startswith("ATA")
             else:
                 passed = False
 
@@ -1000,7 +997,7 @@ def create_brex_engine(
     rules_path: Optional[Path] = None,
     with_audit_log: bool = True,
     audit_output_dir: Optional[Path] = None,
-) -> tuple[BREXDecisionEngine, Optional[BREXAuditLog]]:
+) -> Tuple[BREXDecisionEngine, Optional[BREXAuditLog]]:
     """
     Factory function to create a BREX Decision Engine with optional audit log.
 

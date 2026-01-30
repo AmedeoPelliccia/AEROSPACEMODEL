@@ -50,7 +50,15 @@ from typing import Any, Dict, List, Optional, Union
 
 # Import BREX Decision Engine from ASIGT brex module
 # Note: This assumes the ASIGT/brex directory is accessible
+_BREX_ENGINE_AVAILABLE = False
+BREXDecisionEngine = None
+BREXDecisionAction = None
+BREXCascadeResult = None
+BREXAuditLog = None
+create_brex_engine = None
+
 try:
+    # Try to import from the ASIGT/brex directory
     sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent.parent / "ASIGT" / "brex"))
     from brex_decision_engine import (
         BREXDecisionEngine,
@@ -59,13 +67,16 @@ try:
         BREXAuditLog,
         create_brex_engine,
     )
-except ImportError:
-    # Fallback if direct import fails - define minimal types
-    BREXDecisionEngine = None
-    BREXDecisionAction = None
-    BREXCascadeResult = None
-    BREXAuditLog = None
-    create_brex_engine = None
+    _BREX_ENGINE_AVAILABLE = True
+except (ImportError, ModuleNotFoundError) as e:
+    # Fallback if direct import fails - use None placeholders
+    import warnings
+    warnings.warn(
+        f"BREX Decision Engine not available: {e}. "
+        "Falling back to basic validation mode.",
+        RuntimeWarning,
+        stacklevel=2,
+    )
 
 
 logger = logging.getLogger(__name__)
@@ -325,7 +336,7 @@ class BREXGovernedValidator:
         ctx_dict.setdefault("authority", "ASIT")
 
         # Check if engine is available
-        if self.engine is None:
+        if self.engine is None or BREXDecisionAction is None:
             # Fallback: basic validation without decision engine
             return self._fallback_validate(operation, ctx_dict)
 
@@ -339,12 +350,14 @@ class BREXGovernedValidator:
         if self.audit_log is not None:
             self.audit_log.log_cascade(cascade_result)
 
+        # Determine if operation is allowed
+        allowed_actions = (BREXDecisionAction.ALLOW, BREXDecisionAction.WARN)
+        is_allowed = cascade_result.success and cascade_result.final_action in allowed_actions
+
         # Build result
         result = GovernedValidationResult(
             operation=operation,
-            allowed=cascade_result.success and cascade_result.final_action in (
-                BREXDecisionAction.ALLOW, BREXDecisionAction.WARN
-            ),
+            allowed=is_allowed,
             action=cascade_result.final_action.value,
             escalation_required=cascade_result.escalation_required,
             escalation_target=self._get_escalation_target(cascade_result),
@@ -468,14 +481,18 @@ class BREXGovernedValidator:
             return self.audit_log.export_to_file(str(path))
         raise RuntimeError("Audit log not available")
 
-    def _get_escalation_target(self, cascade_result: BREXCascadeResult) -> Optional[str]:
+    def _get_escalation_target(self, cascade_result) -> Optional[str]:
         """Get the escalation target from cascade result."""
+        if cascade_result is None or BREXDecisionAction is None:
+            return None
+            
         for decision in cascade_result.decisions:
             if decision.action == BREXDecisionAction.ESCALATE:
                 # Get from rule if available
-                rule = self.engine.get_rule(decision.rule_id) if self.engine else None
-                if rule and rule.escalation_target:
-                    return rule.escalation_target
+                if self.engine is not None:
+                    rule = self.engine.get_rule(decision.rule_id)
+                    if rule and rule.escalation_target:
+                        return rule.escalation_target
         return None
 
     def _fallback_validate(
