@@ -10,6 +10,9 @@ A Work Breakdown Structure (WBS) is formalized as a computable ontology and used
 Below is a logical, end-to-end glossary that defines each enabling technology and concept introduced in this conversation, ordered from foundational primitives → execution mechanisms → system-of-systems behavior.
 The intent is conceptual clarity, not marketing. Each term is defined by what problem it solves and what role it plays in the whole.
 
+> **📚 For complete EASA/FAA regulatory mappings of these terms, see [EASA/FAA Vocabulary Mapping](docs/EASA_FAA_VOCABULARY_MAPPING.md)**  
+> **📊 For visual ontology diagrams, see [Ontology Diagram](docs/ONTOLOGY_DIAGRAM.md)**
+
 ⸻
 
 Logical Glossary of Enabling Concepts
@@ -814,7 +817,11 @@ print(f"Optimal configurations: {len(quantum_result.best_solution)}")
 
 ### Documentation
 
-For complete architecture documentation, see: [`docs/HPC_QUANTUM_AGENTIC_ARCHITECTURE.md`](docs/HPC_QUANTUM_AGENTIC_ARCHITECTURE.md)
+| Document | Description |
+|----------|-------------|
+| [`docs/HPC_QUANTUM_AGENTIC_ARCHITECTURE.md`](docs/HPC_QUANTUM_AGENTIC_ARCHITECTURE.md) | HPC, Quantum, and Multi-Agent MDO Architecture |
+| [`docs/EASA_FAA_VOCABULARY_MAPPING.md`](docs/EASA_FAA_VOCABULARY_MAPPING.md) | Complete mapping of AEROSPACEMODEL terms to EASA/FAA regulatory vocabulary |
+| [`docs/ONTOLOGY_DIAGRAM.md`](docs/ONTOLOGY_DIAGRAM.md) | Visual ontology diagrams showing system architecture and regulatory alignment |
 
 ---
 
