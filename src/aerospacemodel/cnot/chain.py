@@ -215,7 +215,7 @@ class CNOTChain:
                 logger.info(gate_result.to_log_entry())
                 
                 # Check if gate blocked execution
-                if gate_result.status == GateStatus.BLOCKED or not gate_result.passed:
+                if gate_result.status == GateStatus.BLOCKED or (not gate_result.passed and gate_result.status != GateStatus.ESCALATE):
                     logger.warning(f"Chain blocked by gate: {gate.gate_id}")
                     result.success = False
                     result.collapsed = False
