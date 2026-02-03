@@ -319,7 +319,7 @@ class AuthorityGate(CNOTGate):
             gate_name="Authority Gate",
             config=config
         )
-        self.required_authority = required_authority or config.get("required_authority") if config else None
+        self.required_authority = required_authority or (config.get("required_authority") if config else None)
         
         # Authority hierarchy (higher index = higher authority)
         self.authority_levels = [

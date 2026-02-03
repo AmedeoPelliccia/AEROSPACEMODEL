@@ -15,7 +15,6 @@ from aerospacemodel.cnot import (
     TraceGate,
     SafetyGate,
 )
-from aerospacemodel.cnot.state import StateType
 
 
 def demo_successful_transformation():
@@ -30,7 +29,7 @@ def demo_successful_transformation():
     # Add gates in sequence
     chain.add_gate(ContractGate(contract_id="KITDM-CTR-LM-CSDB_ATA28"))
     chain.add_gate(BaselineGate(baseline_id="FBL-2026-Q1-003"))
-    chain.add_gate(AuthorityGate(required_authority="STK_CM", config={"required_authority": "STK_CM"}))
+    chain.add_gate(AuthorityGate(required_authority="STK_CM"))
     chain.add_gate(BREXGate())
     chain.add_gate(TraceGate(config={"coverage_threshold": 100}))
     chain.add_gate(SafetyGate())

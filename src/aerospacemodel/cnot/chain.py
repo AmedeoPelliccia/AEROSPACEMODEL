@@ -183,6 +183,7 @@ class CNOTChain:
         result.quantum_state = quantum_state
         
         # Initialize provenance vector
+        provenance = None
         if self.provenance_enabled:
             provenance = ProvenanceVector(
                 vector_id=f"PV-{self.chain_id}",

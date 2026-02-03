@@ -4,8 +4,7 @@ Tests for CNOT Chain
 Tests complete chain execution, state collapse mechanics, and integration.
 """
 
-import pytest
-from aerospacemodel.cnot.chain import CNOTChain, ChainResult
+from aerospacemodel.cnot.chain import CNOTChain
 from aerospacemodel.cnot.gates import (
     AuthorityGate,
     BaselineGate,
@@ -187,6 +186,33 @@ class TestChainExecution:
         assert result.provenance.transformation_contract == "KITDM-CTR-LM-CSDB_ATA28"
         assert result.provenance.source_artifacts == ["DM-001", "DM-002"]
         assert result.provenance.collapsed_artifact is not None
+    
+    def test_chain_execute_without_provenance(self):
+        """Test chain execution with provenance tracking disabled."""
+        chain = CNOTChain(provenance_enabled=False)
+        chain.add_gate(ContractGate("KITDM-CTR-LM-CSDB_ATA28"))
+        chain.add_gate(BaselineGate("FBL-2026-Q1-003"))
+        
+        context = {
+            "contract": {
+                "contract_id": "KITDM-CTR-LM-CSDB_ATA28",
+                "status": "APPROVED"
+            },
+            "baseline": {
+                "baseline_id": "FBL-2026-Q1-003",
+                "state": "APPROVED"
+            },
+            "source_artifacts": ["DM-001", "DM-002"]
+        }
+        
+        result = chain.execute(context)
+        
+        # Should still succeed but with no provenance
+        assert result.success is True
+        assert result.collapsed is True
+        assert result.provenance is None
+        assert result.collapsed_state is not None
+        assert result.collapsed_state.provenance is None
     
     def test_chain_execute_with_custom_quantum_state(self):
         """Test chain execution with custom quantum state."""

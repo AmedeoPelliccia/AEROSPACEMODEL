@@ -4,7 +4,6 @@ Tests for CNOT Gates
 Tests each gate type independently and validates their behavior.
 """
 
-import pytest
 from aerospacemodel.cnot.gates import (
     AuthorityGate,
     BaselineGate,
@@ -182,7 +181,7 @@ class TestAuthorityGate:
     
     def test_authority_gate_blocks_with_lower_authority(self):
         """Test that AuthorityGate blocks with lower authority."""
-        gate = AuthorityGate(required_authority="STK_CM", config={"required_authority": "STK_CM"})
+        gate = AuthorityGate(required_authority="STK_CM")
         context = {
             "execution_authority": "STK_ENG"  # ENG is lower than CM
         }
