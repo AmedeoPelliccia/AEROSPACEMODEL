@@ -242,12 +242,25 @@ but by **expanded human dignity and capability over time**.
 
 ---
 
-## Versioning
+## Relationship to Codes of Conduct and Legal Terms
 
-- Constitution Version: 0.1.0
-- All changes require:
-  - documented intent,
-  - identifiable human authorship,
-  - and ethical backward compatibility.
+This Digital Constitution is distinct from, and prior to,
+Codes of Conduct and Legal Terms.
+
+- Codes of Conduct regulate internal development, learning,
+  and working zones (in-coding).
+- Legal Terms regulate the project’s external legal state
+  and interactions (projecting).
+
+This Constitution governs neither behavior alone nor liability alone.
+It governs **identity**.
+
+It defines what this system is allowed to be,
+the class of futures it may evolve into,
+and the limits it will not cross,
+independently of internal roles or external pressures.
+
+Codes of Conduct and Legal Terms operate within
+the existential bounds defined here.
 
 Author: Amedeo Pelliccia 
