@@ -127,7 +127,74 @@ No contribution is "just volunteer work".
 
 ---
 
-## 6. From CoDEv to CoOpS
+## 6. ROC — Return on Contribution
+
+AEROSPACEMODEL uses **ROC (Return on Contribution)** as a primary governance metric to measure verified economic and ESG value generated per unit of upstream contribution.
+
+### Core Formula
+
+```
+ROC = Attributed Value / Contribution Cost
+```
+
+Where **Attributed Value** includes:
+
+```
+Attributed Value = ΔEBIT + Cost Avoided + Risk Avoided + Carbon-Adjusted Value
+```
+
+### Upstream Calibration
+
+To ensure accountability, ROC is calibrated using the **Upstream Accountability Factor (UAF)**:
+
+```
+ROC_calibrated = ROC × UAF
+```
+
+**UAF** (range 0–1) is computed from four auditable components:
+
+- **P** — Provenance completeness (source traceability)
+- **V** — Validation strength (factual checks passed)
+- **T** — Time integrity (latency/version coherence)
+- **N** — Neutrality (bias/extraction risk controls)
+
+Example calculation:
+```
+UAF = 0.30P + 0.30V + 0.20T + 0.20N
+```
+
+### ESG Alignment
+
+ROC is a **governance-grade ESG KPI**, not merely a financial metric:
+
+- **E (Environmental)**: Includes decarbonization value (€/tCO₂e avoided)
+- **S (Social)**: Recognizes workforce/system contributions (maintenance, safety, reliability)
+- **G (Governance)**: Requires auditable attribution and non-extractive value sharing
+
+### Numeric Example
+
+- Contribution Cost = €1.2M
+- Attributed Value = €3.0M
+- Raw ROC = 3.0 / 1.2 = **2.5**
+- UAF = 0.82
+- Calibrated ROC = 2.5 × 0.82 = **2.05**
+
+Effective return: **2.05×** after accountability calibration.
+
+### Guardrails (Anti-Gaming Measures)
+
+To prevent KPI manipulation:
+
+1. **Mandatory counterfactual baseline** — "What would happen without this contribution?"
+2. **Third-party audit** — High-impact claims require independent value verification
+3. **UAF disclosure** — No ROC publication without transparency on calibration factors
+4. **Actor-class segmentation** — Split ROC by upstream actor type (community, SME, enterprise) to expose extraction patterns
+
+These guardrails ensure ROC remains a legitimate governance tool rather than a vanity metric.
+
+---
+
+## 7. From CoDEv to CoOpS
 
 AEROSPACEMODEL is explicitly designed to transition from **CoDEv** to **CoOpS**.
 
@@ -146,7 +213,7 @@ Cooperation secures return.**
 
 ---
 
-## 7. What Is Not Accepted
+## 8. What Is Not Accepted
 
 Contributions will be rejected if they:
 - exist primarily to serve third-party enterprise capture
@@ -159,7 +226,7 @@ This is intentional.
 
 ---
 
-## 8. Code of Conduct (Short Version)
+## 9. Code of Conduct (Short Version)
 
 - Be precise.
 - Be respectful.
@@ -171,7 +238,7 @@ Serious work requires serious dialogue.
 
 ---
 
-## 9. Final Note
+## 10. Final Note
 
 > **AEROSPACEMODEL is built for contributors who want to govern what they build and benefit from what they sustain.**
 
