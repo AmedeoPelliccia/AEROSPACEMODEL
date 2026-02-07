@@ -33,6 +33,11 @@ from typing import (
 
 logger = logging.getLogger(__name__)
 
+# Limits for graph algorithms to prevent combinatorial explosion
+_MAX_BFS_QUEUE_SIZE = 10000
+_MAX_PATHS = 5
+_MAX_CONNECTIVITY_SAMPLE_PAIRS = 20
+
 
 # =============================================================================
 # EXCEPTIONS
@@ -377,7 +382,7 @@ class Mesh3DTopology:
         target_id: str,
         max_hops: int = 10,
     ) -> List[List[str]]:
-        """Find up to 5 paths between two nodes using BFS.
+        """Find up to ``_MAX_PATHS`` paths between two nodes using BFS.
 
         Args:
             source_id: Origin node ID.
@@ -385,8 +390,8 @@ class Mesh3DTopology:
             max_hops: Maximum number of hops per path.
 
         Returns:
-            List of paths, each path being a list of node IDs
-            from *source_id* to *target_id*.
+            List of paths (capped at ``_MAX_PATHS``), each path being
+            a list of node IDs from *source_id* to *target_id*.
 
         Raises:
             TopologyError: If source or target node is missing.
@@ -401,11 +406,9 @@ class Mesh3DTopology:
 
         adj = self._build_adjacency()
         paths: List[List[str]] = []
-        # BFS carrying full paths; cap queue to avoid combinatorial blow-up
-        max_queue = 10000
         queue: deque[List[str]] = deque([[source_id]])
 
-        while queue and len(paths) < 5:
+        while queue and len(paths) < _MAX_PATHS:
             path = queue.popleft()
             if len(path) - 1 >= max_hops:
                 continue
@@ -417,9 +420,9 @@ class Mesh3DTopology:
                 new_path = path + [neighbor]
                 if neighbor == target_id:
                     paths.append(new_path)
-                    if len(paths) >= 5:
+                    if len(paths) >= _MAX_PATHS:
                         break
-                elif len(queue) < max_queue:
+                elif len(queue) < _MAX_BFS_QUEUE_SIZE:
                     queue.append(new_path)
 
         if not paths:
@@ -522,8 +525,9 @@ class Mesh3DTopology:
     def check_k_connectivity(self, k: int) -> bool:
         """Check if the topology is at least *k*-connected.
 
-        Samples up to 20 operational node pairs and verifies that
-        at least *k* node-disjoint paths exist for each pair.
+        Samples up to ``_MAX_CONNECTIVITY_SAMPLE_PAIRS`` operational
+        node pairs and verifies that at least *k* node-disjoint paths
+        exist for each pair.
 
         Args:
             k: Minimum connectivity level.
@@ -541,9 +545,9 @@ class Mesh3DTopology:
         for i, a in enumerate(operational):
             for b in operational[i + 1:]:
                 pairs.append((a, b))
-                if len(pairs) >= 20:
+                if len(pairs) >= _MAX_CONNECTIVITY_SAMPLE_PAIRS:
                     break
-            if len(pairs) >= 20:
+            if len(pairs) >= _MAX_CONNECTIVITY_SAMPLE_PAIRS:
                 break
 
         for src, tgt in pairs:
