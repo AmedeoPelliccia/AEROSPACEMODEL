@@ -325,7 +325,7 @@ class CoreMissionLayer:
     """Core mission data functional layer."""
     layer_id: str = "CORE-MISSION-LAYER"
     mission_types: List[str] = field(
-        default_factory=lambda: ["EO", "communications", "navigation"],
+        default_factory=lambda: ["eo", "communications", "navigation"],
     )
     node_ids: Set[str] = field(default_factory=set)
     link_ids: Set[str] = field(default_factory=set)

@@ -200,7 +200,7 @@ class TestDataLifecycleManager:
         mgr.add_processing(
             record_id="REC-104",
             location=ProcessingLocation.GROUND,
-            operations=["analyse"],
+            operations=["analyze"],
         )
 
         record = mgr.mark_consumed(
