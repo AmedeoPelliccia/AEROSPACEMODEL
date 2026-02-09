@@ -24,7 +24,6 @@ import random
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import (
-    Any,
     Dict,
     List,
     Optional,
@@ -283,6 +282,19 @@ class BayesianInferenceEngine:
         uncertainty_threshold: float = 0.003,
         ess_threshold_ratio: float = 0.5,
     ) -> None:
+        if num_particles < 1:
+            raise StateError(
+                f"num_particles must be >= 1, got {num_particles}"
+            )
+        if process_noise_std < 0:
+            raise StateError(
+                f"process_noise_std must be >= 0, got {process_noise_std}"
+            )
+        if uncertainty_threshold < 0:
+            raise StateError(
+                "uncertainty_threshold must be >= 0, "
+                f"got {uncertainty_threshold}"
+            )
         self._num_particles = num_particles
         self._critical_damage_m = critical_damage_m
         self._process_noise_std = process_noise_std
@@ -395,12 +407,17 @@ class BayesianInferenceEngine:
         Returns:
             Probability of detection in [0, 1].
         """
+        if not 0.0 <= confidence <= 1.0:
+            logger.warning(
+                "POD confidence out of range [0, 1]: %r; clamping.",
+                confidence,
+            )
         a_50 = _POD_A50_M
         beta = _POD_BETA
         pod = 1.0 / (
             1.0 + (a_50 / max(true_size_m, 1e-10)) ** beta
         )
-        return pod * confidence
+        return max(0.0, min(1.0, pod * confidence))
 
     def _compute_likelihood(
         self,
@@ -612,7 +629,7 @@ class BayesianInferenceEngine:
         """
         feedback: List[DataQualityFeedback] = []
         for s in summaries:
-            uncertainty = s.percentile_95_m - s.mean_size_m
+            uncertainty = abs(s.percentile_95_m - s.mean_size_m)
             exceeded = uncertainty > self._uncertainty_threshold
             feedback.append(
                 DataQualityFeedback(
@@ -691,6 +708,10 @@ class BayesianInferenceEngine:
         if not self._initialized:
             raise InferenceError(
                 "Engine not initialised; call initialize() first"
+            )
+        if dt_cycles < 0:
+            raise InferenceError(
+                f"dt_cycles must be >= 0, got {dt_cycles}"
             )
 
         # --- 1. Predict step ---
@@ -844,11 +865,41 @@ class BayesianInferenceEngine:
             ):
                 worst_action = rm.recommended_action
 
-        # --- 9. Aggregate updated physics / discrepancy ---
-        # Use weighted average across particles
-        ref_state = self._particles[0].state
-        updated_physics = copy.deepcopy(ref_state.physics_params)
-        updated_discrepancy = copy.deepcopy(ref_state.model_discrepancy)
+        # --- 9. Weighted average of updated physics / discrepancy ---
+        w_paris_C = sum(
+            p.weight * p.state.physics_params.paris_law_C
+            for p in self._particles
+        )
+        w_paris_m = sum(
+            p.weight * p.state.physics_params.paris_law_m
+            for p in self._particles
+        )
+        w_sif = sum(
+            p.weight * p.state.physics_params.stress_intensity_factor
+            for p in self._particles
+        )
+        w_luf = sum(
+            p.weight * p.state.physics_params.load_uncertainty_factor
+            for p in self._particles
+        )
+        updated_physics = PhysicsParameters(
+            paris_law_C=w_paris_C,
+            paris_law_m=w_paris_m,
+            stress_intensity_factor=w_sif,
+            load_uncertainty_factor=w_luf,
+        )
+        w_bias_mean = sum(
+            p.weight * p.state.model_discrepancy.bias_mean
+            for p in self._particles
+        )
+        w_bias_std = sum(
+            p.weight * p.state.model_discrepancy.bias_std
+            for p in self._particles
+        )
+        updated_discrepancy = ModelDiscrepancy(
+            bias_mean=w_bias_mean,
+            bias_std=w_bias_std,
+        )
 
         logger.info(
             "Inference update complete: %d locations, action=%s",

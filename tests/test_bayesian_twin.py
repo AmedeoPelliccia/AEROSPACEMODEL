@@ -13,7 +13,6 @@ from aerospacemodel.bayesian_twin.engine import (
     BayesianTwinError,
     DamageState,
     DamageType,
-    DataQualityFeedback,
     InferenceError,
     InferenceResult,
     InspectionResult,
@@ -21,12 +20,10 @@ from aerospacemodel.bayesian_twin.engine import (
     NDTFinding,
     ObservationError,
     ObservationSet,
-    Particle,
     PhysicsParameters,
     PosteriorSummary,
     RecommendedAction,
     RiskMetrics,
-    SafetyCaseEvidence,
     SafetyLevel,
     SensorReading,
     SensorType,
@@ -236,6 +233,14 @@ class TestEngineInitialization:
         with pytest.raises(StateError, match="at least one damage state"):
             engine.initialize(empty_state)
 
+    def test_zero_particles_raises(self) -> None:
+        with pytest.raises(StateError, match="num_particles must be >= 1"):
+            BayesianInferenceEngine(num_particles=0)
+
+    def test_negative_noise_raises(self) -> None:
+        with pytest.raises(StateError, match="process_noise_std must be >= 0"):
+            BayesianInferenceEngine(process_noise_std=-1.0)
+
 
 # =============================================================================
 # DAMAGE PROPAGATION TESTS
@@ -319,6 +324,11 @@ class TestObservationModel:
         pod_full = engine._pod(0.005, 1.0)
         pod_half = engine._pod(0.005, 0.5)
         assert abs(pod_half - pod_full * 0.5) < 1e-10
+
+    def test_pod_clamped_with_high_confidence(self) -> None:
+        engine = BayesianInferenceEngine()
+        pod = engine._pod(0.1, 1.5)
+        assert 0.0 <= pod <= 1.0
 
     def test_likelihood_positive(self) -> None:
         engine = BayesianInferenceEngine(num_particles=10)
@@ -500,6 +510,13 @@ class TestUpdateCycle:
         with pytest.raises(InferenceError, match="not initialised"):
             engine.update(obs)
 
+    def test_update_negative_dt_cycles_raises(self) -> None:
+        engine = BayesianInferenceEngine(num_particles=10)
+        engine.initialize(_make_prior_state())
+        obs = _make_observation_no_crack()
+        with pytest.raises(InferenceError, match="dt_cycles must be >= 0"):
+            engine.update(obs, dt_cycles=-100.0)
+
     def test_update_returns_inference_result(self) -> None:
         engine = BayesianInferenceEngine(num_particles=50)
         engine.initialize(_make_prior_state())
@@ -559,7 +576,7 @@ class TestUpdateCycle:
         engine.initialize(_make_prior_state())
 
         obs = _make_observation_no_crack()
-        result1 = engine.update(obs, dt_cycles=1000.0)
+        engine.update(obs, dt_cycles=1000.0)
         result2 = engine.update(obs, dt_cycles=1000.0)
 
         # After two cycles, the 95th percentile should grow
