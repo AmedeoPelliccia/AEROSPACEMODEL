@@ -17,6 +17,7 @@ Architecture:
     - Layers: Functional layers (ATM/CNS, Military, Ground, Core Mission)
     - Cognitive: Distributed model field (emergent intelligence)
     - Framework: Unified 3-axis cube (lifecycle × topology × domains)
+    - Bayesian Twin: Airframe digital twin inference engine
 
 Quick Start:
     >>> from aerospacemodel import ASIT, ASIGT, Contract
@@ -155,6 +156,36 @@ from aerospacemodel.framework import (
 )
 
 # ═══════════════════════════════════════════════════════════════════════════
+# BAYESIAN TWIN — Airframe Digital Twin Inference
+# ═══════════════════════════════════════════════════════════════════════════
+
+from aerospacemodel.bayesian_twin import (
+    BayesianInferenceEngine,
+    BayesianTwinError,
+    InferenceError,
+    StateError,
+    ObservationError,
+    DamageType,
+    SensorType,
+    InspectionResult,
+    RecommendedAction,
+    SafetyLevel,
+    DamageState,
+    PhysicsParameters,
+    ModelDiscrepancy,
+    StateVector,
+    SensorReading,
+    NDTFinding,
+    ObservationSet,
+    Particle,
+    PosteriorSummary,
+    RiskMetrics,
+    SafetyCaseEvidence,
+    DataQualityFeedback,
+    InferenceResult,
+)
+
+# ═══════════════════════════════════════════════════════════════════════════
 # EXCEPTIONS
 # ═══════════════════════════════════════════════════════════════════════════
 
@@ -240,6 +271,31 @@ __all__ = [
     "ServiceProfile",
     "SecurityProfile",
     "ModelRole",
+
+    # Bayesian Twin (Digital Twin Inference)
+    "BayesianInferenceEngine",
+    "BayesianTwinError",
+    "InferenceError",
+    "StateError",
+    "ObservationError",
+    "DamageType",
+    "SensorType",
+    "InspectionResult",
+    "RecommendedAction",
+    "SafetyLevel",
+    "DamageState",
+    "PhysicsParameters",
+    "ModelDiscrepancy",
+    "StateVector",
+    "SensorReading",
+    "NDTFinding",
+    "ObservationSet",
+    "Particle",
+    "PosteriorSummary",
+    "RiskMetrics",
+    "SafetyCaseEvidence",
+    "DataQualityFeedback",
+    "InferenceResult",
 
     # Exceptions
     "AerospaceModelError",
