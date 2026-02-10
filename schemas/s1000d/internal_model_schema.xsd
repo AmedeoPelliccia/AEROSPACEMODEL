@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+=============================================================================
+AEROSPACEMODEL Internal Data Model Schema
+Canonical representation for the AMM transformation pipeline.
+
+Purpose:
+  Decouples source engineering data from S1000D output format.
+  All pipeline stages operate on this internal model.
+
+Namespace: urn:amm-pipeline:internal-model:1.0
+Version: 2.0.0
+=============================================================================
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="urn:amm-pipeline:internal-model:1.0"
+           xmlns:im="urn:amm-pipeline:internal-model:1.0"
+           elementFormDefault="qualified">
+
+  <!-- =================================================================== -->
+  <!-- ROOT ELEMENT                                                        -->
+  <!-- =================================================================== -->
+
+  <xs:element name="maintenanceTaskSet" type="im:MaintenanceTaskSetType"/>
+
+  <xs:complexType name="MaintenanceTaskSetType">
+    <xs:sequence>
+      <xs:element name="maintenanceTask" type="im:MaintenanceTaskType"
+                  maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="pipelineVersion" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <!-- =================================================================== -->
+  <!-- MAINTENANCE TASK                                                    -->
+  <!-- =================================================================== -->
+
+  <xs:complexType name="MaintenanceTaskType">
+    <xs:sequence>
+      <xs:element name="taskIdentifier" type="im:TaskIdentifierType"/>
+      <xs:element name="applicability" type="im:ApplicabilityType"/>
+      <xs:element name="preliminaryRequirements" type="im:PrelimReqsType"/>
+      <xs:element name="proceduralSteps" type="im:ProceduralStepsType"/>
+      <xs:element name="closingRequirements" type="im:ClosingReqsType"
+                  minOccurs="0"/>
+      <xs:element name="engineeringSource" type="im:SourceTraceType"/>
+    </xs:sequence>
+    <xs:attribute name="taskCategory" type="im:TaskCategoryEnum"
+                  use="required"/>
+  </xs:complexType>
+
+  <!-- =================================================================== -->
+  <!-- TASK IDENTIFIER                                                     -->
+  <!-- =================================================================== -->
+
+  <xs:complexType name="TaskIdentifierType">
+    <xs:sequence>
+      <xs:element name="dmCode" type="im:DMCodeType"/>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="infoName" type="xs:string" minOccurs="0"/>
+      <xs:element name="issueNumber" type="xs:string"/>
+      <xs:element name="inWork" type="xs:string" default="00"/>
+      <xs:element name="languageCode" type="xs:string" default="sx"/>
+      <xs:element name="countryCode" type="xs:string" default="US"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DMCodeType">
+    <xs:attribute name="modelIdentCode" type="xs:string" use="required"/>
+    <xs:attribute name="systemDiffCode" type="xs:string" default="A"/>
+    <xs:attribute name="systemCode" type="xs:string" use="required"/>
+    <xs:attribute name="subSystemCode" type="xs:string" default="0"/>
+    <xs:attribute name="subSubSystemCode" type="xs:string" default="0"/>
+    <xs:attribute name="assyCode" type="xs:string" default="00"/>
+    <xs:attribute name="disassyCode" type="xs:string" default="00"/>
+    <xs:attribute name="disassyCodeVariant" type="xs:string" default="A"/>
+    <xs:attribute name="infoCode" type="xs:string" use="required"/>
+    <xs:attribute name="infoCodeVariant" type="xs:string" default="A"/>
+    <xs:attribute name="itemLocationCode" type="xs:string" default="D"/>
+  </xs:complexType>
+
+  <!-- =================================================================== -->
+  <!-- APPLICABILITY                                                       -->
+  <!-- =================================================================== -->
+
+  <xs:complexType name="ApplicabilityType">
+    <xs:sequence>
+      <xs:element name="applicabilityId" type="xs:string"/>
+      <xs:element name="displayText" type="xs:string" minOccurs="0"/>
+      <xs:element name="modelIdent" type="xs:string" minOccurs="0"
+                  maxOccurs="unbounded"/>
+      <xs:element name="serialRange" type="im:SerialRangeType"
+                  minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SerialRangeType">
+    <xs:attribute name="from" type="xs:string" use="required"/>
+    <xs:attribute name="to" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <!-- =================================================================== -->
+  <!-- PRELIMINARY REQUIREMENTS                                            -->
+  <!-- =================================================================== -->
+
+  <xs:complexType name="PrelimReqsType">
+    <xs:sequence>
+      <xs:element name="condition" type="xs:string"
+                  minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="supportEquipment" type="im:EquipmentRefType"
+                  minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="supply" type="im:SupplyRefType"
+                  minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="spare" type="im:SpareRefType"
+                  minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="safetyWarning" type="xs:string"
+                  minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="safetyCaution" type="xs:string"
+                  minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="maintenanceLevel" type="im:MaintenanceLevelEnum"
+                  default="O"/>
+    <xs:attribute name="taskDuration" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="EquipmentRefType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="partNumber" type="xs:string" minOccurs="0"/>
+      <xs:element name="manufacturerCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="quantity" type="xs:positiveInteger" default="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SupplyRefType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="partNumber" type="xs:string" minOccurs="0"/>
+      <xs:element name="quantity" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SpareRefType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="partNumber" type="xs:string" minOccurs="0"/>
+      <xs:element name="manufacturerCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="quantity" type="xs:positiveInteger" default="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- =================================================================== -->
+  <!-- PROCEDURAL STEPS                                                    -->
+  <!-- =================================================================== -->
+
+  <xs:complexType name="ProceduralStepsType">
+    <xs:sequence>
+      <xs:element name="step" type="im:ProceduralStepType"
+                  maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ProceduralStepType">
+    <xs:sequence>
+      <xs:element name="warning" type="xs:string"
+                  minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="caution" type="xs:string"
+                  minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="actionText" type="xs:string"/>
+      <xs:element name="note" type="xs:string"
+                  minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="illustrationRef" type="xs:string" minOccurs="0"/>
+      <xs:element name="toolRef" type="xs:string"
+                  minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="partRef" type="xs:string"
+                  minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="substep" type="im:ProceduralStepType"
+                  minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="stepNumber" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <!-- =================================================================== -->
+  <!-- CLOSING REQUIREMENTS                                                -->
+  <!-- =================================================================== -->
+
+  <xs:complexType name="ClosingReqsType">
+    <xs:sequence>
+      <xs:element name="condition" type="xs:string"
+                  minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- =================================================================== -->
+  <!-- SOURCE TRACEABILITY                                                 -->
+  <!-- =================================================================== -->
+
+  <xs:complexType name="SourceTraceType">
+    <xs:sequence>
+      <xs:element name="sourceDocument" type="xs:string"/>
+      <xs:element name="validationStatus" type="im:ValidationStatusEnum"/>
+      <xs:element name="engineeringAuthority" type="xs:string"/>
+      <xs:element name="validationDate" type="xs:date"/>
+      <xs:element name="changeHash" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- =================================================================== -->
+  <!-- ENUMERATIONS                                                        -->
+  <!-- =================================================================== -->
+
+  <xs:simpleType name="ValidationStatusEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="validated"/>
+      <xs:enumeration value="pending-review"/>
+      <xs:enumeration value="superseded"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="TaskCategoryEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="servicing"/>
+      <xs:enumeration value="inspection"/>
+      <xs:enumeration value="removal-installation"/>
+      <xs:enumeration value="repair"/>
+      <xs:enumeration value="overhaul"/>
+      <xs:enumeration value="operational-check"/>
+      <xs:enumeration value="cleaning"/>
+      <xs:enumeration value="fault-isolation"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="MaintenanceLevelEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="O"/>
+      <xs:enumeration value="I"/>
+      <xs:enumeration value="D"/>
+      <xs:enumeration value="S"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>
