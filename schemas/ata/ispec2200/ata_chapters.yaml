@@ -329,10 +329,14 @@ chapters:
       - "IPC"
     
   - chapter: "40"
-    title: "Reserved"
-    description: "Reserved for future use"
-    category: "reserved"
-    status: "reserved"
+    title: "Multisystem"
+    description: "Multisystem integration and operating systems"
+    category: "airframe"
+    optin_axis: "T"
+    optin_subdomain: "O-OPERATING_SYSTEMS"
+    publications:
+      - "AMM"
+      - "TSM"
     
   - chapter: "41"
     title: "Reserved"
@@ -341,10 +345,15 @@ chapters:
     status: "reserved"
     
   - chapter: "42"
-    title: "Reserved"
-    description: "Reserved for future use"
-    category: "reserved"
-    status: "reserved"
+    title: "Integrated Modular Avionics"
+    description: "Integrated modular avionics systems"
+    category: "airframe"
+    optin_axis: "T"
+    optin_subdomain: "A2-AVIONICS"
+    publications:
+      - "AMM"
+      - "TSM"
+      - "IPC"
     
   - chapter: "43"
     title: "Reserved"
@@ -353,10 +362,15 @@ chapters:
     status: "reserved"
     
   - chapter: "44"
-    title: "Reserved"
-    description: "Reserved for future use"
-    category: "reserved"
-    status: "reserved"
+    title: "Cabin Systems"
+    description: "Cabin management, entertainment, and passenger systems"
+    category: "airframe"
+    optin_axis: "T"
+    optin_subdomain: "A-AIRFRAME_CABINS"
+    publications:
+      - "AMM"
+      - "TSM"
+      - "IPC"
     
   - chapter: "45"
     title: "Central Maintenance System (CMS)"
@@ -771,29 +785,36 @@ chapters:
     status: "reserved"
     
   - chapter: "95"
-    title: "Reserved"
-    description: "Reserved for future use"
-    category: "reserved"
-    status: "reserved"
+    title: "AI/ML Models"
+    description: "Artificial Intelligence and Machine Learning models for aerospace"
+    category: "extended"
+    optin_axis: "T"
+    optin_subdomain: "I2-INTELLIGENCE"
+    publications:
+      - "AMM"
     
   - chapter: "96"
-    title: "Reserved"
-    description: "Reserved for future use"
-    category: "reserved"
-    status: "reserved"
+    title: "Traceability / DPP Ledger"
+    description: "Digital Product Passport traceability and ledger"
+    category: "extended"
+    optin_axis: "N"
+    publications:
+      - "AMM"
     
   - chapter: "97"
-    title: "Wiring Reporting"
-    description: "Wiring reporting and analysis"
-    category: "special"
+    title: "Synthetic Data Validation"
+    description: "Synthetic data generation and validation for aerospace systems"
+    category: "extended"
+    optin_axis: "T"
+    optin_subdomain: "I2-INTELLIGENCE"
     publications:
-      - "WDM"
+      - "AMM"
     
   - chapter: "98"
-    title: "Reserved"
-    description: "Reserved for future use"
-    category: "reserved"
-    status: "reserved"
+    title: "Reserved Program Slot"
+    description: "Reserved slot for program-specific extensions"
+    category: "extended"
+    optin_axis: "N"
     
   - chapter: "99"
     title: "Reserved"
@@ -831,3 +852,16 @@ categories:
     
   reserved:
     description: "Reserved for future use"
+
+  extended:
+    range: "95-98"
+    description: "OPT-IN Framework extended chapters (AI/ML, traceability)"
+    optin_framework: true
+
+# -----------------------------------------------------------------------------
+# OPT-IN Framework Reference
+# See: ASIGT/mapping/optin_framework_index.yaml
+# -----------------------------------------------------------------------------
+optin_reference:
+  mapping_file: "ASIGT/mapping/optin_framework_index.yaml"
+  version: "1.0.0"

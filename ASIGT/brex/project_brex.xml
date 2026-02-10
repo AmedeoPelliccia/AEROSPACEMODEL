@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+=============================================================================
+Project-Specific BREX Data Module
+AEROSPACEMODEL S1000D Business Rules Exchange
+
+Purpose:
+  Defines project-specific business rules that constrain S1000D content
+  generation beyond the default BREX. Enforced automatically by the
+  ASIGT validation pipeline.
+
+DMC: AERO-A-00-00-00-00A-022A-D
+Issue: 001 / inWork: 00
+=============================================================================
+-->
+<dmodule xmlns="http://www.s1000d.org/S1000D_5-0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <!-- ===================================================================== -->
+  <!-- IDENTIFICATION AND STATUS SECTION                                     -->
+  <!-- ===================================================================== -->
+  <identAndStatusSection>
+    <dmAddress>
+      <dmIdent>
+        <dmCode modelIdentCode="AERO" systemDiffCode="A"
+                systemCode="00" subSystemCode="0" subSubSystemCode="0"
+                assyCode="00" disassyCode="00" disassyCodeVariant="A"
+                infoCode="022" infoCodeVariant="A" itemLocationCode="D"/>
+        <language languageIsoCode="sx" countryIsoCode="US"/>
+        <issueInfo issueNumber="001" inWork="00"/>
+      </dmIdent>
+      <dmAddressItems>
+        <issueDate year="2026" month="01" day="27"/>
+        <dmTitle>
+          <techName>AEROSPACEMODEL Project</techName>
+          <infoName>Business Rules Exchange (BREX)</infoName>
+        </dmTitle>
+      </dmAddressItems>
+    </dmAddress>
+
+    <dmStatus issueType="new">
+      <security securityClassification="01"/>
+      <responsiblePartnerCompany>
+        <enterpriseName>AEROSPACEMODEL Contributors</enterpriseName>
+      </responsiblePartnerCompany>
+      <originator>
+        <enterpriseName>AEROSPACEMODEL</enterpriseName>
+      </originator>
+      <applic>
+        <displayText>
+          <simplePara>All</simplePara>
+        </displayText>
+      </applic>
+      <brexDmRef>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="S1000D" systemDiffCode="G"
+                    systemCode="04" subSystemCode="1" subSubSystemCode="0"
+                    assyCode="0301" disassyCode="00" disassyCodeVariant="A"
+                    infoCode="022" infoCodeVariant="A" itemLocationCode="D"/>
+          </dmRefIdent>
+        </dmRef>
+      </brexDmRef>
+      <qualityAssurance>
+        <firstVerification verificationType="tapiCheck"/>
+      </qualityAssurance>
+    </dmStatus>
+  </identAndStatusSection>
+
+  <!-- ===================================================================== -->
+  <!-- CONTENT SECTION — BREX RULES                                          -->
+  <!-- ===================================================================== -->
+  <content>
+    <brex>
+
+      <!-- ================================================================= -->
+      <!-- RULE 1: Hydraulic system warnings (ATA 29 / SNS 29)               -->
+      <!-- Procedural steps for hydraulic systems MUST include a warning      -->
+      <!-- before the first step, per safety policy.                          -->
+      <!-- ================================================================= -->
+      <structureObjectRule>
+        <objectPath allowedObjectFlag="2">
+          //proceduralStep[
+            ancestor::dmodule//dmCode[@systemCode='29']
+            and not(preceding-sibling::proceduralStep)
+            and not(child::warning)
+          ]
+        </objectPath>
+        <objectUse>
+          Hydraulic system procedures (ATA 29 / SNS 29) must include
+          a warning element before the first procedural step. Hydraulic
+          systems operate above 3000 PSI and require hazard awareness.
+        </objectUse>
+      </structureObjectRule>
+
+      <!-- ================================================================= -->
+      <!-- RULE 2: ICN naming convention                                     -->
+      <!-- All ICN identifiers must begin with 'ICN-AERO-' per project       -->
+      <!-- naming convention.                                                -->
+      <!-- ================================================================= -->
+      <structureObjectRule>
+        <objectPath allowedObjectFlag="2">
+          //graphic[@infoEntityIdent[
+            not(starts-with(.,'ICN-AERO-'))
+          ]]
+        </objectPath>
+        <objectUse>
+          All ICN (Information Control Number) identifiers must begin
+          with the 'ICN-AERO-' prefix per project naming convention.
+          Format: ICN-AERO-{SYSTEM}-{FIGURE}-{SHEET}-{VARIANT}
+        </objectUse>
+      </structureObjectRule>
+
+      <!-- ================================================================= -->
+      <!-- RULE 3: Dual-unit torque values                                   -->
+      <!-- Torque values must be expressed in both Nm and ft-lb.             -->
+      <!-- ================================================================= -->
+      <structureObjectRule>
+        <objectPath allowedObjectFlag="2">
+          //para[
+            contains(translate(.,'nm','NM'),'NM')
+            and not(contains(translate(.,'ft-lb','FT-LB'),'FT-LB'))
+          ]
+        </objectPath>
+        <objectUse>
+          Torque values must be expressed in both metric (Nm) and
+          imperial (ft-lb) units for international maintainer support.
+        </objectUse>
+      </structureObjectRule>
+
+      <!-- ================================================================= -->
+      <!-- RULE 4: Model identification code consistency                     -->
+      <!-- All DMs must use the project model identification code.           -->
+      <!-- ================================================================= -->
+      <structureObjectRule>
+        <objectPath allowedObjectFlag="2">
+          //dmCode[
+            not(@modelIdentCode='AERO')
+            and not(ancestor::brexDmRef)
+          ]
+        </objectPath>
+        <objectUse>
+          All data module codes must use 'AERO' as the model
+          identification code. This ensures CSDB consistency.
+        </objectUse>
+      </structureObjectRule>
+
+      <!-- ================================================================= -->
+      <!-- RULE 5: Procedural DMs must have preliminary requirements         -->
+      <!-- All procedural data modules must include a preliminaryRqmts       -->
+      <!-- section with at least safety information.                         -->
+      <!-- ================================================================= -->
+      <structureObjectRule>
+        <objectPath allowedObjectFlag="2">
+          //procedure[not(child::preliminaryRqmts)]
+        </objectPath>
+        <objectUse>
+          All procedural data modules must include a preliminaryRqmts
+          section specifying required conditions, support equipment,
+          supplies, spares, and safety warnings/cautions.
+        </objectUse>
+      </structureObjectRule>
+
+      <!-- ================================================================= -->
+      <!-- RULE 6: Close-up requirements for removal/installation            -->
+      <!-- Removal and installation procedures must include closeRqmts.      -->
+      <!-- ================================================================= -->
+      <structureObjectRule>
+        <objectPath allowedObjectFlag="2">
+          //procedure[
+            ancestor::dmodule//dmCode[
+              @infoCode='510' or @infoCode='520'
+              or @infoCode='500'
+            ]
+            and not(child::closeRqmts)
+          ]
+        </objectPath>
+        <objectUse>
+          Removal (510), installation (520), and disconnect/connect
+          (500) procedures must include a closeRqmts section specifying
+          post-task verification requirements.
+        </objectUse>
+      </structureObjectRule>
+
+      <!-- ================================================================= -->
+      <!-- RULE 7: Security classification required                          -->
+      <!-- All DMs must specify security classification.                     -->
+      <!-- ================================================================= -->
+      <structureObjectRule>
+        <objectPath allowedObjectFlag="2">
+          //dmStatus[not(child::security/@securityClassification)]
+        </objectPath>
+        <objectUse>
+          All data modules must include a security classification
+          attribute. Use '01' for unclassified content.
+        </objectUse>
+      </structureObjectRule>
+
+      <!-- ================================================================= -->
+      <!-- RULE 8: Fuel system double-caution (ATA 28)                       -->
+      <!-- Fuel system procedures must include both warning and caution.     -->
+      <!-- ================================================================= -->
+      <structureObjectRule>
+        <objectPath allowedObjectFlag="2">
+          //proceduralStep[
+            ancestor::dmodule//dmCode[@systemCode='28']
+            and not(preceding-sibling::proceduralStep)
+            and (not(child::warning) or not(child::caution))
+          ]
+        </objectPath>
+        <objectUse>
+          Fuel system procedures (ATA 28) must include both a warning
+          AND a caution element before the first procedural step due
+          to flammability and vapor hazard requirements.
+        </objectUse>
+      </structureObjectRule>
+
+      <!-- ================================================================= -->
+      <!-- RULE 9: OPT-IN extended chapters must include traceability        -->
+      <!-- AI/ML (95), Traceability (96), Synthetic Data (97) DMs must       -->
+      <!-- include source traceability in remarks.                           -->
+      <!-- ================================================================= -->
+      <structureObjectRule>
+        <objectPath allowedObjectFlag="2">
+          //dmodule[
+            .//dmCode[
+              @systemCode='95' or @systemCode='96'
+              or @systemCode='97' or @systemCode='98'
+            ]
+            and not(.//dmStatus/remarks)
+          ]
+        </objectPath>
+        <objectUse>
+          OPT-IN Framework extended chapters (ATA 95-98) must include
+          a remarks section with source traceability information
+          including engineering authority and validation hash.
+        </objectUse>
+      </structureObjectRule>
+
+    </brex>
+  </content>
+
+</dmodule>

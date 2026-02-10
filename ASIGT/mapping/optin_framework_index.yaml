@@ -1,0 +1,484 @@
+# =============================================================================
+# OPT-IN Framework Index — ATA-to-Axis Mapping
+# AEROSPACEMODEL Pipeline Configuration
+# Version: 1.0.0
+# Last Updated: 2026-01-27
+# =============================================================================
+#
+# Maps all 79+ ATA chapters to their OPT-IN Framework axes and subdomains.
+#
+# OPT-IN Axes:
+#   O — Organizations (governance, policy, airworthiness)
+#   P — Programs (ground handling, servicing, placards)
+#   T — Technologies (on-board systems, structures, propulsion)
+#   I — Infrastructures (ground support, H2 GSE)
+#   N — Neural Networks (AI/ML, governance, traceability)
+#
+# Used by the pipeline for SNS classification, BREX scoping, and
+# publication structure.
+# =============================================================================
+
+metadata:
+  framework: "OPT-IN"
+  version: "1.0.0"
+  description: "Complete ATA chapter reference mapped to OPT-IN Framework axes"
+  last_updated: "2026-01-27"
+
+# =============================================================================
+# AXIS DEFINITIONS
+# =============================================================================
+axes:
+  O:
+    name: "O-ORGANIZATIONS"
+    description: "Governance, policy, airworthiness limitations"
+    ata_range: "00-05"
+
+  P:
+    name: "P-PROGRAMS"
+    description: "Ground handling, servicing, placards and markings"
+    ata_range: "06-12"
+
+  T:
+    name: "T-TECHNOLOGIES"
+    description: "On-board systems, structures, propulsion"
+    ata_range: "20-80, 95, 97"
+    subdomains:
+      A:
+        name: "A-AIRFRAME_CABINS"
+        ata_chapters: ["20", "25", "44", "50", "51", "52", "53", "54", "55", "56", "57"]
+      M:
+        name: "M-MECHANICS"
+        ata_chapters: ["27", "29", "32"]
+      E1:
+        name: "E1-ENVIRONMENT"
+        ata_chapters: ["21", "26", "30", "35", "36", "37", "38", "47"]
+      D:
+        name: "D-DATA"
+        ata_chapters: ["31", "45"]
+      I:
+        name: "I-INFORMATION"
+        ata_chapters: ["46"]
+      E2:
+        name: "E2-ENERGY"
+        ata_chapters: ["24", "49"]
+      E3:
+        name: "E3-ELECTRICS"
+        ata_chapters: ["33", "39"]
+      L1:
+        name: "L1-LOGICS"
+        ata_chapters: []
+        note: "Reserved as required"
+      L2:
+        name: "L2-LINKS"
+        ata_chapters: ["34"]
+      C1:
+        name: "C1-COMMS"
+        ata_chapters: ["23"]
+      C2:
+        name: "C2-CIRCULAR_CRYOGENIC_CELLS"
+        ata_chapters: ["28"]
+      I2:
+        name: "I2-INTELLIGENCE"
+        ata_chapters: ["95", "97"]
+      A2:
+        name: "A2-AVIONICS"
+        ata_chapters: ["22", "42"]
+      O:
+        name: "O-OPERATING_SYSTEMS"
+        ata_chapters: ["40"]
+      P:
+        name: "P-PROPULSION"
+        ata_chapters: ["60", "61", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80"]
+
+  I_INFRA:
+    name: "I-INFRASTRUCTURES"
+    description: "Ground support equipment, H2 supply chain"
+    ata_chapters: ["03", "08", "10", "12", "85"]
+    note: "Infrastructure variants of ATA chapters"
+
+  N:
+    name: "N-NEURAL_NETWORKS"
+    description: "AI/ML governance, traceability, DPP ledger"
+    ata_chapters: ["96", "98"]
+
+# =============================================================================
+# CHAPTER-TO-AXIS MAP (flat lookup)
+# =============================================================================
+chapter_map:
+  # O-ORGANIZATIONS (ATA 00-05)
+  "00":
+    title: "General"
+    axis: "O"
+    path: "O-ORGANIZATIONS/ATA_00-GENERAL/"
+  "01":
+    title: "Maintenance Policy"
+    axis: "O"
+    path: "O-ORGANIZATIONS/ATA_01-MAINTENANCE_POLICY/"
+  "02":
+    title: "Operations Organization"
+    axis: "O"
+    path: "O-ORGANIZATIONS/ATA_02-OPERATIONS_ORG/"
+  "03":
+    title: "Support Information"
+    axis: "O"
+    path: "O-ORGANIZATIONS/ATA_03-SUPPORT_INFORMATION/"
+  "04":
+    title: "Airworthiness Limitations"
+    axis: "O"
+    path: "O-ORGANIZATIONS/ATA_04-AIRWORTHINESS_LIMITATIONS/"
+  "05":
+    title: "Time Limits / Maintenance Checks"
+    axis: "O"
+    path: "O-ORGANIZATIONS/ATA_05-TIME_LIMITS_MAINT_CHECKS/"
+
+  # P-PROGRAMS (ATA 06-12)
+  "06":
+    title: "Dimensions and Areas"
+    axis: "P"
+    path: "P-PROGRAMS/ATA_06-DIMENSIONS_AND_AREAS/"
+  "07":
+    title: "Lifting and Shoring"
+    axis: "P"
+    path: "P-PROGRAMS/ATA_07-LIFTING_AND_SHORING/"
+  "08":
+    title: "Leveling and Weighing"
+    axis: "P"
+    path: "P-PROGRAMS/ATA_08-LEVELING_AND_WEIGHING/"
+  "09":
+    title: "Towing and Taxiing"
+    axis: "P"
+    path: "P-PROGRAMS/ATA_09-TOWING_AND_TAXIING/"
+  "10":
+    title: "Parking, Mooring, Storage, Return to Service"
+    axis: "P"
+    path: "P-PROGRAMS/ATA_10-PARKING_MOORING_STORAGE_RETURN_TO_SERVICE/"
+  "11":
+    title: "Placards and Markings"
+    axis: "P"
+    path: "P-PROGRAMS/ATA_11-PLACARDS_AND_MARKINGS/"
+  "12":
+    title: "Servicing"
+    axis: "P"
+    path: "P-PROGRAMS/ATA_12-SERVICING/"
+
+  # T-TECHNOLOGIES / A-AIRFRAME_CABINS
+  "20":
+    title: "Standard Practices - Airframe"
+    axis: "T"
+    subdomain: "A"
+    path: "T-TECHNOLOGIES/A-AIRFRAME_CABINS/ATA_20-STANDARD_PRACTICES_AIRFRAME/"
+  "25":
+    title: "Equipment / Furnishings"
+    axis: "T"
+    subdomain: "A"
+    path: "T-TECHNOLOGIES/A-AIRFRAME_CABINS/ATA_25-EQUIPMENT_FURNISHINGS/"
+  "44":
+    title: "Cabin Systems"
+    axis: "T"
+    subdomain: "A"
+    path: "T-TECHNOLOGIES/A-AIRFRAME_CABINS/ATA_44-CABIN_SYSTEMS/"
+  "50":
+    title: "Cargo and Accessory Compartments"
+    axis: "T"
+    subdomain: "A"
+    path: "T-TECHNOLOGIES/A-AIRFRAME_CABINS/ATA_50-CARGO_AND_ACCESSORY_COMPARTMENTS/"
+  "51":
+    title: "Standard Practices - General"
+    axis: "T"
+    subdomain: "A"
+    path: "T-TECHNOLOGIES/A-AIRFRAME_CABINS/ATA_51-STANDARD_PRACTICES_GENERAL/"
+  "52":
+    title: "Doors"
+    axis: "T"
+    subdomain: "A"
+    path: "T-TECHNOLOGIES/A-AIRFRAME_CABINS/ATA_52-DOORS/"
+  "53":
+    title: "Fuselage"
+    axis: "T"
+    subdomain: "A"
+    path: "T-TECHNOLOGIES/A-AIRFRAME_CABINS/ATA_53-FUSELAGE/"
+  "54":
+    title: "Nacelles / Pylons"
+    axis: "T"
+    subdomain: "A"
+    path: "T-TECHNOLOGIES/A-AIRFRAME_CABINS/ATA_54-NACELLES_PYLONS/"
+  "55":
+    title: "Stabilizers"
+    axis: "T"
+    subdomain: "A"
+    path: "T-TECHNOLOGIES/A-AIRFRAME_CABINS/ATA_55-STABILIZERS/"
+  "56":
+    title: "Windows"
+    axis: "T"
+    subdomain: "A"
+    path: "T-TECHNOLOGIES/A-AIRFRAME_CABINS/ATA_56-WINDOWS/"
+  "57":
+    title: "Wings"
+    axis: "T"
+    subdomain: "A"
+    path: "T-TECHNOLOGIES/A-AIRFRAME_CABINS/ATA_57-WINGS/"
+
+  # T-TECHNOLOGIES / E1-ENVIRONMENT
+  "21":
+    title: "Air Conditioning / Pressurization"
+    axis: "T"
+    subdomain: "E1"
+    path: "T-TECHNOLOGIES/E1-ENVIRONMENT/ATA_21-AIR_CONDITIONING_PRESSURIZATION/"
+  "26":
+    title: "Fire Protection"
+    axis: "T"
+    subdomain: "E1"
+    path: "T-TECHNOLOGIES/E1-ENVIRONMENT/ATA_26-FIRE_PROTECTION/"
+  "30":
+    title: "Ice and Rain Protection"
+    axis: "T"
+    subdomain: "E1"
+    path: "T-TECHNOLOGIES/E1-ENVIRONMENT/ATA_30-ICE_RAIN_PROTECTION/"
+  "35":
+    title: "Oxygen"
+    axis: "T"
+    subdomain: "E1"
+    path: "T-TECHNOLOGIES/E1-ENVIRONMENT/ATA_35-OXYGEN/"
+  "36":
+    title: "Pneumatic"
+    axis: "T"
+    subdomain: "E1"
+    path: "T-TECHNOLOGIES/E1-ENVIRONMENT/ATA_36-PNEUMATIC/"
+  "37":
+    title: "Vacuum"
+    axis: "T"
+    subdomain: "E1"
+    path: "T-TECHNOLOGIES/E1-ENVIRONMENT/ATA_37-VACUUM/"
+  "38":
+    title: "Water / Waste"
+    axis: "T"
+    subdomain: "E1"
+    path: "T-TECHNOLOGIES/E1-ENVIRONMENT/ATA_38-WATER_WASTE/"
+  "47":
+    title: "Nitrogen Generation System"
+    axis: "T"
+    subdomain: "E1"
+    path: "T-TECHNOLOGIES/E1-ENVIRONMENT/ATA_47-NITROGEN_GENERATION_SYSTEM/"
+
+  # T-TECHNOLOGIES / M-MECHANICS
+  "27":
+    title: "Flight Controls"
+    axis: "T"
+    subdomain: "M"
+    path: "T-TECHNOLOGIES/M-MECHANICS/ATA_27-FLIGHT_CONTROLS/"
+  "29":
+    title: "Hydraulic Power"
+    axis: "T"
+    subdomain: "M"
+    path: "T-TECHNOLOGIES/M-MECHANICS/ATA_29-HYDRAULIC_POWER/"
+  "32":
+    title: "Landing Gear"
+    axis: "T"
+    subdomain: "M"
+    path: "T-TECHNOLOGIES/M-MECHANICS/ATA_32-LANDING_GEAR/"
+
+  # T-TECHNOLOGIES / D-DATA
+  "31":
+    title: "Indicating / Recording"
+    axis: "T"
+    subdomain: "D"
+    path: "T-TECHNOLOGIES/D-DATA/ATA_31-INDICATING_RECORDING/"
+  "45":
+    title: "Central Maintenance System (CMS)"
+    axis: "T"
+    subdomain: "D"
+    path: "T-TECHNOLOGIES/D-DATA/ATA_45-CENTRAL_MAINTENANCE_SYSTEM_CMS/"
+
+  # T-TECHNOLOGIES / I-INFORMATION
+  "46":
+    title: "Information Systems"
+    axis: "T"
+    subdomain: "I"
+    path: "T-TECHNOLOGIES/I-INFORMATION/ATA_46-INFORMATION_SYSTEMS/"
+
+  # T-TECHNOLOGIES / E2-ENERGY
+  "24":
+    title: "Electrical Power"
+    axis: "T"
+    subdomain: "E2"
+    path: "T-TECHNOLOGIES/E2-ENERGY/ATA_24-ELECTRICAL_POWER/"
+  "49":
+    title: "Airborne Auxiliary Power (APU)"
+    axis: "T"
+    subdomain: "E2"
+    path: "T-TECHNOLOGIES/E2-ENERGY/ATA_49-AIRBORNE_AUXILIARY_POWER_APU/"
+
+  # T-TECHNOLOGIES / E3-ELECTRICS
+  "33":
+    title: "Lights"
+    axis: "T"
+    subdomain: "E3"
+    path: "T-TECHNOLOGIES/E3-ELECTRICS/ATA_33-LIGHTS/"
+  "39":
+    title: "Electrical/Electronic Panels"
+    axis: "T"
+    subdomain: "E3"
+    path: "T-TECHNOLOGIES/E3-ELECTRICS/ATA_39-ELECTRICAL_ELECTRONIC_PANELS/"
+
+  # T-TECHNOLOGIES / L2-LINKS
+  "34":
+    title: "Navigation"
+    axis: "T"
+    subdomain: "L2"
+    path: "T-TECHNOLOGIES/L2-LINKS/ATA_34-NAVIGATION/"
+
+  # T-TECHNOLOGIES / C1-COMMS
+  "23":
+    title: "Communications"
+    axis: "T"
+    subdomain: "C1"
+    path: "T-TECHNOLOGIES/C1-COMMS/ATA_23-COMMUNICATIONS/"
+
+  # T-TECHNOLOGIES / C2-CIRCULAR_CRYOGENIC_CELLS
+  "28":
+    title: "Fuel"
+    axis: "T"
+    subdomain: "C2"
+    path: "T-TECHNOLOGIES/C2-CIRCULAR_CRYOGENIC_CELLS/ATA_28-FUEL/"
+
+  # T-TECHNOLOGIES / A2-AVIONICS
+  "22":
+    title: "Auto Flight"
+    axis: "T"
+    subdomain: "A2"
+    path: "T-TECHNOLOGIES/A2-AVIONICS/ATA_22-AUTO_FLIGHT/"
+  "42":
+    title: "Integrated Modular Avionics"
+    axis: "T"
+    subdomain: "A2"
+    path: "T-TECHNOLOGIES/A2-AVIONICS/ATA_42-INTEGRATED_MODULAR_AVIONICS/"
+
+  # T-TECHNOLOGIES / O-OPERATING_SYSTEMS
+  "40":
+    title: "Multisystem"
+    axis: "T"
+    subdomain: "O"
+    path: "T-TECHNOLOGIES/O-OPERATING_SYSTEMS/ATA_40-MULTISYSTEM/"
+
+  # T-TECHNOLOGIES / I2-INTELLIGENCE
+  "95":
+    title: "AI/ML Models"
+    axis: "T"
+    subdomain: "I2"
+    path: "T-TECHNOLOGIES/I2-INTELLIGENCE/ATA_95-AI_ML_MODELS/"
+    extended: true
+  "97":
+    title: "Synthetic Data Validation"
+    axis: "T"
+    subdomain: "I2"
+    path: "T-TECHNOLOGIES/I2-INTELLIGENCE/ATA_97-SYNTHETIC_DATA_VALIDATION/"
+    extended: true
+
+  # T-TECHNOLOGIES / P-PROPULSION
+  "60":
+    title: "Standard Practices - Propeller/Rotor"
+    axis: "T"
+    subdomain: "P"
+    path: "T-TECHNOLOGIES/P-PROPULSION/ATA_60-STANDARD_PRACTICES_PROPELLER_ROTOR/"
+  "61":
+    title: "Propellers / Propulsors"
+    axis: "T"
+    subdomain: "P"
+    path: "T-TECHNOLOGIES/P-PROPULSION/ATA_61-PROPELLERS_PROPULSORS/"
+  "71":
+    title: "Power Plant"
+    axis: "T"
+    subdomain: "P"
+    path: "T-TECHNOLOGIES/P-PROPULSION/ATA_71-POWER_PLANT/"
+  "72":
+    title: "Engine (Turbine/Turboprop/Ducted/Unducted Fan)"
+    axis: "T"
+    subdomain: "P"
+    path: "T-TECHNOLOGIES/P-PROPULSION/ATA_72-ENGINE/"
+  "73":
+    title: "Engine Fuel and Control"
+    axis: "T"
+    subdomain: "P"
+    path: "T-TECHNOLOGIES/P-PROPULSION/ATA_73-ENGINE_FUEL_AND_CONTROL/"
+  "74":
+    title: "Ignition"
+    axis: "T"
+    subdomain: "P"
+    path: "T-TECHNOLOGIES/P-PROPULSION/ATA_74-IGNITION/"
+  "75":
+    title: "Air"
+    axis: "T"
+    subdomain: "P"
+    path: "T-TECHNOLOGIES/P-PROPULSION/ATA_75-AIR/"
+  "76":
+    title: "Engine Controls"
+    axis: "T"
+    subdomain: "P"
+    path: "T-TECHNOLOGIES/P-PROPULSION/ATA_76-ENGINE_CONTROLS/"
+  "77":
+    title: "Engine Indicating"
+    axis: "T"
+    subdomain: "P"
+    path: "T-TECHNOLOGIES/P-PROPULSION/ATA_77-ENGINE_INDICATING/"
+  "78":
+    title: "Exhaust"
+    axis: "T"
+    subdomain: "P"
+    path: "T-TECHNOLOGIES/P-PROPULSION/ATA_78-EXHAUST/"
+  "79":
+    title: "Oil"
+    axis: "T"
+    subdomain: "P"
+    path: "T-TECHNOLOGIES/P-PROPULSION/ATA_79-OIL/"
+  "80":
+    title: "Starting"
+    axis: "T"
+    subdomain: "P"
+    path: "T-TECHNOLOGIES/P-PROPULSION/ATA_80-STARTING/"
+
+  # I-INFRASTRUCTURES
+  "85":
+    title: "Fuel Cell Systems (Infra)"
+    axis: "I_INFRA"
+    path: "I-INFRASTRUCTURES/ATA_85-FUEL_CELL_SYSTEMS_INFRA/"
+    infrastructure_variant: true
+
+  # N-NEURAL_NETWORKS
+  "96":
+    title: "Traceability / DPP Ledger"
+    axis: "N"
+    path: "N-NEURAL_NETWORKS/ATA_96-TRACEABILITY_DPP_LEDGER/"
+    extended: true
+  "98":
+    title: "Reserved Program Slot"
+    axis: "N"
+    path: "N-NEURAL_NETWORKS/ATA_98-RESERVED_PROGRAM_SLOT/"
+    extended: true
+
+# =============================================================================
+# INFRASTRUCTURE VARIANTS
+# Chapters that have both on-board (T) and ground-support (I) variants
+# =============================================================================
+infrastructure_variants:
+  "03":
+    on_board_path: "O-ORGANIZATIONS/ATA_03-SUPPORT_INFORMATION/"
+    infra_path: "I-INFRASTRUCTURES/ATA_03-SUPPORT_INFRA/"
+  "08":
+    on_board_path: "P-PROGRAMS/ATA_08-LEVELING_AND_WEIGHING/"
+    infra_path: "I-INFRASTRUCTURES/ATA_08-LEVELING_AND_WEIGHING_INFRA/"
+  "10":
+    on_board_path: "P-PROGRAMS/ATA_10-PARKING_MOORING_STORAGE_RETURN_TO_SERVICE/"
+    infra_path: "I-INFRASTRUCTURES/ATA_10-PARKING_MOORING_STORAGE_RTS_INFRA/"
+  "12":
+    on_board_path: "P-PROGRAMS/ATA_12-SERVICING/"
+    infra_path: "I-INFRASTRUCTURES/ATA_12-SERVICING_INFRA/"
+
+# =============================================================================
+# SPECIAL INFRASTRUCTURE ENTRY
+# =============================================================================
+special_entries:
+  H2_GSE:
+    title: "H₂ GSE and Supply Chain"
+    axis: "I_INFRA"
+    path: "I-INFRASTRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN/"
+    note: "Non-standard ATA entry for hydrogen ground support"
