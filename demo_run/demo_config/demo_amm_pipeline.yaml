@@ -1,0 +1,54 @@
+pipeline:
+  config:
+    execution:
+      max_parallel_steps: 4
+      parallel_enabled: true
+      timeout_minutes: 60
+    logging:
+      level: INFO
+      output_to_file: true
+  contract:
+    required_fields:
+    - contract_id
+    - baseline_ref
+    template: ASIT/CONTRACTS/templates/KITDM-CTR-LM-CSDB.template.yaml
+  metadata:
+    description: Demonstration pipeline for S1000D AMM content generation
+    name: Demo AMM Content Pipeline
+    owner: Demo Team
+    pipeline_id: DEMO-AMM-001
+    publication_type: AMM
+    tags:
+    - demo
+    - amm
+    - s1000d
+    version: 1.0.0
+  stages:
+  - description: Initialize pipeline and validate prerequisites
+    name: Pipeline Initialization
+    order: 1
+    stage: initialization
+  - description: Load source artifacts from KDB baseline
+    name: Source Loading
+    order: 2
+    stage: source_loading
+  - description: Transform sources to S1000D data modules
+    name: Content Transformation
+    order: 3
+    stage: transformation
+  - description: Validate against BREX and schema
+    name: Content Validation
+    order: 4
+    stage: validation
+  - description: Assemble data modules into publication
+    name: Publication Assembly
+    order: 5
+    stage: publication_assembly
+  - description: Render to deliverable formats
+    name: Output Rendering
+    order: 6
+    stage: rendering
+  - description: Finalize and archive artifacts
+    name: Pipeline Finalization
+    order: 7
+    stage: finalization

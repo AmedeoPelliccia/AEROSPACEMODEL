@@ -1,0 +1,7 @@
+ata_chapter: '27'
+description: The flight control system shall provide aircraft control in all normal
+  and abnormal conditions.
+id: REQ-ATA27-001
+safety_critical: true
+title: Flight Control System
+type: functional

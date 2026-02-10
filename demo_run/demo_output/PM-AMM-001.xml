@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pm xmlns="http://www.s1000d.org/S1000D_5-0">
+  <identAndStatusSection>
+    <pmAddress>
+      <pmIdent>
+        <pmCode pmNumber="AMM-001" pmVolume="01"/>
+        <language languageIsoCode="en" countryIsoCode="US"/>
+        <issueInfo issueNumber="001" inWork="00"/>
+      </pmIdent>
+      <pmAddressItems>
+        <issueDate year="2026" month="2" day="10"/>
+        <pmTitle>Aircraft Maintenance Manual</pmTitle>
+      </pmAddressItems>
+    </pmAddress>
+  </identAndStatusSection>
+  <content>
+    <pmEntry>
+      <pmEntryTitle>Maintenance Procedures</pmEntryTitle>
+      <dmRef>
+        <dmRefIdent>
+          <dmCode dmCode="AERO-A-27-00-00-00A-040A-A"/>
+        </dmRefIdent>
+      </dmRef>
+      <dmRef>
+        <dmRefIdent>
+          <dmCode dmCode="AERO-A-28-00-00-00A-040A-A"/>
+        </dmRefIdent>
+      </dmRef>
+      <dmRef>
+        <dmRefIdent>
+          <dmCode dmCode="AERO-A-28-00-00-00A-040A-A"/>
+        </dmRefIdent>
+      </dmRef>
+      <dmRef>
+        <dmRefIdent>
+          <dmCode dmCode="AERO-A-28-00-00-00A-040A-A"/>
+        </dmRefIdent>
+      </dmRef>
+      <dmRef>
+        <dmRefIdent>
+          <dmCode dmCode="AERO-A-28-00-00-00A-040A-A"/>
+        </dmRefIdent>
+      </dmRef>
+    </pmEntry>
+  </content>
+</pm>

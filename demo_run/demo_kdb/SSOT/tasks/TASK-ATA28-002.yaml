@@ -1,0 +1,18 @@
+ata_chapter: '28'
+description: Remove and replace fuel boost pump
+estimated_time_hours: 4.0
+id: TASK-ATA28-002
+steps:
+- Isolate fuel pump circuit breaker
+- Drain fuel from tank
+- Disconnect electrical connectors
+- Remove fuel pump mounting bolts
+- Remove fuel pump
+task_type: removal
+title: Fuel Pump Replacement
+tools:
+- Wrench set
+- Torque wrench
+warnings:
+- Fuel is flammable
+- Disconnect power before working

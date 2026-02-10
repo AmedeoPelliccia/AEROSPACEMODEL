@@ -1,0 +1,6 @@
+ata_chapter: '28'
+description: The fuel system shall provide fuel to all engines during all flight phases.
+id: REQ-ATA28-001
+safety_critical: true
+title: Fuel System Description
+type: functional

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dml xmlns="http://www.s1000d.org/S1000D_5-0">
+  <identAndStatusSection>
+    <dmlAddress>
+      <dmlIdent>
+        <dmlCode dmlType="c" yearOfDataIssue="2026" seqNumber="00001"/>
+        <language languageIsoCode="en" countryIsoCode="US"/>
+        <issueInfo issueNumber="001" inWork="00"/>
+      </dmlIdent>
+      <dmlAddressItems>
+        <issueDate year="2026" month="2" day="10"/>
+        <dmlTitle>AMM Data Module List</dmlTitle>
+      </dmlAddressItems>
+    </dmlAddress>
+  </identAndStatusSection>
+  <content>
+    <dmlEntry>
+      <dmRef>
+        <dmRefIdent>
+          <dmCode dmCode="AERO-A-27-00-00-00A-040A-A"/>
+        </dmRefIdent>
+      </dmRef>
+    </dmlEntry>
+    <dmlEntry>
+      <dmRef>
+        <dmRefIdent>
+          <dmCode dmCode="AERO-A-28-00-00-00A-040A-A"/>
+        </dmRefIdent>
+      </dmRef>
+    </dmlEntry>
+    <dmlEntry>
+      <dmRef>
+        <dmRefIdent>
+          <dmCode dmCode="AERO-A-28-00-00-00A-040A-A"/>
+        </dmRefIdent>
+      </dmRef>
+    </dmlEntry>
+    <dmlEntry>
+      <dmRef>
+        <dmRefIdent>
+          <dmCode dmCode="AERO-A-28-00-00-00A-040A-A"/>
+        </dmRefIdent>
+      </dmRef>
+    </dmlEntry>
+    <dmlEntry>
+      <dmRef>
+        <dmRefIdent>
+          <dmCode dmCode="AERO-A-28-00-00-00A-040A-A"/>
+        </dmRefIdent>
+      </dmRef>
+    </dmlEntry>
+  </content>
+</dml>

@@ -1,0 +1,7 @@
+ata_chapter: '28'
+description: "The fuel quantity indication system shall display fuel quantity with\
+  \ \xB11% accuracy."
+id: REQ-ATA28-002
+safety_critical: false
+title: Fuel Quantity Indication
+type: performance
