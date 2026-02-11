@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+=============================================================================
+S1000D Data Module Example - ATA 28 Fuel System
+Model: AERO
+ATA Chapter: 28 - Fuel
+Type: Descriptive (Info Code 040A)
+=============================================================================
+-->
+<dmodule xmlns="http://www.s1000d.org/S1000D_5-0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.s1000d.org/S1000D_5-0 S1000D_5-0/xml_schema_flat/descript.xsd">
+  
+  <!-- ===================================================================== -->
+  <!-- IDENTIFICATION AND STATUS SECTION                                     -->
+  <!-- ===================================================================== -->
+  <identAndStatusSection>
+    
+    <!-- Data Module Address -->
+    <dmAddress>
+      <dmIdent>
+        <!-- Data Module Code: AERO-A-28-00-00-00A-040A-A -->
+        <dmCode 
+          modelIdentCode="AERO"
+          systemDiffCode="A"
+          systemCode="28"
+          subSystemCode="00"
+          subSubSystemCode="00"
+          assyCode="00"
+          disassyCode="A"
+          disassyCodeVariant="040"
+          infoCode="A"
+          infoCodeVariant="A"
+          itemLocationCode="A"/>
+        
+        <!-- Language -->
+        <language languageIsoCode="en" countryIsoCode="US"/>
+        
+        <!-- Issue Information -->
+        <issueInfo issueNumber="001" inWork="00"/>
+      </dmIdent>
+      
+      <!-- Data Module Address Items -->
+      <dmAddressItems>
+        <issueDate year="2026" month="02" day="11"/>
+        <dmTitle>
+          <techName>Fuel System</techName>
+          <infoName>Description</infoName>
+        </dmTitle>
+      </dmAddressItems>
+    </dmAddress>
+    
+    <!-- Data Module Status -->
+    <dmStatus issueType="new">
+      <security securityClassification="01"/>
+      <responsiblePartnerCompany>
+        <enterpriseName>AEROSPACEMODEL Project</enterpriseName>
+      </responsiblePartnerCompany>
+      <originator>
+        <enterpriseName>ASIGT Content Pipeline</enterpriseName>
+      </originator>
+      <applic>
+        <displayText>
+          <simplePara>All aircraft</simplePara>
+        </displayText>
+      </applic>
+      <brexDmRef>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="00" 
+                    subSystemCode="00" subSubSystemCode="00" assyCode="00" 
+                    disassyCode="A" disassyCodeVariant="00E" infoCode="A" 
+                    infoCodeVariant="A" itemLocationCode="A"/>
+          </dmRefIdent>
+        </dmRef>
+      </brexDmRef>
+      <qualityAssurance>
+        <unverified/>
+      </qualityAssurance>
+    </dmStatus>
+  </identAndStatusSection>
+  
+  <!-- ===================================================================== -->
+  <!-- CONTENT SECTION                                                       -->
+  <!-- ===================================================================== -->
+  <content>
+    <description>
+      <levelledPara>
+        <title>Fuel System Overview</title>
+        <para>
+          The fuel system stores, manages, and delivers fuel to the engines under
+          all operating conditions. The system ensures continuous fuel supply,
+          proper weight distribution, and safe fuel handling throughout the flight
+          envelope.
+        </para>
+      </levelledPara>
+      
+      <levelledPara>
+        <title>Fuel Storage</title>
+        <para>
+          The aircraft fuel is stored in multiple tanks to optimize center of
+          gravity (CG) management and provide adequate range:
+        </para>
+        <para>
+          <randomList>
+            <listItem>
+              <para>Center Tank - Main fuselage fuel storage (ATA 28-11)</para>
+            </listItem>
+            <listItem>
+              <para>Wing Tanks (Left/Right) - Integral wing fuel storage (ATA 28-12)</para>
+            </listItem>
+            <listItem>
+              <para>Auxiliary Tank - Extended range storage (optional) (ATA 28-13)</para>
+            </listItem>
+          </randomList>
+        </para>
+        <para>
+          All tanks incorporate vent systems, drains, and access provisions for
+          inspection and maintenance.
+        </para>
+      </levelledPara>
+      
+      <levelledPara>
+        <title>Fuel Distribution</title>
+        <para>
+          The fuel distribution system includes:
+        </para>
+        <para>
+          <randomList>
+            <listItem>
+              <para>Boost Pumps - Provide positive fuel pressure (ATA 28-21)</para>
+            </listItem>
+            <listItem>
+              <para>Transfer Pumps - Move fuel between tanks (ATA 28-21)</para>
+            </listItem>
+            <listItem>
+              <para>Fuel Lines - Transport fuel throughout aircraft (ATA 28-22)</para>
+            </listItem>
+            <listItem>
+              <para>Crossfeed System - Enables fuel sharing between wings (ATA 28-23)</para>
+            </listItem>
+            <listItem>
+              <para>Fuel Valves - Control fuel flow (ATA 28-24)</para>
+            </listItem>
+          </randomList>
+        </para>
+        <para>
+          The system provides redundant fuel paths to ensure continued operation
+          with single pump failures.
+        </para>
+      </levelledPara>
+      
+      <levelledPara>
+        <title>Fuel Indication</title>
+        <para>
+          The fuel quantity indication system (ATA 28-41) provides accurate fuel
+          quantity information to the flight crew:
+        </para>
+        <para>
+          <randomList>
+            <listItem>
+              <para>Capacitance-type fuel quantity probes in each tank</para>
+            </listItem>
+            <listItem>
+              <para>Digital processing with temperature compensation</para>
+            </listItem>
+            <listItem>
+              <para>Individual tank quantity displays</para>
+            </listItem>
+            <listItem>
+              <para>Total fuel quantity and fuel used calculations</para>
+            </listItem>
+            <listItem>
+              <para>Low fuel level warnings</para>
+            </listItem>
+          </randomList>
+        </para>
+      </levelledPara>
+      
+      <levelledPara>
+        <title>Fuel Temperature Monitoring</title>
+        <para>
+          The fuel temperature monitoring system (ATA 28-42) provides:
+        </para>
+        <para>
+          <randomList>
+            <listItem>
+              <para>Temperature sensors in each tank</para>
+            </listItem>
+            <listItem>
+              <para>Low fuel temperature warnings</para>
+            </listItem>
+            <listItem>
+              <para>Fuel icing prevention monitoring</para>
+            </listItem>
+          </randomList>
+        </para>
+      </levelledPara>
+      
+      <levelledPara>
+        <title>Safety Features</title>
+        <para>
+          The fuel system incorporates extensive safety features:
+        </para>
+        <para>
+          <randomList>
+            <listItem>
+              <para>Redundant boost pumps for engine feed reliability (DAL A)</para>
+            </listItem>
+            <listItem>
+              <para>Leak detection system with crew alerts</para>
+            </listItem>
+            <listItem>
+              <para>Fuel filter with bypass indication</para>
+            </listItem>
+            <listItem>
+              <para>Water drain provisions and contamination detection</para>
+            </listItem>
+            <listItem>
+              <para>Fuel tank isolation valves for emergency shutoff</para>
+            </listItem>
+            <listItem>
+              <para>Fuel imbalance monitoring and automatic correction</para>
+            </listItem>
+            <listItem>
+              <para>Lightning protection and static discharge provisions</para>
+            </listItem>
+          </randomList>
+        </para>
+      </levelledPara>
+      
+      <levelledPara>
+        <title>Alternative Fuel Compatibility</title>
+        <para>
+          The fuel system is designed for compatibility with:
+        </para>
+        <para>
+          <randomList>
+            <listItem>
+              <para>Jet-A and Jet-A1 conventional fuels</para>
+            </listItem>
+            <listItem>
+              <para>Sustainable Aviation Fuels (SAF) up to 100% blend</para>
+            </listItem>
+            <listItem>
+              <para>Future hydrogen (H2) systems with appropriate modifications</para>
+            </listItem>
+          </randomList>
+        </para>
+        <para>
+          <warningAndCautionPara>
+            <warningAndCaution>
+              <icon>warning</icon>
+              <para>
+                Hydrogen fuel systems require special handling procedures due to
+                extreme flammability and cryogenic temperatures. Only trained
+                personnel with appropriate equipment may service H2 systems.
+              </para>
+            </warningAndCaution>
+          </warningAndCautionPara>
+        </para>
+      </levelledPara>
+      
+      <levelledPara>
+        <title>Related Documentation</title>
+        <para>
+          For detailed maintenance procedures, refer to the following data modules:
+        </para>
+        <para>
+          <randomList>
+            <listItem>
+              <para>DMC-AERO-A-28-11-00-00A-520A-A - Center Tank Maintenance</para>
+            </listItem>
+            <listItem>
+              <para>DMC-AERO-A-28-12-00-00A-520A-A - Wing Tank Maintenance</para>
+            </listItem>
+            <listItem>
+              <para>DMC-AERO-A-28-21-00-00A-520A-A - Fuel Pump Maintenance</para>
+            </listItem>
+            <listItem>
+              <para>DMC-AERO-A-28-41-00-00A-520A-A - Fuel Quantity Indication System</para>
+            </listItem>
+            <listItem>
+              <para>DMC-AERO-A-28-30-00-00A-720A-A - Fuel System Troubleshooting</para>
+            </listItem>
+          </randomList>
+        </para>
+      </levelledPara>
+    </description>
+  </content>
+</dmodule>

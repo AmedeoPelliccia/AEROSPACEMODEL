@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+=============================================================================
+S1000D Publication Module Example - Aircraft Maintenance Manual
+Model: AERO
+Publication Type: AMM (Aircraft Maintenance Manual)
+=============================================================================
+-->
+<pm xmlns="http://www.s1000d.org/S1000D_5-0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.s1000d.org/S1000D_5-0 S1000D_5-0/xml_schema_flat/pm.xsd">
+  
+  <!-- ===================================================================== -->
+  <!-- IDENTIFICATION AND STATUS SECTION                                     -->
+  <!-- ===================================================================== -->
+  <identAndStatusSection>
+    
+    <!-- Publication Module Address -->
+    <pmAddress>
+      <pmIdent>
+        <pmCode modelIdentCode="AERO" pmIssuer="AERO" pmNumber="AMM" pmVolume="01"/>
+        <language languageIsoCode="en" countryIsoCode="US"/>
+        <issueInfo issueNumber="001" inWork="00"/>
+      </pmIdent>
+      
+      <!-- Publication Module Address Items -->
+      <pmAddressItems>
+        <issueDate year="2026" month="02" day="11"/>
+        <pmTitle>Aircraft Maintenance Manual</pmTitle>
+        <shortPmTitle>AMM</shortPmTitle>
+      </pmAddressItems>
+    </pmAddress>
+    
+    <!-- Publication Module Status -->
+    <pmStatus>
+      <security securityClassification="01"/>
+      <responsiblePartnerCompany>
+        <enterpriseName>AEROSPACEMODEL Project</enterpriseName>
+      </responsiblePartnerCompany>
+      <originator>
+        <enterpriseName>ASIGT Content Pipeline</enterpriseName>
+      </originator>
+      <applic>
+        <displayText>
+          <simplePara>All AERO aircraft models</simplePara>
+        </displayText>
+      </applic>
+      <qualityAssurance>
+        <unverified/>
+      </qualityAssurance>
+    </pmStatus>
+  </identAndStatusSection>
+  
+  <!-- ===================================================================== -->
+  <!-- CONTENT SECTION                                                       -->
+  <!-- ===================================================================== -->
+  <content>
+    
+    <!-- Front Matter -->
+    <frontMatter>
+      <frontMatterInfo>
+        <frontMatterDmRef>
+          <dmRef>
+            <dmRefIdent>
+              <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="00" 
+                      subSystemCode="00" subSubSystemCode="00" assyCode="00" 
+                      disassyCode="A" disassyCodeVariant="001" infoCode="A" 
+                      infoCodeVariant="A" itemLocationCode="A"/>
+            </dmRefIdent>
+          </dmRef>
+        </frontMatterDmRef>
+        
+        <!-- Table of Contents -->
+        <frontMatterDmRef>
+          <dmRef>
+            <dmRefIdent>
+              <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="00" 
+                      subSystemCode="00" subSubSystemCode="00" assyCode="00" 
+                      disassyCode="A" disassyCodeVariant="00T" infoCode="A" 
+                      infoCodeVariant="A" itemLocationCode="A"/>
+            </dmRefIdent>
+          </dmRef>
+        </frontMatterDmRef>
+      </frontMatterInfo>
+      
+      <!-- Introduction -->
+      <frontMatterDmRef>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="00" 
+                    subSystemCode="00" subSubSystemCode="00" assyCode="00" 
+                    disassyCode="A" disassyCodeVariant="010" infoCode="A" 
+                    infoCodeVariant="A" itemLocationCode="A"/>
+          </dmRefIdent>
+        </dmRef>
+      </frontMatterDmRef>
+    </frontMatter>
+    
+    <!-- ===================================================================== -->
+    <!-- PUBLICATION CONTENT - ATA CHAPTERS                                    -->
+    <!-- ===================================================================== -->
+    
+    <!-- ATA 27 - Flight Controls -->
+    <pmEntry>
+      <pmEntryTitle>ATA 27 - Flight Controls</pmEntryTitle>
+      
+      <!-- General Description -->
+      <dmRef>
+        <dmRefIdent>
+          <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="27" 
+                  subSystemCode="00" subSubSystemCode="00" assyCode="00" 
+                  disassyCode="A" disassyCodeVariant="040" infoCode="A" 
+                  infoCodeVariant="A" itemLocationCode="A"/>
+        </dmRefIdent>
+        <dmRefAddressItems>
+          <dmTitle>
+            <techName>Flight Control System</techName>
+            <infoName>Description</infoName>
+          </dmTitle>
+        </dmRefAddressItems>
+      </dmRef>
+      
+      <!-- Sub-systems -->
+      <pmEntry>
+        <pmEntryTitle>27-11 - Ailerons</pmEntryTitle>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="27" 
+                    subSystemCode="11" subSubSystemCode="00" assyCode="00" 
+                    disassyCode="A" disassyCodeVariant="520" infoCode="A" 
+                    infoCodeVariant="A" itemLocationCode="A"/>
+          </dmRefIdent>
+          <dmRefAddressItems>
+            <dmTitle>
+              <techName>Aileron</techName>
+              <infoName>Maintenance Procedures</infoName>
+            </dmTitle>
+          </dmRefAddressItems>
+        </dmRef>
+      </pmEntry>
+      
+      <pmEntry>
+        <pmEntryTitle>27-21 - Rudder</pmEntryTitle>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="27" 
+                    subSystemCode="21" subSubSystemCode="00" assyCode="00" 
+                    disassyCode="A" disassyCodeVariant="520" infoCode="A" 
+                    infoCodeVariant="A" itemLocationCode="A"/>
+          </dmRefIdent>
+          <dmRefAddressItems>
+            <dmTitle>
+              <techName>Rudder</techName>
+              <infoName>Maintenance Procedures</infoName>
+            </dmTitle>
+          </dmRefAddressItems>
+        </dmRef>
+      </pmEntry>
+      
+      <pmEntry>
+        <pmEntryTitle>27-31 - Elevator</pmEntryTitle>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="27" 
+                    subSystemCode="31" subSubSystemCode="00" assyCode="00" 
+                    disassyCode="A" disassyCodeVariant="520" infoCode="A" 
+                    infoCodeVariant="A" itemLocationCode="A"/>
+          </dmRefIdent>
+          <dmRefAddressItems>
+            <dmTitle>
+              <techName>Elevator</techName>
+              <infoName>Maintenance Procedures</infoName>
+            </dmTitle>
+          </dmRefAddressItems>
+        </dmRef>
+      </pmEntry>
+      
+      <pmEntry>
+        <pmEntryTitle>27-51 - Flaps</pmEntryTitle>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="27" 
+                    subSystemCode="51" subSubSystemCode="00" assyCode="00" 
+                    disassyCode="A" disassyCodeVariant="520" infoCode="A" 
+                    infoCodeVariant="A" itemLocationCode="A"/>
+          </dmRefIdent>
+          <dmRefAddressItems>
+            <dmTitle>
+              <techName>Flap System</techName>
+              <infoName>Maintenance Procedures</infoName>
+            </dmTitle>
+          </dmRefAddressItems>
+        </dmRef>
+      </pmEntry>
+    </pmEntry>
+    
+    <!-- ATA 28 - Fuel -->
+    <pmEntry>
+      <pmEntryTitle>ATA 28 - Fuel</pmEntryTitle>
+      
+      <!-- General Description -->
+      <dmRef>
+        <dmRefIdent>
+          <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="28" 
+                  subSystemCode="00" subSubSystemCode="00" assyCode="00" 
+                  disassyCode="A" disassyCodeVariant="040" infoCode="A" 
+                  infoCodeVariant="A" itemLocationCode="A"/>
+        </dmRefIdent>
+        <dmRefAddressItems>
+          <dmTitle>
+            <techName>Fuel System</techName>
+            <infoName>Description</infoName>
+          </dmTitle>
+        </dmRefAddressItems>
+      </dmRef>
+      
+      <!-- Sub-systems -->
+      <pmEntry>
+        <pmEntryTitle>28-11 - Center Tank</pmEntryTitle>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="28" 
+                    subSystemCode="11" subSubSystemCode="00" assyCode="00" 
+                    disassyCode="A" disassyCodeVariant="520" infoCode="A" 
+                    infoCodeVariant="A" itemLocationCode="A"/>
+          </dmRefIdent>
+          <dmRefAddressItems>
+            <dmTitle>
+              <techName>Center Tank</techName>
+              <infoName>Maintenance Procedures</infoName>
+            </dmTitle>
+          </dmRefAddressItems>
+        </dmRef>
+      </pmEntry>
+      
+      <pmEntry>
+        <pmEntryTitle>28-12 - Wing Tanks</pmEntryTitle>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="28" 
+                    subSystemCode="12" subSubSystemCode="00" assyCode="00" 
+                    disassyCode="A" disassyCodeVariant="520" infoCode="A" 
+                    infoCodeVariant="A" itemLocationCode="A"/>
+          </dmRefIdent>
+          <dmRefAddressItems>
+            <dmTitle>
+              <techName>Wing Tank</techName>
+              <infoName>Maintenance Procedures</infoName>
+            </dmTitle>
+          </dmRefAddressItems>
+        </dmRef>
+      </pmEntry>
+      
+      <pmEntry>
+        <pmEntryTitle>28-21 - Fuel Pumps</pmEntryTitle>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="28" 
+                    subSystemCode="21" subSubSystemCode="00" assyCode="00" 
+                    disassyCode="A" disassyCodeVariant="520" infoCode="A" 
+                    infoCodeVariant="A" itemLocationCode="A"/>
+          </dmRefIdent>
+          <dmRefAddressItems>
+            <dmTitle>
+              <techName>Fuel Pump</techName>
+              <infoName>Maintenance Procedures</infoName>
+            </dmTitle>
+          </dmRefAddressItems>
+        </dmRef>
+      </pmEntry>
+      
+      <pmEntry>
+        <pmEntryTitle>28-30 - Fuel Dump</pmEntryTitle>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="28" 
+                    subSystemCode="30" subSubSystemCode="00" assyCode="00" 
+                    disassyCode="A" disassyCodeVariant="720" infoCode="A" 
+                    infoCodeVariant="A" itemLocationCode="A"/>
+          </dmRefIdent>
+          <dmRefAddressItems>
+            <dmTitle>
+              <techName>Fuel System</techName>
+              <infoName>Troubleshooting</infoName>
+            </dmTitle>
+          </dmRefAddressItems>
+        </dmRef>
+      </pmEntry>
+      
+      <pmEntry>
+        <pmEntryTitle>28-41 - Fuel Quantity Indication</pmEntryTitle>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="28" 
+                    subSystemCode="41" subSubSystemCode="00" assyCode="00" 
+                    disassyCode="A" disassyCodeVariant="520" infoCode="A" 
+                    infoCodeVariant="A" itemLocationCode="A"/>
+          </dmRefIdent>
+          <dmRefAddressItems>
+            <dmTitle>
+              <techName>Fuel Quantity Indication System</techName>
+              <infoName>Maintenance Procedures</infoName>
+            </dmTitle>
+          </dmRefAddressItems>
+        </dmRef>
+      </pmEntry>
+    </pmEntry>
+    
+  </content>
+</pm>
