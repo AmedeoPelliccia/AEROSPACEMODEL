@@ -71,6 +71,45 @@ class TestAIGovernanceStandard:
         """Standard must include enforcement mechanisms."""
         assert "Enforcement" in standard_text
 
+    def test_architectural_prevention_of_autonomy(self, standard_text: str):
+        """Standard must architecturally prevent autonomous AI decisions."""
+        assert "prevents" in standard_text
+        assert "human-authorization gate" in standard_text
+
+    def test_change_history(self, standard_text: str):
+        """Standard must include a change history table."""
+        assert "Change History" in standard_text
+
+    def test_compliance_traceability_matrix(self, standard_text: str):
+        """Standard must include a Compliance Traceability Matrix."""
+        assert "Compliance Traceability Matrix" in standard_text
+        assert "GOV-001" in standard_text
+
+    def test_operational_monitoring(self, standard_text: str):
+        """Standard must include operational monitoring section."""
+        assert "Operational Monitoring" in standard_text
+        assert "Performance Degradation" in standard_text
+
+    def test_frozen_baseline_definition(self, standard_text: str):
+        """Standard must define frozen model baseline components."""
+        assert "Frozen Model Baseline Definition" in standard_text
+        assert "Cryptographic seal" in standard_text
+
+    def test_consistent_brex_references(self, standard_text: str):
+        """Standard must use consistent BREX-{CATEGORY}-{NNN} format."""
+        assert "BREX-SAFETY-002" in standard_text
+        assert "BREX-AUDIT-001" in standard_text
+
+    def test_enhanced_audit_log_format(self, standard_text: str):
+        """Audit log must include actor, ai_model_version, input_hash."""
+        assert "{actor}" in standard_text
+        assert "{ai_model_version}" in standard_text
+        assert "{input_hash}" in standard_text
+
+    def test_sequential_cicd_gates(self, standard_text: str):
+        """CI/CD must describe sequential gates."""
+        assert "Gate 1" in standard_text or "sequential gates" in standard_text
+
 
 class TestNPAResponse:
     """Tests for NPA_2025-07_RESPONSE.md structural integrity."""

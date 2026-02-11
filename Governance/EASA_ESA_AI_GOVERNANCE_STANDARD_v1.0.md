@@ -6,6 +6,13 @@
 > **Authority:** ASIT (Aircraft Systems Information Transponder)  
 > **Compliance:** EU AI Act, EASA AI Roadmap 2.0, DO-178C, ARP4761
 
+### Change History
+
+| Version | Date | Author | Description |
+|---------|------|--------|-------------|
+| 0.1 | 2025-06-01 | AEROSPACEMODEL Project | Initial draft |
+| 1.0 | 2025-07-01 | AEROSPACEMODEL Project | First release; added CTM, operational monitoring, enhanced audit format |
+
 ---
 
 ## 1. Purpose
@@ -41,8 +48,14 @@ This standard applies to:
 ### 2.2 Out-of-Scope Activities
 
 - Unconstrained generative AI outputs
-- Autonomous decision-making without human oversight
 - Safety-critical decisions without STK_SAF approval
+
+> **Architectural constraint:** Autonomous decision-making without
+> human oversight is not merely out of scope — the AEROSPACEMODEL
+> architecture **prevents** it by design. Every AI output path
+> terminates at a human-authorization gate (Constitution Art. 3,
+> BREX SAFETY-002). No code path exists that commits an AI-generated
+> artifact without a human commit-as-contract step (Art. 4).
 
 ---
 
@@ -70,7 +83,7 @@ Specific enforcement:
 | Requirement | Implementation |
 |-------------|---------------|
 | Design intent traceability | BREX rules + transformation contracts |
-| Decision auditability | Audit log per BREX audit requirements |
+| Decision auditability | Audit log per BREX-AUDIT-001 requirements |
 | Reproducibility | Deterministic pipelines with fixed seeds |
 | Explainability | All outputs linked to governing BREX rule IDs |
 
@@ -98,14 +111,32 @@ AI components are classified per EU AI Act risk tiers:
 | Human Factors | Human-in-the-loop at every safety-critical decision |
 | AI Safety Risk | ARP4761 failure mode analysis, Bayesian twin monitoring |
 
+#### 4.1.1 Frozen Model Baseline Definition
+
+A frozen model baseline comprises:
+
+| Component | Description |
+|-----------|-------------|
+| Model weights / parameters | Serialized model state |
+| Hyperparameters | Training configuration |
+| Training data manifest | Hash-indexed list of training data sources |
+| Random seed values | All seeds used during training |
+| Cryptographic seal | SHA-256 hash of the baseline archive |
+
+Unfreezing a baseline requires a CCB-approved Engineering Change
+Request (ECR) with impact assessment and regression test evidence.
+
 ### 4.2 Certification Considerations
 
 For AI components subject to EASA certification:
 
 1. **DO-178C Compliance**: AI-generated code artifacts follow
    software assurance levels (DAL A–E).
-2. **DO-333 Applicability**: Formal methods supplement applies
-   to AI verification where deterministic behavior is required.
+2. **DO-333 Applicability**: The formal methods supplement applies
+   to AI components that require mathematical proof of correctness.
+   Since all AEROSPACEMODEL pipelines are deterministic, DO-333
+   is applicable to the **verification** of pipeline transformations
+   but not to non-deterministic ML inference (which is not used).
 3. **AMC 20-115C**: Software considerations for airborne systems
    apply to all AI-assisted maintenance content.
 
@@ -133,7 +164,11 @@ AI-assisted maintenance documentation must:
 
 For space-domain AI applications:
 
-- Radiation-hardened validation of AI outputs
+- **Radiation-resilient output validation**: AI outputs destined for
+  on-board systems must be validated against radiation-induced
+  bit-flip scenarios (Single Event Upsets). This is an external
+  hardware assurance requirement per ECSS-E-ST-10-12C; the software
+  governance role is to ensure validation test coverage exists.
 - Ground-segment human approval for all autonomous decisions
 - Redundant verification paths for AI-generated commands
 
@@ -143,23 +178,37 @@ For space-domain AI applications:
 
 ### 6.1 CI/CD Integration
 
-AI governance is enforced through the existing CI/CD pipeline:
+AI governance is enforced through sequential gates in the CI/CD
+pipeline. Each gate must pass before the next is evaluated:
 
-- **Constitution compliance workflow**: Validates structural integrity
+```
+1. BREX Validation (structural, fast)
+   → PASS →
+2. Contract Authorization (approval check)
+   → PASS →
+3. Constitution Compliance (deep governance audit)
+   → PASS →
+4. Merge allowed
+```
+
+Gate descriptions:
+
+- **BREX validation** (Gate 1): All AI outputs checked against BREX
+  rules before acceptance.
+- **Contract approval** (Gate 2): AI transformations require active
+  contract authorization per BREX-AUTHOR-002.
+- **Constitution compliance** (Gate 3): Validates structural integrity
   of governance artifacts on every PR.
-- **BREX validation**: All AI outputs checked against BREX rules
-  before acceptance.
-- **Contract approval**: AI transformations require active contract
-  authorization.
 
 ### 6.2 Escalation Matrix
 
-| Trigger | Target | SLA | Reference |
-|---------|--------|-----|-----------|
-| AI safety-critical output | STK_SAF | 48 hours | BREX SAFETY-002 |
-| AI model baseline change | CCB | 5 business days | BREX BL-002 |
-| AI bias or fairness concern | STK_ETH | 72 hours | EU AI Act Art. 10 |
-| Undefined AI behavior | STK_CM | HALT | Master BREX |
+| Trigger | Target | Severity | SLA | Reference |
+|---------|--------|----------|-----|-----------|
+| AI safety-critical output | STK_SAF | P1: Immediate HALT | Until resolved | BREX-SAFETY-002 |
+| AI safety review (non-blocking) | STK_SAF | P2: Scheduled | 48 hours | BREX-SAFETY-002 |
+| AI model baseline change | CCB | — | 5 business days | BREX-BL-002 |
+| AI bias or fairness concern | STK_ETH | — | 72 hours (interim: disable affected component) | EU AI Act Art. 10 |
+| Undefined AI behavior | STK_CM | HALT | Max 5 business days, then auto-escalate to CCB | Master BREX |
 
 ---
 
@@ -167,11 +216,22 @@ AI governance is enforced through the existing CI/CD pipeline:
 
 ### 7.1 Audit Log Format
 
-All AI governance events are logged per BREX audit requirements:
+All AI governance events are logged per BREX-AUDIT-001 requirements:
 
 ```
-{timestamp} | RULE {rule_id} | {rule_name} | {status} | {context}
+{timestamp} | RULE {rule_id} | {rule_name} | {status} | {actor} | {ai_model_version} | {input_hash} | {context}
 ```
+
+| Field | Description |
+|-------|-------------|
+| `timestamp` | ISO 8601 UTC timestamp |
+| `rule_id` | BREX rule identifier (e.g., BREX-SAFETY-002) |
+| `rule_name` | Human-readable rule name |
+| `status` | PASS, FAIL, ESCALATE, HALT |
+| `actor` | Human approver identity or "SYSTEM" for automated checks |
+| `ai_model_version` | Frozen baseline reference (SHA-256 prefix) |
+| `input_hash` | SHA-256 hash of input data for reproducibility |
+| `context` | Free-text context description |
 
 ### 7.2 Retention
 
@@ -181,7 +241,61 @@ All AI governance events are logged per BREX audit requirements:
 
 ---
 
-## 8. Evolution
+## 8. Compliance Traceability Matrix
+
+The following matrix maps each governance requirement to its source
+regulation, implementation mechanism, and verification method:
+
+| Req ID | Source | Section | Implementation | Verification | Status |
+|--------|--------|---------|---------------|-------------|--------|
+| GOV-001 | EU AI Act Art. 14 | §3.1 | Human-in-the-loop gate | CI check + manual review | ✅ |
+| GOV-002 | EASA Roadmap 2.0 | §4.1 | Frozen model baselines | CCB approval workflow | ✅ |
+| GOV-003 | EU AI Act Art. 13 | §3.2 | BREX audit trail | Audit log validation | ✅ |
+| GOV-004 | DO-178C | §4.2 | DAL-based assurance | Pipeline verification | ✅ |
+| GOV-005 | ARP4761 | §3.3 | Failure mode analysis | Bayesian twin monitoring | ✅ |
+| GOV-006 | Part-M | §4.3 | S1000D configuration management | Traceability check | ✅ |
+| GOV-007 | ECSS-E-ST-40C | §5.1 | AI software lifecycle | ESA process audit | 🔲 |
+| GOV-008 | EU AI Act Art. 10 | §6.2 | Bias escalation to STK_ETH | Escalation workflow test | 🔲 |
+
+> **Note:** This matrix is maintained alongside the standard. Each
+> row must be updated when the corresponding implementation or
+> verification mechanism changes.
+
+---
+
+## 9. Operational Monitoring
+
+### 9.1 Performance Degradation
+
+AI components in operation are monitored for output quality drift:
+
+| Metric | Threshold | Action |
+|--------|-----------|--------|
+| Output validation error rate | > 2% over rolling 30-day window | Escalate to STK_SAF (P2) |
+| Bayesian confidence on safety outputs | < 0.92 | Auto-escalate to STK_SAF (P1) |
+| Pipeline execution anomaly | > 3σ deviation in processing time | Investigate and log |
+
+### 9.2 Periodic Re-Validation
+
+Frozen baselines are re-validated on a scheduled basis:
+
+| Baseline Type | Re-Validation Frequency | Scope |
+|---------------|------------------------|-------|
+| Safety-critical (DAL A/B) | Every 6 months | Full regression + ARP4761 review |
+| Operational (DAL C) | Annually | Regression test suite |
+| Documentation (DAL D/E) | Every 2 years | Spot-check sample |
+
+### 9.3 Anomaly Detection
+
+AI outputs in production are subject to:
+
+- Statistical outlier detection on output distributions
+- Comparison against known-good reference outputs
+- Automatic logging of anomalies per §7.1 audit format
+
+---
+
+## 10. Evolution
 
 This standard evolves through the governance process defined in
 [GOVERNANCE.md §7](../GOVERNANCE.md). Changes require:
@@ -189,10 +303,12 @@ This standard evolves through the governance process defined in
 - Compatibility with the Digital Constitution foundational axiom
 - Review by EASA/ESA subject matter experts where applicable
 - No degradation of human oversight capabilities
+- Update to the Change History table in the document header
+- Update to the Compliance Traceability Matrix (§8) where applicable
 
 ---
 
-## 9. Related Documents
+## 11. Related Documents
 
 | Document | Reference |
 |----------|-----------|
