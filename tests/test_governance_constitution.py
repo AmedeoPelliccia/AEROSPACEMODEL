@@ -18,7 +18,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 class TestDigitalConstitution:
     """Tests for Model_Digital_Constitution.md structural integrity."""
 
-    @pytest.fixture()
+    @pytest.fixture
     def constitution_text(self) -> str:
         path = REPO_ROOT / "Model_Digital_Constitution.md"
         assert path.exists(), "Model_Digital_Constitution.md must exist"
@@ -65,7 +65,7 @@ class TestDigitalConstitution:
 class TestGovernanceDocument:
     """Tests for GOVERNANCE.md structural integrity."""
 
-    @pytest.fixture()
+    @pytest.fixture
     def governance_text(self) -> str:
         path = REPO_ROOT / "GOVERNANCE.md"
         assert path.exists(), "GOVERNANCE.md must exist"
@@ -113,7 +113,7 @@ class TestGovernanceDocument:
 class TestPRTemplate:
     """Tests for PR template with LABOR-REABSORPTION fields."""
 
-    @pytest.fixture()
+    @pytest.fixture
     def template_text(self) -> str:
         path = REPO_ROOT / ".github" / "PULL_REQUEST_TEMPLATE.md"
         assert path.exists(), "PR template must exist"
@@ -160,7 +160,7 @@ class TestPRTemplate:
 class TestConstitutionComplianceWorkflow:
     """Tests for constitution-compliance CI workflow."""
 
-    @pytest.fixture()
+    @pytest.fixture
     def workflow_text(self) -> str:
         path = REPO_ROOT / ".github" / "workflows" / "constitution-compliance.yml"
         assert path.exists(), "Constitution compliance workflow must exist"
