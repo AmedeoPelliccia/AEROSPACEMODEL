@@ -26,7 +26,16 @@ from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Dict, List, Optional
 
-import numpy as np
+try:
+    import numpy as np
+except ImportError as exc:
+    raise ImportError(
+        "NumPy is required by ampel_benchmark for its random number "
+        "generation. Install it with 'pip install numpy', or modify "
+        "ASIGT/quantum/ampel_benchmark.py to use the Python 'random' "
+        "stdlib module instead of NumPy for RNG."
+    ) from exc
+
 import pandas as pd
 
 
@@ -110,6 +119,7 @@ class ResourceAccounting:
             "wall_time_seconds": round(self.wall_time_seconds, 3),
             "circuit_depth": self.circuit_depth,
             "num_cnot_gates": self.num_cnot_gates,
+            "cost_per_shot_usd": self.cost_per_shot_usd,
             "estimated_cost_usd": round(self.estimated_cost_usd, 4),
         }
 
@@ -162,6 +172,12 @@ class BenchmarkResult:
             "chemical_accuracy_achieved": self.chemical_accuracy_achieved,
             "timestamp": self.timestamp,
             "run_label": self.run_label,
+            "convergence_history": self.convergence_history,
+            "convergence_len": len(self.convergence_history),
+            "convergence_final": (
+                self.convergence_history[-1]
+                if self.convergence_history else None
+            ),
         }
 
 
@@ -299,9 +315,15 @@ class AmpelBenchmarkManager:
 
     def __init__(
         self,
-        contract_id: str = "",
+        contract_id: str,
         baseline_id: str = "",
     ):
+        if not contract_id:
+            raise ValueError(
+                "contract_id is required for traceability. "
+                "Provide a valid contract reference, e.g. "
+                "'KITDM-CTR-QUANTUM-001'."
+            )
         self.contract_id = contract_id
         self.baseline_id = baseline_id
         self.results: List[BenchmarkResult] = []
@@ -310,13 +332,15 @@ class AmpelBenchmarkManager:
 
     def log_decision(
         self,
-        decision_id: str,
+        action: str,
         description: str,
         requirements: Optional[List[str]] = None,
     ) -> None:
         """Log a traceable decision point (EASA-aligned)."""
+        event_id = f"AMPEL-EVT-{uuid.uuid4().hex[:8].upper()}"
         self._decision_log.append({
-            "decision_id": decision_id,
+            "event_id": event_id,
+            "action": action,
             "description": description,
             "requirements": requirements or [],
             "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -342,6 +366,13 @@ class AmpelBenchmarkManager:
         Returns:
             ScalingAnalysis with comparative metrics
         """
+        if max_iterations <= 0:
+            raise ValueError(f"max_iterations must be > 0, got {max_iterations}")
+        if shots <= 0:
+            raise ValueError(f"shots must be > 0, got {shots}")
+        if p2q < 0:
+            raise ValueError(f"p2q must be >= 0, got {p2q}")
+
         self.log_decision(
             "start_scaling_test",
             f"Starting scaling test for {molecule.value} at p2q={p2q}",
@@ -512,29 +543,44 @@ class AmpelBenchmarkManager:
         Compute operational envelope from all analyses.
 
         Returns the maximum p2q where synergy remains positive
-        and savings exceed 30% for each molecular system.
+        and savings exceed 30% for each molecular system, with
+        a 15% ECSS safety margin applied to the raw limits.
         """
+        safety_margin_pct = 15.0
+        safety_factor = 1.0 - safety_margin_pct / 100.0
+
         envelope: Dict[str, Dict[str, float]] = {}
 
         for a in self.analyses:
             mol_key = a.molecule.value
             if mol_key not in envelope:
                 envelope[mol_key] = {
-                    "max_p2q_synergy": 0.0,
-                    "max_p2q_savings30": 0.0,
+                    "max_p2q_synergy_raw": 0.0,
+                    "max_p2q_savings30_raw": 0.0,
+                    "max_p2q_synergy_adjusted": 0.0,
+                    "max_p2q_savings30_adjusted": 0.0,
                 }
 
             if a.synergy_positive:
-                envelope[mol_key]["max_p2q_synergy"] = max(
-                    envelope[mol_key]["max_p2q_synergy"], a.p2q
+                envelope[mol_key]["max_p2q_synergy_raw"] = max(
+                    envelope[mol_key]["max_p2q_synergy_raw"], a.p2q
                 )
             if a.execution_savings_pct >= 30.0:
-                envelope[mol_key]["max_p2q_savings30"] = max(
-                    envelope[mol_key]["max_p2q_savings30"], a.p2q
+                envelope[mol_key]["max_p2q_savings30_raw"] = max(
+                    envelope[mol_key]["max_p2q_savings30_raw"], a.p2q
                 )
+
+        # Apply safety margin to raw limits
+        for mol_key in envelope:
+            envelope[mol_key]["max_p2q_synergy_adjusted"] = round(
+                envelope[mol_key]["max_p2q_synergy_raw"] * safety_factor, 6
+            )
+            envelope[mol_key]["max_p2q_savings30_adjusted"] = round(
+                envelope[mol_key]["max_p2q_savings30_raw"] * safety_factor, 6
+            )
 
         return {
             "envelope": envelope,
             "computed_at": datetime.now(timezone.utc).isoformat(),
-            "safety_margin_pct": 15.0,  # ECSS standard
+            "safety_margin_pct": safety_margin_pct,
         }
