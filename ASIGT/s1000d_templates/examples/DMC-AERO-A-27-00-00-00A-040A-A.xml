@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+=============================================================================
+S1000D Data Module Example - ATA 27 Flight Controls
+Model: AERO
+ATA Chapter: 27 - Flight Controls
+Type: Descriptive (Info Code 040A)
+=============================================================================
+-->
+<dmodule xmlns="http://www.s1000d.org/S1000D_5-0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.s1000d.org/S1000D_5-0 S1000D_5-0/xml_schema_flat/descript.xsd">
+  
+  <!-- ===================================================================== -->
+  <!-- IDENTIFICATION AND STATUS SECTION                                     -->
+  <!-- ===================================================================== -->
+  <identAndStatusSection>
+    
+    <!-- Data Module Address -->
+    <dmAddress>
+      <dmIdent>
+        <!-- Data Module Code: AERO-A-27-00-00-00A-040A-A -->
+        <dmCode 
+          modelIdentCode="AERO"
+          systemDiffCode="A"
+          systemCode="27"
+          subSystemCode="00"
+          subSubSystemCode="00"
+          assyCode="00"
+          disassyCode="A"
+          disassyCodeVariant="040"
+          infoCode="A"
+          infoCodeVariant="A"
+          itemLocationCode="A"/>
+        
+        <!-- Language -->
+        <language languageIsoCode="en" countryIsoCode="US"/>
+        
+        <!-- Issue Information -->
+        <issueInfo issueNumber="001" inWork="00"/>
+      </dmIdent>
+      
+      <!-- Data Module Address Items -->
+      <dmAddressItems>
+        <issueDate year="2026" month="02" day="11"/>
+        <dmTitle>
+          <techName>Flight Control System</techName>
+          <infoName>Description</infoName>
+        </dmTitle>
+      </dmAddressItems>
+    </dmAddress>
+    
+    <!-- Data Module Status -->
+    <dmStatus issueType="new">
+      <security securityClassification="01"/>
+      <responsiblePartnerCompany>
+        <enterpriseName>AEROSPACEMODEL Project</enterpriseName>
+      </responsiblePartnerCompany>
+      <originator>
+        <enterpriseName>ASIGT Content Pipeline</enterpriseName>
+      </originator>
+      <applic>
+        <displayText>
+          <simplePara>All aircraft</simplePara>
+        </displayText>
+      </applic>
+      <brexDmRef>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="00" 
+                    subSystemCode="00" subSubSystemCode="00" assyCode="00" 
+                    disassyCode="A" disassyCodeVariant="00E" infoCode="A" 
+                    infoCodeVariant="A" itemLocationCode="A"/>
+          </dmRefIdent>
+        </dmRef>
+      </brexDmRef>
+      <qualityAssurance>
+        <unverified/>
+      </qualityAssurance>
+    </dmStatus>
+  </identAndStatusSection>
+  
+  <!-- ===================================================================== -->
+  <!-- CONTENT SECTION                                                       -->
+  <!-- ===================================================================== -->
+  <content>
+    <description>
+      <levelledPara>
+        <title>Flight Control System Overview</title>
+        <para>
+          The flight control system provides the crew with the means to control the
+          aircraft in flight. The system consists of primary and secondary flight
+          controls, which are described in the following sections.
+        </para>
+      </levelledPara>
+      
+      <levelledPara>
+        <title>Primary Flight Controls</title>
+        <para>
+          The primary flight controls consist of:
+        </para>
+        <para>
+          <randomList>
+            <listItem>
+              <para>Ailerons - Control aircraft roll (ATA 27-11)</para>
+            </listItem>
+            <listItem>
+              <para>Elevators - Control aircraft pitch (ATA 27-31)</para>
+            </listItem>
+            <listItem>
+              <para>Rudder - Control aircraft yaw (ATA 27-21)</para>
+            </listItem>
+          </randomList>
+        </para>
+        <para>
+          These surfaces are operated through a fly-by-wire system with triple
+          redundancy, ensuring safe operation even with multiple system failures.
+        </para>
+      </levelledPara>
+      
+      <levelledPara>
+        <title>Secondary Flight Controls</title>
+        <para>
+          The secondary flight controls enhance aircraft performance and include:
+        </para>
+        <para>
+          <randomList>
+            <listItem>
+              <para>Flaps - High-lift devices for takeoff and landing (ATA 27-51)</para>
+            </listItem>
+            <listItem>
+              <para>Slats - Leading edge high-lift devices (ATA 27-81)</para>
+            </listItem>
+            <listItem>
+              <para>Spoilers - Speed brakes and roll assist devices (ATA 27-61)</para>
+            </listItem>
+          </randomList>
+        </para>
+      </levelledPara>
+      
+      <levelledPara>
+        <title>System Architecture</title>
+        <para>
+          The flight control system uses a quad-redundant computing architecture
+          with the following key features:
+        </para>
+        <para>
+          <randomList>
+            <listItem>
+              <para>Four independent flight control computers with cross-channel monitoring</para>
+            </listItem>
+            <listItem>
+              <para>Triple hydraulic power sources for actuator operation</para>
+            </listItem>
+            <listItem>
+              <para>Electric backup for critical control surfaces</para>
+            </listItem>
+            <listItem>
+              <para>Mechanical backup for elevator control</para>
+            </listItem>
+            <listItem>
+              <para>Flight envelope protection with automatic stall prevention</para>
+            </listItem>
+          </randomList>
+        </para>
+      </levelledPara>
+      
+      <levelledPara>
+        <title>Safety Features</title>
+        <para>
+          The system incorporates multiple safety features in accordance with
+          ARP4761 safety assessment requirements:
+        </para>
+        <para>
+          <randomList>
+            <listItem>
+              <para>Redundant actuation systems (DAL A)</para>
+            </listItem>
+            <listItem>
+              <para>Automatic fault detection and isolation</para>
+            </listItem>
+            <listItem>
+              <para>Control surface position monitoring</para>
+            </listItem>
+            <listItem>
+              <para>Envelope protection preventing excessive control inputs</para>
+            </listItem>
+            <listItem>
+              <para>Graceful degradation with system failures</para>
+            </listItem>
+          </randomList>
+        </para>
+      </levelledPara>
+      
+      <levelledPara>
+        <title>Related Documentation</title>
+        <para>
+          For detailed maintenance procedures, refer to the following data modules:
+        </para>
+        <para>
+          <randomList>
+            <listItem>
+              <para>DMC-AERO-A-27-11-00-00A-520A-A - Aileron Maintenance</para>
+            </listItem>
+            <listItem>
+              <para>DMC-AERO-A-27-21-00-00A-520A-A - Rudder Maintenance</para>
+            </listItem>
+            <listItem>
+              <para>DMC-AERO-A-27-31-00-00A-520A-A - Elevator Maintenance</para>
+            </listItem>
+            <listItem>
+              <para>DMC-AERO-A-27-51-00-00A-520A-A - Flap System Maintenance</para>
+            </listItem>
+          </randomList>
+        </para>
+      </levelledPara>
+    </description>
+  </content>
+</dmodule>

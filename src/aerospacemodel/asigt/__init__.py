@@ -90,6 +90,21 @@ from .brex_governance import (
     OPERATION_RULES,
 )
 
+# Import pipeline components
+from .pipeline import (
+    ContentPipeline,
+    PipelineConfig,
+    PipelineStageType,
+    PipelineStageConfig,
+    IngestNormalizeStage,
+    ValidateEnrichStage,
+    TransformStage,
+    AssembleStage,
+    PublishQAStage,
+    create_amm_pipeline,
+    execute_pipeline,
+)
+
 # Conditional imports to avoid circular dependencies
 if TYPE_CHECKING:
     from aerospacemodel.asit import ASIT, Contract, Baseline
@@ -363,4 +378,17 @@ __all__ = [
     "validate_governed_operation",
     "is_operation_allowed",
     "OPERATION_RULES",
+    
+    # Content Pipeline
+    "ContentPipeline",
+    "PipelineConfig",
+    "PipelineStageType",
+    "PipelineStageConfig",
+    "IngestNormalizeStage",
+    "ValidateEnrichStage",
+    "TransformStage",
+    "AssembleStage",
+    "PublishQAStage",
+    "create_amm_pipeline",
+    "execute_pipeline",
 ]

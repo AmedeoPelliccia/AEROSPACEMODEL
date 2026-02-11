@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+=============================================================================
+S1000D Data Module List Example - Aircraft Maintenance Manual
+Model: AERO
+Publication Type: AMM (Aircraft Maintenance Manual)
+=============================================================================
+-->
+<dml xmlns="http://www.s1000d.org/S1000D_5-0"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.s1000d.org/S1000D_5-0 S1000D_5-0/xml_schema_flat/dml.xsd">
+  
+  <!-- ===================================================================== -->
+  <!-- IDENTIFICATION AND STATUS SECTION                                     -->
+  <!-- ===================================================================== -->
+  <identAndStatusSection>
+    
+    <!-- DML Address -->
+    <dmlAddress>
+      <dmlIdent>
+        <dmlCode modelIdentCode="AERO" senderIdent="AERO" dmlType="p" yearOfDataIssue="2026" seqNumber="00001"/>
+        <issueInfo issueNumber="001" inWork="00"/>
+      </dmlIdent>
+      
+      <!-- DML Address Items -->
+      <dmlAddressItems>
+        <issueDate year="2026" month="02" day="11"/>
+        <dmlTitle>Aircraft Maintenance Manual - Data Module List</dmlTitle>
+      </dmlAddressItems>
+    </dmlAddress>
+    
+    <!-- DML Status -->
+    <dmlStatus>
+      <security securityClassification="01"/>
+      <responsiblePartnerCompany>
+        <enterpriseName>AEROSPACEMODEL Project</enterpriseName>
+      </responsiblePartnerCompany>
+      <originator>
+        <enterpriseName>ASIGT Content Pipeline</enterpriseName>
+      </originator>
+      <applic>
+        <displayText>
+          <simplePara>All AERO aircraft models</simplePara>
+        </displayText>
+      </applic>
+      <qualityAssurance>
+        <unverified/>
+      </qualityAssurance>
+    </dmlStatus>
+  </identAndStatusSection>
+  
+  <!-- ===================================================================== -->
+  <!-- CONTENT SECTION                                                       -->
+  <!-- ===================================================================== -->
+  <content>
+    <dmlContent>
+      
+      <!-- ATA 27 - Flight Controls Data Modules -->
+      <dmlEntry>
+        <dmlRef>
+          <dmRef>
+            <dmRefIdent>
+              <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="27" 
+                      subSystemCode="00" subSubSystemCode="00" assyCode="00" 
+                      disassyCode="A" disassyCodeVariant="040" infoCode="A" 
+                      infoCodeVariant="A" itemLocationCode="A"/>
+            </dmRefIdent>
+          </dmRef>
+        </dmlRef>
+        <issueDate year="2026" month="02" day="11"/>
+        <issueType>new</issueType>
+        <security securityClassification="01"/>
+      </dmlEntry>
+      
+      <dmlEntry>
+        <dmlRef>
+          <dmRef>
+            <dmRefIdent>
+              <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="27" 
+                      subSystemCode="11" subSubSystemCode="00" assyCode="00" 
+                      disassyCode="A" disassyCodeVariant="520" infoCode="A" 
+                      infoCodeVariant="A" itemLocationCode="A"/>
+            </dmRefIdent>
+          </dmRef>
+        </dmlRef>
+        <issueDate year="2026" month="02" day="11"/>
+        <issueType>new</issueType>
+        <security securityClassification="01"/>
+      </dmlEntry>
+      
+      <dmlEntry>
+        <dmlRef>
+          <dmRef>
+            <dmRefIdent>
+              <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="27" 
+                      subSystemCode="21" subSubSystemCode="00" assyCode="00" 
+                      disassyCode="A" disassyCodeVariant="520" infoCode="A" 
+                      infoCodeVariant="A" itemLocationCode="A"/>
+            </dmRefIdent>
+          </dmRef>
+        </dmlRef>
+        <issueDate year="2026" month="02" day="11"/>
+        <issueType>new</issueType>
+        <security securityClassification="01"/>
+      </dmlEntry>
+      
+      <dmlEntry>
+        <dmlRef>
+          <dmRef>
+            <dmRefIdent>
+              <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="27" 
+                      subSystemCode="31" subSubSystemCode="00" assyCode="00" 
+                      disassyCode="A" disassyCodeVariant="520" infoCode="A" 
+                      infoCodeVariant="A" itemLocationCode="A"/>
+            </dmRefIdent>
+          </dmRef>
+        </dmlRef>
+        <issueDate year="2026" month="02" day="11"/>
+        <issueType>new</issueType>
+        <security securityClassification="01"/>
+      </dmlEntry>
+      
+      <dmlEntry>
+        <dmlRef>
+          <dmRef>
+            <dmRefIdent>
+              <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="27" 
+                      subSystemCode="51" subSubSystemCode="00" assyCode="00" 
+                      disassyCode="A" disassyCodeVariant="520" infoCode="A" 
+                      infoCodeVariant="A" itemLocationCode="A"/>
+            </dmRefIdent>
+          </dmRef>
+        </dmlRef>
+        <issueDate year="2026" month="02" day="11"/>
+        <issueType>new</issueType>
+        <security securityClassification="01"/>
+      </dmlEntry>
+      
+      <!-- ATA 28 - Fuel System Data Modules -->
+      <dmlEntry>
+        <dmlRef>
+          <dmRef>
+            <dmRefIdent>
+              <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="28" 
+                      subSystemCode="00" subSubSystemCode="00" assyCode="00" 
+                      disassyCode="A" disassyCodeVariant="040" infoCode="A" 
+                      infoCodeVariant="A" itemLocationCode="A"/>
+            </dmRefIdent>
+          </dmRef>
+        </dmlRef>
+        <issueDate year="2026" month="02" day="11"/>
+        <issueType>new</issueType>
+        <security securityClassification="01"/>
+      </dmlEntry>
+      
+      <dmlEntry>
+        <dmlRef>
+          <dmRef>
+            <dmRefIdent>
+              <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="28" 
+                      subSystemCode="11" subSubSystemCode="00" assyCode="00" 
+                      disassyCode="A" disassyCodeVariant="520" infoCode="A" 
+                      infoCodeVariant="A" itemLocationCode="A"/>
+            </dmRefIdent>
+          </dmRef>
+        </dmlRef>
+        <issueDate year="2026" month="02" day="11"/>
+        <issueType>new</issueType>
+        <security securityClassification="01"/>
+      </dmlEntry>
+      
+      <dmlEntry>
+        <dmlRef>
+          <dmRef>
+            <dmRefIdent>
+              <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="28" 
+                      subSystemCode="12" subSubSystemCode="00" assyCode="00" 
+                      disassyCode="A" disassyCodeVariant="520" infoCode="A" 
+                      infoCodeVariant="A" itemLocationCode="A"/>
+            </dmRefIdent>
+          </dmRef>
+        </dmlRef>
+        <issueDate year="2026" month="02" day="11"/>
+        <issueType>new</issueType>
+        <security securityClassification="01"/>
+      </dmlEntry>
+      
+      <dmlEntry>
+        <dmlRef>
+          <dmRef>
+            <dmRefIdent>
+              <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="28" 
+                      subSystemCode="21" subSubSystemCode="00" assyCode="00" 
+                      disassyCode="A" disassyCodeVariant="520" infoCode="A" 
+                      infoCodeVariant="A" itemLocationCode="A"/>
+            </dmRefIdent>
+          </dmRef>
+        </dmlRef>
+        <issueDate year="2026" month="02" day="11"/>
+        <issueType>new</issueType>
+        <security securityClassification="01"/>
+      </dmlEntry>
+      
+      <dmlEntry>
+        <dmlRef>
+          <dmRef>
+            <dmRefIdent>
+              <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="28" 
+                      subSystemCode="30" subSubSystemCode="00" assyCode="00" 
+                      disassyCode="A" disassyCodeVariant="720" infoCode="A" 
+                      infoCodeVariant="A" itemLocationCode="A"/>
+            </dmRefIdent>
+          </dmRef>
+        </dmlRef>
+        <issueDate year="2026" month="02" day="11"/>
+        <issueType>new</issueType>
+        <security securityClassification="01"/>
+      </dmlEntry>
+      
+      <dmlEntry>
+        <dmlRef>
+          <dmRef>
+            <dmRefIdent>
+              <dmCode modelIdentCode="AERO" systemDiffCode="A" systemCode="28" 
+                      subSystemCode="41" subSubSystemCode="00" assyCode="00" 
+                      disassyCode="A" disassyCodeVariant="520" infoCode="A" 
+                      infoCodeVariant="A" itemLocationCode="A"/>
+            </dmRefIdent>
+          </dmRef>
+        </dmlRef>
+        <issueDate year="2026" month="02" day="11"/>
+        <issueType>new</issueType>
+        <security securityClassification="01"/>
+      </dmlEntry>
+      
+    </dmlContent>
+  </content>
+</dml>

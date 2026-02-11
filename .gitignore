@@ -154,3 +154,6 @@ ASIGT/runs/
 *.exe
 *.dll
 *.dylib
+
+# Demo outputs
+demo_run/
