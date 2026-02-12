@@ -55,21 +55,25 @@ The Human-Centric Digital Systems Charter re-founds digital systems on:
 
 ### CI/CD Integration
 
-Charter compliance is enforced via:
+Charter compliance will be enforced via:
 
-1. **BREX Rules** (automatic in CI/CD):
+1. **BREX Rules** (defined, pending CI/CD integration):
    - HCDS-001: User-level targeting requires consent
    - HCDS-002: Vulnerability signals blocked
    - HCDS-003: Explainability required
    - HCDS-004: Assistant-ad separation enforced
    - HCDS-005: Dark patterns blocked
    - HCDS-006: PICS minimum required
+   
+   **Status:** Rules are fully documented in `policy/hcds_technical_controls_v1.yaml`. Integration into `ASIT/GOVERNANCE/master_brex_authority.yaml` is planned for Phase 2 (Days 31-60 of transition roadmap).
 
-2. **Lifecycle Gates** (manual approval):
+2. **Lifecycle Gates** (defined, pending integration):
    - LC02: Manipulation pattern scan
    - LC04: Separation design review
    - LC06: Explainability coverage check
    - LC08: AASI (separation integrity) tests
+   
+   **Status:** Gates are fully documented in `policy/hcds_technical_controls_v1.yaml`. Integration into `lifecycle/TLI_GATE_RULEBOOK.yaml` is planned for Phase 2 (Days 31-60 of transition roadmap).
 
 ### Code Examples
 
@@ -84,6 +88,7 @@ ad = ad_service.get_contextual_ad(
 )
 
 # ❌ WRONG - User-level targeting without consent check
+# (Will violate HCDS-001 once integrated into CI/CD)
 ad = ad_service.get_personalized_ad(
     user_id=user_id,  # Violates Article 3
     browsing_history=history  # Violates Article 2 if no consent
@@ -109,6 +114,7 @@ explanation = {
 return content, explanation
 
 # ❌ WRONG - No explainability
+# (Will violate HCDS-003 once integrated into CI/CD)
 content = recommendation_engine.get_content(user_context)
 return content  # Violates Article 5
 ```
@@ -119,15 +125,17 @@ return content  # Violates Article 5
 # ✅ CORRECT - Clear, honest language
 button_text = "No thanks, continue with contextual ads"
 
-# ❌ WRONG - Confirm-shaming (violates Article 4)
-button_text = "No, I don't care about my privacy"  # BLOCKED by CI/CD
+# ❌ WRONG - Confirm-shaming
+# (Will violate HCDS-005 once integrated into CI/CD)
+button_text = "No, I don't care about my privacy"  # Violates Article 4
 
 # ✅ CORRECT - Honest countdown (if real)
 if actual_offer_expires_at:
     show_countdown(expires_at=actual_offer_expires_at)
 
-# ❌ WRONG - Fake urgency (violates Article 4)
-show_countdown(expires_at=time.now() + 10_minutes)  # Artificial scarcity - BLOCKED
+# ❌ WRONG - Fake urgency
+# (Will violate HCDS-005 once integrated into CI/CD)
+show_countdown(expires_at=time.now() + 10_minutes)  # Artificial scarcity, violates Article 4
 ```
 
 ---

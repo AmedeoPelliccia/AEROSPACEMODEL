@@ -241,7 +241,7 @@ ad = ad_service.get_personalized_ad(user_id=user_id)
 
 ### BREX Decision Rules
 
-**6 new rules added:**
+**6 new rules defined:**
 
 ```yaml
 HCDS-001: User-level targeting requires explicit consent (Article 3)
@@ -252,7 +252,7 @@ HCDS-005: Dark patterns must not be deployed (Article 4)
 HCDS-006: PICS minimum must be met (Article 8)
 ```
 
-**Enforcement:** Automatic in CI/CD pipeline. Violations block deployment.
+**Enforcement Status:** These rules are documented in `policy/hcds_technical_controls_v1.yaml` and ready for integration. Full CI/CD enforcement requires integration into `ASIT/GOVERNANCE/master_brex_authority.yaml` (planned for Phase 2 of implementation).
 
 ---
 
