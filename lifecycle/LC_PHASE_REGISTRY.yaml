@@ -1,0 +1,483 @@
+# =============================================================================
+# AIRCRAFT TLI v2.1 Canonical Lifecycle Phase Registry
+# Program: AMPEL360 Q100
+# Authority: ASIT (Aircraft Systems Information Transponder)
+# Baseline: GenLM v2.1 Canonical Architecture
+# =============================================================================
+#
+# This is the SSOT (Single Source of Truth) for all lifecycle phases LC01–LC14.
+# All content generation, transformation, and governance operations must reference
+# this canonical registry.
+#
+# Precedence Model (L0 → L8):
+# L0: Program Governance (immutable)
+# L1: LC Canonical Contract
+# L2: Domain Pack
+# L3: Config Context
+# L4: Data Contracts
+# L5: Generation Workflow
+# L6: Assurance Gates
+# L7: Human Authority
+# L8: OPS Feedback Loop
+#
+# Conflict Rule: Lower layer rejection triggers escalation
+# =============================================================================
+
+meta:
+  schema_version: "2.1.0"
+  registry_version: "1.0.0"
+  program: "AMPEL360 Q100"
+  owner: "ASIT"
+  authority: "Aircraft Systems Information Transponder"
+  status: "ACTIVE"
+  last_updated: "2026-02-12"
+  compliance:
+    - "S1000D Issue 5.0"
+    - "DO-178C"
+    - "ARP4754A"
+    - "ARP4761"
+    - "ISO 9001:2015"
+  
+precedence_model:
+  description: "Layered decision authority model"
+  layers:
+    - layer: "L0"
+      name: "Program Governance"
+      authority: "immutable"
+      description: "Constitutional axioms, foundational principles"
+    - layer: "L1"
+      name: "LC Canonical Contract"
+      authority: "ASIT"
+      description: "Lifecycle phase definitions and baseline rules"
+    - layer: "L2"
+      name: "Domain Pack"
+      authority: "Domain Steward"
+      description: "ATA chapter-specific packages and constraints"
+    - layer: "L3"
+      name: "Config Context"
+      authority: "Configuration Manager"
+      description: "Effectivity, variants, customization"
+    - layer: "L4"
+      name: "Data Contracts"
+      authority: "Contract Owner"
+      description: "Content generation contracts and transformations"
+    - layer: "L5"
+      name: "Generation Workflow"
+      authority: "GenLM Agent"
+      description: "AI-driven content generation and pipeline execution"
+    - layer: "L6"
+      name: "Assurance Gates"
+      authority: "Quality Assurance"
+      description: "Gate validation, compliance checking"
+    - layer: "L7"
+      name: "Human Authority"
+      authority: "Subject Matter Expert"
+      description: "Human-in-the-loop approval, safety review"
+    - layer: "L8"
+      name: "OPS Feedback Loop"
+      authority: "Operations"
+      description: "Operational feedback, continuous improvement"
+  
+  conflict_resolution:
+    rule: "Lower layer rejected and escalated"
+    description: "If lower layer contradicts higher layer, reject and escalate to higher authority"
+
+# =============================================================================
+# PLM PHASES (LC01–LC10): Product Lifecycle Management
+# Root: KDB/LM/SSOT/PLM
+# =============================================================================
+
+plm_phases:
+  LC01:
+    canonical_name: "Problem Statement"
+    ssot_dir: "KDB/LM/SSOT/PLM/LC01_PROBLEM_STATEMENT"
+    phase_type: "PLM"
+    description: "Initial problem definition, concept exploration, and governance setup"
+    packages:
+      - "KNOT_MGMT"
+      - "KNU_PLANNING"
+      - "GOVERNANCE"
+      - "INCENTIVES"
+    baseline: null
+    baseline_state: "none"
+    primary_outcome: "Problem definition document, initial governance framework"
+    entry_criteria:
+      - "Program charter approved"
+      - "Stakeholder identification complete"
+    exit_criteria:
+      - "Problem statement validated"
+      - "Governance framework established"
+    gate_id: "G-LC01-ENTRY"
+    
+  LC02:
+    canonical_name: "System Requirements"
+    ssot_dir: "KDB/LM/SSOT/PLM/LC02_SYSTEM_REQUIREMENTS"
+    phase_type: "PLM"
+    description: "System-level requirements definition and interface control"
+    packages:
+      - "REQ"
+      - "ICD"
+      - "DATA"
+      - "COMPLIANCE_INTENT"
+    baseline: "FBL"
+    baseline_state: "Functional Baseline"
+    baseline_producer: true
+    primary_outcome: "Functional Baseline (FBL) - System requirements and ICDs"
+    entry_criteria:
+      - "Problem statement approved"
+      - "Stakeholder requirements gathered"
+    exit_criteria:
+      - "System requirements validated"
+      - "FBL established and under configuration control"
+    gate_id: "G-LC02-FBL"
+    
+  LC03:
+    canonical_name: "Safety & Reliability"
+    ssot_dir: "KDB/LM/SSOT/PLM/LC03_SAFETY_RELIABILITY"
+    phase_type: "PLM"
+    description: "Safety assessment, hazard analysis, and reliability engineering"
+    packages:
+      - "SAFETY"
+      - "RELIABILITY"
+      - "HAZARD_MGMT"
+    baseline: null
+    baseline_state: "none"
+    primary_outcome: "Safety case, FMEA/FHA, preliminary hazard analysis"
+    entry_criteria:
+      - "FBL established (LC02)"
+      - "Safety objectives defined"
+    exit_criteria:
+      - "Safety assessment complete"
+      - "All hazards identified and mitigated"
+    gate_id: "G-LC03-SAFETY"
+    constraints:
+      - "Must trace to LC02 requirements"
+      - "Cannot be skipped for cert-eligible systems"
+    
+  LC04:
+    canonical_name: "Design Definition"
+    ssot_dir: "KDB/LM/SSOT/PLM/LC04_DESIGN_DEFINITION"
+    phase_type: "PLM"
+    description: "Detailed design, interfaces, and configuration definition"
+    packages:
+      - "DESIGN"
+      - "CONFIG"
+      - "INTERFACES"
+    baseline: "DBL"
+    baseline_state: "Design Baseline"
+    baseline_producer: true
+    primary_outcome: "Design Baseline (DBL) - Detailed design and configuration"
+    entry_criteria:
+      - "FBL established (LC02)"
+      - "Safety assessment initiated (LC03)"
+    exit_criteria:
+      - "Design validated"
+      - "DBL established and under configuration control"
+    gate_id: "G-LC04-DBL"
+    
+  LC05:
+    canonical_name: "Analysis Models"
+    ssot_dir: "KDB/LM/SSOT/PLM/LC05_ANALYSIS_MODELS"
+    phase_type: "PLM"
+    description: "Engineering analysis, simulation, and model validation"
+    packages:
+      - "ANALYSIS"
+      - "MODELS"
+      - "VALIDATION"
+    baseline: null
+    baseline_state: "none"
+    primary_outcome: "Validated analysis models and simulation results"
+    entry_criteria:
+      - "DBL established (LC04)"
+      - "Analysis requirements defined"
+    exit_criteria:
+      - "All analysis complete"
+      - "Models validated against requirements"
+    gate_id: "G-LC05-ANALYSIS"
+    
+  LC06:
+    canonical_name: "Integration & Test"
+    ssot_dir: "KDB/LM/SSOT/PLM/LC06_VERIFICATION"
+    phase_type: "PLM"
+    description: "Integration testing, verification, and conformity assessment"
+    packages:
+      - "TEST"
+      - "INTEGRATION"
+      - "CONFORMITY"
+    baseline: null
+    baseline_state: "none"
+    primary_outcome: "Test results, verification evidence, conformity reports"
+    entry_criteria:
+      - "DBL established (LC04)"
+      - "Test plans approved"
+    exit_criteria:
+      - "All verification tests complete"
+      - "Conformity demonstrated"
+    gate_id: "G-LC06-CONFORMITY"
+    constraints:
+      - "Cannot be skipped for cert-eligible systems"
+    
+  LC07:
+    canonical_name: "QA & Process Compliance"
+    ssot_dir: "KDB/LM/SSOT/PLM/LC07_QA_PROCESS"
+    phase_type: "PLM"
+    description: "Quality assurance, process audits, and acceptance"
+    packages:
+      - "QA"
+      - "PROCESS_COMPLIANCE"
+      - "ACCEPTANCE"
+    baseline: null
+    baseline_state: "none"
+    primary_outcome: "QA reports, process compliance evidence, acceptance criteria"
+    entry_criteria:
+      - "Verification complete (LC06)"
+      - "QA plan approved"
+    exit_criteria:
+      - "QA audits complete"
+      - "Process compliance demonstrated"
+    gate_id: "G-LC07-QA"
+    
+  LC08:
+    canonical_name: "Certification"
+    ssot_dir: "KDB/LM/SSOT/PLM/LC08_CONFIGURATION"
+    phase_type: "PLM"
+    description: "Certification basis, compliance demonstration, and flight test"
+    packages:
+      - "CERT_BASIS"
+      - "COMPLIANCE"
+      - "FLIGHT_TEST"
+    baseline: null
+    baseline_state: "none"
+    primary_outcome: "Type certificate, compliance reports, flight test results"
+    entry_criteria:
+      - "All verification complete (LC06)"
+      - "QA acceptance (LC07)"
+    exit_criteria:
+      - "Type certificate issued"
+      - "All compliance demonstrated"
+    gate_id: "G-LC08-CERT"
+    constraints:
+      - "Requires LC06 evidence references"
+    
+  LC09:
+    canonical_name: "ESG & Sustainability"
+    ssot_dir: "KDB/LM/SSOT/PLM/LC09_ESG_SUSTAINABILITY"
+    phase_type: "PLM"
+    description: "Environmental, Social, Governance and sustainability assessment"
+    packages:
+      - "ESG"
+      - "LCA"
+      - "ENV_COMPLIANCE"
+    baseline: null
+    baseline_state: "none"
+    primary_outcome: "ESG reports, life cycle assessment, environmental compliance"
+    entry_criteria:
+      - "Design baseline established (LC04)"
+      - "ESG objectives defined"
+    exit_criteria:
+      - "ESG assessment complete"
+      - "Environmental compliance demonstrated"
+    gate_id: "G-LC09-ESG"
+    constraints:
+      - "Cannot host production release authority"
+    
+  LC10:
+    canonical_name: "Industrial & Supply Chain"
+    ssot_dir: "KDB/LM/SSOT/PLM/LC10_INDUSTRIAL_SUPPLY"
+    phase_type: "PLM"
+    description: "Manufacturing, supply chain, and production release"
+    packages:
+      - "INDUSTRIAL"
+      - "SUPPLY"
+      - "QUALITY_PROD"
+    baseline: "PBL"
+    baseline_state: "Product Baseline"
+    baseline_producer: true
+    primary_outcome: "Product Baseline (PBL) - Production release"
+    entry_criteria:
+      - "Type certificate issued (LC08)"
+      - "Manufacturing readiness review complete"
+    exit_criteria:
+      - "PBL established"
+      - "Production authorized"
+    gate_id: "G-LC10-PBL"
+    constraints:
+      - "Only phase that produces Product Baseline (PBL)"
+
+# =============================================================================
+# OPS PHASES (LC11–LC14): Operations Lifecycle Management
+# Root: IDB/OPS/LM
+# =============================================================================
+
+ops_phases:
+  LC11:
+    canonical_name: "Operations Customization"
+    ssot_dir: "IDB/OPS/LM/LC11_OPERATIONS_CUSTOMIZATION"
+    phase_type: "OPS"
+    description: "Customer-specific configuration and operational customization"
+    packages:
+      - "CUSTOMER_DELTAS"
+      - "OPS_CONFIG"
+      - "RELEASE_NOTES"
+    baseline: null
+    baseline_state: "none"
+    primary_outcome: "Customer-specific operations manuals and configuration"
+    entry_criteria:
+      - "PBL established (LC10)"
+      - "Customer requirements defined"
+    exit_criteria:
+      - "Customization approved"
+      - "Operations manuals delivered"
+    gate_id: "G-LC11-OPS"
+    
+  LC12:
+    canonical_name: "Continued Airworthiness & MRO"
+    ssot_dir: "IDB/OPS/LM/LC12_MAINTENANCE_REPAIR"
+    phase_type: "OPS"
+    description: "Maintenance, repair, and continued airworthiness management"
+    packages:
+      - "SB"
+      - "REPAIR"
+      - "QUERY"
+      - "AOG"
+      - "COC"
+      - "COMPLIANCE"
+    sub_packages:
+      CASES:
+        description: "Individual maintenance cases and work orders"
+      INDEX:
+        description: "Maintenance index and cross-reference"
+    baseline: null
+    baseline_state: "none"
+    primary_outcome: "Service bulletins, repair data, airworthiness directives"
+    entry_criteria:
+      - "Aircraft in service (LC11)"
+      - "Maintenance program approved"
+    exit_criteria:
+      - "Continuous - operational phase"
+    gate_id: "G-LC12-MRO"
+    constraints:
+      - "Must reference certified baseline lineage"
+    
+  LC13:
+    canonical_name: "Maintenance Source Data"
+    ssot_dir: "IDB/OPS/LM/LC13_MAINTENANCE_SOURCE"
+    phase_type: "OPS"
+    description: "Authoritative maintenance source data and evidence"
+    packages:
+      - "Maintenance_Source"
+      - "Repair_Source"
+      - "Overhaul_Source"
+    sub_packages:
+      Maintenance_Source:
+        EVIDENCE: "Maintenance evidence and records"
+      Repair_Source:
+        EVIDENCE: "Repair evidence and records"
+      Overhaul_Source:
+        EVIDENCE: "Overhaul evidence and records"
+    baseline: null
+    baseline_state: "none"
+    primary_outcome: "Maintenance source data, repair manuals, overhaul procedures"
+    entry_criteria:
+      - "Aircraft in service (LC11)"
+      - "Source data requirements defined"
+    exit_criteria:
+      - "Continuous - operational phase"
+    gate_id: "G-LC13-SOURCE"
+    
+  LC14:
+    canonical_name: "End of Life"
+    ssot_dir: "IDB/OPS/LM/LC14_END_OF_LIFE"
+    phase_type: "OPS"
+    description: "Aircraft retirement, dismantling, and material recovery"
+    packages:
+      - "DISMANTLING"
+      - "MATERIAL_RECOVERY"
+      - "DPP_CLOSURE"
+      - "ESG_EOL"
+    baseline: null
+    baseline_state: "none"
+    primary_outcome: "Dismantling procedures, material recovery plan, DPP closure"
+    entry_criteria:
+      - "Aircraft retired from service"
+      - "End-of-life plan approved"
+    exit_criteria:
+      - "Dismantling complete"
+      - "Material recovery executed"
+      - "Digital Product Passport closed"
+    gate_id: "G-LC14-EOL"
+
+# =============================================================================
+# Baseline Rules and Constraints
+# =============================================================================
+
+baseline_rules:
+  FBL:
+    producer_lc: "LC02"
+    name: "Functional Baseline"
+    description: "System requirements and interface control documents"
+    exclusivity: true
+    authority: "System Engineering"
+    
+  DBL:
+    producer_lc: "LC04"
+    name: "Design Baseline"
+    description: "Detailed design and configuration definition"
+    exclusivity: true
+    authority: "Design Engineering"
+    
+  PBL:
+    producer_lc: "LC10"
+    name: "Product Baseline"
+    description: "Production release and manufacturing authorization"
+    exclusivity: true
+    authority: "Manufacturing Engineering"
+
+constraints:
+  architecture:
+    rule: "No standalone Architecture phase"
+    distribution:
+      - phase: "LC02"
+        package: "ICD"
+        description: "System architecture and interface control"
+      - phase: "LC04"
+        package: "INTERFACES"
+        description: "Detailed interface design and integration"
+    
+  synthetic_naming:
+    rule: "No synthetic LC naming allowed"
+    enforcement: "All phases must use canonical_name from this registry"
+    
+  production_authority:
+    rule: "LC09 cannot host production release authority"
+    rationale: "ESG is assessment phase, not production authority"
+    
+  certification_continuity:
+    rule: "All operational changes must reference certified baseline lineage"
+    phases: ["LC12", "LC13"]
+    trace_requirement: "LC08 → LC10 → LC11/LC12/LC13"
+
+# =============================================================================
+# Governance and Traceability
+# =============================================================================
+
+governance:
+  authority: "ASIT"
+  ownership: "Program Configuration Manager"
+  change_control:
+    process: "ECR/ECO"
+    approval_authority: "Configuration Control Board"
+  
+traceability:
+  requirement: "All phases must maintain upward and downward trace"
+  trace_types:
+    - "LC02 REQ → LC03 SAFETY"
+    - "LC02 REQ → LC04 DESIGN"
+    - "LC04 DESIGN → LC06 TEST"
+    - "LC06 TEST → LC08 COMPLIANCE"
+    - "LC08 COMPLIANCE → LC10 PBL"
+    - "LC10 PBL → LC11/LC12/LC13 OPS"
+
+# =============================================================================
+# End of LC Phase Registry
+# =============================================================================
