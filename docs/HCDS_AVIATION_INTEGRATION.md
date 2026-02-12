@@ -67,7 +67,7 @@ The Human-Centric Digital Systems Charter v1.0 extends the AEROSPACEMODEL govern
 - **Requirement:** Safety monitoring compute allocation prioritized
 - **Aviation Context:** Fuel cell thermal runaway detection always has compute priority
 
-**Reference:** `.github/instructions/ata71_fuel_cell_power_plant.instructions.md`
+**Reference:** `.github/instructions/ata71_fuel_cell.instructions.md`
 
 ---
 
