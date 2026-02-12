@@ -36,7 +36,7 @@ The Human-Centric Digital Systems Charter v1.0 extends the AEROSPACEMODEL govern
 - **Aviation Context:** AI safety monitoring always has compute priority over commercial features (e.g., IFE ads)
 - **Enforcement:** Compute quotas enforced at hardware/OS level
 
-**Reference:** `.github/instructions/ata95_ai_ml_models.instructions.md`
+**Reference:** `.github/instructions/ata95_ai_ml.instructions.md`
 
 ---
 
