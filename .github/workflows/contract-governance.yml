@@ -4,9 +4,11 @@ on:
   push:
     paths:
       - 'ASIT/CONTRACTS/**'
+      - 'lifecycle/**'  # Cross-reference lifecycle registry changes
   pull_request:
     paths:
       - 'ASIT/CONTRACTS/**'
+      - 'lifecycle/**'  # Cross-reference lifecycle registry changes
 
 jobs:
   validate-contracts:
@@ -180,6 +182,27 @@ jobs:
           else:
               print(f'\n✓ All contracts have complete authority fields')
           "
+
+  lifecycle-integration-check:
+    name: Lifecycle Registry Integration Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check lifecycle registry integration
+        run: |
+          echo "## Lifecycle Registry Integration" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f "lifecycle/LC_PHASE_REGISTRY.yaml" ]; then
+            echo "✅ LC Phase Registry found" >> $GITHUB_STEP_SUMMARY
+            echo "✅ LC Phase Registry is available for contract governance"
+          else
+            echo "ℹ️ LC Phase Registry not found (lifecycle/ directory may not be initialized yet)"
+          fi
+          if [ -f "lifecycle/T_SUBDOMAIN_LC_ACTIVATION.yaml" ]; then
+            echo "✅ T-Subdomain LC Activation found" >> $GITHUB_STEP_SUMMARY
+            echo "✅ T-Subdomain activation rules are available"
+          fi
 
   governance-checks:
     name: Additional Governance Checks

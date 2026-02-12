@@ -1,0 +1,296 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://aerospacemodel.com/schemas/t_subdomain_lc_activation.schema.json",
+  "title": "T-Subdomain Lifecycle Activation Schema",
+  "description": "JSON Schema for validating T-SUBDOMAIN LC Activation YAML files",
+  "type": "object",
+  "required": ["meta", "lifecycle_packages", "baseline_rules", "subdomains", "validation_rules"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "description": "Metadata about the T-subdomain activation file",
+      "required": ["schema_version", "file_version", "program", "owner", "status", "date", "canonical_lc_source", "policy"],
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Schema version in semver format"
+        },
+        "file_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "File version in semver format"
+        },
+        "program": {
+          "type": "string",
+          "description": "Program name"
+        },
+        "owner": {
+          "type": "string",
+          "description": "Owner organization or role"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["ACTIVE", "DRAFT", "ARCHIVED"],
+          "description": "Status of the activation file"
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of last update (ISO 8601)"
+        },
+        "canonical_lc_source": {
+          "type": "string",
+          "description": "Path to canonical LC phase registry"
+        },
+        "policy": {
+          "type": "object",
+          "required": ["strict_package_validation", "allow_phase_skip", "require_gate_validation"],
+          "properties": {
+            "strict_package_validation": {
+              "type": "boolean",
+              "description": "Enable strict package validation"
+            },
+            "allow_phase_skip": {
+              "type": "boolean",
+              "description": "Allow skipping lifecycle phases"
+            },
+            "require_gate_validation": {
+              "type": "boolean",
+              "description": "Require gate validation"
+            }
+          }
+        }
+      }
+    },
+    "lifecycle_packages": {
+      "type": "object",
+      "description": "Package definitions for each lifecycle phase",
+      "required": ["LC01", "LC02", "LC03", "LC04", "LC05", "LC06", "LC07", "LC08", "LC09", "LC10", "LC11", "LC12", "LC13", "LC14"],
+      "properties": {
+        "LC01": { "$ref": "#/definitions/package_array" },
+        "LC02": { "$ref": "#/definitions/package_array" },
+        "LC03": { "$ref": "#/definitions/package_array" },
+        "LC04": { "$ref": "#/definitions/package_array" },
+        "LC05": { "$ref": "#/definitions/package_array" },
+        "LC06": { "$ref": "#/definitions/package_array" },
+        "LC07": { "$ref": "#/definitions/package_array" },
+        "LC08": { "$ref": "#/definitions/package_array" },
+        "LC09": { "$ref": "#/definitions/package_array" },
+        "LC10": { "$ref": "#/definitions/package_array" },
+        "LC11": { "$ref": "#/definitions/package_array" },
+        "LC12": { "$ref": "#/definitions/package_array" },
+        "LC13": { "$ref": "#/definitions/package_array" },
+        "LC14": { "$ref": "#/definitions/package_array" }
+      }
+    },
+    "baseline_rules": {
+      "type": "object",
+      "description": "Baseline production rules",
+      "required": ["FBL", "DBL", "PBL"],
+      "properties": {
+        "FBL": { "$ref": "#/definitions/baseline_rule" },
+        "DBL": { "$ref": "#/definitions/baseline_rule" },
+        "PBL": { "$ref": "#/definitions/baseline_rule" }
+      }
+    },
+    "defaults": {
+      "type": "object",
+      "description": "Default profiles for standard subdomains",
+      "properties": {
+        "standard_profile": {
+          "type": "object",
+          "properties": {
+            "description": { "type": "string" },
+            "mandatory_phases": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/lc_code" }
+            },
+            "optional_phases": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/lc_code" }
+            },
+            "skip_phases": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/lc_code" }
+            },
+            "gates": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "subdomains": {
+      "type": "object",
+      "description": "Subdomain-specific lifecycle activation rules",
+      "patternProperties": {
+        "^[A-Z0-9_]+$": {
+          "$ref": "#/definitions/subdomain"
+        }
+      }
+    },
+    "validation_rules": {
+      "type": "array",
+      "description": "Validation rules for lifecycle activation",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "rule", "enforcement"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^VAL-\\d{3}$",
+            "description": "Validation rule ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Human-readable rule name"
+          },
+          "rule": {
+            "type": "string",
+            "description": "Rule description"
+          },
+          "enforcement": {
+            "type": "string",
+            "enum": ["block", "warn", "escalate"],
+            "description": "Enforcement level"
+          }
+        }
+      }
+    },
+    "ci_hints": {
+      "type": "object",
+      "description": "Hints for CI/CD integration",
+      "properties": {
+        "yamllint": {
+          "type": "object",
+          "properties": {
+            "max_line_length": { "type": "integer" },
+            "truthy": { "type": "string" }
+          }
+        },
+        "validation_script": { "type": "string" },
+        "schema": { "type": "string" }
+      }
+    }
+  },
+  "definitions": {
+    "package_array": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z_]+$"
+      },
+      "description": "Array of package names"
+    },
+    "baseline_rule": {
+      "type": "object",
+      "required": ["producer_lc", "required_packages"],
+      "properties": {
+        "producer_lc": {
+          "$ref": "#/definitions/lc_code",
+          "description": "Lifecycle phase that produces this baseline"
+        },
+        "required_packages": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Required packages for baseline production"
+        }
+      }
+    },
+    "lc_code": {
+      "type": "string",
+      "pattern": "^LC(0[1-9]|1[0-4])$",
+      "description": "Lifecycle code LC01 through LC14"
+    },
+    "subdomain": {
+      "type": "object",
+      "required": ["title", "optin_path", "ata_scope", "doa_criticality", "novel_technology"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Subdomain title"
+        },
+        "optin_path": {
+          "type": "string",
+          "description": "Path in OPT-IN_FRAMEWORK"
+        },
+        "ata_scope": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "ATA chapters covered by this subdomain"
+        },
+        "doa_criticality": {
+          "type": "string",
+          "enum": ["CRITICAL", "MAJOR", "MINOR", "VARIES"],
+          "description": "Design Organization Approval criticality level"
+        },
+        "novel_technology": {
+          "type": "boolean",
+          "description": "Whether this is a novel technology subdomain"
+        },
+        "special_conditions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Special certification conditions"
+        },
+        "profile": {
+          "type": "string",
+          "description": "Profile to use (e.g., standard_profile)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description"
+        },
+        "plm": {
+          "type": "object",
+          "description": "PLM phase activation (LC01-LC10)",
+          "patternProperties": {
+            "^LC(0[1-9]|10)$": {
+              "$ref": "#/definitions/lc_activation"
+            }
+          }
+        },
+        "ops": {
+          "type": "object",
+          "description": "OPS phase activation (LC11-LC14)",
+          "patternProperties": {
+            "^LC1[1-4]$": {
+              "$ref": "#/definitions/lc_activation"
+            }
+          }
+        },
+        "gates": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Gate IDs applicable to this subdomain"
+        }
+      }
+    },
+    "lc_activation": {
+      "type": "object",
+      "required": ["active"],
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "description": "Whether this phase is active"
+        },
+        "packages": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Packages used in this phase"
+        },
+        "baseline_out": {
+          "type": "string",
+          "enum": ["FBL", "DBL", "PBL"],
+          "description": "Baseline produced by this phase"
+        },
+        "rationale": {
+          "type": "string",
+          "description": "Rationale for this activation"
+        }
+      }
+    }
+  }
+}

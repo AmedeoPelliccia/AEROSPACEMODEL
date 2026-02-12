@@ -6,11 +6,15 @@ on:
       - 'ASIT/**'
       - 'ASIGT/**'
       - 'src/**'
+      - 'lifecycle/**'  # Include lifecycle for BREX rule integration
+      - '.github/instructions/**'  # Include new instruction files
   pull_request:
     paths:
       - 'ASIT/**'
       - 'ASIGT/**'
       - 'src/**'
+      - 'lifecycle/**'  # Include lifecycle for BREX rule integration
+      - '.github/instructions/**'  # Include new instruction files
 
 jobs:
   brex-validation:
@@ -155,6 +159,40 @@ jobs:
           name: brex-compliance-report
           path: brex_compliance_report.yaml
           retention-days: 90
+
+  validate-instruction-files:
+    name: Validate BREX Instruction Files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check instruction files exist
+        run: |
+          echo "## BREX Instruction Files" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          INSTRUCTION_DIR=".github/instructions"
+          INSTRUCTION_FILES=(
+            "ata27_flight_controls.instructions.md"
+            "ata28_fuel.instructions.md"
+            "ata28_h2_cryogenic.instructions.md"
+            "ata71_fuel_cell.instructions.md"
+            "ata95_ai_ml.instructions.md"
+          )
+          
+          echo "Checking BREX instruction files..."
+          for file in "${INSTRUCTION_FILES[@]}"; do
+            if [ -f "$INSTRUCTION_DIR/$file" ]; then
+              echo "✅ $file" >> $GITHUB_STEP_SUMMARY
+              echo "✅ $file"
+            else
+              echo "❌ $file" >> $GITHUB_STEP_SUMMARY
+              echo "❌ Missing: $file"
+            fi
+          done
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Total instruction files: ${#INSTRUCTION_FILES[@]}" >> $GITHUB_STEP_SUMMARY
 
   enforce-determinism:
     name: Enforce Determinism Guarantees
