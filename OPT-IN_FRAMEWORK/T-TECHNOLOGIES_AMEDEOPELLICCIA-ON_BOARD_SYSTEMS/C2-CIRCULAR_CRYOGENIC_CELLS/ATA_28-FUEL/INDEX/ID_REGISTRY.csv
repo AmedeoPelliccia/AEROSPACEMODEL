@@ -1,0 +1,9 @@
+id,type,title,ata_section,lc_phase,status,created_date
+C2-28-SSOT-001,SSOT,LH₂ Cryogenic Cell PLM Baseline,28-10,LC01,active,2026-02-14
+C2-28-REQ-001,REQ,Cryogenic Insulation Thermal Performance,28-10,LC03,active,2026-02-14
+C2-28-REQ-002,REQ,Boil-Off Rate Compliance (SC-28-H2-001),28-10,LC03,active,2026-02-14
+C2-28-KNOT-001,KNOT,Circular Cell Structural Fatigue Under Cryo Cycling,28-10,LC02,graduated,2026-02-14
+C2-28-KNOT-002,KNOT,MLI Vacuum Degradation Long-Term,28-10,LC02,open,2026-02-14
+C2-28-KNU-001,KNU,Fatigue Analysis — Circular Cell Pressure Cycles,28-10,LC03,active,2026-02-14
+C2-28-ECR-001,ECR,Update Insulation Spec for MLI Layer Count,28-10,LC04,pending,2026-02-14
+C2-28-DM-2810-001,DM,DMC-AMPEL-A-28-10-00-00A-040A-D — Storage Description,28-10,LC08,draft,2026-02-14

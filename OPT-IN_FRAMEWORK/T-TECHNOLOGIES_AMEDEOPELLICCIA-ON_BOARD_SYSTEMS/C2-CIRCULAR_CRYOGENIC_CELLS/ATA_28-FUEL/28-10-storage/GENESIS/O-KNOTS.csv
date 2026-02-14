@@ -1,0 +1,4 @@
+knot_id,title,source,uncertainty_type,severity,status,target_closure_date
+C2-28-OKNOT-001,Cryogenic Insulation Aging — MLI Long-Term Performance,No prior circular-geometry MLI flight data,experience_gap,high,open,2026-09-30
+C2-28-OKNOT-002,Circular Cell Structural Fatigue Under Cryo Cycling,Novel geometry with no fatigue heritage,experience_gap,high,graduated,2026-06-30
+C2-28-OKNOT-003,MLI Vacuum Degradation in Operational Environment,Limited data on vacuum jacket integrity over 20+ year life,inherited,medium,open,2026-12-31

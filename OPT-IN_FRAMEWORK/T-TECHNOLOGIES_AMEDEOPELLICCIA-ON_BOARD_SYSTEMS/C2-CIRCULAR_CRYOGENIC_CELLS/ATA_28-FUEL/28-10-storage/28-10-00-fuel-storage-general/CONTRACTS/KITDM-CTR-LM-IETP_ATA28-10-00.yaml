@@ -1,0 +1,26 @@
+# ============================================================
+# Contract: CSDB → IETP Packaging
+# Subject:  ATA 28-10-00 — Fuel Storage General
+# ============================================================
+
+contract:
+  id: "KITDM-CTR-LM-IETP_ATA28-10-00"
+  version: "1.0.0"
+  type: "CSDB_TO_IETP"
+  status: "APPROVED"
+
+scope:
+  ata_section: "28-10-00"
+  title: "Fuel Storage General"
+  technology_domain: "C2"
+
+source:
+  location: "IDB/PUB/AMM/CSDB"
+  description: "S1000D CSDB data modules"
+
+target:
+  location: "IDB/PUB/AMM/IETP_RUNTIME"
+  description: "Interactive Electronic Technical Publication runtime"
+
+approval:
+  approved_date: "2026-02-14"

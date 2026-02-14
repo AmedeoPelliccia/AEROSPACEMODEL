@@ -1,0 +1,33 @@
+# ============================================================
+# ASIT Configuration — ATA 28-10-00 Fuel Storage General
+# Technology Domain: C2 Circular Cryogenic Cells
+# ============================================================
+
+subject:
+  ata_section: "28-10-00"
+  title: "Fuel Storage General"
+  ata_chapter: "28"
+  technology_domain: "C2"
+  aircraft: "AMPEL360-Q100"
+
+contracts:
+  - "KITDM-CTR-LM-CSDB_ATA28-10-00"
+  - "KITDM-CTR-LM-EXPORT_ATA28-10-00"
+  - "KITDM-CTR-LM-IETP_ATA28-10-00"
+
+validation:
+  brex: "strict"
+  schema: true
+  trace_coverage_min: 0.95
+  hydrogen_safety: true
+  cryogenic_safety: true
+
+audit:
+  retention_years: 7
+  immutable_runs: true
+  log_format: "{timestamp} | RULE {rule_id} | {status} | {context}"
+
+pipelines:
+  csdb: "pipelines/ata28-10-00_csdb.yaml"
+  export: "pipelines/ata28-10-00_export.yaml"
+  ietp: "pipelines/ata28-10-00_ietp.yaml"

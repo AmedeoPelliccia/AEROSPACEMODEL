@@ -1,0 +1,32 @@
+# SECTION_INDEX.yaml — Section-Level Artifact Index
+# ATA 28-10 Fuel Storage — C2 Circular Cryogenic Cells
+
+ata_section: "28-10"
+title: "Fuel Storage — LH₂ Circular Cryogenic Cells"
+variant: "C2"
+
+subjects:
+  - id: "28-10-00"
+    title: "Fuel Storage General"
+    path: "28-10-00-fuel-storage-general/"
+    description: "General fuel storage artifacts including cryogenic cell design, insulation, and pressure systems"
+
+metrics:
+  total_artifacts: 34
+  requirements_count: 12
+  design_count: 6
+  safety_count: 4
+  test_count: 8
+  publication_count: 4
+
+genesis_summary:
+  o_knots: 3
+  y_knots: 3
+  graduated: 1
+  open: 5
+
+status_summary:
+  active: 22
+  draft: 8
+  pending_review: 3
+  graduated: 1

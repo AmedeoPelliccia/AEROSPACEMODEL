@@ -1,0 +1,43 @@
+# ============================================================
+# Contract: KDB → CSDB Publication
+# Subject:  ATA 28-10-00 — Fuel Storage General
+# Technology Domain: C2 Circular Cryogenic Cells
+# ============================================================
+
+contract:
+  id: "KITDM-CTR-LM-CSDB_ATA28-10-00"
+  version: "1.0.0"
+  type: "KDB_TO_CSDB"
+  status: "APPROVED"
+
+scope:
+  ata_chapter: "28"
+  ata_section: "28-10-00"
+  title: "Fuel Storage General"
+  technology_domain: "C2"
+  aircraft: "AMPEL360-Q100"
+
+source:
+  location: "KDB/LM/SSOT/PLM"
+  description: "Knowledge Database — Logistics Model — Single Source of Truth"
+
+target:
+  location: "IDB/PUB/AMM/CSDB"
+  description: "Information Deliverable Database — AMM CSDB output"
+
+generators:
+  - type: "dm"
+    description: "S1000D Data Module generation"
+
+validation:
+  brex: true
+  schema: true
+  trace: true
+  hydrogen_safety: true
+  cryogenic_safety: true
+
+approval:
+  required_stakeholders:
+    - "STK_CM"
+    - "STK_SAF"
+  approved_date: "2026-02-14"

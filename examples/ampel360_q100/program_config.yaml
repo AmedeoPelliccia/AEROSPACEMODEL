@@ -1,0 +1,155 @@
+# =============================================================================
+# AMPEL360 Q100 — Program Configuration
+# =============================================================================
+# 100-seat hydrogen-electric aircraft with Circular Cryogenic Cells (C2).
+# Novel certification with hydrogen-specific Special Conditions.
+# =============================================================================
+
+program:
+  name: "AMPEL360 Q100"
+  model_code: "Q100"
+  description: "100-seat hydrogen-electric aircraft with Circular Cryogenic Cells"
+
+  organization:
+    name: "AMPEL Aerospace"
+    cage_code: "AMP01"
+    country_code: "EU"
+
+  aircraft:
+    type: "Fixed-wing"
+    category: "Transport (CS-25)"
+    passenger_capacity: 100
+    crew: 4
+
+    propulsion:
+      type: "Hydrogen Fuel Cell Electric"
+      motor_count: 2
+      fuel_cell_stacks: 4
+      power_total_mw: 2.5
+
+    fuel:
+      type: "Liquid Hydrogen (LH2)"
+      temperature_c: -253
+      tank_type: "Circular Cryogenic Cells (C2)"
+      tank_count: 4
+      capacity_kg: 1200
+
+    performance:
+      range_nm: 1200
+      cruise_speed_ktas: 380
+      cruise_altitude_ft: 37000
+
+  variants:
+    - code: "Q100-C2"
+      name: "Circular Cryogenic"
+      description: "PEM fuel cell with C2 circular cryogenic LH2 tanks"
+
+    - code: "Q100-HT"
+      name: "Hydrogen Turbine"
+      description: "Modified turbine for H2 combustion (future variant)"
+
+  version:
+    current: "1.0.0"
+    aerospacemodel: "2.0.0"
+
+standards:
+  s1000d:
+    issue: "5.0"
+    brex:
+      base: "S1000D_5.0_DEFAULT"
+      project: "Q100_brex"
+
+  language:
+    primary: "en"
+
+  country:
+    primary: "EU"
+
+certification:
+  basis: "EASA CS-25"
+  special_conditions:
+    - "SC-28-H2-001: Hydrogen Storage and Distribution"
+    - "SC-28-CRYO-002: Cryogenic Temperature Handling"
+    - "SC-H2-03: Hydrogen Leak Detection"
+    - "SC-H2-04: Fuel Cell Installation"
+    - "SC-H2-05: Ground Operations Safety"
+
+  exemptions:
+    - "Exemption for non-kerosene fuel (CS 25.1309 equivalent)"
+
+  novel_technology:
+    - domain: "C2_CIRCULAR_CRYOGENIC_CELLS"
+      description: "Circular cryogenic cells for LH2 storage"
+      ata_chapter: "28"
+    - domain: "P_PROPULSION"
+      description: "PEM fuel cell propulsion system"
+      ata_chapter: "71"
+    - domain: "I2_INTELLIGENCE"
+      description: "AI/ML monitoring and predictive analytics"
+      ata_chapter: "95"
+
+asit:
+  governance:
+    baseline_policy: "strict"
+    change_control: true
+    approval_required: true
+
+  contracts:
+    active_dir: "ASIT/CONTRACTS/active"
+    require_approval: true
+
+asigt:
+  generators:
+    dm_generator:
+      enabled: true
+    pm_generator:
+      enabled: true
+
+  validators:
+    brex:
+      enabled: true
+      strict_mode: true
+    schema:
+      enabled: true
+    trace:
+      enabled: true
+
+  renderers:
+    html:
+      enabled: true
+    pdf:
+      enabled: true
+
+directories:
+  kdb:
+    path: "KDB"
+  idb:
+    path: "IDB"
+  output:
+    path: "output"
+
+publications:
+  enabled:
+    - AMM
+    - SRM
+    - IPC
+    - TSM
+    - FCOM
+
+  defaults:
+    issue_info:
+      issue_number: "001"
+      in_work: "00"
+    responsible_partner_company:
+      cage: "AMP01"
+
+traceability:
+  enabled: true
+  evidence:
+    generate_matrices: true
+    hash_algorithm: "SHA-256"
+
+environment:
+  mode: "development"
+  logging:
+    level: "INFO"

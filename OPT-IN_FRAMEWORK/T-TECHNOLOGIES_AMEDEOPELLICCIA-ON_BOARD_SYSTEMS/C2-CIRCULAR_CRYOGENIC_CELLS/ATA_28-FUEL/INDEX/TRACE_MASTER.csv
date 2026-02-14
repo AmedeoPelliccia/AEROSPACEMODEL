@@ -1,0 +1,6 @@
+source_id,target_id,relationship,direction,lc_phase,status
+C2-28-KNU-001,C2-28-KNOT-001,derives_from,up,LC01,active
+C2-28-REQ-001,C2-28-KNU-001,derives_from,up,LC02,active
+C2-28-DES-001,C2-28-REQ-001,satisfies,up,LC04,active
+C2-28-TST-001,C2-28-REQ-002,verifies,up,LC06,active
+C2-28-DM-2810-001,C2-28-DES-001,implements,up,LC08,active
