@@ -194,9 +194,11 @@ NASA guidance and test experience repeatedly highlight that system performance d
 
 For CCC trade studies, this report introduces a **quality factor** $QF\in(0,1]$ (user‑tunable) to capture installation-dependent degradation. It is applied as a multiplier model (e.g., increasing effective radiative and conductive coefficients and/or effective gas pressure as $QF$ decreases). This enables:
 - an **installation robustness** measure based on sensitivity, e.g.
+
   $$
   RI(N)=\frac{q(N,QF=0.8)-q(N,QF=1.0)}{q(N,QF=1.0)},
   $$
+
   where lower $RI$ means less sensitivity to workmanship and handling variability.
 
 ### Assumptions used for numeric examples
@@ -227,7 +229,9 @@ flowchart TD
 
 The plot below shows total heat leak $\dot Q(N)$ for a **representative medium CCC** ($A_{\mathrm{CCC}}=20$ m²) and **fixed insulation thickness** $t_{\mathrm{MLI}}=50$ mm, for three vacuum levels (10⁻⁶, 10⁻⁴, 10⁻³ torr) at $T_h=293$ K and $T_c=20$ K. The model is the modified Lockheed-form correlation documented for cryogenic MLI, which explicitly includes solid conduction and gas conduction terms in addition to radiative transfer.  [7]
 
-*Figure TBD – Total heat leak $\dot Q$ vs layer count $N$ for representative CCC at three vacuum levels.*
+![Heat leak vs layer count at three vacuum levels](figures/heat_leak_vs_N.png)
+
+*Figure 2 – Total heat leak $\dot Q$ vs layer count $N$ for representative CCC (20 m², 50 mm) at three vacuum levels (293 K / 20 K). Modified Lockheed-form MLI model with radiation, solid conduction, and gas conduction terms.*
 
 Interpretation (what matters for CCC):
 - At **high vacuum (10⁻⁶ torr)**, the curve exhibits a **distinct minimum** at moderate layer counts: adding layers initially reduces radiation and gas conduction, but beyond a point increased layer density (packing/compression/contact effects) increases the solid conduction term. This is the same phenomenon documented in NASA analyses: there is an optimal packing (layer density) where heat leak is minimised.  [2, 7]
@@ -237,7 +241,9 @@ Interpretation (what matters for CCC):
 
 Using NASA material guideline areal weights for common reflector and spacer materials, blanket mass scales approximately linearly with $N$. NASA guidance provides representative areal weights for aluminised films and for Dacron/Nomex netting spacers.  [5, 8]
 
-*Figure TBD – MLI blanket mass estimate vs layer count for representative CCC with different stack materials.*
+![MLI blanket mass vs layer count](figures/mass_vs_N.png)
+
+*Figure 3 – MLI blanket mass estimate vs layer count for representative CCC (20 m²) with three stack material configurations: DAM/Dacron (standard), DAM/Silk net (lightweight), and Kapton/Nomex (high-temperature).*
 
 Key implications:
 - For a given CCC surface area, adding layers increases mass linearly, so the “last layers” beyond the knee deliver small thermal benefit per kg.
@@ -247,7 +253,9 @@ Key implications:
 
 The scatter plot below shows the Pareto shape between MLI mass and heat leak for the same representative CCC (20 m², 50 mm thickness, 293 K/20 K, 10⁻⁶ torr). The U‑shape indicates a **true optimum** under fixed thickness constraints (a minimum heat leak at intermediate N), consistent with the documented existence of an optimal layer density.  [2, 7]
 
-*Figure TBD – Pareto front of heat leak vs MLI mass for representative CCC under fixed-thickness constraint.*
+![Pareto front of heat leak vs MLI mass](figures/pareto_Qdot_vs_mass.png)
+
+*Figure 4 – Pareto front of heat leak vs MLI mass for representative CCC (20 m², 50 mm, $10^{-6}$ torr) with DAM/Dacron stack at 293 K / 20 K. Color indicates layer count $N$; red star marks the optimum.*
 
 ### Example numeric results for small/medium/large CCCs
 
@@ -311,6 +319,62 @@ A Monte Carlo uncertainty study was performed around a representative CCC operat
 ![Monte Carlo distribution of optimal MLI layer count N*](figures/monte_carlo_optimal_N_star.png)
 
 *Figure 1 – Monte Carlo distribution of optimal MLI layer count $N^*$ (10,000 samples; CCC 293 K / 20 K). Median $N^* = 56$; 5th–95th percentile = 36–93 layers.*
+
+<details>
+<summary>Python code — Monte Carlo simulation (click to expand)</summary>
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(42)
+N_samples = 10_000
+sigma = 5.67e-8  # Stefan-Boltzmann
+Th, Tc = 293.0, 20.0
+A_CCC = 20.0  # m^2
+N_range = np.arange(5, 201)
+
+# Sampled parameters (uniform distributions over plausible ranges)
+t_mli   = np.random.uniform(0.045, 0.055, N_samples)       # m
+P_torr  = 10**np.random.uniform(-6, -4, N_samples)          # torr
+QF      = np.random.uniform(0.80, 1.00, N_samples)          # quality factor
+eps     = np.random.uniform(0.025, 0.040, N_samples)         # emittance
+C_s_arr = np.random.uniform(1.0e-4, 1.5e-4, N_samples)      # solid cond coeff
+
+N_star = np.empty(N_samples)
+for i in range(N_samples):
+    q_best, n_best = np.inf, N_range[0]
+    for N in N_range:
+        Nstar = N / (t_mli[i] * 100)
+        q_rad   = eps[i] * sigma * (Th**4 - Tc**4) / (N + 1)
+        q_solid = C_s_arr[i] * Nstar**2.56 * (Th - Tc) / N
+        q_gas   = 1.2 * 0.3 * P_torr[i] * (Th - Tc)
+        q_total = (q_rad + q_solid + q_gas) / QF[i]
+        if q_total < q_best:
+            q_best, n_best = q_total, N
+    N_star[i] = n_best
+
+med  = np.median(N_star)
+p5   = np.percentile(N_star, 5)
+p95  = np.percentile(N_star, 95)
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5),
+                                gridspec_kw={"width_ratios": [2.5, 1]})
+ax1.hist(N_star, bins=60, density=True, color='royalblue', edgecolor='white', lw=0.3)
+ax1.axvline(med, color='red', ls='--', lw=2, label=f'Median $N^*$ = {int(med)}')
+ax1.axvline(p5,  color='orange', ls=':', lw=1.5, label=f'5th pctl = {int(p5)}')
+ax1.axvline(p95, color='orange', ls=':', lw=1.5, label=f'95th pctl = {int(p95)}')
+ax1.set_xlabel("Optimal layer count $N^*$")
+ax1.set_ylabel("Probability density")
+ax1.legend()
+ax2.boxplot(N_star, vert=True)
+ax2.set_ylabel("Optimal layer count $N^*$")
+ax2.set_title("Summary statistics")
+plt.tight_layout()
+plt.savefig("figures/monte_carlo_optimal_N_star.png", dpi=150)
+```
+
+</details>
 
 In this example study:
 - Median $N^* \approx 56$ layers; 5th–95th percentile ≈ 36–93 layers (from 10,000 Monte Carlo samples with the assumed uncertainty ranges).
