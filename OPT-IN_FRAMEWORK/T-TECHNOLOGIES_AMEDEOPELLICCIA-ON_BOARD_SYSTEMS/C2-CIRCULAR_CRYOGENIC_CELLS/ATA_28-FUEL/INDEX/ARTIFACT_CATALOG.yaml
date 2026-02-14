@@ -42,6 +42,27 @@ artifact_types:
     formats: ["xml"]
     description: "S1000D data modules for AMM/SRM publication"
 
+  trade_studies:
+    count: 3
+    location: "28-10-storage/28-10-00-fuel-storage-general/KDB/DEV/trade-studies/"
+    naming_pattern: "TS-28-10-TS{NN}_{topic}.yaml"
+    formats: ["yaml", "md"]
+    description: "LC04 trade studies for LH₂ storage architecture (geometry, distribution, insulation)"
+
+  compliance_matrices:
+    count: 1
+    location: "28-10-storage/28-10-00-fuel-storage-general/KDB/DEV/trade-studies/"
+    naming_pattern: "CS25_compliance_matrix.{yaml|md}"
+    formats: ["yaml", "md"]
+    description: "EASA CS-25 compliance matrix for LH₂ cryogenic fuel storage with Special Conditions"
+
+  baselines:
+    count: 1
+    location: "28-10-storage/28-10-00-fuel-storage-general/KDB/LM/SSOT/"
+    naming_pattern: "FBL-Q100-ATA28-{NNN}.{yaml|md}"
+    formats: ["yaml", "md"]
+    description: "Functional Baseline definitions with acceptance criteria for DEV → SSOT promotion"
+
   publications:
     count: 1
     location: "28-10-storage/28-10-00-fuel-storage-general/IDB/PUB/LM/LC08_PUBLICATION/"

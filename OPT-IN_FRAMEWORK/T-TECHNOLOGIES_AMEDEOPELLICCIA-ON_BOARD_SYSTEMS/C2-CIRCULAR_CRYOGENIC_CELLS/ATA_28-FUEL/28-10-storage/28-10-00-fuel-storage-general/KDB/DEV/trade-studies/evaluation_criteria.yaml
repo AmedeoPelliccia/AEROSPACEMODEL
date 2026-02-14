@@ -1,0 +1,48 @@
+# Evaluation Criteria — Weighted Scoring Matrix
+# ATA 28-10-00 Fuel Storage General Trade Studies
+# AMPEL360 Q100 — C2 Circular Cryogenic Cells
+
+ata_code: "28-10-00"
+technology_domain: "C2"
+lifecycle_phase: "LC04"
+date: "2026-02-14"
+version: "0.1.0"
+
+criteria:
+  - name: "Structural efficiency"
+    weight_pct: 25
+  - name: "Safety"
+    weight_pct: 25
+  - name: "Thermal performance"
+    weight_pct: 20
+  - name: "Certification maturity"
+    weight_pct: 15
+  - name: "Integration in BWB"
+    weight_pct: 15
+
+summary: >
+  Multi-Cell Circular Vacuum-MLI configuration scores highest
+  across weighted criteria.  This combines TS-28-10-TS01 Option A
+  (Circular Cylinder), TS-28-10-TS02 Option C (Multi-Cell
+  Distributed), and TS-28-10-TS03 Option A (Vacuum + MLI).
+
+open_risks:
+  - id: "RISK-01"
+    description: "Cryogenic fatigue in cyclic mission profiles"
+  - id: "RISK-02"
+    description: "Slosh modelling under BWB pitch dynamics"
+  - id: "RISK-03"
+    description: "Vent plume interaction with empennage-less architecture"
+  - id: "RISK-04"
+    description: "Lightning zoning interaction (ATA 24 / ATA 06)"
+  - id: "RISK-05"
+    description: "Maintenance access in 600-series zones"
+
+next_actions:
+  - phase: "LC04 → LC05"
+    actions:
+      - "Finite element comparative analysis (A vs B geometries)"
+      - "Thermal transient simulation (mission profile)"
+      - "Safety FHA update (ATA 28 + 26 crosslink)"
+      - "Mass model update (WBS level 3)"
+      - "Update Zone Register 610–640"
