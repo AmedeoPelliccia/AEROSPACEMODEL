@@ -1,0 +1,50 @@
+# ARTIFACT_CATALOG.yaml — Artifact Type Inventory for ATA 28 (C2)
+# AMPEL360 Q100 — Circular Cryogenic Cells Fuel System
+
+ata_system: "28"
+variant: "C2-CIRCULAR_CRYOGENIC_CELLS"
+last_updated: "2026-02-14"
+
+artifact_types:
+
+  requirements:
+    count: 12
+    location: "28-10-storage/28-10-00-fuel-storage-general/IDB/DEV/LM/LC03_REQUIREMENTS/"
+    naming_pattern: "C2-28-REQ-{NNN}"
+    formats: ["yaml", "csv"]
+    description: "System, safety, and interface requirements for LH₂ storage"
+
+  design_specs:
+    count: 6
+    location: "28-10-storage/28-10-00-fuel-storage-general/IDB/DEV/LM/LC04_DESIGN/"
+    naming_pattern: "C2-28-DES-{NNN}"
+    formats: ["yaml", "md"]
+    description: "Design specifications for cryogenic cells, insulation, and pressure systems"
+
+  safety_analyses:
+    count: 4
+    location: "28-10-storage/28-10-00-fuel-storage-general/KDB/LM/SSOT/SAFETY/"
+    naming_pattern: "C2-28-SAF-{NNN}"
+    formats: ["yaml", "csv"]
+    description: "ARP4761 FHA, FMEA, and fault tree analyses"
+
+  test_procedures:
+    count: 8
+    location: "28-10-storage/28-10-00-fuel-storage-general/IDB/DEV/LM/LC06_VERIFICATION/"
+    naming_pattern: "C2-28-TST-{NNN}"
+    formats: ["yaml", "md"]
+    description: "Verification and validation test procedures"
+
+  data_modules:
+    count: 3
+    location: "28-10-storage/28-10-00-fuel-storage-general/IDB/PUB/LM/LC08_PUBLICATION/"
+    naming_pattern: "DMC-AMPEL-A-28-10-{SS}-{SS}A-{III}A-D"
+    formats: ["xml"]
+    description: "S1000D data modules for AMM/SRM publication"
+
+  publications:
+    count: 1
+    location: "28-10-storage/28-10-00-fuel-storage-general/IDB/PUB/LM/LC08_PUBLICATION/"
+    naming_pattern: "PMC-AMPEL-A-28-10-{SS}"
+    formats: ["xml"]
+    description: "Publication module codes for compiled output"

@@ -1,0 +1,4 @@
+knot_id,title,source,regulatory_ref,uncertainty_type,severity,status
+C2-28-YKNOT-001,Boil-Off Rate Compliance Pathway,SC-28-H2-001 requires defined BOG limits,SC-28-H2-001,regulatory,high,open
+C2-28-YKNOT-002,Cryogenic Material Qualification Under CS-25 SC,Special conditions mandate novel qualification,SC-28-CRYO-002,regulatory,high,open
+C2-28-YKNOT-003,Hydrogen Purity Verification at Tank Interface,ISO 14687-2 compliance method undefined for circular cells,SC-28-H2-001,requirement_derived,medium,open

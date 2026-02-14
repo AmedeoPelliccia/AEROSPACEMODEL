@@ -1,0 +1,48 @@
+# SSOT_INDEX.yaml — Authoritative Source Locations for ATA 28 (C2)
+# AMPEL360 Q100 — Circular Cryogenic Cells Fuel System
+# BREX Profile: AEROSPACEMODEL-PRJ-01
+
+ata_system: "28"
+variant: "C2-CIRCULAR_CRYOGENIC_CELLS"
+description: "Registry of authoritative source locations for ATA 28 LH₂ fuel system"
+
+kdb:
+  lm_ssot_plm:
+    path: "KDB/LM/SSOT/PLM/"
+    description: "Product lifecycle management SSOT for C2 cryogenic cells"
+  lm_ssot_safety:
+    path: "KDB/LM/SSOT/SAFETY/"
+    description: "Safety analysis SSOT (ARP4761 failure modes, FHA/FMEA)"
+  lm_ssot_requirements:
+    path: "KDB/LM/SSOT/REQ/"
+    description: "Requirements baseline for LH₂ storage and distribution"
+
+idb:
+  lc03_requirements:
+    path: "IDB/DEV/LM/LC03_REQUIREMENTS/"
+    description: "LC03 requirements packages (system, safety, interface)"
+  lc04_design:
+    path: "IDB/DEV/LM/LC04_DESIGN/"
+    description: "LC04 design review artifacts (PDR/CDR packages)"
+  lc06_verification:
+    path: "IDB/DEV/LM/LC06_VERIFICATION/"
+    description: "LC06 verification and test procedures"
+  lc08_publication:
+    path: "IDB/PUB/LM/LC08_PUBLICATION/"
+    description: "LC08 S1000D data modules and publications"
+  lc11_operations:
+    path: "IDB/OPS/LM/LC11_OPERATIONS_CUSTOMIZATION/"
+    description: "LC11 operator customization packages"
+
+contracts:
+  ata28_h2:
+    path: "CONTRACTS/KITDM-CTR-LM-CSDB_ATA28_H2.yaml"
+    description: "ASIT contract for ATA 28 H2 cryogenic content generation"
+
+governance:
+  change_control:
+    path: "GOVERNANCE/CHANGE_CONTROL/"
+    description: "ECR/ECO registers and CCB minutes"
+  baselines:
+    path: "GOVERNANCE/BASELINE_REGISTER.csv"
+    description: "Baseline register for C2 fuel system configuration"
