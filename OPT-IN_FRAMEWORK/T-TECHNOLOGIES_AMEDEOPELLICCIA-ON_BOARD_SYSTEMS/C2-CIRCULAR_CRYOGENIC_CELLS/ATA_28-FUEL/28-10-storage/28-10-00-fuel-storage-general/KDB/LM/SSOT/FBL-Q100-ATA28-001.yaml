@@ -257,4 +257,5 @@ evidence_package:
   - "TS-28-10-TS03_insulation.yaml"
   - "evaluation_criteria.yaml"
   - "CS25_compliance_matrix.yaml"
-  - "FBL-Q100-ATA28-001.yaml (this document)"
+  # Includes this baseline document as part of the evidence package
+  - "FBL-Q100-ATA28-001.yaml"

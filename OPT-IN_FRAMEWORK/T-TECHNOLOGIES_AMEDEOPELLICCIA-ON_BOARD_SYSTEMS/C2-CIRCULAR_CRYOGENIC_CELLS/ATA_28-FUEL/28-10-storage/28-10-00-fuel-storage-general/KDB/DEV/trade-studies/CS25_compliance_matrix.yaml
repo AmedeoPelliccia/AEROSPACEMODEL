@@ -350,7 +350,7 @@ special_conditions:
 # =========================================================================
 evidence_package:
   - "ATA28_LH2_FuelStorage_SystemArchitecture.md"
-  - "CS25_ComplianceMatrix_ATA28_LH2.yaml"
+  - "CS25_compliance_matrix.yaml"
   - "FHA_PSSA_SSA_ATA28_LH2.pdf"
   - "Tank_Qualification_TestPlan_Report.pdf"
   - "VentingAndReliefSizing_Report.pdf"

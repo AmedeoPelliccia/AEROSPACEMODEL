@@ -273,12 +273,31 @@ class TestFBLEvidencePackage:
 
 
 class TestBaselineRegister:
-    """BASELINE_REGISTER.csv must list FBL-Q100-ATA28-001."""
+    """BASELINE_REGISTER.csv must list FBL-Q100-ATA28-001 with correct fields."""
 
-    def test_fbl_in_register(self):
+    @pytest.fixture()
+    def fbl_row(self):
+        import csv
+
         path = ATA28 / "GOVERNANCE" / "BASELINE_REGISTER.csv"
-        content = path.read_text()
-        assert "FBL-Q100-ATA28-001" in content
+        with open(path, newline="") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                if row["baseline_id"] == "FBL-Q100-ATA28-001":
+                    return row
+        return None
+
+    def test_fbl_in_register(self, fbl_row):
+        assert fbl_row is not None, "FBL-Q100-ATA28-001 not found in BASELINE_REGISTER.csv"
+
+    def test_fbl_type(self, fbl_row):
+        assert fbl_row["type"] == "FBL"
+
+    def test_fbl_status(self, fbl_row):
+        assert fbl_row["status"] == "established"
+
+    def test_fbl_approver_includes_stk_saf(self, fbl_row):
+        assert "STK_SAF" in fbl_row["approver"]
 
 
 # =========================================================================
