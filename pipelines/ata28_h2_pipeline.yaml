@@ -3,158 +3,451 @@
 # =============================================================================
 # Transformation pipeline for LH₂ cryogenic fuel system content.
 # Generates S1000D-compliant Data Modules for ATA 28 hydrogen systems.
+#
+# Operates under ASIT contract authority.
 # =============================================================================
 
 pipeline:
-  id: "ata28_h2_pipeline"
-  version: "1.0.0"
-  title: "ATA 28 Hydrogen Cryogenic Fuel System Pipeline"
-  description: |
-    Generates S1000D publications for hydrogen cryogenic fuel systems,
-    including Circular Cryogenic Cells (C2) and conventional LH₂ tanks.
+  # ---------------------------------------------------------------------------
+  # PIPELINE METADATA
+  # ---------------------------------------------------------------------------
+  metadata:
+    pipeline_id: "PIPELINE-ATA28-H2-001"
+    name: "ATA 28 Hydrogen Cryogenic Fuel System Pipeline"
+    description: |
+      End-to-end transformation pipeline for generating S1000D publications
+      for hydrogen cryogenic fuel systems, including Circular Cryogenic Cells
+      (C2) and conventional LH₂ tanks.
+    version: "1.0.0"
+    publication_type: "AMM"
+    s1000d_issue: "5.0"
 
-stages:
-  # -------------------------------------------------------------------------
-  # Stage 1: Initialization
-  # -------------------------------------------------------------------------
-  - name: "initialize"
-    description: "Load configuration and validate prerequisites"
-    steps:
-      - action: "load_config"
-        source: "program_config.yaml"
-      - action: "validate_contract"
-        contract_pattern: "KITDM-CTR-LM-CSDB_ATA28*"
-      - action: "verify_baseline"
-        require_approved: true
-      - action: "check_special_conditions"
-        required:
-          - "SC-28-H2-001"
-          - "SC-28-CRYO-002"
+    owner: "STK_CM"
+    maintainer: "Fuel Systems Engineering"
 
-  # -------------------------------------------------------------------------
-  # Stage 2: Source Loading
-  # -------------------------------------------------------------------------
-  - name: "load_sources"
-    description: "Load KDB content for ATA 28 hydrogen systems"
-    sources:
-      - type: "requirements"
-        path: "KDB/requirements/ata28_*"
-        filter:
-          ata_chapter: "28"
-      - type: "tasks"
-        path: "KDB/ground_ops/refueling_*"
-        filter:
-          ata_chapter: "28"
-      - type: "fault_data"
-        path: "KDB/faults/ata28_*"
-        optional: true
+    created: "2026-02-14"
+    last_modified: "2026-02-14"
 
-  # -------------------------------------------------------------------------
-  # Stage 3: Transformation
-  # -------------------------------------------------------------------------
-  - name: "transform"
-    description: "Generate S1000D Data Modules"
-    generators:
-      - type: "descriptive_dm"
-        template: "ASIGT/s1000d_templates/descriptive.xml"
-        mapping: "ASIGT/mapping/requirement_to_dm.yaml"
-        options:
-          include_warnings: true
-          hydrogen_warnings: true
-          cryogenic_warnings: true
+    tags:
+      - "ata28"
+      - "hydrogen"
+      - "cryogenic"
+      - "lh2"
+      - "c2"
+      - "s1000d"
 
-      - type: "procedural_dm"
-        template: "ASIGT/s1000d_templates/procedural.xml"
-        mapping: "ASIGT/mapping/task_to_dm.yaml"
-        options:
-          include_safety_steps: true
+  # ---------------------------------------------------------------------------
+  # CONTRACT BINDING
+  # ---------------------------------------------------------------------------
+  contract:
+    template: "ASIT/CONTRACTS/templates/KITDM-CTR-LM-CSDB.template.yaml"
+    required_fields:
+      - "contract_id"
+      - "baseline_ref"
+      - "scope.ata_chapters"
+      - "scope.effectivity"
+      - "authority.approved_by"
+    validation:
+      check_baseline_exists: true
+      check_authority_valid: true
+      check_scope_coverage: true
+    special_conditions:
+      - "SC-28-H2-001"
+      - "SC-28-CRYO-002"
 
-      - type: "fault_isolation_dm"
-        template: "ASIGT/s1000d_templates/fault_isolation.xml"
-        mapping: "ASIGT/mapping/fault_to_dm.yaml"
-        optional: true
+  # ---------------------------------------------------------------------------
+  # PIPELINE STAGES
+  # ---------------------------------------------------------------------------
+  stages:
+    # -------------------------------------------------------------------------
+    # STAGE 1: INITIALIZATION
+    # -------------------------------------------------------------------------
+    - stage: "initialization"
+      name: "Pipeline Initialization"
+      description: "Initialize pipeline environment and validate prerequisites"
+      order: 1
 
-    dmc_format:
-      model_ident_code: "${MODEL_IDENT_CODE}"
-      system_diff_code: "A"
-      system_code: "28"
+      steps:
+        - step: "load_config"
+          name: "Load Configuration"
+          action: "config.load"
+          inputs:
+            config_path: "program_config.yaml"
+          outputs:
+            - "config"
+          on_failure: "abort"
 
-    batch:
-      parallel: 5
-      on_failure: "abort"
+        - step: "validate_contract"
+          name: "Validate ASIT Contract"
+          action: "contract.validate"
+          inputs:
+            contract_pattern: "KITDM-CTR-LM-CSDB_ATA28*"
+          outputs:
+            - "contract"
+            - "baseline_ref"
+            - "scope"
+          on_failure: "abort"
 
-  # -------------------------------------------------------------------------
-  # Stage 4: Validation
-  # -------------------------------------------------------------------------
-  - name: "validate"
-    description: "Validate generated content"
-    validators:
-      - type: "brex"
-        rules:
-          - "S1000D_5.0_DEFAULT"
-          - "${PROJECT_BREX}"
-        strict: true
+        - step: "check_baseline"
+          name: "Verify Baseline Availability"
+          action: "baseline.verify"
+          inputs:
+            baseline_ref: "${baseline_ref}"
+            require_approved: true
+          outputs:
+            - "baseline"
+            - "baseline_status"
+          on_failure: "abort"
 
-      - type: "schema"
-        schema_path: "schemas/s1000d/5.0/"
+        - step: "check_special_conditions"
+          name: "Verify Special Conditions"
+          action: "conditions.verify"
+          inputs:
+            required:
+              - "SC-28-H2-001"
+              - "SC-28-CRYO-002"
+          outputs:
+            - "conditions_status"
+          on_failure: "abort"
 
-      - type: "hydrogen_safety"
-        checks:
-          - "mandatory_warnings_present"
-          - "cryogenic_hazard_documented"
-          - "leak_detection_referenced"
-          - "emergency_procedures_linked"
+    # -------------------------------------------------------------------------
+    # STAGE 2: SOURCE LOADING
+    # -------------------------------------------------------------------------
+    - stage: "source_loading"
+      name: "Source Loading"
+      description: "Load KDB content for ATA 28 hydrogen systems"
+      order: 2
+      depends_on: ["initialization"]
 
-      - type: "cross_reference"
-        verify_links: true
+      steps:
+        - step: "load_requirements"
+          name: "Load Requirements"
+          action: "source.load"
+          inputs:
+            source_type: "requirement"
+            baseline: "${baseline}"
+            scope: "${scope}"
+            source_paths:
+              - "KDB/requirements/ata28_*"
+          outputs:
+            - "requirements"
+          filters:
+            - field: "ata_chapter"
+              values: ["28"]
+          on_failure: "warn"
 
-    on_failure: "abort"
+        - step: "load_tasks"
+          name: "Load Maintenance Tasks"
+          action: "source.load"
+          inputs:
+            source_type: "task"
+            baseline: "${baseline}"
+            scope: "${scope}"
+            source_paths:
+              - "KDB/ground_ops/refueling_*"
+          outputs:
+            - "tasks"
+          filters:
+            - field: "ata_chapter"
+              values: ["28"]
+          on_failure: "warn"
 
-  # -------------------------------------------------------------------------
-  # Stage 5: Traceability
-  # -------------------------------------------------------------------------
-  - name: "trace"
-    description: "Build traceability matrix"
-    options:
-      generate_matrix: true
-      hash_algorithm: "SHA-256"
-      require_complete: true
-      format: "yaml"
+        - step: "load_fault_data"
+          name: "Load Fault Isolation Data"
+          action: "source.load"
+          inputs:
+            source_type: "fault_isolation"
+            baseline: "${baseline}"
+            scope: "${scope}"
+            source_paths:
+              - "KDB/faults/ata28_*"
+          outputs:
+            - "fault_data"
+          on_failure: "warn"
 
-  # -------------------------------------------------------------------------
-  # Stage 6: Publication Assembly
-  # -------------------------------------------------------------------------
-  - name: "assemble"
-    description: "Assemble CSDB publication package"
-    outputs:
-      - type: "pm"
-        title: "ATA 28 Hydrogen Fuel System"
-      - type: "dml"
-        title: "Data Module List — ATA 28"
-      - type: "icn"
-        source: "graphics/"
-        optional: true
+    # -------------------------------------------------------------------------
+    # STAGE 3: TRANSFORMATION
+    # -------------------------------------------------------------------------
+    - stage: "transformation"
+      name: "Content Transformation"
+      description: "Transform KDB sources to S1000D data modules"
+      order: 3
+      depends_on: ["source_loading"]
 
-  # -------------------------------------------------------------------------
-  # Stage 7: Rendering (optional)
-  # -------------------------------------------------------------------------
-  - name: "render"
-    description: "Generate human-readable outputs"
-    optional: true
-    formats:
-      - type: "html"
-        stylesheet: "ASIGT/renderers/s1000d_html.xslt"
-      - type: "pdf"
-        stylesheet: "ASIGT/renderers/s1000d_pdf.xslt"
+      steps:
+        - step: "generate_description_dms"
+          name: "Generate Description Data Modules"
+          action: "generator.dm_descriptive"
+          inputs:
+            sources: "${requirements}"
+            mapping: "ASIGT/mapping/requirement_to_dm.yaml"
+            template: "ASIGT/s1000d_templates/dm_descriptive.xml"
+            config:
+              model_ident_code: "${config.model_ident_code}"
+              system_diff_code: "A"
+              system_code: "28"
+              include_warnings: true
+              hydrogen_warnings: true
+              cryogenic_warnings: true
+          outputs:
+            - "dm_descriptive"
+          parallel: true
+          batch_size: 5
+          on_failure: "abort"
 
-  # -------------------------------------------------------------------------
-  # Stage 8: Finalization
-  # -------------------------------------------------------------------------
-  - name: "finalize"
-    description: "Generate reports and archive"
-    steps:
-      - action: "generate_report"
-        format: "yaml"
-      - action: "archive"
-        immutable: true
-        retention: "7 years"
+        - step: "generate_procedural_dms"
+          name: "Generate Procedural Data Modules"
+          action: "generator.dm_procedural"
+          inputs:
+            sources: "${tasks}"
+            mapping: "ASIGT/mapping/task_to_dm.yaml"
+            template: "ASIGT/s1000d_templates/dm_procedural.xml"
+            config:
+              model_ident_code: "${config.model_ident_code}"
+              include_safety_steps: true
+          outputs:
+            - "dm_procedural"
+          parallel: true
+          batch_size: 5
+          on_failure: "continue"
+
+        - step: "generate_fault_isolation_dms"
+          name: "Generate Fault Isolation Data Modules"
+          action: "generator.dm_fault_isolation"
+          inputs:
+            sources: "${fault_data}"
+            mapping: "ASIGT/mapping/fault_to_dm.yaml"
+            template: "ASIGT/s1000d_templates/dm_fault_isolation.xml"
+            config:
+              model_ident_code: "${config.model_ident_code}"
+          outputs:
+            - "dm_fault_isolation"
+          parallel: true
+          batch_size: 5
+          on_failure: "continue"
+
+    # -------------------------------------------------------------------------
+    # STAGE 4: VALIDATION
+    # -------------------------------------------------------------------------
+    - stage: "validation"
+      name: "Content Validation"
+      description: "Validate generated content against BREX, schema, and H₂ safety"
+      order: 4
+      depends_on: ["transformation"]
+
+      steps:
+        - step: "brex_validation"
+          name: "BREX Rule Validation"
+          action: "validator.brex"
+          inputs:
+            data_modules: "${dm_descriptive}"
+            brex_file: "ASIGT/brex/S1000D_5.0_DEFAULT.yaml"
+            project_brex: "ASIGT/brex/project_brex.yaml"
+          outputs:
+            - "brex_results"
+          config:
+            fail_on_error: true
+            strict: true
+          on_failure: "abort"
+
+        - step: "schema_validation"
+          name: "XML Schema Validation"
+          action: "validator.schema"
+          inputs:
+            data_modules: "${dm_descriptive}"
+            schema_path: "schemas/s1000d/5.0/"
+          outputs:
+            - "schema_results"
+          on_failure: "abort"
+
+        - step: "hydrogen_safety_validation"
+          name: "Hydrogen Safety Content Validation"
+          action: "validator.hydrogen_safety"
+          inputs:
+            data_modules: "${dm_descriptive}"
+            checks:
+              - "mandatory_warnings_present"
+              - "cryogenic_hazard_documented"
+              - "leak_detection_referenced"
+              - "emergency_procedures_linked"
+          outputs:
+            - "h2_safety_results"
+          on_failure: "abort"
+
+        - step: "reference_validation"
+          name: "Cross-Reference Validation"
+          action: "validator.references"
+          inputs:
+            data_modules: "${dm_descriptive}"
+          outputs:
+            - "reference_results"
+          on_failure: "warn"
+
+    # -------------------------------------------------------------------------
+    # STAGE 5: TRACEABILITY
+    # -------------------------------------------------------------------------
+    - stage: "traceability"
+      name: "Traceability Generation"
+      description: "Build source-to-output traceability matrix"
+      order: 5
+      depends_on: ["validation"]
+
+      steps:
+        - step: "build_trace_matrix"
+          name: "Build Trace Matrix"
+          action: "trace.build_matrix"
+          inputs:
+            sources:
+              requirements: "${requirements}"
+              tasks: "${tasks}"
+              fault_data: "${fault_data}"
+            outputs:
+              dm_descriptive: "${dm_descriptive}"
+              dm_procedural: "${dm_procedural}"
+              dm_fault_isolation: "${dm_fault_isolation}"
+            hash_algorithm: "SHA-256"
+          outputs:
+            - "trace_matrix"
+          on_failure: "abort"
+
+        - step: "validate_traceability"
+          name: "Validate Traceability Completeness"
+          action: "validator.trace"
+          inputs:
+            trace_matrix: "${trace_matrix}"
+            requirements:
+              input_coverage: 1.0
+              output_coverage: 1.0
+          outputs:
+            - "trace_validation_results"
+          on_failure: "warn"
+
+    # -------------------------------------------------------------------------
+    # STAGE 6: PUBLICATION ASSEMBLY
+    # -------------------------------------------------------------------------
+    - stage: "publication_assembly"
+      name: "Publication Assembly"
+      description: "Assemble data modules into CSDB publication package"
+      order: 6
+      depends_on: ["traceability"]
+
+      steps:
+        - step: "generate_pm"
+          name: "Generate Publication Module"
+          action: "generator.pm"
+          inputs:
+            data_modules: "${dm_descriptive}"
+            config:
+              publication_type: "AMM"
+              pm_title: "ATA 28 Hydrogen Fuel System"
+          outputs:
+            - "pm_ata28"
+          on_failure: "abort"
+
+        - step: "generate_dml"
+          name: "Generate Data Module List"
+          action: "generator.dml"
+          inputs:
+            data_modules: "${dm_descriptive}"
+            publication_module: "${pm_ata28}"
+            config:
+              dml_title: "Data Module List — ATA 28"
+          outputs:
+            - "dml"
+          on_failure: "abort"
+
+        - step: "assemble_csdb"
+          name: "Assemble CSDB Package"
+          action: "package.csdb"
+          inputs:
+            data_modules: "${dm_descriptive}"
+            publication_module: "${pm_ata28}"
+            dml: "${dml}"
+            output_path: "IDB/CSDB/AMM"
+          outputs:
+            - "csdb_package"
+          on_failure: "abort"
+
+    # -------------------------------------------------------------------------
+    # STAGE 7: RENDERING (OPTIONAL)
+    # -------------------------------------------------------------------------
+    - stage: "rendering"
+      name: "Output Rendering"
+      description: "Render publication to delivery formats"
+      order: 7
+      depends_on: ["publication_assembly"]
+      condition: "${config.render_outputs}"
+
+      steps:
+        - step: "render_html"
+          name: "Render HTML Output"
+          action: "renderer.html"
+          inputs:
+            publication_module: "${pm_ata28}"
+            config:
+              stylesheet: "ASIGT/renderers/s1000d_html.xslt"
+          outputs:
+            - "html_output"
+          on_failure: "warn"
+
+        - step: "render_pdf"
+          name: "Render PDF Output"
+          action: "renderer.pdf"
+          inputs:
+            publication_module: "${pm_ata28}"
+            config:
+              stylesheet: "ASIGT/renderers/s1000d_pdf.xslt"
+          outputs:
+            - "pdf_output"
+          on_failure: "warn"
+
+    # -------------------------------------------------------------------------
+    # STAGE 8: FINALIZATION
+    # -------------------------------------------------------------------------
+    - stage: "finalization"
+      name: "Pipeline Finalization"
+      description: "Finalize run artifacts and generate reports"
+      order: 8
+      depends_on: ["rendering"]
+      always_run: true
+
+      steps:
+        - step: "generate_report"
+          name: "Generate Validation Report"
+          action: "report.validation"
+          inputs:
+            brex_results: "${brex_results}"
+            schema_results: "${schema_results}"
+            h2_safety_results: "${h2_safety_results}"
+            output_path: "${run_directory}/VALIDATION_REPORT.json"
+          outputs:
+            - "validation_report"
+          on_failure: "warn"
+
+        - step: "archive_run"
+          name: "Archive Run Artifacts"
+          action: "run.archive"
+          inputs:
+            run_directory: "${run_directory}"
+            immutable: true
+            retention_years: 7
+          outputs:
+            - "archive_status"
+          on_failure: "warn"
+
+  # ---------------------------------------------------------------------------
+  # PIPELINE CONFIGURATION
+  # ---------------------------------------------------------------------------
+  config:
+    execution:
+      parallel_enabled: true
+      max_parallel_steps: 5
+      timeout_minutes: 60
+
+    logging:
+      level: "INFO"
+      format: "[{timestamp}] {level} {step}: {message}"
+
+    cleanup:
+      remove_temp_files: true
+      retention_days: 90

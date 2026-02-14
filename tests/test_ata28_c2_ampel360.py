@@ -277,39 +277,39 @@ class TestH2Pipeline:
         return _load_yaml(REPO_ROOT / "pipelines" / "ata28_h2_pipeline.yaml")
 
     def test_pipeline_id(self, pipeline):
-        assert pipeline["pipeline"]["id"] == "ata28_h2_pipeline"
+        assert pipeline["pipeline"]["metadata"]["pipeline_id"] == "PIPELINE-ATA28-H2-001"
 
     def test_has_stages(self, pipeline):
-        assert len(pipeline["stages"]) == 8
+        assert len(pipeline["pipeline"]["stages"]) == 8
 
     def test_stage_names(self, pipeline):
-        names = [s["name"] for s in pipeline["stages"]]
-        assert "initialize" in names
-        assert "load_sources" in names
-        assert "transform" in names
-        assert "validate" in names
-        assert "trace" in names
-        assert "assemble" in names
-        assert "finalize" in names
+        names = [s["stage"] for s in pipeline["pipeline"]["stages"]]
+        assert "initialization" in names
+        assert "source_loading" in names
+        assert "transformation" in names
+        assert "validation" in names
+        assert "traceability" in names
+        assert "publication_assembly" in names
+        assert "finalization" in names
 
     def test_hydrogen_safety_validation(self, pipeline):
         """Pipeline must include hydrogen safety validation."""
         validate_stage = next(
-            s for s in pipeline["stages"] if s["name"] == "validate"
+            s for s in pipeline["pipeline"]["stages"] if s["stage"] == "validation"
         )
-        validator_types = [v["type"] for v in validate_stage["validators"]]
-        assert "hydrogen_safety" in validator_types
+        step_names = [step["step"] for step in validate_stage["steps"]]
+        assert "hydrogen_safety_validation" in step_names
 
     def test_special_conditions_check(self, pipeline):
         """Pipeline initialization must check special conditions."""
         init_stage = next(
-            s for s in pipeline["stages"] if s["name"] == "initialize"
+            s for s in pipeline["pipeline"]["stages"] if s["stage"] == "initialization"
         )
         sc_step = next(
-            step for step in init_stage["steps"] if step["action"] == "check_special_conditions"
+            step for step in init_stage["steps"] if step["step"] == "check_special_conditions"
         )
-        assert "SC-28-H2-001" in sc_step["required"]
-        assert "SC-28-CRYO-002" in sc_step["required"]
+        assert "SC-28-H2-001" in sc_step["inputs"]["required"]
+        assert "SC-28-CRYO-002" in sc_step["inputs"]["required"]
 
 
 # =============================================================================

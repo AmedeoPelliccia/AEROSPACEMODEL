@@ -6,7 +6,7 @@
 subject:
   ata_section: "28-10-00"
   title: "Fuel Storage General"
-  ata_chapter: 28
+  ata_chapter: "28"
   technology_domain: "C2"
   aircraft: "AMPEL360-Q100"
 
