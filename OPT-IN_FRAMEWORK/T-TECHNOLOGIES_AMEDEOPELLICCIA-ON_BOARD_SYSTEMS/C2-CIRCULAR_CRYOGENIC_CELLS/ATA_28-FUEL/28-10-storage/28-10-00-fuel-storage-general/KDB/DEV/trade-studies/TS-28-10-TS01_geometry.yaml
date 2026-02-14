@@ -1,0 +1,82 @@
+# Trade Study TS-28-10-TS01
+# Geometry: Circular vs Non-Circular Cryogenic Tanks
+# ATA 28-10-00 Fuel Storage General
+# AMPEL360 Q100 — C2 Circular Cryogenic Cells
+
+trade_study_id: "TS-28-10-TS01"
+title: "Geometry — Circular vs Non-Circular Cryogenic Tanks"
+ata_code: "28-10-00"
+technology_domain: "C2"
+aircraft_program: "AMPEL360 Q100"
+lifecycle_phase: "LC04"
+status: "preliminary"
+author: "STK_ENG"
+date: "2026-02-14"
+version: "0.1.0"
+
+objective: >
+  Determine optimal tank cross-section for structural efficiency,
+  cryogenic thermal stability, integration within BWB centerbody,
+  and certification feasibility.
+
+options:
+  - id: A
+    name: "Circular Cylinder"
+    description: "Perfect circular cylindrical cross-section"
+    structural_efficiency: "High"
+    thermal_behaviour: "Optimal"
+    integration: "Moderate"
+    certification_risk: "Low"
+    analysis:
+      stress_model: "Uniform hoop stress — σ_hoop = P·r / t"
+      stress_concentration: "Minimal"
+      insulation_layering: "Simplified"
+      heritage: "NASA, Airbus ZEROe concepts"
+      mass_efficiency: "HIGH"
+
+  - id: B
+    name: "Elliptical"
+    description: "Elliptical cross-section for BWB packaging"
+    structural_efficiency: "Medium"
+    thermal_behaviour: "Moderate"
+    integration: "High"
+    certification_risk: "Medium"
+    analysis:
+      stress_distribution: "Non-uniform"
+      reinforcement: "Required at major axis"
+      thermal_gradient_risk: "Curvature transitions"
+      mass_penalty: "+4–8% estimated"
+
+  - id: C
+    name: "Conformal / Multi-lobed"
+    description: "Multi-lobed conformal geometry for maximum BWB fit"
+    structural_efficiency: "Low–Medium"
+    thermal_behaviour: "Complex"
+    integration: "Very High"
+    certification_risk: "High"
+    analysis:
+      load_paths: "Complex"
+      weld_length: "Increased"
+      sloshing_complexity: "High"
+      vent_routing: "Complex"
+      certification_uncertainty: "High"
+
+preliminary_selection:
+  selected_option: "A"
+  baseline_name: "Circular Cryogenic Cell (CCC)"
+  rationale:
+    - "Lowest structural risk"
+    - "Predictable cryogenic behaviour"
+    - "Deterministic modelling compatibility (5D addressable tank states)"
+    - "Compatible with modular distributed storage (zones 610–640)"
+
+feeds:
+  - lifecycle: "LC03"
+    artifact: "Safety FHA update"
+  - lifecycle: "LC05"
+    artifact: "Finite element comparative analysis (A vs B geometries)"
+
+traceability:
+  derives_from: "WP-28-03"
+  satisfies: []
+  verifies: []

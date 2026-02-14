@@ -1,0 +1,65 @@
+# Trade Study TS-28-10-TS03
+# Insulation Concept
+# ATA 28-10-00 Fuel Storage General
+# AMPEL360 Q100 — C2 Circular Cryogenic Cells
+
+trade_study_id: "TS-28-10-TS03"
+title: "Insulation Concept"
+ata_code: "28-10-00"
+technology_domain: "C2"
+aircraft_program: "AMPEL360 Q100"
+lifecycle_phase: "LC04"
+status: "preliminary"
+author: "STK_ENG"
+date: "2026-02-14"
+version: "0.1.0"
+
+objective: >
+  Evaluate insulation concepts for circular cryogenic cells
+  comparing vacuum multi-layer insulation, foam, and hybrid
+  active cooling approaches for TRL, mass, maintainability,
+  and risk.
+
+options:
+  - id: A
+    name: "Vacuum + MLI"
+    description: "Vacuum-jacketed multi-layer insulation"
+    type: "Passive"
+    trl: "High"
+    mass: "Medium"
+    maintainability: "Medium"
+    risk: "Low"
+
+  - id: B
+    name: "Foam"
+    description: "Closed-cell cryogenic foam insulation"
+    type: "Passive"
+    trl: "Medium"
+    mass: "High"
+    maintainability: "High"
+    risk: "Medium"
+
+  - id: C
+    name: "Hybrid Active Cooling"
+    description: "Cryocooler-assisted active thermal management"
+    type: "Active"
+    trl: "Low"
+    mass: "High"
+    maintainability: "Low"
+    risk: "High"
+
+preliminary_selection:
+  selected_option: "A"
+  baseline_name: "Vacuum + MLI"
+  rationale:
+    - "Heritage from existing cryogenic systems"
+    - "Predictable boil-off modelling"
+
+feeds:
+  - lifecycle: "LC05"
+    artifact: "Thermal transient simulation (mission profile)"
+
+traceability:
+  derives_from: "WP-28-05"
+  satisfies: []
+  verifies: []

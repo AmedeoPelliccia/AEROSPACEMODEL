@@ -1,0 +1,73 @@
+# Trade Study TS-28-10-TS02
+# Distributed Small Cells vs Single Large Tank
+# ATA 28-10-00 Fuel Storage General
+# AMPEL360 Q100 — C2 Circular Cryogenic Cells
+
+trade_study_id: "TS-28-10-TS02"
+title: "Distributed Small Cells vs Single Large Tank"
+ata_code: "28-10-00"
+technology_domain: "C2"
+aircraft_program: "AMPEL360 Q100"
+lifecycle_phase: "LC04"
+status: "preliminary"
+author: "STK_ENG"
+date: "2026-02-14"
+version: "0.1.0"
+
+objective: >
+  Evaluate storage architectures for LH₂ fuel system comparing
+  single-tank, dual-symmetric, and multi-cell distributed
+  configurations for CG stability, redundancy, structural impact,
+  and safety.
+
+options:
+  - id: A
+    name: "Single Large Tank"
+    description: "Single centrally located cryogenic tank"
+    cg_stability: "Stable (central)"
+    redundancy: "Low"
+    structural_impact: "Heavy reinforcement"
+    safety: "Medium"
+
+  - id: B
+    name: "Dual Symmetric Tanks"
+    description: "Two symmetrically placed cryogenic tanks"
+    cg_stability: "Very Good"
+    redundancy: "Medium"
+    structural_impact: "Balanced"
+    safety: "Good"
+
+  - id: C
+    name: "Multi-Cell Distributed"
+    description: "Multiple smaller circular cryogenic cells distributed across BWB"
+    cg_stability: "Excellent"
+    redundancy: "High"
+    structural_impact: "Load distributed"
+    safety: "Very High"
+    analysis:
+      zonal_isolation: "Fire / leak containment"
+      selective_venting: true
+      survivability: "Improved"
+      bwb_compatibility: "Compatible with BWB volume distribution"
+      boil_off_management: "Simplified hydrogen boil-off management"
+      mass_trade_off: "+2–5% plumbing complexity"
+      safety_gain: "Significant"
+
+preliminary_selection:
+  selected_option: "C"
+  baseline_name: "Distributed Circular Cryogenic Cells"
+  rationale:
+    - "Aligned with ZNNN 600–699 hazard zoning"
+    - "Aligned with modular propulsion architecture (500–599)"
+    - "Deterministic isolation logic (5D system state s-dimension)"
+
+feeds:
+  - lifecycle: "LC03"
+    artifact: "Safety FHA update (ATA 28 + 26 crosslink)"
+  - lifecycle: "LC05"
+    artifact: "Mass model update (WBS level 3)"
+
+traceability:
+  derives_from: "WP-28-03"
+  satisfies: []
+  verifies: []
