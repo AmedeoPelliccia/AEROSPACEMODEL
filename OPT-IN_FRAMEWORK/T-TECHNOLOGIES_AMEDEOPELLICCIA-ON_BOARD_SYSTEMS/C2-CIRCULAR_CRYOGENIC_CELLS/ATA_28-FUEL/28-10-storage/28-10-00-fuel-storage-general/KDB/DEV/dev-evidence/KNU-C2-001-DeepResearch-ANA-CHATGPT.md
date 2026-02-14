@@ -24,18 +24,18 @@ Qualification test points are recommended at **N = 40, 55–60, and 80 layers**,
 CCC baseline values are unspecified; all results are therefore stated as **functions of parameters** and illustrated with **representative cases**.
 
 **Geometry / scaling**
-- Let the CCC external surface area be \(A_{\mathrm{CCC}}\) (m²). Total heat leak is
-\[
+- Let the CCC external surface area be $A_{\mathrm{CCC}}$ (m²). Total heat leak is
+$$
 \dot Q_{\mathrm{CCC}}(N)=A_{\mathrm{CCC}}\;q_{\mathrm{MLI}}(N) + \dot Q_{\mathrm{seams}} + \dot Q_{\mathrm{penetrations}}.
-\]
-The MLI blanket term \(q_{\mathrm{MLI}}\) is in W/m²; seam and penetration terms are handled as explicit adders (W). Seam adders are motivated directly by measured seam/penetration degradation tests.  [4]
+$$
+The MLI blanket term $q_{\mathrm{MLI}}$ is in W/m²; seam and penetration terms are handled as explicit adders (W). Seam adders are motivated directly by measured seam/penetration degradation tests.  [4]
 
 **Mission profile / representative phases**
 Because CCC mission phases are not finalised, the report treats boundary conditions as a set of representative envelopes:
-- Ground hot-day: warm boundary \(T_h \sim 320\) K (illustrative), likely worst case for boil‑off rate.
-- Cruise/cold ambient: \(T_h \sim 250\) K (illustrative) with typically lower radiative driving potential.
-- Cold soak / cold start: \(T_h \sim 235\) K (illustrative).
-- All cases assume LH2 cold boundary \(T_c \sim 20\) K as the dominant design point for cryogenic storage.  [3, 7]
+- Ground hot-day: warm boundary $T_h \sim 320$ K (illustrative), likely worst case for boil‑off rate.
+- Cruise/cold ambient: $T_h \sim 250$ K (illustrative) with typically lower radiative driving potential.
+- Cold soak / cold start: $T_h \sim 235$ K (illustrative).
+- All cases assume LH2 cold boundary $T_c \sim 20$ K as the dominant design point for cryogenic storage.  [3, 7]
 
 **External thermal environments**
 Warm boundary temperature is treated as a controllable/modelled parameter and can represent:
@@ -45,19 +45,19 @@ Warm boundary temperature is treated as a controllable/modelled parameter and ca
 Cryogenic MLI performance is sensitive to warm boundary temperature and the relative domination of radiation vs conduction.  [3]
 
 **Vacuum level and residual gas model**
-Vacuum pressure \(P\) is treated over the requested range:
-\[
+Vacuum pressure $P$ is treated over the requested range:
+$$
 P \in [10^{-6},\;10^{-3}] \;\text{torr}.
-\]
-Residual gas conduction in MLI is commonly treated in the free‑molecule regime at sufficiently low pressures via a linear pressure term (heat flux proportional to \(P\)), consistent with standard cryogenic MLI formulations.  [1, 4, 7]
+$$
+Residual gas conduction in MLI is commonly treated in the free‑molecule regime at sufficiently low pressures via a linear pressure term (heat flux proportional to $P$), consistent with standard cryogenic MLI formulations.  [1, 4, 7]
 
 **Layer count and packing**
-- \(N\): number of reflective shields (layers).
-- \(N^\*\): layer density, typically in layers/cm.
-- \(t_{\mathrm{MLI}}\): installed MLI thickness (cm or mm).  
+- $N$: number of reflective shields (layers).
+- $N^\*$: layer density, typically in layers/cm.
+- $t_{\mathrm{MLI}}$: installed MLI thickness (cm or mm).  
 A fundamental design branch exists:
-- *Thickness-unconstrained*: \(N^\*\) is held roughly constant, \(t_{\mathrm{MLI}}\propto N\).
-- *Thickness-constrained*: \(t_{\mathrm{MLI}}\) is bounded by CCC envelope, so \(N^\* = N/t_{\mathrm{MLI}}\) increases with \(N\), increasing contact conduction risk. NASA optimisation work explicitly demonstrates the existence of an optimal layer density under such constraints.  [2]
+- *Thickness-unconstrained*: $N^\*$ is held roughly constant, $t_{\mathrm{MLI}}\propto N$.
+- *Thickness-constrained*: $t_{\mathrm{MLI}}$ is bounded by CCC envelope, so $N^\* = N/t_{\mathrm{MLI}}$ increases with $N$, increasing contact conduction risk. NASA optimisation work explicitly demonstrates the existence of an optimal layer density under such constraints.  [2]
 
 **Traceability placeholders**
 - ATA28 (Fuel): CCC integration & thermal management allocated at system level (placeholders: `ATA28/CCC/ARCH/*`).
@@ -76,31 +76,31 @@ Cryogenic MLI heat transfer is modelled as the superposition of:
 - Plus explicit adders for seams and penetrations (implementation losses).  [1, 4, 7]
 
 A layer-by-layer physics representation expresses per-gap heat flux as:
-\[
+$$
 q_{\mathrm{total}}=q_{\mathrm{rad}}+q_{\mathrm{gas}}+q_{\mathrm{solid}},
-\]
+$$
 with the familiar two-surface radiation form
-\[
+$$
 q_{\mathrm{rad}}=\sigma\frac{(T_H^4-T_C^4)}{\left(\frac{1}{\varepsilon_H}+\frac{1}{\varepsilon_C}-1\right)},
-\]
+$$
 free-molecule gas conduction in the form
-\[
+$$
 q_{\mathrm{gas}}=C_1\,P\,\alpha\, (T_H-T_C),
-\]
+$$
 and solid conduction modelled as
-\[
+$$
 q_{\mathrm{solid}}=K_s\,(T_H-T_C),\quad K_s=C_2\,f\,\frac{k}{\Delta x}.
-\]
-Parameters include accommodation coefficient \(\alpha\), empirical constants \(C_2\), separator density ratio \(f\), and separator conductivity \(k(T)\) (Dacron conductivity curve fit provided).  [1, 7]
+$$
+Parameters include accommodation coefficient $\alpha$, empirical constants $C_2$, separator density ratio $f$, and separator conductivity $k(T)$ (Dacron conductivity curve fit provided).  [1, 7]
 
 For blanket-level design sweeps, this report uses the widely applied **modified Lockheed-form correlation** (a semi-empirical model) adapted for cryogenic MLI and specifically documented for Dacron spacer conduction and vacuum-dependent gas conduction:
-\[
+$$
 q_{\mathrm{MLI}}=
 2.4{\times}10^{-4}\;k(T)\;(N^\*)^{2.63}\frac{(T_H-T_C)}{N_s}
 +4.944{\times}10^{-10}\;E\;\frac{(T_H^{4.67}-T_C^{4.67})}{N_s}
 +1.46{\times}10^{4}\;P\;\frac{(T_H^{0.52}-T_C^{0.52})}{N_s},
-\]
-where \(q_{\mathrm{MLI}}\) is in W/m², \(T\) is in K, \(P\) is in torr, \(N^\*\) is in layers/cm, and \(N_s\) is number of shields (layers). The correlation explicitly encodes the **contact conduction penalty** via the \((N^\*)^{2.63}\) term and gas conduction via the pressure term.  [7]
+$$
+where $q_{\mathrm{MLI}}$ is in W/m², $T$ is in K, $P$ is in torr, $N^\*$ is in layers/cm, and $N_s$ is number of shields (layers). The correlation explicitly encodes the **contact conduction penalty** via the $(N^\*)^{2.63}$ term and gas conduction via the pressure term.  [7]
 
 This correlation-based approach is widely used in system-level cryogenic MLI modelling and sits alongside Lockheed/McDonnell Douglas style empirical equations described in NASA materials.  [7]
 
@@ -111,20 +111,20 @@ Representative stack options and key properties are taken from NASA MLI material
 - Spacers: Dacron netting or Nomex netting, with typical thickness ~0.16 mm and areal weight ~6.3 g/m².  [8]
 
 The blanket mass is modelled as:
-\[
+$$
 m_{\mathrm{MLI}}(N) \approx A_{\mathrm{CCC}}\;N\;\mu_{\mathrm{layer}} + A_{\mathrm{CCC}}\;\mu_{\mathrm{covers}},
-\]
-where \(\mu_{\mathrm{layer}}\) is effective areal mass per layer (film + spacer) and \(\mu_{\mathrm{covers}}\) accounts for inner/outer cover sheets (optional). Areal weights are taken from NASA guidance; Kapton-based solutions are typically heavier than Mylar-based for equivalent thickness class.  [5, 8]
+$$
+where $\mu_{\mathrm{layer}}$ is effective areal mass per layer (film + spacer) and $\mu_{\mathrm{covers}}$ accounts for inner/outer cover sheets (optional). Areal weights are taken from NASA guidance; Kapton-based solutions are typically heavier than Mylar-based for equivalent thickness class.  [5, 8]
 
 ### Implementation losses: seams and penetrations
 
 To reflect installation realism, we add:
 
 - **Seam heat input**: a NASA seam study reports a seam penalty of **0.169 W per metre** for an offset butt joint seam configuration, beyond a baseline blanket heat flux of **0.388 W/m²** (in that test setup). This motivates a seam-length-based add-on:
-  \[
+  $$
   \dot Q_{\mathrm{seams}} \approx q'_{\mathrm{seam}}\,L_{\mathrm{seam}},\quad q'_{\mathrm{seam}}\sim 0.169\text{ W/m},
-  \]
-  with \(L_{\mathrm{seam}}\) parameterised as seam length per CCC.  [4]
+  $$
+  with $L_{\mathrm{seam}}$ parameterised as seam length per CCC.  [4]
 
 - **Penetration heat input**: a penetration test in the same seam/penetration study reports **~0.543 W** additional heat input for a fiberglass support strut configuration and a large affected zone; separate penetration calorimetry reports **ΔQ ~0.50 W (aluminium strut) and ~0.31 W (composite strut)** for “no integration” test cases, reinforcing that penetrations can contribute order‑unity watts if not buffered and temperature-matched.  [4]
 
@@ -134,21 +134,21 @@ These adders are critical to CCC optimisation because CCC segments typically hav
 
 NASA guidance and test experience repeatedly highlight that system performance depends on real-world implementation (scratches/handling, seam treatment, integration), and that cryogenic MLI requires careful treatment of off‑nominal environments and integration details.  [3, 5, 7]
 
-For CCC trade studies, this report introduces a **quality factor** \(QF\in(0,1]\) (user‑tunable) to capture installation-dependent degradation. It is applied as a multiplier model (e.g., increasing effective radiative and conductive coefficients and/or effective gas pressure as \(QF\) decreases). This enables:
+For CCC trade studies, this report introduces a **quality factor** $QF\in(0,1]$ (user‑tunable) to capture installation-dependent degradation. It is applied as a multiplier model (e.g., increasing effective radiative and conductive coefficients and/or effective gas pressure as $QF$ decreases). This enables:
 - an **installation robustness** measure based on sensitivity, e.g.
-  \[
+  $$
   RI(N)=\frac{q(N,QF=0.8)-q(N,QF=1.0)}{q(N,QF=1.0)},
-  \]
-  where lower \(RI\) means less sensitivity to workmanship and handling variability.
+  $$
+  where lower $RI$ means less sensitivity to workmanship and handling variability.
 
 ### Assumptions used for numeric examples
 
 The report’s example calculations are illustrative and parameterised:
-- LH2 cold boundary: \(T_c=20\) K (design point).  [3, 7]
-- Latent heat for boil‑off conversion: \(h_{fg}\approx 447\) kJ/kg near 20 K (parahydrogen).  [6]
+- LH2 cold boundary: $T_c=20$ K (design point).  [3, 7]
+- Latent heat for boil‑off conversion: $h_{fg}\approx 447$ kJ/kg near 20 K (parahydrogen).  [6]
 - Vacuum pressure cases: 10⁻⁶, 10⁻⁴, 10⁻³ torr (with user‑specified pressure supported).  [4, 7]
-- Representative CCC MLI thickness used in plots: \(t_{\mathrm{MLI}}=50\) mm (parameter; you can substitute your envelope).  
-- Reflector emittance parameter used in plots: \(E=0.03\) (typical) unless noted; guidance reports typical IR emittance in this range for aluminised films.  [5, 7, 8]
+- Representative CCC MLI thickness used in plots: $t_{\mathrm{MLI}}=50$ mm (parameter; you can substitute your envelope).  
+- Reflector emittance parameter used in plots: $E=0.03$ (typical) unless noted; guidance reports typical IR emittance in this range for aluminised films.  [5, 7, 8]
 - Seam and penetration adders are not hard-coded in plots (plots show blanket-only behaviour); they are applied explicitly in recommendations and test planning using NASA-measured seam/penetration penalties.  [4]
 
 _Illustrative figures (not included here) may show: (i) a multilayer insulation blanket cross‑section, (ii) a cryogenic tank vacuum jacket with MLI, (iii) Dacron spacer netting within the MLI stack, and (iv) double‑aluminised Mylar MLI film._
@@ -167,9 +167,9 @@ flowchart TD
 
 ### Blanket heat leak versus layer count
 
-The plot below shows total heat leak \(\dot Q(N)\) for a **representative medium CCC** (\(A_{\mathrm{CCC}}=20\) m²) and **fixed insulation thickness** \(t_{\mathrm{MLI}}=50\) mm, for three vacuum levels (10⁻⁶, 10⁻⁴, 10⁻³ torr) at \(T_h=293\) K and \(T_c=20\) K. The model is the modified Lockheed-form correlation documented for cryogenic MLI, which explicitly includes solid conduction and gas conduction terms in addition to radiative transfer.  [7]
+The plot below shows total heat leak $\dot Q(N)$ for a **representative medium CCC** ($A_{\mathrm{CCC}}=20$ m²) and **fixed insulation thickness** $t_{\mathrm{MLI}}=50$ mm, for three vacuum levels (10⁻⁶, 10⁻⁴, 10⁻³ torr) at $T_h=293$ K and $T_c=20$ K. The model is the modified Lockheed-form correlation documented for cryogenic MLI, which explicitly includes solid conduction and gas conduction terms in addition to radiative transfer.  [7]
 
-*Figure TBD – Total heat leak \(\dot Q\) vs layer count \(N\) for representative CCC at three vacuum levels.*
+*Figure TBD – Total heat leak $\dot Q$ vs layer count $N$ for representative CCC at three vacuum levels.*
 
 Interpretation (what matters for CCC):
 - At **high vacuum (10⁻⁶ torr)**, the curve exhibits a **distinct minimum** at moderate layer counts: adding layers initially reduces radiation and gas conduction, but beyond a point increased layer density (packing/compression/contact effects) increases the solid conduction term. This is the same phenomenon documented in NASA analyses: there is an optimal packing (layer density) where heat leak is minimised.  [2, 7]
@@ -177,7 +177,7 @@ Interpretation (what matters for CCC):
 
 ### Mass growth with layer count and stack selection
 
-Using NASA material guideline areal weights for common reflector and spacer materials, blanket mass scales approximately linearly with \(N\). NASA guidance provides representative areal weights for aluminised films and for Dacron/Nomex netting spacers.  [5, 8]
+Using NASA material guideline areal weights for common reflector and spacer materials, blanket mass scales approximately linearly with $N$. NASA guidance provides representative areal weights for aluminised films and for Dacron/Nomex netting spacers.  [5, 8]
 
 *Figure TBD – MLI blanket mass estimate vs layer count for representative CCC with different stack materials.*
 
@@ -194,17 +194,17 @@ The scatter plot below shows the Pareto shape between MLI mass and heat leak for
 ### Example numeric results for small/medium/large CCCs
 
 To illustrate scaling, define representative CCC surface areas:
-- Small: \(A_{\mathrm{CCC}}=5\) m²  
-- Medium: \(A_{\mathrm{CCC}}=20\) m²  
-- Large: \(A_{\mathrm{CCC}}=80\) m²  
+- Small: $A_{\mathrm{CCC}}=5$ m²  
+- Medium: $A_{\mathrm{CCC}}=20$ m²  
+- Large: $A_{\mathrm{CCC}}=80$ m²  
 (These are parameter sets only; substitute actual CCC geometry.)
 
-For LH2 boil‑off conversion, use \(h_{fg}\approx 447\) kJ/kg at ~20 K.  [6]
+For LH2 boil‑off conversion, use $h_{fg}\approx 447$ kJ/kg at ~20 K.  [6]
 
 Assuming:
-- \(t_{\mathrm{MLI}}=50\) mm fixed,
-- \(T_h=293\) K, \(T_c=20\) K,
-- good vacuum \(P=10^{-6}\) torr,
+- $t_{\mathrm{MLI}}=50$ mm fixed,
+- $T_h=293$ K, $T_c=20$ K,
+- good vacuum $P=10^{-6}$ torr,
 - and a typical DAM Mylar + Dacron net stack (areal weights from NASA guidance),  [5, 7, 8]
 
 the following blanket-only results (no seam/penetration adders) are representative:
@@ -250,10 +250,10 @@ These results justify treating seam length per CCC and number/type of penetratio
 
 A Monte Carlo uncertainty study was performed around a representative CCC operating point (293 K/20 K, 50±5 mm installed thickness, vacuum spanning 10⁻⁶–10⁻⁴ torr, and installation quality factor spanning 0.8–1.0). The distribution below shows that the “optimal N” is not a single crisp value; practical optima cluster around ~50–70 layers with a tail to higher N driven by poorer vacuum and poorer installation quality (which effectively increases conduction and gas terms). The modelling structure reflects NASA’s emphasis that system-level prediction must capture inefficiencies and implementation, not just ideal blanket equations.  [4, 7]
 
-*Figure TBD – Uncertainty in optimal N (Monte Carlo distribution of optimal layer count \(N^\*\)).*
+*Figure TBD – Uncertainty in optimal N (Monte Carlo distribution of optimal layer count $N^\*$).*
 
 In this example study:
-- Median \(N^\*\) ≈ 57 layers; 5th–95th percentile ≈ 42–87 layers (illustrative, given the assumed uncertainty ranges).
+- Median $N^\*$ ≈ 57 layers; 5th–95th percentile ≈ 42–87 layers (illustrative, given the assumed uncertainty ranges).
 
 ## Recommendation and LC05 verification points
 
@@ -262,16 +262,16 @@ In this example study:
 Given CCC parameter uncertainty, the most defensible output is a **recommended band** and a **calculation recipe**:
 
 **Recipe (parameterised)**
-1. Establish the design envelope: \(T_h\) (by mission phase), \(T_c\) (~20 K for LH2), and vacuum level \(P\) (expected and allowable).  [3, 7]  
-2. Establish available insulation thickness \(t_{\mathrm{MLI}}\) and derive the installed layer density \(N^\* = N/t_{\mathrm{MLI}}\).  
+1. Establish the design envelope: $T_h$ (by mission phase), $T_c$ (~20 K for LH2), and vacuum level $P$ (expected and allowable).  [3, 7]  
+2. Establish available insulation thickness $t_{\mathrm{MLI}}$ and derive the installed layer density $N^\* = N/t_{\mathrm{MLI}}$.  
 3. Use a validated MLI performance model (modified Lockheed/McIntosh layer-by-layer) that includes radiation, solid conduction, and gas conduction terms.  [1, 7]  
 4. Add explicit seam and penetration contributions based on expected CCC integration (use empirical seam/penetration test data to bound).  [4]  
-5. Sweep \(N=5\) to ~200 and select:
+5. Sweep $N=5$ to ~200 and select:
    - the **knee** around 50–70 layers if thickness can grow (diminishing returns criterion), and/or
-   - the **minimum of \(q(N)\)** for fixed thickness constraints (optimal layer density criterion).  [2, 3, 7]
+   - the **minimum of $q(N)$** for fixed thickness constraints (optimal layer density criterion).  [2, 3, 7]
 
 **CCC recommendation**
-- **Nominal selection**: **N\* = 55 layers** (baseline) with allowed band **40–70 layers**, targeted to **design vacuum ≤10⁻⁵ torr**, and installed to a density near the documented optimal region for the relevant \(T_h/T_c\) range (often ~8–12 layers/cm for cryogenic conditions; refine with your exact environment).  [2, 3, 7]
+- **Nominal selection**: **N\* = 55 layers** (baseline) with allowed band **40–70 layers**, targeted to **design vacuum ≤10⁻⁵ torr**, and installed to a density near the documented optimal region for the relevant $T_h/T_c$ range (often ~8–12 layers/cm for cryogenic conditions; refine with your exact environment).  [2, 3, 7]
 - **If vacuum may degrade to ~10⁻⁴ torr during some phases**: do not rely on layer count alone; either (i) raise N towards ~80 as a mitigating measure *and* (ii) prioritise vacuum integrity and integration controls, since seams/penetrations are likely to dominate before blanket physics does.  [4, 7]
 
 ### Manufacturability and installation robustness guidance
@@ -293,15 +293,15 @@ To support LC05 verification and to reduce model–hardware risk, test a bounded
   - **Max**: N = 80 (upper bound for degraded-vacuum mitigation, higher complexity)
 
 - **Vacuum points (dominant environmental variable)**:  
-  - \(P\) ≈ 10⁻⁶ torr (best-case)  
-  - \(P\) ≈ 10⁻⁴ torr (degraded but plausible)  
-  - Optional stressing: \(P\) ≈ 10⁻³ torr to demonstrate transition where MLI becomes gas-conduction dominated (and to justify operational vacuum requirements).  [4, 7]
+  - $P$ ≈ 10⁻⁶ torr (best-case)  
+  - $P$ ≈ 10⁻⁴ torr (degraded but plausible)  
+  - Optional stressing: $P$ ≈ 10⁻³ torr to demonstrate transition where MLI becomes gas-conduction dominated (and to justify operational vacuum requirements).  [4, 7]
 
 - **Thermal boundary points** (representative):  
-  - \(T_h\) = 320 K (hot-day bounding)  
-  - \(T_h\) = 293 K (nominal ambient)  
-  - \(T_h\) = 250 K or 235 K (cold ambient / cold soak)  
-  - \(T_c\) fixed near 20 K for LH2.  [3, 7]
+  - $T_h$ = 320 K (hot-day bounding)  
+  - $T_h$ = 293 K (nominal ambient)  
+  - $T_h$ = 250 K or 235 K (cold ambient / cold soak)  
+  - $T_c$ fixed near 20 K for LH2.  [3, 7]
 
 - **Integration points (must be explicitly tested)**:  
   - Baseline “no penetration” blanket tests for repeatability (NASA penetration testing reports repeatability within ~6% for nearly identical blankets when edge effects are controlled).  [4]  
