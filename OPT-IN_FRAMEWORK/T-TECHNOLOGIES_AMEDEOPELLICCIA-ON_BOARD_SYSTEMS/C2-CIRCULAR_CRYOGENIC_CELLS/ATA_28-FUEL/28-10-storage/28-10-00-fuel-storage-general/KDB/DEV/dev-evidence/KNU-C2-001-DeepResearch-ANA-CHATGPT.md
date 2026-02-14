@@ -24,10 +24,16 @@ Qualification test points are recommended at **N = 40, 55–60, and 80 layers**,
 CCC baseline values are unspecified; all results are therefore stated as **functions of parameters** and illustrated with **representative cases**.
 
 **Geometry / scaling**
-- Let the CCC external surface area be $A_{\mathrm{CCC}}$ (m²). Total heat leak is
+- Let the CCC external surface area be
+
+  $A_{\mathrm{CCC}}$
+
+  (m²). Total heat leak is
+  
 $$
 \dot Q_{\mathrm{CCC}}(N)=A_{\mathrm{CCC}}\;q_{\mathrm{MLI}}(N) + \dot Q_{\mathrm{seams}} + \dot Q_{\mathrm{penetrations}}.
 $$
+
 The MLI blanket term $q_{\mathrm{MLI}}$ is in W/m²; seam and penetration terms are handled as explicit adders (W). Seam adders are motivated directly by measured seam/penetration degradation tests.  [4]
 
 **Mission profile / representative phases**
@@ -46,9 +52,11 @@ Cryogenic MLI performance is sensitive to warm boundary temperature and the rela
 
 **Vacuum level and residual gas model**
 Vacuum pressure $P$ is treated over the requested range:
+
 $$
 P \in [10^{-6},\;10^{-3}] \;\text{torr}.
 $$
+
 Residual gas conduction in MLI is commonly treated in the free‑molecule regime at sufficiently low pressures via a linear pressure term (heat flux proportional to $P$), consistent with standard cryogenic MLI formulations.  [1, 4, 7]
 
 **Layer count and packing**
@@ -76,31 +84,65 @@ Cryogenic MLI heat transfer is modelled as the superposition of:
 - Plus explicit adders for seams and penetrations (implementation losses).  [1, 4, 7]
 
 A layer-by-layer physics representation expresses per-gap heat flux as:
+
 $$
 q_{\mathrm{total}}=q_{\mathrm{rad}}+q_{\mathrm{gas}}+q_{\mathrm{solid}},
 $$
+
 with the familiar two-surface radiation form
+
 $$
 q_{\mathrm{rad}}=\sigma\frac{(T_H^4-T_C^4)}{\left(\frac{1}{\varepsilon_H}+\frac{1}{\varepsilon_C}-1\right)},
 $$
+
 free-molecule gas conduction in the form
+
 $$
 q_{\mathrm{gas}}=C_1\,P\,\alpha\, (T_H-T_C),
 $$
+
 and solid conduction modelled as
+
 $$
 q_{\mathrm{solid}}=K_s\,(T_H-T_C),\quad K_s=C_2\,f\,\frac{k}{\Delta x}.
 $$
+
 Parameters include accommodation coefficient $\alpha$, empirical constants $C_2$, separator density ratio $f$, and separator conductivity $k(T)$ (Dacron conductivity curve fit provided).  [1, 7]
 
 For blanket-level design sweeps, this report uses the widely applied **modified Lockheed-form correlation** (a semi-empirical model) adapted for cryogenic MLI and specifically documented for Dacron spacer conduction and vacuum-dependent gas conduction:
+
 $$
 q_{\mathrm{MLI}}=
 2.4{\times}10^{-4}\;k(T)\;(N^\*)^{2.63}\frac{(T_H-T_C)}{N_s}
 +4.944{\times}10^{-10}\;E\;\frac{(T_H^{4.67}-T_C^{4.67})}{N_s}
 +1.46{\times}10^{4}\;P\;\frac{(T_H^{0.52}-T_C^{0.52})}{N_s},
 $$
-where $q_{\mathrm{MLI}}$ is in W/m², $T$ is in K, $P$ is in torr, $N^\*$ is in layers/cm, and $N_s$ is number of shields (layers). The correlation explicitly encodes the **contact conduction penalty** via the $(N^\*)^{2.63}$ term and gas conduction via the pressure term.  [7]
+
+where 
+
+$q_{\mathrm{MLI}}$ 
+
+is in W/m², 
+
+$T$ 
+
+is in K, 
+
+$P$ 
+
+is in torr, 
+
+$N^\*$ 
+
+is in layers/cm, and 
+
+$N_s$ 
+
+is number of shields (layers). The correlation explicitly encodes the **contact conduction penalty** via the 
+
+$(N^\*)^{2.63}$ 
+
+term and gas conduction via the pressure term.  [7]
 
 This correlation-based approach is widely used in system-level cryogenic MLI modelling and sits alongside Lockheed/McDonnell Douglas style empirical equations described in NASA materials.  [7]
 
@@ -111,20 +153,36 @@ Representative stack options and key properties are taken from NASA MLI material
 - Spacers: Dacron netting or Nomex netting, with typical thickness ~0.16 mm and areal weight ~6.3 g/m².  [8]
 
 The blanket mass is modelled as:
+
 $$
 m_{\mathrm{MLI}}(N) \approx A_{\mathrm{CCC}}\;N\;\mu_{\mathrm{layer}} + A_{\mathrm{CCC}}\;\mu_{\mathrm{covers}},
 $$
-where $\mu_{\mathrm{layer}}$ is effective areal mass per layer (film + spacer) and $\mu_{\mathrm{covers}}$ accounts for inner/outer cover sheets (optional). Areal weights are taken from NASA guidance; Kapton-based solutions are typically heavier than Mylar-based for equivalent thickness class.  [5, 8]
+
+where 
+
+$\mu_{\mathrm{layer}}$ 
+
+is effective areal mass per layer (film + spacer) and 
+
+$\mu_{\mathrm{covers}}$
+
+accounts for inner/outer cover sheets (optional). Areal weights are taken from NASA guidance; Kapton-based solutions are typically heavier than Mylar-based for equivalent thickness class.  [5, 8]
 
 ### Implementation losses: seams and penetrations
 
 To reflect installation realism, we add:
 
 - **Seam heat input**: a NASA seam study reports a seam penalty of **0.169 W per metre** for an offset butt joint seam configuration, beyond a baseline blanket heat flux of **0.388 W/m²** (in that test setup). This motivates a seam-length-based add-on:
+  
   $$
   \dot Q_{\mathrm{seams}} \approx q'_{\mathrm{seam}}\,L_{\mathrm{seam}},\quad q'_{\mathrm{seam}}\sim 0.169\text{ W/m},
   $$
-  with $L_{\mathrm{seam}}$ parameterised as seam length per CCC.  [4]
+  
+  with
+  
+   $L_{\mathrm{seam}}$
+
+  parameterised as seam length per CCC.  [4]
 
 - **Penetration heat input**: a penetration test in the same seam/penetration study reports **~0.543 W** additional heat input for a fiberglass support strut configuration and a large affected zone; separate penetration calorimetry reports **ΔQ ~0.50 W (aluminium strut) and ~0.31 W (composite strut)** for “no integration” test cases, reinforcing that penetrations can contribute order‑unity watts if not buffered and temperature-matched.  [4]
 
@@ -253,7 +311,9 @@ A Monte Carlo uncertainty study was performed around a representative CCC operat
 *Figure TBD – Uncertainty in optimal N (Monte Carlo distribution of optimal layer count $N^\*$).*
 
 In this example study:
-- Median $N^\*$ ≈ 57 layers; 5th–95th percentile ≈ 42–87 layers (illustrative, given the assumed uncertainty ranges).
+- Median
+
+$N^\*$ ≈ 57 layers; 5th–95th percentile ≈ 42–87 layers (illustrative, given the assumed uncertainty ranges).
 
 ## Recommendation and LC05 verification points
 
