@@ -308,12 +308,12 @@ These results justify treating seam length per CCC and number/type of penetratio
 
 A Monte Carlo uncertainty study was performed around a representative CCC operating point (293 K/20 K, 50±5 mm installed thickness, vacuum spanning 10⁻⁶–10⁻⁴ torr, and installation quality factor spanning 0.8–1.0). The distribution below shows that the “optimal N” is not a single crisp value; practical optima cluster around ~50–70 layers with a tail to higher N driven by poorer vacuum and poorer installation quality (which effectively increases conduction and gas terms). The modelling structure reflects NASA’s emphasis that system-level prediction must capture inefficiencies and implementation, not just ideal blanket equations.  [4, 7]
 
-*Figure TBD – Uncertainty in optimal N (Monte Carlo distribution of optimal layer count $N^\*$).*
+![Monte Carlo distribution of optimal MLI layer count N*](figures/monte_carlo_optimal_N_star.png)
+
+*Figure 1 – Monte Carlo distribution of optimal MLI layer count $N^*$ (10,000 samples; CCC 293 K / 20 K). Median $N^* = 56$; 5th–95th percentile = 36–93 layers.*
 
 In this example study:
-- Median
-
-$N^\*$ ≈ 57 layers; 5th–95th percentile ≈ 42–87 layers (illustrative, given the assumed uncertainty ranges).
+- Median $N^* \approx 56$ layers; 5th–95th percentile ≈ 36–93 layers (from 10,000 Monte Carlo samples with the assumed uncertainty ranges).
 
 ## Recommendation and LC05 verification points
 
