@@ -106,6 +106,7 @@ class OperationContext:
     # ATA domain
     ata_domain: str = ""
     ata_chapter: str = ""
+    sub_system: str = ""
 
     # Authority
     authority: str = "ASIT"
@@ -138,6 +139,7 @@ class OperationContext:
             "baseline_status": self.baseline_status,
             "ata_domain": self.ata_domain,
             "ata_chapter": self.ata_chapter,
+            "sub_system": self.sub_system,
             "authority": self.authority,
             "invoker": self.invoker,
             "safety_impact": self.safety_impact,
@@ -214,6 +216,7 @@ class GovernedValidationResult:
 # Map of operations to required BREX rules
 OPERATION_RULES = {
     "generate_dm": ["CTR-001", "BL-001", "STRUCT-001", "AUTHOR-002"],
+    "generate_srm_task": ["CTR-001", "BL-001", "STRUCT-001", "AUTHOR-002", "SAFETY-002"],
     "produce_publication": ["CTR-001", "STRUCT-001", "BREX-001", "LC-001"],
     "transform_content": ["CTR-001", "PIPELINE-004", "TRACE-001"],
     "modify_baseline": ["CTR-001", "BL-002", "AUTHOR-003"],

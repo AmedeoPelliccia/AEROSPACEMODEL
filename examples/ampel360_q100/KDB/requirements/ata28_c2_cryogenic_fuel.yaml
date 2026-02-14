@@ -1,0 +1,516 @@
+# =============================================================================
+# AMPEL360 Q100 — ATA 28 Circular Cryogenic Cells (C2) Fuel System
+# =============================================================================
+# LH₂ cryogenic fuel system requirements for Circular Cryogenic Cells.
+# Structured per ATA iSpec 2200 with EASA Special Conditions.
+# =============================================================================
+
+metadata:
+  source: "KDB"
+  domain: "requirements"
+  ata_chapter: "28"
+  title: "Circular Cryogenic Cells (C2) — LH₂ Fuel System"
+  baseline: "DBL-Q100-2026-Q2"
+  program: "AMPEL360 Q100"
+  novel_technology: "C2_CIRCULAR_CRYOGENIC_CELLS"
+
+requirements:
+  # ---------------------------------------------------------------------------
+  # Section 00: Fuel System Description
+  # ---------------------------------------------------------------------------
+  - id: "REQ-Q100-C2-001"
+    type: "descriptive"
+    title: "C2 Cryogenic Fuel System Overview"
+    ata_code: "28-00-00"
+    info_code: "040"
+    applicability: "APP-Q100-ALL"
+    safety_critical: true
+
+    content:
+      summary: |
+        The AMPEL360 Q100 employs a Circular Cryogenic Cells (C2) architecture
+        for liquid hydrogen storage and distribution to the fuel cell propulsion
+        system.
+
+      details: |
+        The C2 fuel system consists of:
+        - Four circular cryogenic cells (1200 kg total LH₂ capacity)
+        - Vacuum-jacketed multi-layer insulation (MLI)
+        - Cryogenic transfer and distribution piping
+        - Boil-off gas (BOG) management system
+        - Pressure regulation and relief system
+        - Multi-sensor hydrogen leak detection
+        - Ground refueling interface (LH₂)
+        - AI-driven monitoring and predictive analytics
+
+        Architecture integration:
+        - Propulsion: PEM fuel cells (ATA 71)
+        - Electrical: DC power conditioning (ATA 24)
+        - Fire protection: H₂ fire detection (ATA 26)
+        - Flight controls: Emergency fuel management (ATA 27)
+
+    traceability:
+      parent: "SYS-REQ-028"
+    special_conditions:
+      - "SC-28-H2-001"
+      - "SC-28-CRYO-002"
+
+    warnings:
+      - type: "hydrogen"
+        text: |
+          DANGER: Hydrogen is extremely flammable. Concentrations of 4-75%
+          in air are explosive. Ensure adequate ventilation. No open flames
+          or ignition sources within 15 meters.
+
+  - id: "REQ-Q100-C2-002"
+    type: "descriptive"
+    title: "System Safety Analysis"
+    ata_code: "28-00-10"
+    info_code: "040"
+    applicability: "APP-Q100-ALL"
+    safety_critical: true
+
+    content:
+      summary: |
+        Hazard analysis and safety assessment for the C2 cryogenic fuel system.
+
+      details: |
+        Identified hazards per ARP4761:
+        - H₂ leakage (minor and major)
+        - Overpressure events
+        - Thermal runaway
+        - Cryogenic burns (personnel)
+        - Boil-off exceeding limits
+        - Fuel starvation
+
+        Safety compliance:
+        - EASA CS-25 Subpart E (Powerplant)
+        - SC-28-H2-001 (Hydrogen Storage and Distribution)
+        - SC-28-CRYO-002 (Cryogenic Temperature Handling)
+        - BREX rules: SAFETY-002, SAFETY-H2-001, SAFETY-H2-002, SAFETY-H2-003
+
+    traceability:
+      parent: "SYS-REQ-028-SAF"
+
+  - id: "REQ-Q100-C2-003"
+    type: "descriptive"
+    title: "Regulatory Compliance Matrix"
+    ata_code: "28-00-20"
+    info_code: "040"
+    applicability: "APP-Q100-ALL"
+
+    content:
+      summary: |
+        Regulatory compliance for the C2 cryogenic fuel system.
+
+      details: |
+        Applicable regulations:
+        - EASA CS-25 with Special Conditions
+        - SC-28-H2-001: LH₂ storage and handling
+        - SC-28-CRYO-002: Cryogenic system safety
+        - EU AI Act: For AI-driven monitoring/control systems
+        - EASA AI Roadmap 2.0: AI governance and oversight
+        - ISO 14687-2: Hydrogen fuel quality
+        - EN 17124: Hydrogen purity specification
+
+  # ---------------------------------------------------------------------------
+  # Section 10: Fuel Storage — Circular Cryogenic Cells
+  # ---------------------------------------------------------------------------
+  - id: "REQ-Q100-C2-010"
+    type: "descriptive"
+    title: "Circular Cryogenic Cells Design"
+    ata_code: "28-10-00"
+    info_code: "040"
+    applicability: "APP-Q100-ALL"
+    safety_critical: true
+
+    content:
+      summary: |
+        Four circular cryogenic cells store liquid hydrogen at -253°C
+        using vacuum-jacketed multi-layer insulation.
+
+      details: |
+        C2 cell specifications:
+        - Cell geometry: Circular cross-section (optimized for pressure)
+        - Cell count: 4 (2 forward, 2 aft)
+        - Forward cells capacity: 250 kg LH₂ each
+        - Aft cells capacity: 350 kg LH₂ each
+        - Total capacity: 1200 kg LH₂
+        - Operating temperature: -253°C (-423°F)
+        - Operating pressure: 2.5 bar (nominal)
+        - Max design pressure: 5.0 bar
+        - Inner shell: Stainless steel 316L
+        - Outer shell: Aluminum alloy 5083
+        - Insulation: Multi-Layer Insulation (MLI), 40 layers
+        - Vacuum level: < 0.001 mbar
+        - Boil-off rate: < 0.5% per day (design target)
+
+        Material compatibility:
+        - All wetted surfaces are hydrogen-compatible
+        - Cryogenic-rated seals (PTFE)
+        - Non-sparking fittings (Inconel 718)
+
+    traceability:
+      parent: "REQ-Q100-C2-001"
+    special_conditions:
+      - "SC-28-H2-001"
+      - "SC-28-CRYO-002"
+
+    warnings:
+      - type: "cold-injury"
+        text: |
+          DANGER: Liquid hydrogen at -253°C (-423°F). Contact causes severe
+          cryogenic burns and frostbite. Wear face shield, cryogenic gloves,
+          and protective apron. Emergency shower and eyewash must be accessible.
+
+  - id: "REQ-Q100-C2-011"
+    type: "descriptive"
+    title: "Boil-Off Management System"
+    ata_code: "28-10-10"
+    info_code: "040"
+    applicability: "APP-Q100-ALL"
+    safety_critical: true
+
+    content:
+      summary: |
+        Boil-off gas (BOG) management captures and processes hydrogen
+        gas from cryogenic cell heat ingress.
+
+      details: |
+        BOG management specifications:
+        - Primary: Recovery to fuel cell APU (zero-loss mode)
+        - Secondary: Controlled venting via overboard vent mast
+        - Emergency: Rapid depressurization via burst discs
+        - BOG rate monitoring: Continuous (AI-assisted prediction)
+        - Design boil-off rate: < 0.5% per day (all cells combined)
+        - Warning threshold: > 0.8% per day
+        - Alarm threshold: > 1.2% per day
+        - Vent mast location: Upper fuselage (away from ignition sources)
+
+    traceability:
+      parent: "REQ-Q100-C2-010"
+
+  - id: "REQ-Q100-C2-012"
+    type: "descriptive"
+    title: "Storage Safety and Redundancy"
+    ata_code: "28-10-20"
+    info_code: "040"
+    applicability: "APP-Q100-ALL"
+    safety_critical: true
+
+    content:
+      summary: |
+        Pressure relief, leak detection, and fail-safe systems for C2 cells.
+
+      details: |
+        Safety systems per cell:
+        - Dual pressure relief valves (set at 4.5 bar)
+        - Burst disc backup (set at 4.8 bar)
+        - Cell isolation valve (fail-closed, < 2s response)
+        - Vacuum loss detection (thermal sensors)
+        - Hydrogen leak sensors: 3 per cell bay (catalytic bead)
+        - Warning threshold: 1% H₂ (25% LEL)
+        - Alarm threshold: 2% H₂ (50% LEL)
+        - Automatic isolation at alarm threshold
+
+        Redundancy:
+        - Forward/aft cell independence (single cell loss tolerable)
+        - Dual pressure regulation per cell
+        - Triple-redundant leak detection per bay
+
+    traceability:
+      parent: "REQ-Q100-C2-010"
+    special_conditions:
+      - "SC-28-H2-001"
+
+  # ---------------------------------------------------------------------------
+  # Section 20: Fuel Distribution
+  # ---------------------------------------------------------------------------
+  - id: "REQ-Q100-C2-020"
+    type: "descriptive"
+    title: "Cryogenic Piping and Valves"
+    ata_code: "28-20-00"
+    info_code: "040"
+    applicability: "APP-Q100-ALL"
+    safety_critical: true
+
+    content:
+      summary: |
+        Vacuum-insulated distribution piping and cryogenic valves transfer
+        LH₂ from C2 cells to the fuel cell propulsion system.
+
+      details: |
+        Distribution system:
+        - Piping material: Stainless steel 316L
+        - Insulation: Vacuum-jacketed with MLI
+        - Line diameter: 25 mm (main), 15 mm (branch)
+        - Operating temperature: -253°C to ambient
+        - Isolation valves: Pneumatically actuated (fail-closed)
+        - Crossfeed capability between forward/aft cell groups
+        - Thermal expansion compensation: Bellows joints
+
+    traceability:
+      parent: "REQ-Q100-C2-001"
+
+  - id: "REQ-Q100-C2-021"
+    type: "descriptive"
+    title: "Flow Control and Optimization"
+    ata_code: "28-20-10"
+    info_code: "040"
+    applicability: "APP-Q100-C2"
+
+    content:
+      summary: |
+        Flow control logic, sensors, and AI-driven optimization for
+        hydrogen delivery to fuel cells.
+
+      details: |
+        Flow control:
+        - Mass flow sensors: Coriolis type (cryogenic-rated)
+        - Flow regulation: Proportional valves with PID control
+        - AI optimization: Fuel cell demand prediction
+        - Tank balancing: Automated CG management
+        - Vaporizer interface: Heat exchanger (fuel cell waste heat)
+        - Backup vaporizer: Electric heater (25 kg/hr capacity)
+
+  - id: "REQ-Q100-C2-022"
+    type: "procedural"
+    title: "Emergency Shutdown Procedure"
+    ata_code: "28-20-20"
+    info_code: "500"
+    applicability: "APP-Q100-ALL"
+    safety_critical: true
+
+    content:
+      summary: |
+        Emergency fuel system shutdown for rapid isolation and
+        depressurization of the C2 cryogenic system.
+
+      details: |
+        Emergency shutdown triggers:
+        - H₂ concentration alarm (> 2% in any bay)
+        - Thermal anomaly (rapid temperature rise)
+        - Pressure exceedance (> 4.5 bar any cell)
+        - Crew-initiated (ECAM/EICAS action)
+        - Fire detection in fuel system zone
+
+        Shutdown sequence:
+        1. Close all cell isolation valves (< 2s)
+        2. Disconnect fuel cell H₂ supply
+        3. Activate inert gas purge (if available)
+        4. Open overboard vent (controlled depressurization)
+        5. Notify crew via EICAS message
+        6. Log event for maintenance action
+
+    warnings:
+      - type: "hydrogen"
+        text: |
+          DANGER: Emergency shutdown vents hydrogen overboard. Ensure no
+          ignition sources near vent mast. Ground personnel must maintain
+          safe distance during venting operations.
+
+  # ---------------------------------------------------------------------------
+  # Section 30: Fuel Indication and Monitoring
+  # ---------------------------------------------------------------------------
+  - id: "REQ-Q100-C2-030"
+    type: "descriptive"
+    title: "Sensors and Telemetry"
+    ata_code: "28-30-00"
+    info_code: "040"
+    applicability: "APP-Q100-ALL"
+
+    content:
+      summary: |
+        Distributed sensor network for LH₂ level, temperature, pressure,
+        and boil-off rate monitoring in C2 cells.
+
+      details: |
+        Sensor suite per cell:
+        - Level: Capacitive gauge (cryogenic-rated), accuracy ±1%
+        - Temperature: PT100 RTD sensors (4 per cell)
+        - Pressure: Piezoelectric transducers (dual per cell)
+        - Boil-off rate: Derived from pressure/temperature/level trends
+        - Vacuum level: Ion gauge (insulation space)
+
+        Data acquisition:
+        - Sample rate: 10 Hz (normal), 100 Hz (anomaly)
+        - Data bus: ARINC 664 (AFDX)
+        - Logging: Continuous to flight data recorder
+        - Digital twin integration: Real-time ASIT data feed
+
+    traceability:
+      parent: "REQ-Q100-C2-001"
+
+  - id: "REQ-Q100-C2-031"
+    type: "descriptive"
+    title: "AI/ML Monitoring and Predictive Analytics"
+    ata_code: "28-30-10"
+    info_code: "040"
+    applicability: "APP-Q100-ALL"
+
+    content:
+      summary: |
+        AI/ML models for predictive analytics on boil-off, leakage,
+        and system health of C2 cryogenic cells.
+
+      details: |
+        AI/ML capabilities:
+        - Boil-off prediction (LSTM neural network)
+        - Leak detection enhancement (anomaly detection)
+        - Insulation degradation trending
+        - Fuel consumption optimization
+        - Remaining mission fuel estimation
+
+        EU AI Act compliance:
+        - Risk category: High (safety-critical monitoring)
+        - Human oversight: Mandatory for critical alerts
+        - Explainability: SHAP/LIME for all predictions
+        - Data governance: Training data provenance tracked
+        - Conformity assessment: Per EASA AI Roadmap 2.0
+
+    traceability:
+      parent: "REQ-Q100-C2-030"
+
+  - id: "REQ-Q100-C2-032"
+    type: "descriptive"
+    title: "Crew Interfaces and Alerts"
+    ata_code: "28-30-20"
+    info_code: "040"
+    applicability: "APP-Q100-ALL"
+
+    content:
+      summary: |
+        EICAS messages, maintenance alerts, and HITL escalation paths
+        for the C2 fuel system.
+
+      details: |
+        EICAS messages:
+        - FUEL C2 LEVEL LOW (amber): < 15% capacity any cell
+        - FUEL C2 PRESS HIGH (amber): > 3.5 bar any cell
+        - FUEL C2 PRESS HIGH (red): > 4.0 bar any cell
+        - FUEL C2 LEAK DET (red): H₂ > 2% any bay
+        - FUEL C2 BOG HIGH (amber): Boil-off > 0.8%/day
+        - FUEL C2 TEMP WARN (amber): Temperature anomaly
+        - FUEL C2 EMER SHUT (red): Emergency shutdown active
+
+        HITL escalation paths:
+        - Amber alerts: Crew advisory, maintenance log entry
+        - Red alerts: Immediate crew action required
+        - AI predictions: Human confirmation before maintenance action
+
+  # ---------------------------------------------------------------------------
+  # Section 40: Maintenance and Operations
+  # ---------------------------------------------------------------------------
+  - id: "REQ-Q100-C2-040"
+    type: "procedural"
+    title: "Routine Inspection Procedures"
+    ata_code: "28-40-00"
+    info_code: "300"
+    applicability: "APP-Q100-ALL"
+    task_type: "scheduled"
+    interval: "A Check"
+
+    content:
+      summary: |
+        Routine inspection procedures for C2 cryogenic cells, including
+        tank integrity, valve functionality, and insulation checks.
+
+      details: |
+        A Check items:
+        - Visual inspection of cell bays and piping
+        - Leak detection system functional test
+        - Pressure relief valve operability check
+        - Insulation vacuum level verification
+        - Sensor calibration verification
+        - Boil-off rate trending review
+
+        2A Check items (in addition):
+        - Cell vacuum integrity test
+        - MLI insulation inspection (if vacuum degraded)
+        - Isolation valve response time test
+        - Crossfeed valve operability check
+
+    warnings:
+      - type: "hydrogen"
+        text: "Ensure cells are purged with inert gas before opening any access panel."
+      - type: "cold-injury"
+        text: "Cells may retain cryogenic temperatures for 48+ hours after draining."
+
+  - id: "REQ-Q100-C2-041"
+    type: "procedural"
+    title: "LH₂ Refueling Procedures"
+    ata_code: "28-40-10"
+    info_code: "500"
+    applicability: "APP-Q100-ALL"
+    safety_critical: true
+
+    content:
+      summary: |
+        Ground refueling procedures for liquid hydrogen transfer to
+        C2 cryogenic cells.
+
+      details: |
+        Pre-refueling:
+        - Verify bonding and grounding connections
+        - Confirm H₂ monitoring active in all zones
+        - Verify fire extinguishers positioned
+        - Clear exclusion zone (15 m radius)
+        - Confirm no open flames or ignition sources
+
+        Refueling sequence:
+        1. Connect bonding cable
+        2. Connect cryogenic refueling coupling
+        3. Purge transfer line with inert gas
+        4. Initiate LH₂ transfer (controlled flow)
+        5. Monitor cell levels, pressures, temperatures
+        6. Complete transfer at target level
+        7. Disconnect and purge coupling
+        8. Post-refueling leak check
+
+        H₂ fuel quality requirements (ISO 14687-2):
+        - Purity: > 99.97%
+        - CO: < 0.2 ppm
+        - CO₂: < 2 ppm
+        - H₂O: < 5 ppm
+
+    warnings:
+      - type: "hydrogen"
+        text: |
+          DANGER: Hydrogen is extremely flammable. No open flames or
+          ignition sources within 15 meters. Use H₂-rated tools only.
+          Continuous H₂ monitoring required throughout operation.
+      - type: "cold-injury"
+        text: |
+          DANGER: Liquid hydrogen at -253°C. Wear cryogenic PPE including
+          face shield, insulated gloves, and apron. Emergency shower must
+          be accessible.
+
+  - id: "REQ-Q100-C2-042"
+    type: "procedural"
+    title: "Troubleshooting and Fault Isolation"
+    ata_code: "28-40-20"
+    info_code: "700"
+    applicability: "APP-Q100-ALL"
+
+    content:
+      summary: |
+        Fault isolation, repair, and recertification procedures for
+        C2 fuel system anomalies.
+
+      details: |
+        Fault categories:
+        - F1: Leak detection (H₂ sensor activation)
+        - F2: Pressure anomaly (over/under pressure)
+        - F3: Temperature anomaly (insulation degradation)
+        - F4: Boil-off exceedance (> design threshold)
+        - F5: Sensor failure (loss of monitoring)
+        - F6: Valve malfunction (stuck open/closed)
+
+        Escalation requirements:
+        - All hydrogen-related faults require BREX escalation
+        - Safety-critical repairs require STK_SAF approval
+        - Recertification per SC-28-H2-001 after any cell repair
+
+    warnings:
+      - type: "hydrogen"
+        text: "All troubleshooting involving H₂ systems requires safety standby."

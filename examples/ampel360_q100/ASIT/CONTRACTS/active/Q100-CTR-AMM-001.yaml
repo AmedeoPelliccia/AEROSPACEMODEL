@@ -1,0 +1,102 @@
+# =============================================================================
+# AMPEL360 Q100 — AMM Generation Contract (ATA 28 C2 Focus)
+# =============================================================================
+
+contract:
+  id: "Q100-CTR-AMM-001"
+  version: "1.0.0"
+  type: "KDB_TO_CSDB"
+
+  metadata:
+    title: "Aircraft Maintenance Manual — ATA 28 C2 Cryogenic Fuel System"
+    description: "Generate AMM for AMPEL360 Q100 Circular Cryogenic Cells fuel system"
+    created_date: "2026-02-14"
+    created_by: "Configuration Management"
+    brex_contract_ref: "KITDM-CTR-LM-CSDB_ATA28"
+
+  status: "active"
+
+source:
+  baseline:
+    type: "DBL"
+    id: "DBL-Q100-2026-Q2"
+
+  scope:
+    ata_chapters:
+      - "28"  # Fuel (LH₂ Circular Cryogenic Cells)
+    content_types:
+      - "requirements"
+      - "tasks"
+
+  location:
+    path: "KDB/"
+
+target:
+  publication:
+    type: "AMM"
+    pm_code: "PMC-Q100-AMP01-00001-00"
+    title: "AMPEL360 Q100 Fuel System Maintenance Manual — C2 Cryogenic"
+
+  output:
+    format: "S1000D"
+    issue: "5.0"
+
+  location:
+    path: "IDB/csdb/"
+
+transformation:
+  generators:
+    - type: "dm"
+      enabled: true
+      mappings:
+        - "requirement_to_dm"
+        - "task_to_dm"
+
+  options:
+    include_graphics: true
+    generate_dml: true
+    include_warnings: true
+    hydrogen_warnings: true
+    cryogenic_warnings: true
+
+validation:
+  brex:
+    enabled: true
+    rules: "Q100_brex"
+    strict: true
+
+  schema:
+    enabled: true
+
+  trace:
+    enabled: true
+    require_complete: true
+
+  additional:
+    - type: "hydrogen_safety"
+      enabled: true
+    - type: "cryogenic_safety"
+      enabled: true
+    - type: "c2_cell_integrity"
+      enabled: true
+
+approval:
+  required: true
+
+  authority:
+    role: "STK_CM"
+    name: "Configuration Manager"
+    date: "2026-02-14"
+
+  reviewers:
+    - role: "STK_ENG"
+      name: "Systems Engineering"
+      date: "2026-02-14"
+    - role: "STK_SAF"
+      name: "Safety Engineering"
+      date: "2026-02-14"
+
+execution:
+  pipeline: "ata28_h2_pipeline"
+  schedule:
+    type: "manual"

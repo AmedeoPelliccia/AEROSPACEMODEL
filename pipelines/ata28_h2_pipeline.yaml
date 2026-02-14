@@ -1,0 +1,160 @@
+# =============================================================================
+# ATA 28 — Hydrogen Cryogenic Fuel System Pipeline
+# =============================================================================
+# Transformation pipeline for LH₂ cryogenic fuel system content.
+# Generates S1000D-compliant Data Modules for ATA 28 hydrogen systems.
+# =============================================================================
+
+pipeline:
+  id: "ata28_h2_pipeline"
+  version: "1.0.0"
+  title: "ATA 28 Hydrogen Cryogenic Fuel System Pipeline"
+  description: |
+    Generates S1000D publications for hydrogen cryogenic fuel systems,
+    including Circular Cryogenic Cells (C2) and conventional LH₂ tanks.
+
+stages:
+  # -------------------------------------------------------------------------
+  # Stage 1: Initialization
+  # -------------------------------------------------------------------------
+  - name: "initialize"
+    description: "Load configuration and validate prerequisites"
+    steps:
+      - action: "load_config"
+        source: "program_config.yaml"
+      - action: "validate_contract"
+        contract_pattern: "KITDM-CTR-LM-CSDB_ATA28*"
+      - action: "verify_baseline"
+        require_approved: true
+      - action: "check_special_conditions"
+        required:
+          - "SC-28-H2-001"
+          - "SC-28-CRYO-002"
+
+  # -------------------------------------------------------------------------
+  # Stage 2: Source Loading
+  # -------------------------------------------------------------------------
+  - name: "load_sources"
+    description: "Load KDB content for ATA 28 hydrogen systems"
+    sources:
+      - type: "requirements"
+        path: "KDB/requirements/ata28_*"
+        filter:
+          ata_chapter: "28"
+      - type: "tasks"
+        path: "KDB/ground_ops/refueling_*"
+        filter:
+          ata_chapter: "28"
+      - type: "fault_data"
+        path: "KDB/faults/ata28_*"
+        optional: true
+
+  # -------------------------------------------------------------------------
+  # Stage 3: Transformation
+  # -------------------------------------------------------------------------
+  - name: "transform"
+    description: "Generate S1000D Data Modules"
+    generators:
+      - type: "descriptive_dm"
+        template: "ASIGT/s1000d_templates/descriptive.xml"
+        mapping: "ASIGT/mapping/requirement_to_dm.yaml"
+        options:
+          include_warnings: true
+          hydrogen_warnings: true
+          cryogenic_warnings: true
+
+      - type: "procedural_dm"
+        template: "ASIGT/s1000d_templates/procedural.xml"
+        mapping: "ASIGT/mapping/task_to_dm.yaml"
+        options:
+          include_safety_steps: true
+
+      - type: "fault_isolation_dm"
+        template: "ASIGT/s1000d_templates/fault_isolation.xml"
+        mapping: "ASIGT/mapping/fault_to_dm.yaml"
+        optional: true
+
+    dmc_format:
+      model_ident_code: "${MODEL_IDENT_CODE}"
+      system_diff_code: "A"
+      system_code: "28"
+
+    batch:
+      parallel: 5
+      on_failure: "abort"
+
+  # -------------------------------------------------------------------------
+  # Stage 4: Validation
+  # -------------------------------------------------------------------------
+  - name: "validate"
+    description: "Validate generated content"
+    validators:
+      - type: "brex"
+        rules:
+          - "S1000D_5.0_DEFAULT"
+          - "${PROJECT_BREX}"
+        strict: true
+
+      - type: "schema"
+        schema_path: "schemas/s1000d/5.0/"
+
+      - type: "hydrogen_safety"
+        checks:
+          - "mandatory_warnings_present"
+          - "cryogenic_hazard_documented"
+          - "leak_detection_referenced"
+          - "emergency_procedures_linked"
+
+      - type: "cross_reference"
+        verify_links: true
+
+    on_failure: "abort"
+
+  # -------------------------------------------------------------------------
+  # Stage 5: Traceability
+  # -------------------------------------------------------------------------
+  - name: "trace"
+    description: "Build traceability matrix"
+    options:
+      generate_matrix: true
+      hash_algorithm: "SHA-256"
+      require_complete: true
+      format: "yaml"
+
+  # -------------------------------------------------------------------------
+  # Stage 6: Publication Assembly
+  # -------------------------------------------------------------------------
+  - name: "assemble"
+    description: "Assemble CSDB publication package"
+    outputs:
+      - type: "pm"
+        title: "ATA 28 Hydrogen Fuel System"
+      - type: "dml"
+        title: "Data Module List — ATA 28"
+      - type: "icn"
+        source: "graphics/"
+        optional: true
+
+  # -------------------------------------------------------------------------
+  # Stage 7: Rendering (optional)
+  # -------------------------------------------------------------------------
+  - name: "render"
+    description: "Generate human-readable outputs"
+    optional: true
+    formats:
+      - type: "html"
+        stylesheet: "ASIGT/renderers/s1000d_html.xslt"
+      - type: "pdf"
+        stylesheet: "ASIGT/renderers/s1000d_pdf.xslt"
+
+  # -------------------------------------------------------------------------
+  # Stage 8: Finalization
+  # -------------------------------------------------------------------------
+  - name: "finalize"
+    description: "Generate reports and archive"
+    steps:
+      - action: "generate_report"
+        format: "yaml"
+      - action: "archive"
+        immutable: true
+        retention: "7 years"

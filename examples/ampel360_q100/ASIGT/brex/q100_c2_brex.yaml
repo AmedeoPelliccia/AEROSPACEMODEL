@@ -1,0 +1,210 @@
+# =============================================================================
+# AMPEL360 Q100 — BREX Rules for C2 Circular Cryogenic Cells
+# =============================================================================
+# Project-specific BREX rules governing ATA 28 content for the
+# Circular Cryogenic Cells (C2) fuel system.
+# =============================================================================
+
+brex:
+  id: "Q100-BREX-C2-001"
+  version: "1.0.0"
+  title: "BREX Rules — C2 Circular Cryogenic Cells"
+  program: "AMPEL360 Q100"
+  ata_chapter: "28"
+  novel_technology: "C2_CIRCULAR_CRYOGENIC_CELLS"
+
+  authority:
+    owner: "ASIT"
+    approver: "STK_SAF"
+    effective_date: "2026-02-14"
+
+  parent_brex:
+    - "S1000D_5.0_DEFAULT"
+    - "ASIT-BREX-MASTER-001"
+
+  # ---------------------------------------------------------------------------
+  # C2-Specific BREX Decision Rules
+  # ---------------------------------------------------------------------------
+  rules:
+    # Structure Rules
+    - id: "C2-STRUCT-001"
+      name: "C2 domain classification required"
+      category: "structure"
+      condition: "ata_domain MUST be '28' for C2 content"
+      enforcement: "block"
+      message: "C2 Circular Cryogenic Cells content requires ATA 28 classification"
+
+    - id: "C2-STRUCT-002"
+      name: "C2 novel technology tag required"
+      category: "structure"
+      condition: "novel_technology MUST include 'C2_CIRCULAR_CRYOGENIC_CELLS'"
+      enforcement: "block"
+      message: "Content must be tagged with C2_CIRCULAR_CRYOGENIC_CELLS domain"
+
+    # Contract Rules
+    - id: "C2-CTR-001"
+      name: "C2 content requires approved contract"
+      category: "authority"
+      condition: "content generation requires contract matching 'KITDM-CTR-LM-CSDB_ATA28*'"
+      enforcement: "require_contract"
+      message: "C2 content generation requires KITDM-CTR-LM-CSDB_ATA28 contract"
+
+    # Safety Rules — Hydrogen
+    - id: "C2-SAFETY-001"
+      name: "Hydrogen explosion hazard warning mandatory"
+      category: "safety"
+      condition: "any procedure involving H₂ handling MUST include explosion hazard warning"
+      enforcement: "block"
+      warning_type: "EXPLOSION HAZARD"
+      warning_text: |
+        DANGER: Hydrogen is extremely flammable. Concentrations of 4-75%
+        in air are explosive. Ensure adequate ventilation. No open flames
+        or ignition sources within 15 meters.
+      message: "Hydrogen explosion hazard warning is mandatory"
+
+    - id: "C2-SAFETY-002"
+      name: "Cryogenic hazard warning mandatory"
+      category: "safety"
+      condition: "any procedure involving LH₂ contact MUST include cryogenic warning"
+      enforcement: "block"
+      warning_type: "CRYOGENIC HAZARD"
+      warning_text: |
+        DANGER: Liquid hydrogen at -253°C (-423°F). Contact causes severe
+        cryogenic burns and frostbite. Wear face shield, cryogenic gloves,
+        and protective apron.
+      message: "Cryogenic hazard warning is mandatory for LH₂ procedures"
+
+    - id: "C2-SAFETY-003"
+      name: "Leak detection documentation mandatory"
+      category: "safety"
+      condition: "C2 system documentation MUST reference leak detection"
+      enforcement: "block"
+      message: "H₂ leak detection system must be documented for all C2 content"
+
+    - id: "C2-SAFETY-004"
+      name: "Asphyxiation hazard warning for enclosed spaces"
+      category: "safety"
+      condition: "enclosed space procedures MUST include asphyxiation warning"
+      enforcement: "block"
+      warning_type: "ASPHYXIATION HAZARD"
+      warning_text: |
+        DANGER: Hydrogen displaces oxygen. Enclosed space entry requires
+        oxygen monitoring and ventilation. Follow confined space procedures.
+      message: "Asphyxiation hazard warning required for enclosed space procedures"
+
+    # Boil-Off Management Rules
+    - id: "C2-BOG-001"
+      name: "Boil-off rate monitoring required"
+      category: "operational"
+      condition: "C2 system MUST include boil-off rate monitoring"
+      enforcement: "block"
+      thresholds:
+        design_target: "< 0.5% per day"
+        warning: "> 0.8% per day"
+        alarm: "> 1.2% per day"
+      message: "Boil-off rate monitoring with defined thresholds is required"
+
+    - id: "C2-BOG-002"
+      name: "Boil-off exceedance requires escalation"
+      category: "operational"
+      condition: "boil-off rate exceeding alarm threshold MUST trigger escalation"
+      enforcement: "escalate"
+      escalation_target: "STK_SAF"
+      message: "Boil-off exceedance requires safety engineering escalation"
+
+    # Escalation Rules
+    - id: "C2-ESC-001"
+      name: "Hydrogen anomaly escalation mandatory"
+      category: "escalation"
+      condition: "any hydrogen-related anomaly MUST be escalated to STK_SAF"
+      enforcement: "escalate"
+      escalation_target: "STK_SAF"
+      timeout: "72 hours"
+      message: "Hydrogen anomalies require mandatory safety escalation"
+
+    - id: "C2-ESC-002"
+      name: "C2 cell repair requires recertification"
+      category: "escalation"
+      condition: "any C2 cell structural repair MUST trigger recertification"
+      enforcement: "escalate"
+      escalation_target: "CCB"
+      special_conditions:
+        - "SC-28-H2-001"
+        - "SC-28-CRYO-002"
+      message: "C2 cell repairs require CCB review and recertification"
+
+    # Lifecycle Rules
+    - id: "C2-LC-001"
+      name: "C2 content lifecycle state required"
+      category: "lifecycle"
+      condition: "C2 content MUST be in valid lifecycle state"
+      enforcement: "block"
+      valid_states:
+        - "LC01"  # Concept
+        - "LC02"  # Requirements
+        - "LC03"  # Architecture
+        - "LC04"  # Design
+        - "LC05"  # Implementation
+        - "LC06"  # Verification
+        - "LC07"  # Validation
+        - "LC08"  # Production
+        - "LC09"  # Delivery
+        - "LC10"  # In-Service
+      message: "C2 content must have valid lifecycle state"
+
+    # AI/ML Governance Rules
+    - id: "C2-AI-001"
+      name: "AI monitoring requires human oversight"
+      category: "ai_governance"
+      condition: "AI/ML predictions for C2 system MUST have human oversight"
+      enforcement: "escalate"
+      escalation_target: "STK_SAF"
+      eu_ai_act_category: "high_risk"
+      message: "AI/ML monitoring of safety-critical C2 system requires HITL"
+
+    - id: "C2-AI-002"
+      name: "AI model explainability required"
+      category: "ai_governance"
+      condition: "AI models for C2 monitoring MUST provide explainability"
+      enforcement: "block"
+      techniques:
+        - "SHAP"
+        - "LIME"
+        - "Feature importance"
+      message: "Explainability is mandatory for C2 AI/ML models"
+
+    # Material Compatibility Rules
+    - id: "C2-MAT-001"
+      name: "Cryogenic material compatibility required"
+      category: "design"
+      condition: "C2 wetted surfaces MUST use hydrogen-compatible cryogenic materials"
+      enforcement: "block"
+      approved_materials:
+        - "Stainless Steel 316L"
+        - "Aluminum Alloy 5083"
+        - "Aluminum Alloy 6061"
+        - "Inconel 718"
+        - "Inconel 625"
+        - "PTFE (Teflon)"
+      prohibited_materials:
+        - "Carbon Steel"
+        - "Standard Elastomers"
+      message: "Only approved cryogenic-compatible materials may be specified"
+
+  # ---------------------------------------------------------------------------
+  # Audit Requirements
+  # ---------------------------------------------------------------------------
+  audit:
+    format: "{timestamp} | RULE {rule_id} | {rule_name} | {status} | {context}"
+    required_entries:
+      - "Contract validation"
+      - "ATA domain verification"
+      - "Safety impact assessment"
+      - "BREX compliance check"
+      - "Trace coverage validation"
+      - "H₂ warning inclusion"
+      - "Cryogenic warning inclusion"
+      - "Leak detection documentation check"
+      - "Boil-off threshold verification"
+      - "AI governance compliance (if applicable)"
+    retention: "7 years minimum (certification)"
