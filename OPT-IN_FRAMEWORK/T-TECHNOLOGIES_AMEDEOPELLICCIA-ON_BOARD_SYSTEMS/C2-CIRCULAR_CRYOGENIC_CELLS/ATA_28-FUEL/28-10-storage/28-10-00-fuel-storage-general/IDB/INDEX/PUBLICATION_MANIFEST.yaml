@@ -1,0 +1,28 @@
+# ============================================================
+# Publication Manifest — ATA 28-10-00 Fuel Storage General
+# ============================================================
+
+publications:
+  AMM:
+    version: "0.1.0"
+    status: "STRUCTURE_ONLY"
+    last_generated: null
+    path: "IDB/PUB/AMM/"
+
+  SRM:
+    version: "0.1.0"
+    status: "STRUCTURE_ONLY"
+    last_generated: null
+    path: "IDB/PUB/SRM/"
+
+  CMM:
+    version: "0.1.0"
+    status: "STRUCTURE_ONLY"
+    last_generated: null
+    path: "IDB/PUB/CMM/"
+
+  IPC:
+    version: "0.1.0"
+    status: "STRUCTURE_ONLY"
+    last_generated: null
+    path: "IDB/PUB/IPC/"

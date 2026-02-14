@@ -1,0 +1,10 @@
+# ============================================================
+# Baseline Reference — ATA 28-10-00 Fuel Storage General
+# ============================================================
+
+baseline:
+  baseline_id: "BL-28-10-00-001"
+  type: "INITIAL"
+  established_date: "2026-02-14"
+  source: "KDB/LM/SSOT/PLM"
+  description: "Initial baseline — IDB structure established"
