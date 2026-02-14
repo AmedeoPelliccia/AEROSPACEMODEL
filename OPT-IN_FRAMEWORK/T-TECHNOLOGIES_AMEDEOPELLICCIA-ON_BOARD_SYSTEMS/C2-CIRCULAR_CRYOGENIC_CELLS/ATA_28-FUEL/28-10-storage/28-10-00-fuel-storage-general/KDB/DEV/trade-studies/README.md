@@ -20,6 +20,13 @@
 | `CS25_compliance_matrix.yaml` | EASA CS-25 compliance matrix (YAML, machine-readable) | 23 reqs + 6 Special Conditions |
 | `CS25_compliance_matrix.md` | EASA CS-25 compliance matrix (Markdown, human-readable) | — |
 
+## Promotion to SSOT
+
+The Functional Baseline **FBL-Q100-ATA28-001** (in `KDB/LM/SSOT/`)
+defines the acceptance criteria for promoting these trade study outputs.
+All seven promotion gates (FBL-GATE-001 through FBL-GATE-007) must be
+satisfied before content moves from DEV to SSOT.
+
 ## Governance
 
 These trade studies reside in `KDB/DEV/trade-studies/` and are **not

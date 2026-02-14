@@ -1,0 +1,260 @@
+# Functional Baseline — FBL-Q100-ATA28-001
+# AMPEL360 Q100 BWB Hydrogen Fuel Storage System
+# ATA 28-10-00 Fuel Storage General — C2 Circular Cryogenic Cells
+#
+# This baseline defines the accepted functional architecture and the
+# acceptance criteria that trade study findings must satisfy before
+# promotion from KDB/DEV into KDB/LM/SSOT.
+
+baseline_id: "FBL-Q100-ATA28-001"
+title: "Functional Baseline — LH₂ Fuel Storage Architecture"
+ata_code: "28-10-00"
+technology_domain: "C2"
+aircraft_program: "AMPEL360 Q100"
+baseline_type: "FBL"
+lifecycle_phase: "LC04"
+status: "established"
+date: "2026-02-14"
+version: "1.0.0"
+approver: "CCB / STK_SAF"
+brex_profile: "AEROSPACEMODEL-PRJ-01"
+
+# =========================================================================
+# 1. Architecture Decisions (from trade studies)
+# =========================================================================
+architecture_decisions:
+
+  - decision_id: "FBL-DEC-001"
+    trade_study_ref: "TS-28-10-TS01"
+    topic: "Tank cross-section geometry"
+    selected_option: "A — Circular Cylinder"
+    baseline_name: "Circular Cryogenic Cell (CCC)"
+    key_rationale:
+      - "Uniform hoop stress (σ_hoop = P·r / t) — lowest structural risk"
+      - "Predictable cryogenic thermal behaviour"
+      - "Deterministic modelling compatibility (5D addressable tank states)"
+      - "Compatible with modular distributed storage (zones 610–640)"
+      - "Proven certification path (NASA, Airbus ZEROe heritage)"
+
+  - decision_id: "FBL-DEC-002"
+    trade_study_ref: "TS-28-10-TS02"
+    topic: "Storage architecture"
+    selected_option: "C — Multi-Cell Distributed"
+    baseline_name: "Distributed Circular Cryogenic Cells"
+    key_rationale:
+      - "Excellent CG stability"
+      - "High redundancy — zonal isolation (fire / leak containment)"
+      - "Aligned with ZNNN 600–699 hazard zoning"
+      - "Aligned with modular propulsion architecture (500–599)"
+      - "Deterministic isolation logic (5D system state s-dimension)"
+
+  - decision_id: "FBL-DEC-003"
+    trade_study_ref: "TS-28-10-TS03"
+    topic: "Insulation concept"
+    selected_option: "A — Vacuum + MLI"
+    baseline_name: "Vacuum-Jacketed Multi-Layer Insulation"
+    key_rationale:
+      - "Heritage from existing cryogenic systems"
+      - "Predictable boil-off modelling"
+      - "Highest TRL among candidates"
+
+# =========================================================================
+# 2. Functional Requirements (FBL scope)
+# =========================================================================
+functional_requirements:
+
+  - req_id: "FBL-REQ-001"
+    title: "Tank geometry shall be circular cylindrical"
+    category: "structural"
+    acceptance: "Cross-section is circular; stress report demonstrates uniform hoop stress"
+    verification: "Analysis + Inspection"
+
+  - req_id: "FBL-REQ-002"
+    title: "Storage shall use distributed multi-cell architecture"
+    category: "architecture"
+    acceptance: "Minimum 3 independent LH₂ cells distributed across BWB centerbody zones 610–640"
+    verification: "Design review + Analysis"
+
+  - req_id: "FBL-REQ-003"
+    title: "Insulation shall be vacuum-jacketed MLI"
+    category: "thermal"
+    acceptance: "Boil-off rate ≤ 0.1 %/h under cruise thermal environment"
+    verification: "Analysis + Test"
+
+  - req_id: "FBL-REQ-004"
+    title: "Zonal isolation shall provide independent containment"
+    category: "safety"
+    acceptance: "Each cell independently isolatable; single-cell leak does not propagate"
+    verification: "Analysis (FHA/FMEA) + Test"
+
+  - req_id: "FBL-REQ-005"
+    title: "System shall comply with CS-25 + Special Conditions SC-LH2-01 to SC-LH2-06"
+    category: "certification"
+    acceptance: "All 23 CS-25 requirements and 6 SC-LH2 items addressed in compliance matrix"
+    verification: "Review + Analysis"
+
+  - req_id: "FBL-REQ-006"
+    title: "Materials shall be cryogenic-compatible per CS 25.603 / 25.605"
+    category: "materials"
+    acceptance: "All wetted materials qualified for -253 °C service; no embrittlement susceptibility"
+    verification: "Test + Analysis"
+
+  - req_id: "FBL-REQ-007"
+    title: "Vent and relief system shall prevent over-pressure"
+    category: "safety"
+    acceptance: "Relief valve sizing covers normal and abnormal boil-off; vent plume analysis complete"
+    verification: "Analysis + Test"
+
+  - req_id: "FBL-REQ-008"
+    title: "H₂ leak detection shall cover all potential leak points"
+    category: "safety"
+    acceptance: "Sensor coverage verified for all enclosed spaces and interfaces"
+    verification: "Inspection + Test"
+
+  - req_id: "FBL-REQ-009"
+    title: "CG impact shall remain within certified envelope"
+    category: "performance"
+    acceptance: "CG shift due to fuel burn within ±2 % MAC of nominal for all mission phases"
+    verification: "Analysis"
+
+  - req_id: "FBL-REQ-010"
+    title: "Structural fatigue life shall meet cryogenic cycling target"
+    category: "structural"
+    acceptance: "Damage tolerance substantiation per CS 25.571 for cryogenic thermal cycles"
+    verification: "Analysis + Test"
+
+# =========================================================================
+# 3. Acceptance Criteria for DEV → SSOT Promotion
+# =========================================================================
+promotion_criteria:
+
+  description: >
+    All items below must be satisfied before trade study outputs and
+    their derived functional requirements can be promoted from
+    KDB/DEV to KDB/LM/SSOT.
+
+  gates:
+    - gate_id: "FBL-GATE-001"
+      title: "BREX Validation"
+      description: "All YAML artifacts pass BREX rules (AEROSPACEMODEL-PRJ-01 + C2-*)"
+      authority: "ASIT"
+      mandatory: true
+
+    - gate_id: "FBL-GATE-002"
+      title: "Traceability Completeness"
+      description: >
+        Every trade study selection is traced to at least one WBS work
+        package (derives_from) and one functional requirement (satisfies).
+      authority: "STK_CM"
+      mandatory: true
+
+    - gate_id: "FBL-GATE-003"
+      title: "Safety Review"
+      description: >
+        STK_SAF has reviewed all safety-critical decisions (zonal
+        isolation, leak detection, vent/relief, materials compatibility)
+        and signed off or raised escalations.
+      authority: "STK_SAF"
+      mandatory: true
+
+    - gate_id: "FBL-GATE-004"
+      title: "Engineering Approval"
+      description: >
+        STK_ENG has reviewed architecture decisions (geometry,
+        distribution, insulation) and confirmed technical adequacy.
+      authority: "STK_ENG"
+      mandatory: true
+
+    - gate_id: "FBL-GATE-005"
+      title: "CS-25 Compliance Mapping"
+      description: >
+        Compliance matrix covers all applicable CS-25 paragraphs and
+        Special Conditions SC-LH2-01 through SC-LH2-06 with identified
+        MoC and evidence artefacts.
+      authority: "STK_ENG / DER"
+      mandatory: true
+
+    - gate_id: "FBL-GATE-006"
+      title: "Open Risks Documented"
+      description: >
+        All open technical risks are recorded with mitigations assigned
+        and accepted by the CCB for the current lifecycle phase.
+      authority: "CCB"
+      mandatory: true
+
+    - gate_id: "FBL-GATE-007"
+      title: "ECR/ECO Submission"
+      description: >
+        An Engineering Change Request (ECR) referencing FBL-Q100-ATA28-001
+        has been approved by the CCB before content promotion.
+      authority: "CCB"
+      mandatory: true
+
+# =========================================================================
+# 4. Evaluation Criteria (inherited from trade studies)
+# =========================================================================
+evaluation_criteria:
+  - name: "Structural efficiency"
+    weight_pct: 25
+  - name: "Safety"
+    weight_pct: 25
+  - name: "Thermal performance"
+    weight_pct: 20
+  - name: "Certification maturity"
+    weight_pct: 15
+  - name: "Integration in BWB"
+    weight_pct: 15
+
+# =========================================================================
+# 5. Open Technical Risks (accepted for current phase)
+# =========================================================================
+open_risks:
+  - id: "RISK-01"
+    description: "Cryogenic fatigue in cyclic mission profiles"
+    mitigation: "LC05 FEA analysis + coupon testing"
+  - id: "RISK-02"
+    description: "Slosh modelling under BWB pitch dynamics"
+    mitigation: "LC05 CFD simulation + scale-model test"
+  - id: "RISK-03"
+    description: "Vent plume interaction with empennage-less architecture"
+    mitigation: "LC05 plume dispersion analysis"
+  - id: "RISK-04"
+    description: "Lightning zoning interaction (ATA 24 / ATA 06)"
+    mitigation: "LC04 zonal hazard analysis update"
+  - id: "RISK-05"
+    description: "Maintenance access in 600-series zones"
+    mitigation: "LC04 maintainability study"
+
+# =========================================================================
+# 6. Traceability
+# =========================================================================
+traceability:
+  derives_from:
+    - "TS-28-10-TS01"
+    - "TS-28-10-TS02"
+    - "TS-28-10-TS03"
+    - "CM-28-10-CS25"
+  satisfies:
+    - "WP-28-01"
+    - "WP-28-03"
+    - "WP-28-05"
+  feeds:
+    - lifecycle: "LC03"
+      artifact: "Safety FHA/PSSA update"
+    - lifecycle: "LC05"
+      artifact: "FEA, thermal transient, slosh simulations"
+    - lifecycle: "LC06"
+      artifact: "Qualification test plans"
+    - lifecycle: "LC08"
+      artifact: "Type certification documentation"
+
+# =========================================================================
+# 7. Evidence Package (required for baseline establishment)
+# =========================================================================
+evidence_package:
+  - "TS-28-10-TS01_geometry.yaml"
+  - "TS-28-10-TS02_distributed_architecture.yaml"
+  - "TS-28-10-TS03_insulation.yaml"
+  - "evaluation_criteria.yaml"
+  - "CS25_compliance_matrix.yaml"
+  - "FBL-Q100-ATA28-001.yaml (this document)"
