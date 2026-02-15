@@ -34,7 +34,7 @@ Chronological record of uncertainty discovery and resolution activity.
 - `KNU-28-10-00-TEST-001` — Cryo-fatigue coupon test plan (LC06, STK_TEST)
 - `KNU-28-10-00-TEST-002` — Execute cryo-fatigue coupon tests (LC06, STK_TEST)
 - `KNU-28-10-00-CM-001` — Configuration baseline update (LC08, STK_CM)
-- `KNU-28-10-00-PUB-DM-002` — S1000D descriptive data module (PUB/AMM/CSDB/DM, STK_CM)
+- `KNU-28-10-00-PUB-DM-002` — S1000D descriptive data module (IDB/PUB/AMM/CSDB/DM, STK_CM)
 
 **Total planned effort:** 68 person-days  
 **Plan file:** `KDB/LM/SSOT/PLM/LC01_PROBLEM_STATEMENT/KNU_PLAN_OKNOT002.csv`  
