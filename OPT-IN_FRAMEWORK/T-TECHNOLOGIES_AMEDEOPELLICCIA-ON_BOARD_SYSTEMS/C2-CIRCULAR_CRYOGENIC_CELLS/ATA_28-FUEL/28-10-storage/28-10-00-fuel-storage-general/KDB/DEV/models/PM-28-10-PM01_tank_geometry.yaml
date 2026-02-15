@@ -33,13 +33,19 @@ parameters:
     name: "Wall thickness"
     unit: "mm"
     range: [1.5, 6.0]
-    description: "Minimum wall thickness driven by hoop stress and fatigue"
+    description: "Minimum wall thickness driven by von Mises stress and fatigue"
 
-  - symbol: "P_design"
-    name: "Design pressure"
+  - symbol: "P_limit"
+    name: "Limit pressure"
     unit: "bar"
     range: [2.0, 6.0]
-    description: "Maximum operating pressure including relief margin"
+    description: "Design max operating pressure including margins (limit load case)"
+
+  - symbol: "P_ultimate"
+    name: "Ultimate pressure"
+    unit: "bar"
+    derived: "P_ultimate = 1.5 * P_limit"
+    description: "Ultimate pressure per CS 25.305 (1.5 × limit)"
 
   - symbol: "L"
     name: "Cylinder length"
@@ -47,11 +53,17 @@ parameters:
     range: [1.0, 6.0]
     description: "Barrel length excluding end-caps"
 
-  - symbol: "sigma_allow"
-    name: "Allowable stress"
+  - symbol: "sigma_allow_limit"
+    name: "Allowable stress (limit)"
     unit: "MPa"
     range: [120, 450]
-    description: "Material allowable at -253 °C (cryogenic service)"
+    description: "Material allowable at -253 °C for limit load case"
+
+  - symbol: "sigma_allow_ult"
+    name: "Allowable stress (ultimate)"
+    unit: "MPa"
+    range: [120, 450]
+    description: "Material allowable at -253 °C for ultimate load case"
 
   - symbol: "rho_mat"
     name: "Material density"
@@ -59,46 +71,95 @@ parameters:
     range: [2700, 8000]
     description: "Structural material density (Al-alloy to stainless steel range)"
 
+  - symbol: "eta_j"
+    name: "Joint efficiency factor"
+    unit: "–"
+    range: [0.6, 1.0]
+    description: "Weld / joint efficiency knockdown factor"
+
 governing_equations:
+  - name: "Pressure conversion"
+    expression: "P [Pa] = P [bar] * 1e5"
+    notes: "All equations use SI units internally"
+
+  - name: "Thin-wall validity gate"
+    expression: "t_w / r_i <= 0.10"
+    notes: "If violated, switch to thick-wall (Lamé) model"
+
   - name: "Hoop stress"
-    expression: "sigma_hoop = P_design * r_i / t_w"
-    constraint: "sigma_hoop <= sigma_allow / SF"
-    notes: "SF = 1.5 for limit load; 2.0 for ultimate (CS 25.305)"
+    expression: "sigma_hoop = P * r_i / t_w"
+    notes: "Thin-wall membrane hoop stress (closed-end cylinder)"
 
   - name: "Longitudinal stress"
-    expression: "sigma_long = P_design * r_i / (2 * t_w)"
-    constraint: "sigma_long <= sigma_allow / SF"
+    expression: "sigma_long = P * r_i / (2 * t_w)"
+    notes: "Thin-wall membrane longitudinal stress"
 
-  - name: "Minimum wall thickness"
-    expression: "t_w_min = P_design * r_i * SF / sigma_allow"
-    notes: "Derived from hoop stress requirement"
+  - name: "Von Mises equivalent stress"
+    expression: "sigma_vM = sqrt(3)/2 * P * r_i / t_w"
+    constraint_limit: "sigma_vM(P_limit) <= sigma_allow_limit"
+    constraint_ultimate: "sigma_vM(P_ultimate) <= sigma_allow_ult"
+    notes: "More robust than hoop-only; derived from sigma_theta^2 + sigma_z^2 - sigma_theta*sigma_z"
+
+  - name: "Minimum wall thickness (von Mises, limit)"
+    expression: "t_w_min = sqrt(3)/2 * P_limit * r_i / (eta_j * sigma_allow_limit)"
+    notes: "Includes joint efficiency factor eta_j; apply max(t_w_min, t_mfg, t_NDE, t_corr)"
 
   - name: "Shell mass (barrel)"
     expression: "m_barrel = 2 * pi * r_i * t_w * L * rho_mat"
-    notes: "Excludes end-caps"
+    notes: "Thin-shell mid-surface approximation"
 
   - name: "End-cap mass (hemispherical)"
-    expression: "m_endcap = 4 * pi * r_i^2 * t_w * rho_mat / 2"
-    notes: "Two hemispherical end-caps per cell; t_w/2 for hemi-sphere"
+    expression: "m_endcap = 4 * pi * r_i^2 * t_w * rho_mat"
+    notes: "Two hemispheres = full sphere surface area 4*pi*r^2"
+
+  - name: "Total shell mass"
+    expression: "m_total = 2 * pi * rho_mat * t_w * (r_i * L + 2 * r_i^2)"
+    notes: "Barrel + endcaps combined"
 
   - name: "Internal volume"
     expression: "V_int = pi * r_i^2 * L + (4/3) * pi * r_i^3"
     notes: "Cylinder barrel + two hemispheres"
 
+  - name: "External surface area"
+    expression: "A_ext = 2 * pi * r_i * L + 4 * pi * r_i^2"
+    notes: "Relevant for thermal/MLI trade (links to PM-28-10-PM02)"
+
   - name: "Volumetric efficiency"
     expression: "eta_vol = V_int / V_envelope"
     notes: "V_envelope = bounding box of insulated assembly"
 
+  - name: "Thick-wall hoop stress (Lamé, if t_w/r_i > 0.10)"
+    expression: "sigma_theta(r_i) = P * (r_o^2 + r_i^2) / (r_o^2 - r_i^2)"
+    notes: "r_o = r_i + t_w; use when thin-wall validity gate is violated"
+
 optimisation:
-  objective_function: "Minimise m_total = m_barrel + m_endcap"
+  objective_function: >
+    Minimise J = m_total
+    + lambda_L * max(0, L - L_max)^2
+    + lambda_A * (A_ext - A_target)^2
+  objective_notes: >
+    Multi-objective: mass + length penalty + surface-area penalty.
+    Area term connects to MLI heat-leak trade (PM-28-10-PM02 / KNU-C2-001).
+    Under pure stress-limited thin-wall sizing (t_w proportional to P*r_i/sigma),
+    mass scales as V/pi + (2/3)*r_i^3, which is monotonic in r_i.
+    Therefore the optimisation collapses to min-radius unless additional
+    constraints (max length, max area, bay geometry, feed hardware clearance)
+    are active.
   constraints:
-    - "sigma_hoop <= sigma_allow / SF"
-    - "t_w >= t_w_min"
+    - "sigma_vM(P_limit) <= sigma_allow_limit"
+    - "sigma_vM(P_ultimate) <= sigma_allow_ult"
+    - "t_w / r_i <= 0.10 (thin-wall validity)"
+    - "t_w >= max(t_w_min, t_mfg, t_NDE, t_corr)"
     - "V_int >= V_required"
-    - "Fatigue life >= N_cycles (CS 25.571 target)"
+    - "Fatigue life >= N_cycles (CS 25.571 pressure cycle spectrum)"
     - "r_i <= r_envelope (BWB bay clearance)"
+    - "L <= L_max (bay length constraint)"
+    - "Leak-before-burst fracture control at cryo (damage tolerance)"
+    - "P_proof and P_burst margins vs relief set points"
+    - "Buckling under external pressure (vacuum jacket outer shell)"
+    - "Thermal contraction mismatch at bi-material interfaces"
   design_variables: ["r_i", "L", "t_w"]
-  method: "Gradient-based + parametric sweep"
+  method: "Gradient-based + parametric sweep + multi-objective Pareto"
 
 material_candidates:
   - id: "MAT-A"

@@ -27,29 +27,70 @@ requirements per CS 25.571.
 | Symbol | Name | Unit | Range | Description |
 |--------|------|------|-------|-------------|
 | $r_i$ | Internal radius | m | 0.3–1.2 | Inner radius of the circular cylindrical shell |
-| $t_w$ | Wall thickness | mm | 1.5–6.0 | Minimum wall driven by hoop stress and fatigue |
-| $P_{\mathrm{design}}$ | Design pressure | bar | 2.0–6.0 | Max operating pressure incl. relief margin |
+| $t_w$ | Wall thickness | mm | 1.5–6.0 | Minimum wall driven by von Mises stress and fatigue |
+| $P_{\mathrm{limit}}$ | Limit pressure | bar | 2.0–6.0 | Design max operating pressure incl. margins |
+| $P_{\mathrm{ultimate}}$ | Ultimate pressure | bar | derived | $1.5 \times P_{\mathrm{limit}}$ per CS 25.305 |
 | $L$ | Cylinder length | m | 1.0–6.0 | Barrel length excluding end-caps |
-| $\sigma_{\mathrm{allow}}$ | Allowable stress | MPa | 120–450 | Material allowable at −253 °C |
+| $\sigma_{\mathrm{allow,limit}}$ | Allowable stress (limit) | MPa | 120–450 | Material allowable at −253 °C, limit case |
+| $\sigma_{\mathrm{allow,ult}}$ | Allowable stress (ultimate) | MPa | 120–450 | Material allowable at −253 °C, ultimate case |
 | $\rho_{\mathrm{mat}}$ | Material density | kg/m³ | 2700–8000 | Structural material density range |
+| $\eta_j$ | Joint efficiency | – | 0.6–1.0 | Weld / joint efficiency knockdown |
 
 ---
 
 ## Governing Equations
 
-### Hoop stress (thin-wall)
+### Pressure convention (CS 25.305)
+
+- $P_{\mathrm{limit}}$ = design max operating pressure including margins
+- $P_{\mathrm{ultimate}} = 1.5\,P_{\mathrm{limit}}$
+- Allowables defined separately for limit and ultimate checks
+- Pressure conversion: $P\;[\mathrm{Pa}] = P\;[\mathrm{bar}] \times 10^5$
+
+### Thin-wall validity gate
 
 $$
-\sigma_{\mathrm{hoop}} = \frac{P_{\mathrm{design}} \cdot r_i}{t_w}
-\;\le\; \frac{\sigma_{\mathrm{allow}}}{\mathrm{SF}}
+\frac{t_w}{r_i} \le 0.10
 $$
 
-SF = 1.5 (limit), 2.0 (ultimate) per CS 25.305.
+If violated, switch to thick-wall (Lamé) model.
 
-### Minimum wall thickness
+### Membrane stresses (thin-wall, closed ends)
 
 $$
-t_{w,\min} = \frac{P_{\mathrm{design}} \cdot r_i \cdot \mathrm{SF}}{\sigma_{\mathrm{allow}}}
+\sigma_{\theta} = \frac{P\,r_i}{t_w}
+\qquad
+\sigma_{z} = \frac{P\,r_i}{2\,t_w}
+$$
+
+### Von Mises equivalent stress
+
+$$
+\sigma_{\mathrm{vM}}
+= \sqrt{\sigma_{\theta}^2 + \sigma_{z}^2 - \sigma_{\theta}\,\sigma_{z}}
+= \frac{\sqrt{3}}{2}\,\frac{P\,r_i}{t_w}
+$$
+
+Constraints:
+
+$$
+\sigma_{\mathrm{vM}}(P_{\mathrm{limit}}) \le \sigma_{\mathrm{allow,limit}}
+$$
+
+$$
+\sigma_{\mathrm{vM}}(P_{\mathrm{ultimate}}) \le \sigma_{\mathrm{allow,ult}}
+$$
+
+### Minimum wall thickness (von Mises, limit, with joint efficiency)
+
+$$
+t_{w,\min} = \frac{\sqrt{3}}{2}\,\frac{P_{\mathrm{limit}}\,r_i}{\eta_j\,\sigma_{\mathrm{allow,limit}}}
+$$
+
+Applied thickness:
+
+$$
+t_w \ge \max\!\big(t_{w,\min},\; t_{\mathrm{mfg}},\; t_{\mathrm{NDE}},\; t_{\mathrm{corr}}\big)
 $$
 
 ### Shell mass (barrel + hemispherical end-caps)
@@ -59,7 +100,11 @@ m_{\mathrm{barrel}} = 2\pi\, r_i\, t_w\, L\, \rho_{\mathrm{mat}}
 $$
 
 $$
-m_{\mathrm{endcap}} = 2\pi\, r_i^2\, t_w\, \rho_{\mathrm{mat}}
+m_{\mathrm{endcap}} = 4\pi\, r_i^2\, t_w\, \rho_{\mathrm{mat}}
+$$
+
+$$
+m_{\mathrm{total}} = 2\pi\,\rho_{\mathrm{mat}}\,t_w\!\left(r_i\,L + 2\,r_i^2\right)
 $$
 
 ### Internal volume
@@ -68,19 +113,56 @@ $$
 V_{\mathrm{int}} = \pi\, r_i^2\, L + \tfrac{4}{3}\pi\, r_i^3
 $$
 
+### External surface area
+
+$$
+A_{\mathrm{ext}} = 2\pi\,r_i\,L + 4\pi\,r_i^2
+$$
+
+Relevant for thermal/MLI trade (links to PM-28-10-PM02 / KNU-C2-001).
+
+### Thick-wall option (Lamé, if $t_w/r_i > 0.10$)
+
+$$
+\sigma_{\theta}(r_i) = P\,\frac{r_o^2 + r_i^2}{r_o^2 - r_i^2}
+\qquad (r_o = r_i + t_w)
+$$
+
 ---
 
 ## Optimisation Formulation
 
-**Minimise:** $m_{\mathrm{total}} = m_{\mathrm{barrel}} + m_{\mathrm{endcap}}$
+**Minimise:**
+
+$$
+J = m_{\mathrm{total}}
++ \lambda_L\,\max(0,\,L - L_{\max})^2
++ \lambda_A\,(A_{\mathrm{ext}} - A_{\mathrm{target}})^2
+$$
+
+The area penalty connects directly to the KNU-C2-001 MLI layer optimisation
+workstream (heat leak scales with $A_{\mathrm{ext}}$ and vacuum/MLI quality).
+
+> **Note:** Under pure stress-limited thin-wall sizing ($t_w \propto P\,r_i/\sigma$),
+> mass scales as $V/\pi + \tfrac{2}{3}r_i^3$, which is monotonic increasing in
+> $r_i$.  The optimum therefore collapses to min-radius unless additional
+> constraints (max length, max area, bay geometry, feed hardware clearance) are
+> active.  Multi-objective formulation is required.
 
 **Subject to:**
 
-- $\sigma_{\mathrm{hoop}} \le \sigma_{\mathrm{allow}} / \mathrm{SF}$
-- $t_w \ge t_{w,\min}$
+- $\sigma_{\mathrm{vM}}(P_{\mathrm{limit}}) \le \sigma_{\mathrm{allow,limit}}$
+- $\sigma_{\mathrm{vM}}(P_{\mathrm{ultimate}}) \le \sigma_{\mathrm{allow,ult}}$
+- $t_w / r_i \le 0.10$ (thin-wall validity)
+- $t_w \ge \max(t_{w,\min},\,t_{\mathrm{mfg}},\,t_{\mathrm{NDE}},\,t_{\mathrm{corr}})$
 - $V_{\mathrm{int}} \ge V_{\mathrm{required}}$
-- Fatigue life $\ge N_{\mathrm{cycles}}$ (CS 25.571 target)
+- Fatigue life $\ge N_{\mathrm{cycles}}$ (CS 25.571 pressure cycle spectrum)
 - $r_i \le r_{\mathrm{envelope}}$ (BWB bay clearance)
+- $L \le L_{\max}$ (bay length constraint)
+- Leak-before-burst / fracture control at cryo (damage tolerance philosophy)
+- $P_{\mathrm{proof}}$, $P_{\mathrm{burst}}$ margins tied to relief set points
+- Buckling under external pressure (vacuum jacket outer shell)
+- Thermal contraction mismatch at bi-material interfaces
 
 **Design variables:** $r_i$, $L$, $t_w$
 
