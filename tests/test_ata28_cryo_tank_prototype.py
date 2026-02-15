@@ -200,7 +200,7 @@ class TestPrototypeReadme:
         assert "C2" in readme
 
     def test_not_baselined_disclaimer(self, readme):
-        assert "NOT baselined" in readme or "not baselined" in readme.lower()
+        assert "not baselined" in readme.lower()
 
     def test_lists_all_layers(self, readme):
         assert "Inner Pressure Vessel" in readme
