@@ -12,7 +12,7 @@ lifecycle_phase: "LC05"
 status: "preliminary"
 author: "STK_ENG"
 date: "2026-02-15"
-version: "0.1.1"
+version: "0.1.2"
 
 objective: >
   Define the thermal stack-up model for vacuum-jacketed multi-layer
@@ -22,6 +22,7 @@ objective: >
   to estimate boil-off and size insulation per TS-28-10-TS03 (Option A).
 
 parameters:
+  # --- Design variables ---
   - symbol: "N_layers"
     name: "Number of reflective shields (layers)"
     unit: "–"
@@ -32,8 +33,9 @@ parameters:
     name: "Layer packing density"
     unit: "layers/cm"
     range: [5, 20]
-    description: "Installed packing density; typical optimum band 8–12 layers/cm"
+    description: "Installed packing density; typical optimum band 8-12 layers/cm"
 
+  # --- Boundary conditions ---
   - symbol: "T_h"
     name: "Warm boundary temperature"
     unit: "K"
@@ -44,7 +46,7 @@ parameters:
     name: "Cold boundary temperature"
     unit: "K"
     range: [20, 25]
-    description: "LH₂ tank wall temperature (~20 K for para-hydrogen)"
+    description: "LH2 tank wall temperature (~20 K for para-hydrogen)"
 
   - symbol: "P_vac"
     name: "Vacuum pressure"
@@ -52,12 +54,14 @@ parameters:
     range: [1.0e-6, 1.0e-3]
     description: "Residual gas pressure in the vacuum annulus"
 
+  # --- Geometry ---
   - symbol: "A_CCC"
     name: "CCC external surface area"
-    unit: "m²"
+    unit: "m^2"
     range: [5, 80]
     description: "Total insulated surface area of one cell"
 
+  # --- Integration loss inputs ---
   - symbol: "L_seam"
     name: "Total seam length"
     unit: "m"
@@ -70,67 +74,118 @@ parameters:
     range: [2, 20]
     description: "Count of strut / feedthrough penetrations"
 
+  # --- Model coefficients (must be declared for deterministic execution) ---
+  - symbol: "C_r"
+    name: "Radiation constant"
+    unit: "W/(m^2 K^4.67)"
+    default: 5.39e-10
+    description: "Lockheed radiation constant for DAM/Mylar reflectors"
+
+  - symbol: "epsilon_eff"
+    name: "Effective emissivity"
+    unit: "–"
+    default: 0.031
+    range: [0.01, 0.10]
+    description: "Effective emissivity of reflector/spacer assembly"
+
+  - symbol: "C_s"
+    name: "Solid conduction coefficient"
+    unit: "W/(m^2 K (layers/cm)^2.63)"
+    default: 8.95e-8
+    description: "McIntosh coefficient for Dacron net spacer conduction"
+
+  - symbol: "C_g"
+    name: "Gas conduction coefficient"
+    unit: "W/(m^2 K torr)"
+    default: 1.46
+    description: "Free-molecule gas conduction coefficient (N2 or residual air)"
+
+  - symbol: "k_seam"
+    name: "Seam linear conductance"
+    unit: "W/m"
+    default: 0.169
+    description: "NASA measured seam heat leak per meter for 30-layer MLI with LH2 sink"
+
+  - symbol: "q_pen_avg"
+    name: "Average penetration heat leak"
+    unit: "W"
+    default: 0.40
+    range: [0.31, 0.50]
+    description: "Per-penetration heat leak (composite-aluminium strut range, NASA calorimetry)"
+
+  - symbol: "h_fg"
+    name: "Latent heat of vaporisation"
+    unit: "J/kg"
+    default: 447000
+    description: "Para-hydrogen at 20 K (NIST); 447 kJ/kg"
+
+  # --- Installation quality factor ---
+  - symbol: "I_install"
+    name: "Installation loss factor"
+    unit: "–"
+    default: 1.0
+    range: [1.0, 2.0]
+    description: >
+      Multiplicative penalty on blanket heat flux to represent
+      workmanship, compression, and edge effects.  1.0 = ideal;
+      1.3-1.6 typical for flight hardware.
+
 governing_equations:
   - name: "Radiation heat flux (modified Lockheed MLI model)"
     expression: >
       q_rad = C_r * epsilon_eff * (T_h^4.67 - T_c^4.67) / N_layers
-    unit: "W/m²"
+    unit: "W/m^2"
     notes: >
-      C_r = radiation constant; epsilon_eff = effective emissivity of
-      reflector/spacer assembly.  Exponent 4.67 from Lockheed fit
-      accounts for radiation + solid conduction coupling.
+      Exponent 4.67 from Lockheed fit accounts for radiation + solid
+      conduction coupling.
 
   - name: "Solid conduction heat flux (Dacron spacer)"
     expression: >
       q_cond = C_s * n_density^2.63 * (T_h - T_c) / N_layers
-    unit: "W/m²"
+    unit: "W/m^2"
     notes: >
-      C_s = McIntosh conductivity coefficient; n_density dependence
-      captures contact pressure effect on inter-layer conduction.
+      n_density dependence captures contact pressure effect on
+      inter-layer conduction.
 
   - name: "Residual gas conduction heat flux"
     expression: >
       q_gas = C_g * P_vac * (T_h - T_c)
-    unit: "W/m²"
+    unit: "W/m^2"
     notes: >
       Free-molecule regime conduction; linear in pressure.  Dominant
       only when P_vac > ~1E-4 torr.  This is a heat flux term (per
       unit area), not a total heat rate.
 
-  - name: "Total blanket heat flux"
+  - name: "Total blanket heat flux (with installation factor)"
     expression: >
-      q_MLI = q_rad + q_cond + q_gas
-    unit: "W/m²"
-    notes: "Sum of all areal heat flux contributions through the MLI blanket"
+      q_MLI = I_install * (q_rad + q_cond + q_gas)
+    unit: "W/m^2"
+    notes: >
+      I_install accounts for workmanship/compression losses.
+      Set I_install = 1.0 for ideal blanket.
 
   - name: "Seam heat leak (additive, total rate)"
     expression: >
       Q_dot_seam = k_seam * L_seam
     unit: "W"
-    notes: >
-      k_seam ≈ 0.169 W/m (NASA measured value for 30-layer MLI with
-      LH₂ sink).  This is a total heat rate adder, not per-area.
+    notes: "Total heat rate adder, not per-area."
 
   - name: "Penetration heat leak (additive, total rate)"
     expression: >
       Q_dot_pen = n_pen * q_pen_avg
     unit: "W"
-    notes: >
-      q_pen_avg ≈ 0.31–0.50 W per penetration (composite–aluminium
-      strut range from NASA calorimetry).  Total heat rate adder.
+    notes: "Total heat rate adder."
 
   - name: "Total cell heat leak rate"
     expression: >
       Q_dot_total = A_CCC * q_MLI + Q_dot_seam + Q_dot_pen
     unit: "W"
-    notes: "Blanket areal flux × area + integration loss adders"
+    notes: "Blanket areal flux x area + integration loss adders"
 
   - name: "Boil-off mass flow rate"
     expression: >
       m_dot_boil = Q_dot_total / h_fg
     unit: "kg/s"
-    notes: >
-      h_fg ≈ 447 kJ/kg for para-hydrogen at 20 K (NIST).
 
 optimisation:
   objective_function: "Minimise Q_dot_total subject to mass and thickness constraints"
@@ -141,6 +196,11 @@ optimisation:
     - "Total MLI mass <= m_MLI_budget"
   design_variables: ["N_layers", "n_density"]
   method: "Parametric sweep + Monte Carlo sensitivity"
+  knee_criterion: >
+    Optimal N_layers defined as the point where
+    |d(q_MLI)/d(N_layers)| < 0.5 W/(m^2 layer) for the cruise
+    reference case (diminishing-returns knee).  This is a
+    deterministic threshold, not a visual estimate.
 
 reference_cases:
   - case: "Ground hot-day"
@@ -163,13 +223,13 @@ reference_cases:
 
 outputs:
   - name: "Optimal layer count"
-    description: "N_layers at heat-leak knee (~55 ± 15 layers)"
+    description: "N_layers at diminishing-returns knee per knee_criterion"
   - name: "Heat flux vs N_layers curve"
-    description: "q_MLI(N_layers) [W/m²] for each reference case"
+    description: "q_MLI(N_layers) [W/m^2] for each reference case"
   - name: "Boil-off rate map"
     description: "m_dot_boil [kg/s] vs N_layers for each reference case"
   - name: "Seam/penetration budget"
-    description: "Maximum allowable seam length and penetration count to stay within Q_dot budget"
+    description: "Maximum allowable seam length and penetration count within Q_dot budget"
   - name: "Vacuum sensitivity"
     description: "Q_dot_total [W] vs P_vac at nominal N_layers"
 

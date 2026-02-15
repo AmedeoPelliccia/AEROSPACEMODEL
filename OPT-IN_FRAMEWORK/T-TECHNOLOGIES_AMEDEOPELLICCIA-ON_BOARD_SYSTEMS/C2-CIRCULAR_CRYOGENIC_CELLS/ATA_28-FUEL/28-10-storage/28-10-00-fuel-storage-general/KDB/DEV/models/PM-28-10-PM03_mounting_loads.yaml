@@ -12,7 +12,7 @@ lifecycle_phase: "LC05"
 status: "preliminary"
 author: "STK_ENG"
 date: "2026-02-15"
-version: "0.1.0"
+version: "0.1.1"
 
 objective: >
   Define the structural analysis model for cryogenic cell mounting and
@@ -21,6 +21,114 @@ objective: >
   with CS 25.561 (emergency landing), CS 25.571 (fatigue and damage
   tolerance), and DO-160 vibration requirements while accommodating
   cryogenic thermal contraction.
+
+analysis_policy:
+  load_classification:
+    limit_loads:
+      description: "Loads expected in service without permanent deformation"
+      includes: ["thermal_cycling", "normal_ops_static"]
+    ultimate_loads:
+      description: "Emergency / crash loads; structure must not fail"
+      includes: ["crash"]
+      ultimate_factor: 1.5
+  combined_case_rule: >
+    Combined load cases (LC-COMB-*) apply superposition of constituent
+    cases.  Thermal pre-stress from LC-THERM-01 is added algebraically
+    to crash inertia loads before margin evaluation.  The most
+    conservative result (max principal stress or von Mises) governs.
+
+mass_properties:
+  - symbol: "m_cell"
+    name: "Cell total mass (filled)"
+    unit: "kg"
+    range: [200, 2000]
+    description: "Tank structure + LH2 fill; drives crash inertia loads"
+
+  - symbol: "CG"
+    name: "Cell centre of gravity"
+    unit: "[m, m, m]"
+    description: "CG position in aircraft body frame [x_CG, y_CG, z_CG]; TBD from PM-01 geometry"
+
+  - symbol: "I_xx"
+    name: "Moment of inertia (roll)"
+    unit: "kg m^2"
+    description: "Mass moment of inertia about longitudinal axis"
+
+  - symbol: "I_yy"
+    name: "Moment of inertia (pitch)"
+    unit: "kg m^2"
+    description: "Mass moment of inertia about lateral axis"
+
+  - symbol: "I_zz"
+    name: "Moment of inertia (yaw)"
+    unit: "kg m^2"
+    description: "Mass moment of inertia about vertical axis"
+
+  - symbol: "I_tensor_note"
+    name: "Inertia tensor note"
+    description: >
+      Full 3x3 tensor to be derived from FEA mass model once PM-01
+      geometry is frozen.  Off-diagonal terms assumed negligible for
+      symmetric cylindrical cell at preliminary level.
+
+cte_parameters:
+  - symbol: "alpha_tank"
+    name: "CTE of tank wall material"
+    unit: "1/K"
+    default: 22.5e-6
+    description: "Mean CTE 293-20 K; Al 5083 default (MAT-A from PM-01)"
+
+  - symbol: "alpha_mount"
+    name: "CTE of mount / airframe interface material"
+    unit: "1/K"
+    default: 11.5e-6
+    description: "Mean CTE 293-20 K; steel or composite strut default"
+
+  - symbol: "Delta_T"
+    name: "Temperature excursion"
+    unit: "K"
+    default: -273
+    description: "293 K (ambient) to 20 K (LH2); negative = contraction"
+
+  - symbol: "L_mount_span"
+    name: "Mount span (distance between fixed and sliding supports)"
+    unit: "m"
+    range: [1.0, 6.0]
+    description: "Distance over which differential contraction acts"
+
+  - symbol: "delta_thermal"
+    name: "Thermal mismatch displacement (analytical)"
+    unit: "m"
+    derived: "delta_thermal = (alpha_tank - alpha_mount) * Delta_T * L_mount_span"
+    description: >
+      Quick-check differential contraction at mount interface.
+      Positive = tank contracts more than mount structure.
+
+mount_heat_leak:
+  description: >
+    Each mount point conducts heat from the warm structure to the cold
+    tank.  This must stay within the thermal budget allocated by PM-02.
+  expression: "Q_dot_mount = n_mounts * k_strut * A_strut * (T_h - T_c) / L_strut"
+  unit: "W"
+  parameters:
+    - symbol: "n_mounts"
+      name: "Number of mount points"
+      unit: "–"
+      range: [3, 8]
+    - symbol: "k_strut"
+      name: "Strut thermal conductivity"
+      unit: "W/(m K)"
+      range: [0.3, 15]
+      description: "Composite strut ~0.3; steel ~15"
+    - symbol: "A_strut"
+      name: "Strut cross-section area"
+      unit: "m^2"
+      range: [1.0e-4, 1.0e-2]
+    - symbol: "L_strut"
+      name: "Strut length"
+      unit: "m"
+      range: [0.1, 0.5]
+  constraint: "Q_dot_mount <= Q_dot_mount_budget (from PM-28-10-PM02 allocation)"
 
 load_cases:
   - id: "LC-VIB-01"
@@ -31,6 +139,8 @@ load_cases:
     frequency_range: [10, 2000]
     frequency_unit: "Hz"
     duration: "60 min equivalent"
+    psd_placeholder: "TBD — populate with DO-160G Table 8-1 breakpoints"
+    damping: "zeta = 0.02 (2% critical; default for metallic structure)"
     description: "In-service random vibration during flight phases"
 
   - id: "LC-VIB-02"
@@ -41,6 +151,8 @@ load_cases:
     frequency_range: [5, 500]
     frequency_unit: "Hz"
     duration: "30 min equivalent"
+    psd_placeholder: "TBD — populate with DO-160G Table 8-1 breakpoints"
+    damping: "zeta = 0.02"
     description: "Ground operations vibration including taxi and take-off roll"
 
   - id: "LC-CRASH-01"
@@ -49,6 +161,7 @@ load_cases:
     standard: "CS 25.561"
     load_factor_g: 9.0
     direction: "Forward"
+    applied_force: "F = m_cell * 9.0 * 9.81 [N] at CG"
     description: "Ultimate forward emergency landing load"
 
   - id: "LC-CRASH-02"
@@ -57,6 +170,7 @@ load_cases:
     standard: "CS 25.561"
     load_factor_g: 6.0
     direction: "Downward"
+    applied_force: "F = m_cell * 6.0 * 9.81 [N] at CG"
     description: "Ultimate downward emergency landing load"
 
   - id: "LC-CRASH-03"
@@ -65,6 +179,7 @@ load_cases:
     standard: "CS 25.561"
     load_factor_g: 3.0
     direction: "Lateral"
+    applied_force: "F = m_cell * 3.0 * 9.81 [N] at CG"
     description: "Ultimate lateral emergency landing load"
 
   - id: "LC-CRASH-04"
@@ -73,6 +188,7 @@ load_cases:
     standard: "CS 25.561"
     load_factor_g: 1.5
     direction: "Aft"
+    applied_force: "F = m_cell * 1.5 * 9.81 [N] at CG"
     description: "Ultimate rearward emergency landing load"
 
   - id: "LC-THERM-01"
@@ -82,7 +198,7 @@ load_cases:
     T_cryo: 20
     delta_T: -273
     temperature_unit: "K"
-    description: "Thermal contraction from ambient to LH₂ operating temperature"
+    description: "Thermal contraction from ambient to LH2 operating temperature"
 
   - id: "LC-THERM-02"
     name: "Mission thermal cycle"
@@ -98,6 +214,7 @@ load_cases:
     type: "combined"
     description: "Crash load factors applied with tank at cryogenic temperature (worst case)"
     components: ["LC-CRASH-01", "LC-THERM-01"]
+    superposition: "Algebraic addition of thermal pre-stress + crash inertia"
 
 mount_concepts:
   - id: "MNT-A"
@@ -132,6 +249,25 @@ mount_concepts:
     crash_retention: "Frame shear-web design"
     heritage: "Aircraft fuselage tank integration"
 
+trade_matrix:
+  description: >
+    Weighted evaluation of mount concepts.  Weights must sum to 1.0.
+    Score each concept 1-5 per criterion; weighted total selects winner.
+  criteria:
+    - name: "Mass"
+      weight: 0.25
+    - name: "Thermal isolation"
+      weight: 0.20
+    - name: "Crash retention margin"
+      weight: 0.20
+    - name: "Thermal contraction accommodation"
+      weight: 0.15
+    - name: "Manufacturing complexity"
+      weight: 0.10
+    - name: "Heritage / TRL"
+      weight: 0.10
+  scoring: "1 = worst, 5 = best; populate in LC05 detailed assessment"
+
 analysis_methods:
   - name: "Modal analysis"
     description: "Finite-element natural frequency and mode shape extraction"
@@ -144,12 +280,12 @@ analysis_methods:
     output: "RMS stress, acceleration at mount points"
 
   - name: "Static crash analysis"
-    description: "Inertia relief analysis under CS 25.561 load factors"
+    description: "Inertia relief analysis under CS 25.561 load factors applied at CG"
     tool: "FEA (NASTRAN SOL 101)"
     output: "Mount reaction forces, stress distribution, margins of safety"
 
   - name: "Thermal stress analysis"
-    description: "Contraction-induced stresses at mount interfaces"
+    description: "Contraction-induced stresses at mount interfaces using CTE parameters"
     tool: "FEA (NASTRAN SOL 153 or coupled thermal-structural)"
     output: "Interface forces, sliding pad displacements, stress at constraints"
 
@@ -161,30 +297,47 @@ analysis_methods:
 acceptance_criteria:
   - criterion: "Natural frequency > 25 Hz (mounted)"
     standard: "DO-160G avoidance of airframe resonance bands"
+    load_type: "limit"
 
-  - criterion: "Positive margin of safety under all CS 25.561 crash cases"
+  - criterion: "Positive margin of safety under all CS 25.561 crash cases at ultimate"
     standard: "CS 25.561 / CS 25.562"
+    load_type: "ultimate"
+    notes: "MS = (allowable / applied) - 1 >= 0 at 1.5x limit"
 
-  - criterion: "Thermal cycling fatigue life >= 2× design service life"
+  - criterion: "No yielding under limit crash loads"
+    standard: "CS 25.305"
+    load_type: "limit"
+
+  - criterion: "Thermal cycling fatigue life >= 2x design service life"
     standard: "CS 25.571"
+    load_type: "limit"
 
   - criterion: "Mount heat leak <= allocated thermal budget per support"
     standard: "Thermal interface control (PM-28-10-PM02 budget)"
+    load_type: "operational"
 
-  - criterion: "No yielding under combined crash + cryogenic loads"
-    standard: "CS 25.305 (safety factors applied)"
+  - criterion: "No yielding under combined crash + cryogenic at limit"
+    standard: "CS 25.305"
+    load_type: "limit"
+
+  - criterion: "No failure under combined crash + cryogenic at ultimate"
+    standard: "CS 25.305"
+    load_type: "ultimate"
+    notes: "Ultimate = 1.5x limit crash loads + thermal pre-stress"
 
 outputs:
   - name: "Mount concept trade matrix"
-    description: "Weighted evaluation of MNT-A / MNT-B / MNT-C"
+    description: "Weighted evaluation of MNT-A / MNT-B / MNT-C per trade_matrix criteria"
   - name: "Reaction force envelopes"
     description: "Max mount forces for each load case"
   - name: "Thermal displacement map"
-    description: "Contraction displacements at each mount station"
+    description: "Contraction displacements at each mount station (delta_thermal + FEA)"
   - name: "Fatigue life prediction"
     description: "Cycles to crack initiation at critical mount locations"
   - name: "Vibration response spectra"
     description: "Tank acceleration vs frequency under DO-160 excitation"
+  - name: "Mount heat leak summary"
+    description: "Q_dot_mount per concept vs PM-02 thermal budget"
 
 feeds:
   - lifecycle: "LC06"

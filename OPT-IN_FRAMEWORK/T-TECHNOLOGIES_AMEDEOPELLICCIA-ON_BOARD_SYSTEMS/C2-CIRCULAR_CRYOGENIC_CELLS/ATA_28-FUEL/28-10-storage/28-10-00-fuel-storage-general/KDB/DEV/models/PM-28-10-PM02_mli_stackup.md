@@ -19,7 +19,7 @@ as a function of layer count, installation density, vacuum level,
 boundary temperatures, and integration losses (seams and penetrations)
 to estimate boil-off and size insulation per TS-28-10-TS03 (Option A).
 
-> **Unit convention:** $q$ terms are heat flux [W/m²]; $\dot Q$ terms
+> **Unit convention:** $q$ terms are heat flux [W/m^2]; $\dot Q$ terms
 > are total heat rate [W].  Integration losses (seams, penetrations)
 > are additive heat rate terms [W], not per-area.
 
@@ -27,16 +27,29 @@ to estimate boil-off and size insulation per TS-28-10-TS03 (Option A).
 
 ## Design Parameters
 
-| Symbol | Name | Unit | Range | Description |
-|--------|------|------|-------|-------------|
+| Symbol | Name | Unit | Range / Default | Description |
+|--------|------|------|-----------------|-------------|
 | $N_{\mathrm{layers}}$ | Number of reflective shields | – | 20–100 | MLI blanket layer count |
-| $n_{\mathrm{density}}$ | Layer packing density | layers/cm | 5–20 | Optimal ≈ 8–12 layers/cm |
+| $n_{\mathrm{density}}$ | Layer packing density | layers/cm | 5–20 | Optimal 8–12 layers/cm |
 | $T_h$ | Warm boundary temperature | K | 235–320 | Vacuum jacket outer wall |
-| $T_c$ | Cold boundary temperature | K | 20–25 | LH₂ tank wall (~20 K) |
-| $P_{\mathrm{vac}}$ | Vacuum pressure | torr | 10⁻⁶–10⁻³ | Residual gas pressure |
-| $A_{\mathrm{CCC}}$ | CCC external surface area | m² | 5–80 | Total insulated area per cell |
+| $T_c$ | Cold boundary temperature | K | 20–25 | LH2 tank wall (~20 K) |
+| $P_{\mathrm{vac}}$ | Vacuum pressure | torr | 1E-6 – 1E-3 | Residual gas pressure |
+| $A_{\mathrm{CCC}}$ | CCC external surface area | m^2 | 5–80 | Total insulated area per cell |
 | $L_{\mathrm{seam}}$ | Total seam length | m | 0–50 | Cumulative blanket joint length |
 | $n_{\mathrm{pen}}$ | Penetration count | – | 2–20 | Strut / feedthrough penetrations |
+
+### Model Coefficients
+
+| Symbol | Name | Unit | Default | Description |
+|--------|------|------|---------|-------------|
+| $C_r$ | Radiation constant | W/(m^2 K^4.67) | 5.39E-10 | Lockheed radiation constant |
+| $\varepsilon_{\mathrm{eff}}$ | Effective emissivity | – | 0.031 | Reflector/spacer assembly |
+| $C_s$ | Solid conduction coeff. | W/(m^2 K (layers/cm)^2.63) | 8.95E-8 | McIntosh Dacron spacer coeff. |
+| $C_g$ | Gas conduction coeff. | W/(m^2 K torr) | 1.46 | Free-molecule (N2/air) |
+| $k_{\mathrm{seam}}$ | Seam linear conductance | W/m | 0.169 | NASA 30-layer MLI, LH2 sink |
+| $q_{\mathrm{pen,avg}}$ | Avg penetration heat leak | W | 0.40 | Composite–Al strut range |
+| $h_{fg}$ | Latent heat of vaporisation | J/kg | 447 000 | Para-H2 at 20 K (NIST) |
+| $I_{\mathrm{install}}$ | Installation loss factor | – | 1.0 (range 1.0–2.0) | Workmanship / compression penalty |
 
 ---
 
@@ -65,25 +78,25 @@ $$
 
 This is a heat flux (per unit area), not a total heat rate.
 
-### Total blanket heat flux
+### Total blanket heat flux (with installation factor)
 
 $$
-q_{\mathrm{MLI}} = q_{\mathrm{rad}} + q_{\mathrm{cond}} + q_{\mathrm{gas}}
+q_{\mathrm{MLI}} = I_{\mathrm{install}} \cdot \bigl(q_{\mathrm{rad}} + q_{\mathrm{cond}} + q_{\mathrm{gas}}\bigr)
 \quad [\mathrm{W/m^2}]
 $$
+
+$I_{\mathrm{install}} = 1.0$ for ideal blanket; 1.3–1.6 typical for flight hardware.
 
 ### Integration losses (additive heat rate terms)
 
 $$
 \dot Q_{\mathrm{seam}} = k_{\mathrm{seam}} \cdot L_{\mathrm{seam}}
 \quad [\mathrm{W}]
-\quad (k_{\mathrm{seam}} \approx 0.169\;\text{W/m})
 $$
 
 $$
 \dot Q_{\mathrm{pen}} = n_{\mathrm{pen}} \cdot q_{\mathrm{pen,avg}}
 \quad [\mathrm{W}]
-\quad (q_{\mathrm{pen,avg}} \approx 0.31\text{–}0.50\;\text{W})
 $$
 
 ### Total cell heat leak rate
@@ -98,7 +111,6 @@ $$
 $$
 \dot m_{\mathrm{boil}} = \frac{\dot Q_{\mathrm{total}}}{h_{fg}}
 \quad [\mathrm{kg/s}]
-\quad (h_{fg} \approx 447\;\text{kJ/kg for para-H}_2\text{ at 20 K})
 $$
 
 ---
@@ -107,9 +119,9 @@ $$
 
 | Case | $T_h$ (K) | $T_c$ (K) | $P_{\mathrm{vac}}$ (torr) | Notes |
 |------|-----------|-----------|---------------------------|-------|
-| Ground hot-day | 320 | 20 | 10⁻⁵ | Worst-case boil-off |
-| Cruise | 250 | 20 | 10⁻⁵ | Nominal operations |
-| Degraded vacuum | 280 | 20 | 10⁻⁴ | Vacuum-loss sensitivity |
+| Ground hot-day | 320 | 20 | 1E-5 | Worst-case boil-off |
+| Cruise | 250 | 20 | 1E-5 | Nominal operations |
+| Degraded vacuum | 280 | 20 | 1E-4 | Vacuum-loss sensitivity |
 
 ---
 
@@ -126,14 +138,18 @@ $$
 
 **Design variables:** $N_{\mathrm{layers}}$, $n_{\mathrm{density}}$
 
+**Knee criterion:** Optimal $N_{\mathrm{layers}}$ defined as the point where
+$|d(q_{\mathrm{MLI}})/d(N_{\mathrm{layers}})| < 0.5$ W/(m^2 layer) for the
+cruise reference case (diminishing-returns threshold, deterministic).
+
 ---
 
 ## Outputs
 
 | Output | Description |
 |--------|-------------|
-| Optimal layer count | $N_{\mathrm{layers}}$ at heat-leak knee (~55 ± 15 layers) |
-| Heat flux vs $N_{\mathrm{layers}}$ curve | $q_{\mathrm{MLI}}$ [W/m²] for each reference case |
+| Optimal layer count | $N_{\mathrm{layers}}$ at diminishing-returns knee per knee criterion |
+| Heat flux vs $N_{\mathrm{layers}}$ curve | $q_{\mathrm{MLI}}$ [W/m^2] for each reference case |
 | Boil-off rate map | $\dot m_{\mathrm{boil}}$ [kg/s] vs $N_{\mathrm{layers}}$ for each reference case |
 | Seam / penetration budget | Max allowable seam length and penetration count within $\dot Q$ budget |
 | Vacuum sensitivity | $\dot Q_{\mathrm{total}}$ [W] vs $P_{\mathrm{vac}}$ at nominal $N_{\mathrm{layers}}$ |
