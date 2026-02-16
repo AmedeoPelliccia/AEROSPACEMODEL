@@ -172,7 +172,7 @@ governance_rules:
     message: "No silent gate override in safety branches"
 
   - id: "MTL-GOV-004"
-    condition: "Operational optimisations must preserve labour continuity"
+    condition: "Operational optimizations must preserve labour continuity"
     enforcement: "escalate"
     escalation_target: "STK_OPS"
     message: "Labour continuity constraint applies"
