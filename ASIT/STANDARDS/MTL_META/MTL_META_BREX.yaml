@@ -137,9 +137,9 @@ contract_rules:
 # -----------------------------------------------------------------------------
 traceability_rules:
   - id: "MTL-TRACE-001"
-    condition: "Every L1/L2 token MUST have trace.derives_from"
+    condition: "Every L1/L2 token MUST have trace.derives_from and trace.feeds"
     enforcement: "block"
-    message: "Subject and method tokens require traceability"
+    message: "Subject and method tokens require derives_from and feeds traceability links"
 
   - id: "MTL-TRACE-002"
     condition: "Every L3 token MUST reference at least one L2 or L1 token"
