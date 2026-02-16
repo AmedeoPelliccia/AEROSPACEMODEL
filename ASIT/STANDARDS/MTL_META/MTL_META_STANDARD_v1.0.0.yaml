@@ -1,0 +1,310 @@
+# =============================================================================
+# META TRANSFORMATION LAYERS (MTL) — Core Standard
+# Standard ID: MTL-META-CORE
+# Version: 1.0.0
+# =============================================================================
+#
+# PURPOSE:
+#   Define a domain-agnostic, reusable architecture that converts any learnable
+#   or tokenisable process into verified, traceable, trainable token layers.
+#
+# SCOPE:
+#   Universal — applies to ATA aerospace, robotics, MRO, certification,
+#   PAL (Program Assembly Lines), RTM (Requirements Traceability), and
+#   ASI (Artificial Superintelligence) training pipelines.
+#
+# ALIAS:
+#   "Motion Transmission Lever" when the domain is physical / robotic.
+#
+# COMPLIANCE:
+#   S1000D Issue 5.0 (structural alignment)
+#   DO-178C / ARP4754A / ARP4761 (safety domains)
+#   EU AI Act (AI-specific risk categories)
+#
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# METADATA
+# -----------------------------------------------------------------------------
+metadata:
+  standard_id: "MTL-META-CORE"
+  title: "Meta Transformation Layers Core Standard"
+  version: "1.0.0"
+  status: "DRAFT"
+  classification: "Framework Standard"
+
+  created_date: "2026-02-16"
+  effective_date: "2026-02-16"
+
+  author: "ASIT Configuration Management"
+  approved_by: ""
+  approval_reference: ""
+
+  compliance:
+    - "S1000D Issue 5.0"
+    - "DO-178C"
+    - "ARP4754A"
+    - "ARP4761"
+    - "EU AI Act"
+
+  determinism_level: "strict"
+  audit_required: true
+  replay_capable: true
+
+# -----------------------------------------------------------------------------
+# DEFINITION
+# -----------------------------------------------------------------------------
+definition: |
+  Meta Transformation Layers (MTL) is a system of semantic stratification
+  that converts a process — human, digital, or physical — into:
+
+    1. Domain context representation        (L5)
+    2. Structural resolution                (L4)
+    3. Composed procedures                  (L3)
+    4. Atomic transformation methods        (L2)
+    5. Subject / evidence units             (L1)
+
+  Every artefact carries full traceability, governance metadata, and is
+  suitable for direct AI-model training, so the model learns on the same
+  tokens it later consumes in execution.
+
+# -----------------------------------------------------------------------------
+# LAYERS
+# -----------------------------------------------------------------------------
+layers:
+  - id: "L5"
+    name: "Domain Context Token"
+    purpose: "Identify which system or problem is being solved"
+    token_pattern: "CTX-{DOMAIN}-{SYS}"
+    ata_28_equivalent: "SDR-28 (System Domain Resolver)"
+    examples:
+      - "CTX-AERO-28"
+      - "CTX-ROB-LINE"
+      - "CTX-MRO-ENG"
+
+  - id: "L4"
+    name: "Structure Resolver Token"
+    purpose: "Identify which component or sub-process applies"
+    token_pattern: "STR-{DOMAIN}-{SYS}-{COMP}"
+    ata_28_equivalent: "SCR-28-{SS} (Section/Component Resolver)"
+    examples:
+      - "STR-AERO-28-11"
+      - "STR-ROB-LINE-ST04"
+      - "STR-MRO-ENG-HPT"
+
+  - id: "L3"
+    name: "Procedure Composer Token"
+    purpose: "End-to-end flow of steps, hand-offs, and gates"
+    token_pattern: "PRC-{DOMAIN}-{SYS}-{SEQ}"
+    ata_28_equivalent: "STP-28-11-{SEQ} (Standard Token Procedure)"
+    examples:
+      - "PRC-AERO-28-001"
+      - "PRC-ROB-LINE-012"
+      - "PRC-MRO-ENG-005"
+
+  - id: "L2"
+    name: "Transformation Method Token"
+    purpose: "Formulas, rules, models, heuristics — validated atomic methods"
+    token_pattern: "XFM-{DOMAIN}-{SYS}-{CLASS}-{SEQ}"
+    ata_28_equivalent: "MTP-28-11-{DOM}-{SEQ} (Process/Scaling Method)"
+    examples:
+      - "XFM-AERO-28-THRM-001"
+      - "XFM-ROB-LINE-KIN-003"
+      - "XFM-MRO-ENG-MATL-010"
+
+  - id: "L1"
+    name: "Subject / Evidence Token"
+    purpose: "Facts, criteria, constraints, evidences — atomic knowledge units"
+    token_pattern: "SBJ-{DOMAIN}-{SYS}-{CLASS}-{SEQ}"
+    ata_28_equivalent: "MTK-28-11-{DOM}-{SEQ} (Subject Token)"
+    examples:
+      - "SBJ-AERO-28-TS-001"
+      - "SBJ-ROB-LINE-QA-014"
+      - "SBJ-MRO-ENG-SAFE-003"
+
+# -----------------------------------------------------------------------------
+# TOKEN CONTRACT SCHEMA
+# -----------------------------------------------------------------------------
+token_contract:
+  description: |
+    Every token, regardless of domain, must include the following minimum
+    contract so that it is machine-tokenisable and suitable for learning.
+  required_fields:
+    - field: "token_id"
+      type: "string"
+      description: "Unique identifier following layer token pattern"
+    - field: "layer"
+      type: "enum"
+      allowed: ["L1", "L2", "L3", "L4", "L5"]
+      description: "Layer this token belongs to"
+    - field: "name"
+      type: "string"
+      description: "Human-readable name"
+    - field: "intent"
+      type: "string"
+      description: "What the token achieves"
+    - field: "inputs"
+      type: "array"
+      description: "Typed inputs with units"
+    - field: "outputs"
+      type: "array"
+      description: "Typed outputs with units"
+    - field: "acceptance_gates"
+      type: "array"
+      description: "Machine-evaluable pass/fail criteria"
+    - field: "governance"
+      type: "object"
+      description: "Owner role, status, version"
+  optional_fields:
+    - field: "method_class"
+      type: "string"
+      description: "L2-class taxonomy code (e.g. KIN, THRM)"
+    - field: "assumptions"
+      type: "array"
+      description: "Simplifying assumptions"
+    - field: "constraints"
+      type: "array"
+      description: "Hard constraints"
+    - field: "failure_modes"
+      type: "array"
+      description: "Known failure modes"
+    - field: "trace"
+      type: "object"
+      description: "derives_from and feeds references"
+
+# -----------------------------------------------------------------------------
+# METHOD CLASS TAXONOMY (L2)
+# -----------------------------------------------------------------------------
+method_classes:
+  description: |
+    Stable taxonomy of L2 transformation-method families.  Models can be
+    trained per family and then composed at L3.
+  classes:
+    - id: "GEOM"
+      name: "Geometry / Spatial"
+    - id: "KIN"
+      name: "Kinematics"
+    - id: "DYN"
+      name: "Dynamics"
+    - id: "THRM"
+      name: "Thermal"
+    - id: "MATL"
+      name: "Materials"
+    - id: "CTRL"
+      name: "Control"
+    - id: "QUAL"
+      name: "Quality / Metrology"
+    - id: "SAFE"
+      name: "Safety"
+    - id: "CERT"
+      name: "Certification"
+    - id: "EVAL"
+      name: "Evaluation / Optimisation"
+    - id: "OPS"
+      name: "Operations"
+    - id: "MRO"
+      name: "Maintenance / Repair"
+
+# -----------------------------------------------------------------------------
+# DOMAIN PROFILES
+# -----------------------------------------------------------------------------
+domain_profiles:
+  description: |
+    Meta Transformation Layers is the global framework.
+    Domain profiles are specialisations that inherit and extend it.
+  profiles:
+    - profile_id: "AERO"
+      name: "Aerospace (ATA-aligned)"
+      description: "S1000D / ATA chapter-based aerospace systems"
+      existing_implementation: "ATA 28-11 5D token architecture"
+    - profile_id: "ROB"
+      name: "Robotics / Motion Transmission Lever"
+      description: "Kinematics, actuators, force/torque transmission, mechatronic MRO"
+      alias: "Motion Transmission Lever"
+    - profile_id: "MRO"
+      name: "Maintenance, Repair, Overhaul"
+      description: "Cross-domain maintenance and repair operations"
+    - profile_id: "CERT"
+      name: "Certification / Compliance"
+      description: "Regulatory compliance workflows"
+    - profile_id: "PAL"
+      name: "Program Assembly Line"
+      description: "Software and integration pipeline governance"
+
+# -----------------------------------------------------------------------------
+# INVARIANTS
+# -----------------------------------------------------------------------------
+invariants:
+  description: "Global properties that must hold for any MTL deployment"
+  rules:
+    - id: "INV-001"
+      name: "Deterministic Replay"
+      statement: "Given token_id + version, execution output is deterministic"
+    - id: "INV-002"
+      name: "Full Traceability"
+      statement: "Every token has a derives_from or feeds reference"
+    - id: "INV-003"
+      name: "Machine-Evaluable Gates"
+      statement: "All acceptance_gates can be evaluated without human input"
+    - id: "INV-004"
+      name: "Model-Token Version Lock"
+      statement: "MODEL.token_version == TOKEN_LIBRARY.version"
+
+# -----------------------------------------------------------------------------
+# GOVERNANCE POLICIES
+# -----------------------------------------------------------------------------
+governance:
+  policies:
+    - id: "GOV-001"
+      name: "Hard Version Lock"
+      statement: "MODEL.token_version == TOKEN_LIBRARY.version"
+      enforcement: "block"
+    - id: "GOV-002"
+      name: "Deny by Default for Autonomy"
+      statement: "No autonomous execution without explicit approval"
+      enforcement: "block"
+    - id: "GOV-003"
+      name: "No Silent Gate Override"
+      statement: "Safety/harm-sensitive branches cannot bypass gates"
+      enforcement: "escalate"
+      escalation_target: "STK_SAF"
+    - id: "GOV-004"
+      name: "Labour Continuity Constraint"
+      statement: "Operational optimisations must not eliminate labour without review"
+      enforcement: "escalate"
+      escalation_target: "STK_OPS"
+
+# -----------------------------------------------------------------------------
+# CANONICAL LEARNING RULE
+# -----------------------------------------------------------------------------
+learning_rule:
+  statement: |
+    The model learns on the same tokens it later consumes in execution.
+  benefits:
+    - "Zero semantic drift between training and deployment"
+    - "Deterministic replay by token + version"
+    - "Complete decision traceability"
+    - "Automatic evidence for audit and certification"
+
+# -----------------------------------------------------------------------------
+# COMPATIBILITY
+# -----------------------------------------------------------------------------
+compatibility:
+  ata_28_mapping:
+    description: "Backward-compatible mapping to existing ATA 28-11 5D tokens"
+    layer_map:
+      L5: "D5 / SDR-{ATA}"
+      L4: "D4 / SCR-{ATA}-{SS}"
+      L3: "D3 / STP-{ATA}-{SS}-{SEQ}"
+      L2: "D2 / MTP-{ATA}-{SS}-{DOM}-{SEQ}"
+      L1: "D1 / MTK-{ATA}-{SS}-{DOM}-{SEQ}"
+
+# -----------------------------------------------------------------------------
+# SUMMARY
+# -----------------------------------------------------------------------------
+summary:
+  total_layers: 5
+  total_method_classes: 12
+  total_invariants: 4
+  total_governance_policies: 4
+  total_domain_profiles: 5
