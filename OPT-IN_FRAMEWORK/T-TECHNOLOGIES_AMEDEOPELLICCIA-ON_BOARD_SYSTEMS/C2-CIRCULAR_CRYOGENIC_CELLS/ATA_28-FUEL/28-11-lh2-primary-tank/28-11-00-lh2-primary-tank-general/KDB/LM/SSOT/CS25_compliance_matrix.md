@@ -8,7 +8,7 @@
 | Technology Domain | C2 — Circular Cryogenic Cells |
 | Aircraft Programme | AMPEL360 Q100 |
 | Lifecycle Phase | LC04 (Design Definition) |
-| Status | Preliminary (DEV — not baselined) |
+| Status | **Promoted** (SSOT — ECR-ATA28-11-CS25-SSOT-001) |
 
 > **Note:** CS-25 is written for conventional fuels.  For LH₂ primary
 > tank storage an additional package of **Special Conditions (SC)**, Issue
@@ -101,10 +101,9 @@ covered) and require explicit Special Conditions agreed with EASA:
 
 ## Governance
 
-This compliance matrix resides in `KDB/DEV/trade-studies/` and is **not
-baselined**.  Promotion to `KDB/LM/SSOT/` requires:
+This compliance matrix has been **promoted to SSOT** via
+**ECR-ATA28-11-CS25-SSOT-001** and resides in `KDB/LM/SSOT/`.
 
-- BREX validation
-- Trace coverage verification
-- STK_ENG / STK_SAF approval
-- ECR submission via `GOVERNANCE/CHANGE_CONTROL/`
+- **Source:** `KDB/DEV/trade-studies/CS25_compliance_matrix.yaml`
+- **ECR:** `GOVERNANCE/CHANGE_CONTROL/ECR/ECR-ATA28-11-CS25-SSOT-001.md`
+- **Baseline:** BL-28-11-CS25-001 (FBL, pending STK_SAF review)
