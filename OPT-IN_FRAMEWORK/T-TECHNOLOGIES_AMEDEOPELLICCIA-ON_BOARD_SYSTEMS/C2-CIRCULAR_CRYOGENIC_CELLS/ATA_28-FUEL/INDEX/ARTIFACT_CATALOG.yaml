@@ -77,6 +77,20 @@ artifact_types:
     formats: ["yaml", "md"]
     description: "Standard Token Procedures — composed MTK+MTP tokens as single-token end-to-end procedures"
 
+  section_component_resolvers:
+    count: 1
+    location: "28-11-lh2-primary-tank/28-11-00-lh2-primary-tank-general/KDB/DEV/mtl/"
+    naming_pattern: "SCR-{ATA}_{topic}.yaml"
+    formats: ["yaml", "md"]
+    description: "Layer D4 — Section/component resolution tokens routing to STPs within ATA 28"
+
+  system_domain_resolvers:
+    count: 1
+    location: "28-11-lh2-primary-tank/28-11-00-lh2-primary-tank-general/KDB/DEV/mtl/"
+    naming_pattern: "SDR-{ATA}_{topic}.yaml"
+    formats: ["yaml", "md"]
+    description: "Layer D5 — System domain resolution token providing top-level entry for ATA 28"
+
   parametric_models:
     count: 3
     location: "28-10-storage/28-10-00-fuel-storage-general/KDB/DEV/models/"
