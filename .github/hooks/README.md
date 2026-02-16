@@ -126,7 +126,7 @@ PYTHONPATH=.github/plugins:$PYTHONPATH pylint \
 ```bash
 pip install pre-commit
 # For Pylint plugin (optional but recommended)
-pip install pylint astroid
+pip install pylint
 ```
 
 ### Setup

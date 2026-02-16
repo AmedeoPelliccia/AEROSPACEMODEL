@@ -13,7 +13,7 @@ pre-commit install
 pre-commit install --hook-type commit-msg
 
 # 3. (Optional) Install Pylint for code checks
-pip install pylint astroid
+pip install pylint
 ```
 
 ## Your First Constitutional Commit (2 minutes)

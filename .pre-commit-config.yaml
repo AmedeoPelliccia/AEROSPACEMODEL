@@ -57,8 +57,8 @@ repos:
       
       # Hook 3: Constitutional Pylint Check
       # Enforces Article 3 & 6 (Technology as Servant + Human Harm Precedence)
-      # Note: This requires pylint and astroid to be installed
-      # pip install pylint astroid
+      # Note: This requires pylint to be installed
+      # pip install pylint
       - id: constitutional-pylint
         name: Constitutional code patterns
         description: Checks Python code for constitutional compliance (safety-critical patterns)
@@ -78,7 +78,7 @@ repos:
                 "$@" || true
             else
               echo "⚠️  Pylint not installed - skipping constitutional code checks."
-              echo "   Install with: pip install pylint astroid"
+              echo "   Install with: pip install pylint"
             fi
           - --
 
