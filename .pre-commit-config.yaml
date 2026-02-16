@@ -1,0 +1,93 @@
+# Constitutional Pre-Commit Hooks Configuration
+#
+# Enforces Model Digital Constitution at the atomic unit of change (the commit).
+#
+# Hook Mappings to Constitutional Articles:
+# - constitutional-commit-msg: Articles 4, 7 (Commit Legitimacy, Explicit Purpose)
+# - labor-reabsorption-check: Articles 1, 8 (Human Labor Foundation, No Exclusion by Efficiency)
+# - constitutional-pylint: Articles 3, 6 (Technology as Servant, Human Harm Precedence)
+#
+# Installation:
+#   pip install pre-commit
+#   pre-commit install
+#   pre-commit install --hook-type commit-msg
+#
+# See .github/hooks/README.md for usage details.
+
+repos:
+  # Standard pre-commit hooks for basic hygiene
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-yaml
+        name: Check YAML syntax
+      - id: end-of-file-fixer
+        name: Fix end of files
+      - id: trailing-whitespace
+        name: Trim trailing whitespace
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+        name: Check for large files
+
+  # Constitutional enforcement hooks (local)
+  - repo: local
+    hooks:
+      # Hook 1: Constitutional Commit Message Validation
+      # Enforces Article 4 (Commit as Unit of Legitimacy) + Article 7 (Explicit Purpose)
+      - id: constitutional-commit-msg
+        name: Constitutional commit validation
+        description: Validates commit message structure per Model Digital Constitution
+        entry: python3 .github/hooks/constitutional_commit_validator.py
+        language: script
+        stages: [commit-msg]
+        always_run: true
+        pass_filenames: false
+        args: []
+      
+      # Hook 2: Labor Reabsorption Pattern Scan
+      # Enforces Article 1 & 8 (Human Labor Foundation + No Exclusion by Efficiency)
+      - id: labor-reabsorption-check
+        name: Labor reabsorption pattern scan
+        description: Scans for labor-displacing patterns requiring reabsorption plan
+        entry: bash -c 'files=$(grep -l -i "remove.*role\|eliminate.*position\|workforce reduction\|job elimination\|autonomous.*override" "$@" 2>/dev/null || true); if [ -n "$files" ]; then echo "⚠️  LABOR PATTERN DETECTED in:"; echo "$files"; echo ""; echo "Article 1 & 8 require labor reabsorption documentation."; echo "Add LABOR_REABSORPTION_PLAN.md or justify in commit HUMAN_IMPACT."; echo "See Model_Digital_Constitution.md Articles 1, 8, 11."; exit 0; fi' --
+        language: system
+        files: \.(py|md|txt|yaml|yml)$
+        pass_filenames: true
+        stages: [commit]
+      
+      # Hook 3: Constitutional Pylint Check
+      # Enforces Article 3 & 6 (Technology as Servant + Human Harm Precedence)
+      # Note: This requires pylint and astroid to be installed
+      # pip install pylint astroid
+      - id: constitutional-pylint
+        name: Constitutional code patterns
+        description: Checks Python code for constitutional compliance (safety-critical patterns)
+        entry: bash
+        language: system
+        files: \.py$
+        pass_filenames: true
+        stages: [commit]
+        args:
+          - -c
+          - |
+            if command -v pylint &> /dev/null; then
+              PYTHONPATH=.github/plugins:$PYTHONPATH pylint \
+                --load-plugins=constitutional_pylint_plugin \
+                --disable=all \
+                --enable=constitution-violation-harm-precedence,constitution-violation-autonomous-override \
+                "$@" || true
+            else
+              echo "⚠️  Pylint not installed - skipping constitutional code checks."
+              echo "   Install with: pip install pylint astroid"
+            fi
+          - --
+
+# Configuration for specific hooks
+default_language_version:
+  python: python3
+
+# Fail fast on first error (recommended for constitutional enforcement)
+fail_fast: false
+
+# Minimum pre-commit version
+minimum_pre_commit_version: '2.20.0'
