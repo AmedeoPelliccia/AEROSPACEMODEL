@@ -2,7 +2,7 @@
 Tests for CS-25 Compliance Matrix in KDB/DEV/trade-studies/.
 
 Validates the EASA CS-25 compliance matrix YAML and Markdown records
-for ATA 28-10-00 Fuel Storage General (LH₂ Cryogenic Cells).
+for ATA 28-11-00 LH₂ Primary Tank (Cryogenic Cells).
 """
 
 from __future__ import annotations
@@ -19,11 +19,24 @@ TRADE_STUDIES = (
     / "T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS"
     / "C2-CIRCULAR_CRYOGENIC_CELLS"
     / "ATA_28-FUEL"
-    / "28-10-storage"
-    / "28-10-00-fuel-storage-general"
+    / "28-11-lh2-primary-tank"
+    / "28-11-00-lh2-primary-tank-general"
     / "KDB"
     / "DEV"
     / "trade-studies"
+)
+
+ECR_DIR = (
+    REPO_ROOT
+    / "OPT-IN_FRAMEWORK"
+    / "T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS"
+    / "C2-CIRCULAR_CRYOGENIC_CELLS"
+    / "ATA_28-FUEL"
+    / "28-11-lh2-primary-tank"
+    / "28-11-00-lh2-primary-tank-general"
+    / "GOVERNANCE"
+    / "CHANGE_CONTROL"
+    / "ECR"
 )
 
 
@@ -32,8 +45,8 @@ TRADE_STUDIES = (
 # =========================================================================
 
 
-class TestComplianceMatrixFiles:
-    """CS-25 compliance matrix files must exist."""
+class TestComplianceMatrixFiles2811:
+    """CS-25 compliance matrix files for 28-11 must exist."""
 
     def test_yaml_exists(self):
         assert (TRADE_STUDIES / "CS25_compliance_matrix.yaml").exists()
@@ -47,8 +60,8 @@ class TestComplianceMatrixFiles:
 # =========================================================================
 
 
-class TestComplianceMatrixYAML:
-    """CS-25 compliance matrix YAML must parse and have required fields."""
+class TestComplianceMatrixYAML2811:
+    """CS-25 compliance matrix YAML for 28-11 must parse and have required fields."""
 
     @pytest.fixture()
     def cm_data(self):
@@ -60,10 +73,10 @@ class TestComplianceMatrixYAML:
         assert cm_data is not None
 
     def test_has_matrix_id(self, cm_data):
-        assert "matrix_id" in cm_data
+        assert cm_data.get("matrix_id") == "CM-28-11-CS25"
 
     def test_has_ata_code(self, cm_data):
-        assert cm_data.get("ata_code") == "28-10-00"
+        assert cm_data.get("ata_code") == "28-11-00"
 
     def test_has_technology_domain(self, cm_data):
         assert cm_data.get("technology_domain") == "C2"
@@ -80,7 +93,7 @@ class TestComplianceMatrixYAML:
 # =========================================================================
 
 
-class TestComplianceMatrixSections:
+class TestComplianceMatrixSections2811:
     """Sections A–D must be present with requirements."""
 
     @pytest.fixture()
@@ -103,7 +116,7 @@ class TestComplianceMatrixSections:
             len(s.get("requirements", []))
             for s in cm_data.get("sections", [])
         )
-        assert total == 23
+        assert total == 10
 
 
 # =========================================================================
@@ -111,7 +124,7 @@ class TestComplianceMatrixSections:
 # =========================================================================
 
 
-class TestRequirementSchema:
+class TestRequirementSchema2811:
     """Every requirement entry must have the expected fields."""
 
     @pytest.fixture()
@@ -161,7 +174,7 @@ class TestRequirementSchema:
 # =========================================================================
 
 
-class TestSpecialConditions:
+class TestSpecialConditions2811:
     """Special Conditions (SC-LH2-*) must be present."""
 
     @pytest.fixture()
@@ -173,7 +186,7 @@ class TestSpecialConditions:
     def test_special_conditions_present(self, cm_data):
         sc = cm_data.get("special_conditions", [])
         assert isinstance(sc, list)
-        assert len(sc) == 6
+        assert len(sc) == 5
 
     def test_sc_ids_format(self, cm_data):
         for sc in cm_data.get("special_conditions", []):
@@ -191,7 +204,7 @@ class TestSpecialConditions:
 # =========================================================================
 
 
-class TestEvidencePackage:
+class TestEvidencePackage2811:
     """Minimum evidence package must list at least 8 artefacts."""
 
     @pytest.fixture()
@@ -211,8 +224,8 @@ class TestEvidencePackage:
 # =========================================================================
 
 
-class TestComplianceMatrixTraceability:
-    """Traceability links to trade studies and lifecycle phases."""
+class TestComplianceMatrixTraceability2811:
+    """Traceability links to parent matrix and lifecycle phases."""
 
     @pytest.fixture()
     def cm_data(self):
@@ -220,11 +233,9 @@ class TestComplianceMatrixTraceability:
         with open(path) as f:
             return yaml.safe_load(f)
 
-    def test_derives_from_trade_studies(self, cm_data):
+    def test_derives_from_parent_matrix(self, cm_data):
         derives = cm_data.get("traceability", {}).get("derives_from", [])
-        assert "TS-28-10-TS01" in derives
-        assert "TS-28-10-TS02" in derives
-        assert "TS-28-10-TS03" in derives
+        assert "CM-28-10-CS25" in derives
 
     def test_feeds_lifecycle_phases(self, cm_data):
         feeds = cm_data.get("traceability", {}).get("feeds", [])
@@ -234,12 +245,38 @@ class TestComplianceMatrixTraceability:
 
 
 # =========================================================================
+# ECR Document
+# =========================================================================
+
+
+class TestECRDocument2811:
+    """ECR-ATA28-11-CS25-SSOT-001 must exist and contain key fields."""
+
+    def test_ecr_file_exists(self):
+        assert (ECR_DIR / "ECR-ATA28-11-CS25-SSOT-001.md").exists()
+
+    def test_ecr_contains_ecr_id(self):
+        text = (ECR_DIR / "ECR-ATA28-11-CS25-SSOT-001.md").read_text()
+        assert "ECR-ATA28-11-CS25-SSOT-001" in text
+
+    def test_ecr_references_matrix(self):
+        text = (ECR_DIR / "ECR-ATA28-11-CS25-SSOT-001.md").read_text()
+        assert "CM-28-11-CS25" in text
+
+    def test_ecr_has_approval_table(self):
+        text = (ECR_DIR / "ECR-ATA28-11-CS25-SSOT-001.md").read_text()
+        assert "STK_ENG" in text
+        assert "STK_SAF" in text
+        assert "CCB Chair" in text
+
+
+# =========================================================================
 # Artifact Catalog Registration
 # =========================================================================
 
 
-class TestArtifactCatalogComplianceMatrix:
-    """ARTIFACT_CATALOG.yaml must include compliance_matrices entry."""
+class TestArtifactCatalogComplianceMatrix2811:
+    """ARTIFACT_CATALOG.yaml must reflect updated compliance_matrices count."""
 
     @pytest.fixture()
     def catalog_data(self):
