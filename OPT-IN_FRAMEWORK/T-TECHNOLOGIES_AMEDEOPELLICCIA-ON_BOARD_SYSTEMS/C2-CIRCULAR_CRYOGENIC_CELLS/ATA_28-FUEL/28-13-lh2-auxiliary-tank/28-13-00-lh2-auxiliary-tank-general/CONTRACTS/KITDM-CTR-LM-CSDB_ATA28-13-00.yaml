@@ -1,0 +1,8 @@
+# KITDM-CTR-LM-CSDB_ATA28-13-00.yaml
+# Contract for ATA 28-13-00 — LH₂ Auxiliary Tank General
+
+contract_id: "KITDM-CTR-LM-CSDB_ATA28-13-00"
+ata_code: "28-13-00"
+technology_domain: "C2"
+status: "draft"
+created: "2026-02-16"
