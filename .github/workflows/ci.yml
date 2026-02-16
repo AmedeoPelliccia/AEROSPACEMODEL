@@ -12,23 +12,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
-      
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -e ".[dev]"
-      
+
       - name: Run ruff linter
         run: |
           ruff check src/ ASIGT/ --output-format=github
         continue-on-error: true
-      
+
       - name: Run mypy type checker
         run: |
           mypy src/ --ignore-missing-imports
@@ -42,18 +42,18 @@ jobs:
         python-version: ['3.9', '3.10', '3.11', '3.12']
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
-      
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -e ".[dev]"
-      
+
       - name: Run pytest with coverage
         run: |
           if [ -d "tests" ]; then
@@ -61,7 +61,7 @@ jobs:
           else
             echo "No tests directory found - skipping tests"
           fi
-      
+
       - name: Upload coverage to artifacts
         uses: actions/upload-artifact@v4
         if: matrix.python-version == '3.11' && always()
@@ -75,27 +75,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
-      
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -e ".[dev]"
-      
+
       - name: Validate BREX rules structure
         run: |
           python -c "
           import yaml
           from pathlib import Path
-          
+
           brex_files = list(Path('ASIGT/brex').glob('*.yaml'))
           print(f'Found {len(brex_files)} BREX files')
-          
+
           for brex_file in brex_files:
               print(f'Validating {brex_file}...')
               with open(brex_file) as f:
@@ -104,10 +104,10 @@ jobs:
                       print(f'  ✓ Valid YAML: {brex_file.name}')
                   else:
                       print(f'  ⚠ Empty or invalid: {brex_file.name}')
-          
+
           print('BREX validation complete')
           "
-      
+
       - name: Test BREX Decision Engine import
         run: |
           python -c "
@@ -122,27 +122,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
-      
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install pyyaml jsonschema
-      
+
       - name: Validate contract YAML files
         run: |
           python -c "
           import yaml
           from pathlib import Path
-          
+
           contract_files = list(Path('ASIT/CONTRACTS').rglob('*.yaml'))
           print(f'Found {len(contract_files)} contract files')
-          
+
           errors = []
           for contract_file in contract_files:
               try:
@@ -155,30 +155,30 @@ jobs:
               except Exception as e:
                   errors.append(f'{contract_file}: {e}')
                   print(f'  ✗ {contract_file}: {e}')
-          
+
           if errors:
               print(f'\n❌ {len(errors)} validation errors found')
               exit(1)
           else:
               print(f'\n✓ All {len(contract_files)} contract files valid')
           "
-      
+
       - name: Check contract ID format compliance
         run: |
           python -c "
           import re
           import yaml
           from pathlib import Path
-          
+
           # Expected format: KITDM-CTR-{CATEGORY}-{TARGET}
           contract_id_pattern = re.compile(r'^KITDM-CTR-[A-Z]+-[A-Z0-9_]+$')
-          
+
           active_contracts = list(Path('ASIT/CONTRACTS/active').glob('*.yaml'))
-          
+
           if not active_contracts:
               print('No active contracts found - skipping ID validation')
               exit(0)
-          
+
           for contract_file in active_contracts:
               with open(contract_file) as f:
                   data = yaml.safe_load(f)
@@ -195,7 +195,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Check S1000D schema files
         run: |
           if [ -d "schemas" ]; then
@@ -204,24 +204,24 @@ jobs:
           else
             echo "⚠ No schemas directory - call for human in the loop to provide schema validation"
           fi
-      
+
       - name: Verify ATA chapter alignment in templates
         run: |
           python -c "
           from pathlib import Path
           import re
-          
+
           # Check templates for ATA references
           template_files = list(Path('templates').rglob('*.xml')) + list(Path('templates').rglob('*.jinja2'))
-          
+
           if not template_files:
               print('No template files found')
               exit(0)
-          
+
           print(f'Checking {len(template_files)} template files for ATA references...')
-          
+
           ata_pattern = re.compile(r'ATA[\s-]*(\d{2})')
-          
+
           for template_file in template_files:
               try:
                   content = template_file.read_text()
@@ -231,6 +231,6 @@ jobs:
                       print(f'  {template_file.name}: ATA chapters {chapters}')
               except Exception as e:
                   print(f'  ⚠ Could not read {template_file}: {e}')
-          
+
           print('ATA alignment check complete')
           "
