@@ -1,0 +1,997 @@
+# AIT-28-11-00 — AI Training Material
+# ATA 28-11-00 LH₂ Primary Tank General
+# AMPEL360 Q100 — C2 Circular Cryogenic Cells
+#
+# Purpose: Structures the MTL token library as training material for
+# AEROSPACEMODEL ASI — the AI system orchestrating digital production
+# (design generation, gate evaluation, anomaly detection, production
+# optimization, certification evidence compilation, self-validation).
+# This package trains AI models on the identical token structures they
+# will orchestrate in production.
+
+ait_id: "AIT-28-11-00"
+title: "AI Training Material — ATA 28-11-00 LH₂ Primary Tank"
+ata_code: "28-11-00"
+ai_platform: "AEROSPACEMODEL ASI"
+source_library: "MTL-28-11-00"
+training_objective: >
+  Train AI models to understand, execute, validate, and govern
+  LH₂ cryogenic tank engineering procedures — from first-principles
+  physics through certification compliance — using the identical
+  token structures the AI will orchestrate in production.
+version: "0.1.2"
+schema_version: "1.0.0"
+created_on: "2026-02-16"
+last_updated_on: "2026-02-16"
+status: "DEV"
+author: "STK_ENG"
+owner_role: "STK_ENG"
+safety_authority_role: "STK_SAF"
+configuration_authority_role: "STK_CM"
+
+# =========================================================================
+# LIFECYCLE CONTROL
+# =========================================================================
+lifecycle_control:
+  allowed_status_values: ["DEV", "VAL", "SSOT", "DEPRECATED"]
+  current_status: "DEV"
+  baseline_state: "non-baselined"
+
+# =========================================================================
+# ACTUATION POLICY
+# =========================================================================
+actuation_policy:
+  DEV: "forbidden"
+  VAL: "forbidden"
+  SSOT: "allowed_with_human_authorizer_and_all_gates_passed"
+  description: >
+    Direct production actuation is FORBIDDEN in DEV and VAL lifecycle
+    states. SSOT promotion enables actuation only when human authorizer
+    is present and all acceptance gates pass.
+
+# =========================================================================
+# DETERMINISM POLICY
+# =========================================================================
+determinism_policy:
+  float_comparison: "abs_err<=1e-9 OR rel_err<=1e-6"
+  rounding_mode: "half_even"
+  units_normalization_required: true
+  description: >
+    Ensures deterministic replay of procedures across repeated runs.
+    Floating-point comparisons use combined absolute and relative error
+    tolerances to avoid false failures from rounding differences.
+
+# =========================================================================
+# PROVENANCE REQUIREMENTS
+# =========================================================================
+provenance_requirements:
+  source_hash_pattern: "^sha256:[a-f0-9]{64}$"
+  forbid_placeholder_hashes: true
+  description: >
+    All training examples must have valid SHA-256 hashes for source
+    tokens. Placeholder hashes (e.g., "TBD-SHA256") are forbidden for
+    SSOT promotion. Hash format: "sha256:{64 hex chars}".
+
+# =========================================================================
+# GOVERNANCE
+# =========================================================================
+governance:
+  constitution_id: "AEROSPACEMODEL-MDC"
+  constitution_version: "1.0.0"
+  applicable_articles: ["A4", "A5", "A6", "A8", "A10", "A11"]
+  enforcement_mode: "deny_by_default"
+  autonomous_actuation_allowed: false
+  autonomous_actuation_requires:
+    - "SSOT token set"
+    - "human_authorizer_present"
+    - "evidence_sink_online"
+    - "model_token_version_lock_pass"
+  description: >
+    Constitutional controls enforce that AI operates within defined
+    governance boundaries. Article A4 (Commit Legitimacy), A5 (Traceability
+    and Accountability), A6 (Safety Guardrails), A8 (Labor Continuity),
+    A10 (Constitutional Supremacy), and A11 (Capital-vs-Axiom Conflict
+    Resolution) are mandatory for all autonomous operations. Autonomous
+    actuation is DENIED by default and requires explicit enablement
+    conditions to be met.
+
+# =========================================================================
+# MODEL LOCK
+# =========================================================================
+model_lock:
+  policy: "hard_lock"
+  required_match: "ASI.model_token_version == MTL.version"
+  on_mismatch: "HOLD_AUTONOMY"
+  description: >
+    AI model version must match the token library version exactly.
+    Version mismatch triggers automatic HOLD on all autonomous operations.
+    This ensures the AI model is trained on the exact token structure it
+    will consume in production, preventing drift-induced errors.
+
+# =========================================================================
+# SAFETY POLICY
+# =========================================================================
+safety_policy:
+  uncertainty_action: ["DEGRADE", "PAUSE", "ESCALATE"]
+  harm_sensitive_decisions_require_human: true
+  prohibited:
+    - "unbounded_stochastic_execution_for_harm_sensitive_flows"
+    - "silent_override_of_acceptance_gates"
+  uncertainty_thresholds:
+    low: "u < 0.2"
+    medium: "0.2 <= u < 0.5"
+    high: "u >= 0.5"
+  required_action_by_level:
+    low: "DEGRADE"
+    medium: "PAUSE"
+    high: "ESCALATE"
+  description: >
+    Safety-critical decisions require human oversight. When uncertainty
+    exceeds thresholds, the AI must degrade to conservative behavior,
+    pause for human review, or escalate to safety authority. Uncertainty
+    metric: model prediction confidence (u = 1 - max_softmax_probability).
+    Acceptance gate overrides are prohibited without explicit human
+    authorization.
+
+# =========================================================================
+# LABOR CONTINUITY POLICY
+# =========================================================================
+labor_continuity_policy:
+  deny_if_net_human_exclusion: true
+  requires_reabsorption_plan_if_role_shift: true
+  article_reference: ["A1", "A8", "A11"]
+  description: >
+    AI-driven optimization must not result in net human exclusion from
+    the production process. Any role shifts require documented reabsorption
+    plans. Article A1 (Human Dignity), A8 (Labor Continuity), and A11
+    (Transparency) mandate that automation augments rather than replaces
+    human expertise.
+
+# =========================================================================
+# TRAINING ARCHITECTURE
+# =========================================================================
+training_architecture:
+  description: >
+    Six-layer training architecture progressing from first-principles
+    domain knowledge through production governance. Each layer builds
+    on the previous, culminating in a fully integrated AI system capable
+    of autonomous operation under constitutional constraints.
+  
+  layers:
+    - layer_id: "L1"
+      name: "Domain Knowledge"
+      description: >
+        First-principles physics, materials science, and cryogenic
+        engineering fundamentals. Trains AI to reason from physical
+        laws rather than pure pattern matching.
+      source_tokens: ["MTK-28-11-TS-*", "MTK-28-11-CM-*", "MTK-28-11-SC-*", "MTK-28-11-EC-*"]
+      learning_objective: >
+        Master cryogenic thermodynamics, structural mechanics, materials
+        behavior at 20K, boil-off physics, heat transfer, and pressure
+        vessel theory.
+      validation_criteria:
+        - "Accurate prediction of boil-off rates from heat flux and geometry"
+        - "Correct material property interpolation at cryogenic temperatures"
+        - "Physical constraint satisfaction (energy conservation, material limits)"
+    
+    - layer_id: "L2"
+      name: "Method Execution"
+      description: >
+        Closed-form calculation procedures and empirical correlations.
+        Trains AI to execute standard engineering calculations with
+        numerical precision and propagate uncertainties.
+      source_tokens: ["MTP-28-11-GEOM-*", "MTP-28-11-THRM-*", "MTP-28-11-MATL-*", "MTP-28-11-CERT-*", "MTP-28-11-EVAL-*"]
+      learning_objective: >
+        Execute geometric sizing, thermal analysis, material selection,
+        certification assessment, and evaluation scoring with deterministic
+        repeatability.
+      validation_criteria:
+        - "Numeric verification within declared tolerance (±0.5% for closed-form)"
+        - "Correct units propagation and dimensional analysis"
+        - "Scaling law application within validated range bounds"
+    
+    - layer_id: "L3"
+      name: "Procedural Composition"
+      description: >
+        End-to-end standard procedures composing multiple method steps.
+        Trains AI to orchestrate complete workflows from inputs through
+        acceptance gates.
+      source_tokens: ["STP-28-11-001", "STP-28-11-002", "STP-28-11-003", "STP-28-11-004", "STP-28-11-005"]
+      learning_objective: >
+        Compose multi-step procedures with correct sequencing, intermediate
+        hand-offs, and acceptance gate evaluation. Maintain full audit trail.
+      validation_criteria:
+        - "Deterministic replay: same inputs → same outputs across runs"
+        - "Step-by-step audit log with token references and intermediate values"
+        - "Correct hand-off of intermediate results between steps"
+    
+    - layer_id: "L4"
+      name: "Acceptance Logic"
+      description: >
+        Gate evaluation and decision boundaries. Trains AI to classify
+        pass/fail/conditional outcomes and route exceptions correctly.
+      source_tokens: ["acceptance_gates from STP procedures", "RTM-28-11-*", "CERT-28-11-*"]
+      learning_objective: >
+        Evaluate acceptance criteria as machine-readable expressions,
+        classify outcomes, trigger escalations, and maintain gate traceability.
+      validation_criteria:
+        - "100% gate expression evaluation accuracy"
+        - "Correct escalation routing for failed gates"
+        - "No silent gate overrides"
+    
+    - layer_id: "L5"
+      name: "Failure Mode Recognition"
+      description: >
+        Anomaly detection and failure mode classification. Trains AI to
+        recognize deviations from expected behavior and diagnose root causes.
+      source_tokens: ["RTM-28-11-*", "CERT-28-11-*", "failure_modes from compliance matrix"]
+      learning_objective: >
+        Detect anomalies in sensor data, parametric model outputs, and
+        gate outcomes. Classify failure modes, estimate severity, and
+        recommend disposition (rework, scrap, accept with deviation).
+      validation_criteria:
+        - "Anomaly detection recall >95% on validation dataset"
+        - "Failure mode classification accuracy >90%"
+        - "Correct severity estimation (DAL A/B/C/D alignment)"
+    
+    - layer_id: "L6"
+      name: "Production Governance"
+      description: >
+        Production optimization under constitutional constraints. Trains
+        AI to optimize throughput, quality, and cost while respecting
+        safety, labor continuity, and gate integrity.
+      source_references:
+        - type: "token_pattern"
+          value: "PAL-28-11-*"
+        - type: "dataset"
+          value: "production_metrics"
+        - type: "dataset"
+          value: "optimization_constraints"
+      learning_objective: >
+        Optimize production line parameters (cycle time, resource allocation,
+        inspection sampling) while satisfying all acceptance gates, safety
+        constraints, and constitutional articles.
+      validation_criteria:
+        - "No gate violations in optimized production plans"
+        - "Labor continuity constraints satisfied"
+        - "Cost/quality Pareto frontier convergence"
+
+# =========================================================================
+# TRAINING DATASETS
+# =========================================================================
+training_datasets:
+  description: >
+    Six datasets corresponding to the six training layers. Each dataset
+    includes concrete examples with full provenance linking back to
+    source MTL tokens. Provenance ensures all training material is
+    traceable, versioned, and auditable.
+  
+  datasets:
+    # -----------------------------------------------------------------------
+    # DS-01: Domain Knowledge
+    # -----------------------------------------------------------------------
+    - dataset_id: "DS-01"
+      title: "First-Principles Domain Knowledge"
+      layer: "L1"
+      generation_method: "Extract physics-based reasoning chains from MTK tokens"
+      description: >
+        Pairs of (engineering question → first-principles reasoning →
+        quantitative answer) extracted from trade study subjects, compliance
+        requirements, and special conditions.
+      training_type: "reasoning_chain"
+      examples:
+        - example_id: "DS-01-EX-001"
+          question: >
+            Given a spherical LH₂ tank storing 5000 kg at 70.8 kg/m³, what
+            is the minimum surface area?
+          reasoning: >
+            Step 1: V = m / ρ = 5000 kg / 70.8 kg/m³ = 70.6 m³
+            Step 2: Sphere has minimum area for given volume
+            Step 3: A = (36πV²)^(1/3) = (36π × 70.6²)^(1/3) = 83 m²
+          answer: "83 m²"
+          provenance:
+            source_token_id: "MTK-28-11-TS-001"
+            source_token_version: "0.1.0"
+            source_hash: "TBD-SHA256"
+            generated_on: "2026-02-16"
+            generator_version: "AIT-GEN-0.1.1"
+        
+        - example_id: "DS-01-EX-002"
+          question: >
+            What is the steady-state boil-off mass rate for a tank with 83 m²
+            surface area experiencing 1.3 W/m² heat flux? LH₂ latent heat is
+            445.5 kJ/kg.
+          reasoning: >
+            Step 1: Q_total = A × q" = 83 m² × 1.3 W/m² = 107.9 W
+            Step 2: ṁ = Q / L_vap = 107.9 W / 445500 J/kg = 2.42×10⁻⁴ kg/s
+            Step 3: Convert to daily: 2.42×10⁻⁴ kg/s × 86400 s/day = 20.9 kg/day
+          answer: "20.9 kg/day (0.42% of 5000 kg)"
+          provenance:
+            source_token_id: "MTK-28-11-TS-003"
+            source_token_version: "0.1.0"
+            source_hash: "TBD-SHA256"
+            generated_on: "2026-02-16"
+            generator_version: "AIT-GEN-0.1.1"
+    
+    # -----------------------------------------------------------------------
+    # DS-02: Method Execution
+    # -----------------------------------------------------------------------
+    - dataset_id: "DS-02"
+      title: "Calculation Method Execution"
+      layer: "L2"
+      generation_method: "Extract calculation procedures from MTP process tokens"
+      description: >
+        Triplets of (inputs → method → outputs) with numerical precision
+        requirements. Includes both closed-form processes and empirical
+        scaling relationships.
+      training_type: "calculation_verification"
+      examples:
+        - example_id: "DS-02-EX-001"
+          inputs:
+            stored_lh2_mass_kg: 5000
+            lh2_density_kg_per_m3: 70.8
+          method: "MTP-28-11-GEOM-001: V = m / ρ"
+          outputs:
+            required_volume_m3: 70.6
+          tolerance: "±0.1 m³"
+          provenance:
+            source_token_id: "MTP-28-11-GEOM-001"
+            source_token_version: "0.1.0"
+            source_hash: "TBD-SHA256"
+            generated_on: "2026-02-16"
+            generator_version: "AIT-GEN-0.1.1"
+        
+        - example_id: "DS-02-EX-002"
+          inputs:
+            required_volume_m3: 70.6
+          method: "MTP-28-11-GEOM-002: A = (36πV²)^(1/3)"
+          outputs:
+            surface_area_m2: 83
+          tolerance: "±0.5 m²"
+          provenance:
+            source_token_id: "MTP-28-11-GEOM-002"
+            source_token_version: "0.1.0"
+            source_hash: "TBD-SHA256"
+            generated_on: "2026-02-16"
+            generator_version: "AIT-GEN-0.1.1"
+    
+    # -----------------------------------------------------------------------
+    # DS-03: Procedural Composition
+    # -----------------------------------------------------------------------
+    - dataset_id: "DS-03"
+      title: "Standard Procedure Execution Traces"
+      layer: "L3"
+      generation_method: "supervised procedural trace training"
+      description: >
+        Complete execution traces of STP standard procedures. Each trace
+        shows inputs, step-by-step token calls, intermediate hand-offs,
+        and final outputs. Training uses supervised procedural trace
+        learning, not chain-of-thought, to maintain explicit step auditability.
+      training_type: "full_procedure_trace"
+      examples:
+        - example_id: "DS-03-EX-001"
+          procedure: "STP-28-11-001"
+          procedure_title: "LH₂ Tank Sizing — From Fuel Mass to Boil-Off Performance"
+          inputs:
+            stored_lh2_mass_kg: 5000
+            lh2_density_kg_per_m3: 70.8
+            lh2_latent_heat_kJ_per_kg: 445.5
+            system_heat_flux_W_per_m2: 1.3
+            tank_mass_kg: 800
+            system_mass_kg: 200
+          execution_trace:
+            - step: 1
+              token: "MTP-28-11-GEOM-001"
+              action: "Compute required tank volume"
+              inputs: {stored_lh2_mass_kg: 5000, lh2_density_kg_per_m3: 70.8}
+              output: {required_volume_m3: 70.6}
+              hand_off: "required_volume_m3 → step 2"
+            - step: 2
+              token: "MTP-28-11-GEOM-002"
+              action: "Compute minimum surface area"
+              inputs: {required_volume_m3: 70.6}
+              output: {surface_area_m2: 83}
+              hand_off: "surface_area_m2 → step 3"
+            - step: 3
+              token: "MTP-28-11-GEOM-003"
+              action: "Apply cylinder area penalty"
+              inputs: {surface_area_m2: 83, aspect_ratio_L_over_D: 2.0}
+              output: {adjusted_area_m2: 92}
+              hand_off: "adjusted_area_m2 → step 4"
+            - step: 4
+              token: "MTP-28-11-THRM-002"
+              action: "Compute total heat leak"
+              inputs: {adjusted_area_m2: 92, system_heat_flux_W_per_m2: 1.3}
+              output: {total_heat_leak_W: 119.6}
+              hand_off: "total_heat_leak_W → step 5"
+            - step: 5
+              token: "MTP-28-11-THRM-001"
+              action: "Convert to boil-off rate"
+              inputs: {total_heat_leak_W: 119.6, lh2_latent_heat_kJ_per_kg: 445.5}
+              output: {boil_off_rate_kg_per_s: 2.68e-4}
+              hand_off: "boil_off_rate_kg_per_s → step 6"
+            - step: 6
+              token: "MTP-28-11-THRM-003"
+              action: "Convert to daily percentage"
+              inputs: {boil_off_rate_kg_per_s: 2.68e-4, stored_lh2_mass_kg: 5000}
+              output: {boil_off_pct_per_day: 0.46}
+              hand_off: "boil_off_pct_per_day → outputs"
+            - step: 7
+              token: "MTP-28-11-GEOM-004"
+              action: "Compute gravimetric efficiency"
+              inputs: {stored_lh2_mass_kg: 5000, tank_mass_kg: 800, system_mass_kg: 200}
+              output: {gravimetric_efficiency: 0.833}
+              hand_off: "gravimetric_efficiency → outputs"
+          outputs:
+            required_volume_m3: 70.6
+            adjusted_area_m2: 92
+            boil_off_pct_per_day: 0.46
+            gravimetric_efficiency: 0.833
+          provenance:
+            source_token_id: "STP-28-11-001"
+            source_token_version: "0.1.0"
+            source_hash: "TBD-SHA256"
+            generated_on: "2026-02-16"
+            generator_version: "AIT-GEN-0.1.1"
+        
+        - example_id: "DS-03-EX-002"
+          procedure: "STP-28-11-002"
+          procedure_title: "Structural Substantiation — From Geometry to Damage Tolerance"
+          inputs:
+            operating_pressure_kPa: 250
+            internal_radius_m: 2.5
+            wall_thickness_m: 0.005
+            parent_strength_MPa: 724
+            weld_efficiency_factor: 0.80
+            cte_inner_per_K: 2.2e-5
+            cte_jacket_per_K: 1.7e-5
+            length_m: 8.0
+            initial_flaw_size_mm: 0.5
+          execution_trace:
+            - step: 1
+              token: "MTP-28-11-MATL-002"
+              action: "Compute hoop stress from pressure, radius, and wall thickness"
+              inputs: {operating_pressure_kPa: 250, internal_radius_m: 2.5, wall_thickness_m: 0.005}
+              output: {hoop_stress_Pa: 125000000}
+              hand_off: "hoop_stress_Pa → step 2"
+            - step: 2
+              token: "MTP-28-11-MATL-004"
+              action: "Apply weld derating to derive effective allowable"
+              inputs: {parent_strength_MPa: 724, weld_efficiency_factor: 0.80}
+              output: {weld_allowable_MPa: 579.2}
+              hand_off: "weld_allowable_MPa → step 3"
+            - step: 3
+              token: "MTP-28-11-CERT-001"
+              action: "Apply 1.5 ultimate pressure factor and check ultimate margin"
+              inputs: {hoop_stress_Pa: 125000000, weld_allowable_MPa: 579.2}
+              output: {ultimate_margin: 1.16}
+              hand_off: "ultimate_margin → step 4"
+            - step: 4
+              token: "MTP-28-11-MATL-005"
+              action: "Compute differential thermal contraction"
+              inputs: {cte_inner_per_K: 2.2e-5, cte_jacket_per_K: 1.7e-5, length_m: 8.0}
+              output: {differential_contraction_mm: 1.2}
+              hand_off: "differential_contraction_mm → step 5"
+            - step: 5
+              token: "MTP-28-11-MATL-001"
+              action: "Anchor cryogenic material properties at 20K"
+              inputs: {temperature_K: 20}
+              output: {yield_strength_20K_MPa: 724, uts_20K_MPa: 859}
+              hand_off: "cryogenic_allowables → step 6"
+            - step: 6
+              token: "MTP-28-11-CERT-003"
+              action: "Perform damage tolerance assessment"
+              inputs: {initial_flaw_size_mm: 0.5, hoop_stress_Pa: 125000000}
+              output: {critical_crack_length_mm: 12.5, inspection_interval_cycles: 5000}
+              hand_off: "inspection_interval_cycles → outputs"
+          outputs:
+            hoop_stress_Pa: 125000000
+            ultimate_margin: 1.16
+            weld_allowable_MPa: 579.2
+            differential_contraction_mm: 1.2
+            critical_crack_length_mm: 12.5
+            inspection_interval_cycles: 5000
+          provenance:
+            source_token_id: "STP-28-11-002"
+            source_token_version: "0.1.0"
+            source_hash: "TBD-SHA256"
+            generated_on: "2026-02-16"
+            generator_version: "AIT-GEN-0.1.1"
+    
+    # -----------------------------------------------------------------------
+    # DS-04: Acceptance Logic
+    # -----------------------------------------------------------------------
+    - dataset_id: "DS-04"
+      title: "Acceptance Gate Evaluation"
+      layer: "L4"
+      generation_method: "Extract acceptance gates from STP procedures and compliance matrix"
+      description: >
+        Machine-evaluable gate expressions with pass/fail classification.
+        All gates are represented as structured expressions, not free text,
+        enabling deterministic evaluation and audit logging.
+      training_type: "boundary_classification"
+      examples:
+        - example_id: "DS-04-EX-001"
+          gate:
+            gate_id: "AG-STP-001-G1"
+            expr: "boil_off_pct_per_day <= 1.0"
+            severity: "mandatory"
+            escalation_route: "STK_ENG → CCB"
+          test_cases:
+            - inputs: {boil_off_pct_per_day: 0.46}
+              expected_outcome: "PASS"
+              rationale: "0.46 ≤ 1.0"
+            - inputs: {boil_off_pct_per_day: 1.2}
+              expected_outcome: "FAIL"
+              rationale: "1.2 > 1.0 → escalate to CCB"
+          provenance:
+            source_token_id: "STP-28-11-001"
+            source_token_version: "0.1.0"
+            source_hash: "TBD-SHA256"
+            generated_on: "2026-02-16"
+            generator_version: "AIT-GEN-0.1.1"
+        
+        - example_id: "DS-04-EX-002"
+          gate:
+            gate_id: "AG-CM-001-G2"
+            expr: "gravimetric_efficiency >= 0.50"
+            severity: "mandatory"
+            escalation_route: "STK_ENG → CCB"
+          test_cases:
+            - inputs: {gravimetric_efficiency: 0.833}
+              expected_outcome: "PASS"
+              rationale: "0.833 ≥ 0.50"
+            - inputs: {gravimetric_efficiency: 0.45}
+              expected_outcome: "FAIL"
+              rationale: "0.45 < 0.50 → escalate to CCB"
+          provenance:
+            source_token_id: "MTK-28-11-CM-001"
+            source_token_version: "0.1.0"
+            source_hash: "TBD-SHA256"
+            generated_on: "2026-02-16"
+            generator_version: "AIT-GEN-0.1.1"
+    
+    # -----------------------------------------------------------------------
+    # DS-05: Failure Mode Recognition
+    # -----------------------------------------------------------------------
+    - dataset_id: "DS-05"
+      title: "Anomaly Detection and Failure Mode Classification"
+      layer: "L5"
+      generation_method: "Extract failure modes from RTM and CERT tokens"
+      description: >
+        Anomaly patterns, failure mode signatures, and diagnostic reasoning
+        chains. Trains AI to detect deviations, classify failure modes,
+        and recommend disposition.
+      training_type: "anomaly_reasoning"
+      examples:
+        - example_id: "DS-05-EX-001"
+          scenario: "Unexpected boil-off rate increase"
+          sensor_data:
+            boil_off_pct_per_day_measured: 1.8
+            boil_off_pct_per_day_predicted: 0.5
+            heat_flux_measured_W_per_m2: 2.4
+            heat_flux_design_W_per_m2: 1.3
+          diagnostic_reasoning: >
+            Step 1: Deviation = 1.8 - 0.5 = 1.3% per day (260% increase)
+            Step 2: Heat flux increased from 1.3 to 2.4 W/m² (85% increase)
+            Step 3: Failure mode hypothesis: MLI degradation or vacuum jacket leak
+            Step 4: Severity: Major (fuel loss impacts mission duration)
+            Step 5: Disposition: Inspect vacuum jacket, pressure test, thermal imaging
+          failure_mode: "MLI degradation or vacuum jacket leak"
+          severity: "Major"
+          disposition: "Inspect and repair before flight release"
+          provenance:
+            source_token_id: "RTM-28-11-001"
+            source_token_version: "0.1.0"
+            source_hash: "TBD-SHA256"
+            generated_on: "2026-02-16"
+            generator_version: "AIT-GEN-0.1.1"
+        
+        - example_id: "DS-05-EX-002"
+          scenario: "Material yield strength below specification"
+          sensor_data:
+            yield_strength_measured_MPa: 580
+            yield_strength_spec_MPa: 650
+            test_temperature_K: 20
+            material: "Al-Li 2195"
+          diagnostic_reasoning: >
+            Step 1: Deviation = 650 - 580 = 70 MPa (10.8% reduction)
+            Step 2: Below minimum acceptable for DAL A pressure vessel
+            Step 3: Failure mode hypothesis: Heat treatment deviation or lot variation
+            Step 4: Severity: Hazardous (structural integrity at risk)
+            Step 5: Disposition: Reject lot, investigate heat treatment records
+          failure_mode: "Heat treatment deviation"
+          severity: "Hazardous"
+          disposition: "Reject material lot, root cause investigation"
+          provenance:
+            source_token_id: "CERT-28-11-002"
+            source_token_version: "0.1.0"
+            source_hash: "TBD-SHA256"
+            generated_on: "2026-02-16"
+            generator_version: "AIT-GEN-0.1.1"
+    
+    # -----------------------------------------------------------------------
+    # DS-06: Production Governance
+    # -----------------------------------------------------------------------
+    - dataset_id: "DS-06"
+      title: "Production Optimization under Constraints"
+      layer: "L6"
+      generation_method: "RL with constitutional constraints and gate satisfaction"
+      description: >
+        Production optimization scenarios with constitutional constraints.
+        Trains AI to maximize throughput and quality while respecting
+        safety gates, labor continuity, and cost boundaries. Uses
+        reinforcement learning with hard penalties for constraint violations.
+      training_type: "production_governance"
+      rl_constraints:
+        action_space: "constrained"
+        gate_violation_penalty: "hard"
+        direct_actuation_in_dev_val: false
+      examples:
+        - example_id: "DS-06-EX-001"
+          scenario: "Optimize tank inspection sampling rate"
+          state:
+            current_sampling_rate_pct: 100
+            defect_detection_rate: 0.98
+            inspection_cost_per_tank_usd: 2500
+            production_throughput_tanks_per_month: 12
+          action_space:
+            - "Reduce sampling to 50% (statistical sampling with 95% confidence)"
+            - "Maintain 100% sampling"
+            - "Increase to 100% + automated NDE for all critical welds"
+          constraints:
+            - "defect_detection_rate >= 0.95 (safety gate)"
+            - "no_net_human_exclusion == true (labor continuity)"
+            - "cost_increase_pct <= 20 (budget gate)"
+          optimal_action: "Reduce sampling to 50% with automated NDE backup"
+          rationale: >
+            Statistical sampling at 50% maintains 0.96 detection rate (above
+            0.95 gate). Automated NDE augments human inspectors (no exclusion).
+            Cost reduction: $1250/tank × 6 tanks = $7500/month savings.
+          outcome:
+            defect_detection_rate: 0.96
+            inspection_cost_per_tank_usd: 1800
+            human_inspector_hours_saved_per_month: 180
+            human_inspector_hours_redeployed: "NDE system oversight"
+          provenance:
+            source_token_id: "PAL-28-11-001"
+            source_token_version: "0.1.0"
+            source_hash: "TBD-SHA256"
+            generated_on: "2026-02-16"
+            generator_version: "AIT-GEN-0.1.1"
+        
+        - example_id: "DS-06-EX-002"
+          scenario: "Optimize weld procedure cycle time"
+          state:
+            current_weld_cycle_time_min: 45
+            weld_defect_rate_ppm: 120
+            throughput_tanks_per_month: 12
+          action_space:
+            - "Reduce cycle time to 35 min (faster weld speed)"
+            - "Maintain 45 min cycle"
+            - "Increase to 55 min (slower, more conservative)"
+          constraints:
+            - "weld_defect_rate_ppm <= 150 (quality gate)"
+            - "no_gate_override == true (safety)"
+            - "no_net_human_exclusion == true (labor continuity)"
+          optimal_action: "Reduce cycle time to 35 min with process monitoring"
+          rationale: >
+            Parametric study shows 35 min cycle maintains 130 ppm defect rate
+            (below 150 gate). Real-time weld monitoring alerts on deviations.
+            Human welder retains override authority. Throughput increases to
+            15 tanks/month.
+          outcome:
+            weld_cycle_time_min: 35
+            weld_defect_rate_ppm: 130
+            throughput_tanks_per_month: 15
+            human_welder_role: "Process oversight with AI monitoring assist"
+          provenance:
+            source_token_id: "PAL-28-11-002"
+            source_token_version: "0.1.0"
+            source_hash: "TBD-SHA256"
+            generated_on: "2026-02-16"
+            generator_version: "AIT-GEN-0.1.1"
+
+# =========================================================================
+# AI CAPABILITIES AFTER TRAINING
+# =========================================================================
+ai_capabilities_after_training:
+  description: >
+    Six AI capabilities enabled by the training architecture. Each
+    capability is trained by specific datasets and validated against
+    production-relevant criteria.
+  
+  capabilities:
+    - capability_id: "C1"
+      name: "Autonomous Design Generation"
+      description: >
+        Generate preliminary tank designs from mission requirements.
+        Execute STP sizing procedures, evaluate trade-offs, select
+        baseline geometry and materials.
+      trained_by: ["DS-01", "DS-02", "DS-03"]
+      validation_criteria:
+        - "Design convergence within 5 iterations"
+        - "Boil-off prediction accuracy within ±10%"
+        - "Material selection matches human expert 90% of cases"
+      human_oversight: "Design review at LC04 gate"
+    
+    - capability_id: "C2"
+      name: "Real-Time Gate Evaluation"
+      description: >
+        Evaluate acceptance gates during design, analysis, and production.
+        Classify pass/fail, trigger escalations, maintain audit trail.
+      trained_by: ["DS-04"]
+      validation_criteria:
+        - "Gate evaluation accuracy 100% on validation set"
+        - "Zero silent gate overrides"
+        - "Escalation routing correct 100% of cases"
+      human_oversight: "CCB authority for gate waivers"
+    
+    - capability_id: "C3"
+      name: "Anomaly Detection & Disposition"
+      description: >
+        Detect anomalies in sensor data, parametric model outputs, and
+        test results. Classify failure modes, estimate severity, recommend
+        disposition (rework, scrap, accept with deviation).
+      trained_by: ["DS-05"]
+      validation_criteria:
+        - "Anomaly detection recall >95%"
+        - "Failure mode classification accuracy >90%"
+        - "Severity estimation matches human expert 85% of cases"
+      human_oversight: "STK_SAF authority for hazardous dispositions"
+    
+    - capability_id: "C4"
+      name: "Production Optimization"
+      description: >
+        Optimize production line parameters (cycle time, resource allocation,
+        inspection sampling) under constitutional constraints. Maximize
+        throughput and quality while respecting safety gates and labor
+        continuity.
+      trained_by: ["DS-06"]
+      validation_criteria:
+        - "No gate violations in optimized plans"
+        - "Labor continuity constraints satisfied 100% of cases"
+        - "Cost/quality Pareto frontier convergence"
+      human_oversight: "STK_ENG authority for major process changes"
+    
+    - capability_id: "C5"
+      name: "Certification Evidence Compilation"
+      description: >
+        Compile certification evidence packages from design artifacts,
+        test results, and analysis reports. Map evidence to CS-25 requirements,
+        special conditions, and compliance matrix entries.
+      trained_by: ["DS-01", "DS-04", "DS-05"]
+      validation_criteria:
+        - "Evidence-to-requirement traceability 100%"
+        - "Zero missing evidence items in validation audits"
+        - "Human reviewer acceptance rate >90%"
+      human_oversight: "Certification authority (CAA/FAA/EASA) approval"
+    
+    - capability_id: "C6"
+      name: "Self-Validation"
+      description: >
+        Validate own outputs against known-good reference cases, detect
+        model drift, and trigger retraining when performance degrades.
+      trained_by: ["DS-01", "DS-02", "DS-03", "DS-04", "DS-05", "DS-06"]
+      validation_criteria:
+        - "Drift detection latency <1 hour"
+        - "False positive rate <5%"
+        - "Automatic retraining trigger on >10% performance degradation"
+      human_oversight: "STK_CM authority for model version approval"
+
+# =========================================================================
+# TRAINING PIPELINE
+# =========================================================================
+training_pipeline:
+  description: >
+    Six-stage training pipeline progressing from pretraining through
+    production governance. Each stage builds on the previous, with
+    explicit validation gates between stages.
+  
+  stages:
+    - stage_id: "stage_1_pretrain"
+      name: "Domain Knowledge Pretraining"
+      data: ["DS-01"]
+      method: "supervised learning on physics reasoning chains"
+      objective: >
+        Master first-principles cryogenic engineering knowledge.
+      validation:
+        - "Boil-off prediction accuracy within ±10% on held-out test set"
+        - "Material property interpolation error <5%"
+        - "Physical constraint satisfaction 100% (energy conservation, etc.)"
+    
+    - stage_id: "stage_2_methods"
+      name: "Calculation Method Fine-Tuning"
+      data: ["DS-02"]
+      method: "supervised learning on calculation examples with numerical precision"
+      objective: >
+        Execute geometric sizing, thermal analysis, and material selection
+        calculations with deterministic repeatability.
+      validation:
+        - "Numeric verification within ±0.5% for closed-form methods"
+        - "Units propagation correct 100% of cases"
+        - "Scaling law application within validated range bounds"
+    
+    - stage_id: "stage_3_procedures"
+      name: "Procedural Composition Training"
+      data: ["DS-03"]
+      method: "supervised procedural trace training"
+      objective: >
+        Orchestrate multi-step procedures with correct sequencing and
+        intermediate hand-offs. Maintain full audit trail.
+      validation:
+        - "Deterministic replay: same inputs → same outputs"
+        - "Step-by-step audit log with token references"
+        - "Correct hand-off of intermediate results"
+    
+    - stage_id: "stage_4_gates"
+      name: "Acceptance Logic Training"
+      data: ["DS-04"]
+      method: "supervised classification on gate evaluation examples"
+      objective: >
+        Evaluate acceptance gates with 100% accuracy. Classify pass/fail,
+        trigger escalations, maintain traceability.
+      validation:
+        - "Gate evaluation accuracy 100% on validation set"
+        - "Zero silent gate overrides"
+        - "Escalation routing correct 100% of cases"
+    
+    - stage_id: "stage_5_anomalies"
+      name: "Failure Mode Recognition Training"
+      data: ["DS-05"]
+      method: "supervised learning on anomaly-failure mode pairs"
+      objective: >
+        Detect anomalies and classify failure modes with high recall and
+        precision. Recommend disposition.
+      validation:
+        - "Anomaly detection recall >95%"
+        - "Failure mode classification accuracy >90%"
+        - "Severity estimation matches human expert 85% of cases"
+    
+    - stage_id: "stage_6_governance"
+      name: "Production Governance Training"
+      data: ["DS-06"]
+      method: "reinforcement learning with constitutional constraints"
+      objective: >
+        Optimize production under constraints. Maximize throughput and
+        quality while respecting safety gates and labor continuity.
+      rl_constraints:
+        action_space: "constrained"
+        gate_violation_penalty: "hard"
+        direct_actuation_in_dev_val: false
+      validation:
+        - "No gate violations in optimized plans"
+        - "Labor continuity constraints satisfied 100%"
+        - "Cost/quality Pareto frontier convergence"
+
+# =========================================================================
+# CONTINUOUS LEARNING
+# =========================================================================
+continuous_learning:
+  description: >
+    Feedback loop from production operations back to AI training.
+    Enables model improvement from real-world data while maintaining
+    version control and constitutional constraints.
+  
+  feedback_sources:
+    - source: "Production line sensor data"
+      feeds_into: ["DS-05 (anomaly detection)"]
+      trigger: "New failure mode observed"
+      process: >
+        Human-in-the-loop labeling of new failure modes. Add to DS-05
+        training set, retrain L5 layer, validate, deploy new version.
+      version_increment: "patch (e.g., 0.1.1 → 0.1.2)"
+    
+    - source: "NDE inspection results"
+      feeds_into: ["DS-04 (gate evaluation)", "DS-05 (anomaly detection)"]
+      trigger: "Gate pass/fail outcome observed"
+      process: >
+        Validate gate predictions against ground truth. If systematic
+        drift detected, add to DS-04 training set, retrain L4 layer.
+      version_increment: "patch"
+    
+    - source: "Acceptance gate outcomes"
+      feeds_into: ["DS-04 (gate evaluation)"]
+      trigger: "Gate waiver or exception granted by CCB"
+      process: >
+        Record waiver decision and rationale. Update gate logic if
+        exception represents new policy. Requires CCB approval.
+      version_increment: "minor (e.g., 0.1.2 → 0.2.0)"
+    
+    - source: "Engineering design changes (ECRs)"
+      feeds_into: ["DS-01", "DS-02", "DS-03"]
+      trigger: "ECR approved and baselined"
+      process: >
+        Update MTL tokens to reflect design changes. Regenerate affected
+        training examples. Retrain affected layers. Full validation.
+      version_increment: "major (e.g., 0.2.0 → 1.0.0) if baseline change"
+  
+  versioning_policy:
+    description: >
+      AI model version locked to token library version. Version format:
+      ASI-{MTL_version}-{training_stage}. Example: ASI-0.1.0-stage_6.
+      Version mismatch triggers automatic HOLD on autonomous operations.
+    version_format: "ASI-{MTL_version}-{training_stage}"
+    version_lock_enforcement: "hard"
+    on_version_mismatch: "HOLD_AUTONOMY"
+
+# =========================================================================
+# PROMOTION CRITERIA
+# =========================================================================
+promotion_criteria:
+  description: "Package is promotion-ready only if ALL gates pass"
+  gates:
+    - gate_id: "PC-01"
+      requirement: "100% DS examples signed and provenance-linked to MTL tokens"
+      validation: "Automated check: all provenance.source_token_id exist in MTL"
+    
+    - gate_id: "PC-02"
+      requirement: "Numeric verification error within declared tolerance for all MTP methods"
+      validation: "Automated test: run DS-02 examples, verify tolerance per determinism_policy"
+    
+    - gate_id: "PC-03"
+      requirement: "STP replay deterministic across repeated runs (same inputs → same outputs)"
+      validation: "Automated test: replay DS-03 examples 10x, verify deterministic per determinism_policy"
+    
+    - gate_id: "PC-04"
+      requirement: "Constitutional controls enforced (A4/A5/A6/A8/A10/A11)"
+      validation: "Manual review: verify governance section implementation"
+    
+    - gate_id: "PC-04A"
+      requirement: "Constitution fields present and complete"
+      validation: "Automated schema validation: governance.constitution_id, governance.applicable_articles exist"
+    
+    - gate_id: "PC-05"
+      requirement: "Version lock enforced (ASI == MTL) with automatic HOLD on mismatch"
+      validation: "Automated test: verify model_lock policy implementation"
+    
+    - gate_id: "PC-06"
+      requirement: "Human oversight path validated for all harm-sensitive branches"
+      validation: "Manual review: verify escalation routes for safety gates"
+    
+    - gate_id: "PC-06A"
+      requirement: "Escalation routes defined for all safety-critical gates"
+      validation: "Automated check: all DS-04 gate examples have escalation_route field"
+    
+    - gate_id: "PC-07"
+      requirement: "Labor continuity constraints validated for optimization actions"
+      validation: "Manual review: verify DS-06 examples satisfy labor continuity policy"
+    
+    - gate_id: "PC-07A"
+      requirement: "Labor continuity fields present in all DS-06 examples"
+      validation: "Automated check: all DS-06 examples reference labor continuity in outcome"
+
+# =========================================================================
+# TRACEABILITY
+# =========================================================================
+traceability:
+  derives_from:
+    - "MTL-28-11-00"
+    - "MTL-28-11-00-PROC"
+    - "STP-28-11-00"
+  feeds:
+    - lifecycle: "LC05"
+      artifact: "Parametric model pipelines (each STP = one model entry point)"
+      description: >
+        Detailed design phase consumes STP tokens to generate parametric
+        CAD models and analysis inputs.
+    - lifecycle: "LC06"
+      artifact: "Verification test sequences (each STP = one test procedure)"
+      description: >
+        Verification phase uses STP token structure to define test procedures
+        and acceptance criteria.
+    - lifecycle: "LC08"
+      artifact: "S1000D procedural data modules (each STP = one DM procedure)"
+      description: >
+        Technical publication phase generates S1000D data modules from
+        STP token procedures.
+    - lifecycle: "LC09"
+      artifact: "Manufacturing work instructions (robotics line execution)"
+      description: >
+        Production phase uses STP tokens to generate automated work instructions
+        for robotics-assisted manufacturing.
+    - lifecycle: "LC10"
+      artifact: "MRO repair procedures (AEROSPACEROBOTICS)"
+      description: >
+        In-service support phase uses STP tokens to generate maintenance,
+        repair, and overhaul procedures.
