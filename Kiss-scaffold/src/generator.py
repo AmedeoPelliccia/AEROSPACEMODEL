@@ -518,15 +518,530 @@ def gen_csdb_pub(ctx: GenContext, atdp_cfg: Dict[str, Any]) -> None:
         """,
     )
 
+    # Generate enhanced COMMON_CSDB structure with detailed subdirectories
     for d in common_csdb_dirs:
-        _write(ctx, f"00-00-general/PUB/ATDP/COMMON_CSDB/{d}/.gitkeep", "")
+        _gen_common_csdb_dir(ctx, d)
 
+    # Generate enhanced product structures with full CSDB hierarchy
     for product in products:
-        _write(ctx, f"00-00-general/PUB/ATDP/PRODUCTS/{product}/README.md", f"# {product}\n")
-        _write(ctx, f"00-00-general/PUB/ATDP/PRODUCTS/{product}/.gitkeep", "")
+        _gen_product_structure(ctx, product)
+
+    # Generate enhanced ATDP README
+    _gen_atdp_readme(ctx)
 
     _write(ctx, "00-00-general/PUB/ATDP/EXPORT/.gitkeep", "")
     _write(ctx, "00-00-general/PUB/ATDP/IETP/.gitkeep", "")
+
+
+def _gen_common_csdb_dir(ctx: GenContext, dir_name: str) -> None:
+    """Generate enhanced COMMON_CSDB subdirectory with templates and schemas."""
+    base_path = f"00-00-general/PUB/ATDP/COMMON_CSDB/{dir_name}"
+    
+    if dir_name == "DM":
+        _write(ctx, f"{base_path}/.gitkeep", "")
+        _write(ctx, f"{base_path}/README.md", f"""\
+            # COMMON_CSDB / DM — Shared Data Module Layer
+
+            This directory contains reusable, product-agnostic Data Module (DM) assets
+            for ATDP products (AMM, IPC, SRM, TSM, WDM, FIM, MMEL, MPD).
+
+            ## Purpose
+            - Provide common DM templates and fragments
+            - Enforce uniform metadata and traceability
+            - Reduce duplication across product-specific publication trees
+
+            ## Rules
+            1. Every DM asset must be registered in `dm_index.csv`.
+            2. Every DM metadata file must include SSOT/CSDB_REF provenance.
+            3. No product-exclusive payload in COMMON DM.
+            4. Naming must be deterministic and stable.
+
+            ## Minimal naming convention
+            - Content: `DM-<DOMAIN>-<CODE>.md`
+            - Metadata: `DM-<DOMAIN>-<CODE>.meta.yaml`
+
+            Example:
+            - `DM-TEMPLATE-COMMON-0001.md`
+            - `DM-TEMPLATE-COMMON-0001.meta.yaml`
+
+            ---
+
+            **GenKISS**: General Knowledge and Information Standard Systems
+            """)
+        _write(ctx, f"{base_path}/dm_index.csv", """\
+            DM_ID,Title,Type,Language,Applicability,Source_Type,Source_Ref,Status,Owner_AoR,Last_Updated_UTC,Notes
+            DM-TEMPLATE-COMMON-0001,Common DM Skeleton,TEMPLATE,EN,ALL,SSOT,KNU-00-00-005-LC02-GenKISS-SYS_REQ,ACTIVE,STK_DATA,2026-02-16T10:00:00Z,Seed shared template
+            """)
+        _write(ctx, f"{base_path}/schema/dm_header.schema.yaml", """\
+            $schema: "http://json-schema.org/draft-07/schema#"
+            title: "Common DM Header Metadata"
+            type: object
+            required:
+              - dm_id
+              - title
+              - type
+              - language
+              - applicability
+            properties:
+              dm_id:
+                type: string
+                pattern: "^DM-[A-Z0-9\\-]+$"
+              title:
+                type: string
+              type:
+                type: string
+                enum: ["TEMPLATE", "FRAGMENT", "MODULE", "REFERENCE"]
+              language:
+                type: string
+                pattern: "^[A-Z]{2}$"
+              applicability:
+                type: string
+              version:
+                type: string
+              owner_aor:
+                type: ["string", "null"]
+              tags:
+                type: array
+                items: { type: string }
+            """)
+        _write(ctx, f"{base_path}/schema/dm_trace.schema.yaml", """\
+            $schema: "http://json-schema.org/draft-07/schema#"
+            title: "DM Traceability Schema"
+            type: object
+            required:
+              - dm_id
+              - source_type
+              - source_ref
+            properties:
+              dm_id:
+                type: string
+              source_type:
+                type: string
+                enum: ["SSOT", "CSDB_REF", "COMMON_CSDB"]
+              source_ref:
+                type: string
+              derived_utc:
+                type: string
+                format: date-time
+            """)
+        _write(ctx, f"{base_path}/templates/DM-TEMPLATE-COMMON-0001.md", """\
+            # DM-TEMPLATE-COMMON-0001: Common DM Skeleton
+
+            This is a seed template for common data modules.
+
+            ## Content Structure
+            - Introduction
+            - Procedure/Description
+            - References
+            - Warnings/Cautions/Notes
+
+            ---
+
+            **GenKISS**: General Knowledge and Information Standard Systems
+            """)
+        _write(ctx, f"{base_path}/templates/DM-TEMPLATE-COMMON-0001.meta.yaml", """\
+            dm_id: DM-TEMPLATE-COMMON-0001
+            title: Common DM Skeleton
+            type: TEMPLATE
+            language: EN
+            applicability: ALL
+            version: 1.0.0
+            owner_aor: STK_DATA
+            tags: [template, common, seed]
+            source_type: SSOT
+            source_ref: KNU-00-00-005-LC02-GenKISS-SYS_REQ
+            """)
+    
+    elif dir_name == "PM":
+        _write(ctx, f"{base_path}/.gitkeep", "")
+        _write(ctx, f"{base_path}/README.md", f"""\
+            # COMMON_CSDB / PM — Shared Publication Module Layer
+
+            This directory contains reusable, product-agnostic Publication Module (PM)
+            assets for ATDP products (AMM, IPC, SRM, TSM, WDM, FIM, MMEL, MPD).
+
+            ## Purpose
+            - Provide common PM assembly templates
+            - Standardize module composition order
+            - Preserve traceability to SSOT/CSDB_REF sources
+
+            ## Rules
+            1. Every PM asset must be registered in `pm_index.csv`.
+            2. Every PM metadata file must include provenance and derived UTC.
+            3. COMMON PM must not include product-exclusive payload.
+            4. PMs can reference COMMON_CSDB/DM modules only through declared refs.
+
+            ## Minimal naming convention
+            - Content: `PM-<DOMAIN>-<CODE>.md`
+            - Metadata: `PM-<DOMAIN>-<CODE>.meta.yaml`
+
+            Example:
+            - `PM-TEMPLATE-COMMON-0001.md`
+            - `PM-TEMPLATE-COMMON-0001.meta.yaml`
+
+            ---
+
+            **GenKISS**: General Knowledge and Information Standard Systems
+            """)
+        _write(ctx, f"{base_path}/pm_index.csv", """\
+            PM_ID,Title,Type,Language,Applicability,Source_Type,Source_Ref,Status,Owner_AoR,Last_Updated_UTC,Notes
+            PM-TEMPLATE-COMMON-0001,Common PM Skeleton,TEMPLATE,EN,ALL,SSOT,KNU-00-00-005-LC02-GenKISS-SYS_REQ,ACTIVE,STK_DATA,2026-02-16T10:00:00Z,Seed shared publication module template
+            """)
+        _write(ctx, f"{base_path}/schema/pm_header.schema.yaml", """\
+            $schema: "http://json-schema.org/draft-07/schema#"
+            title: "Common PM Header Metadata"
+            type: object
+            required:
+              - pm_id
+              - title
+              - type
+              - language
+              - applicability
+            properties:
+              pm_id:
+                type: string
+                pattern: "^PM-[A-Z0-9\\-]+$"
+              title:
+                type: string
+              type:
+                type: string
+                enum: ["TEMPLATE", "ASSEMBLY", "REFERENCE"]
+              language:
+                type: string
+                pattern: "^[A-Z]{2}$"
+              applicability:
+                type: string
+              version:
+                type: string
+              owner_aor:
+                type: ["string", "null"]
+              tags:
+                type: array
+                items: { type: string }
+            """)
+        _write(ctx, f"{base_path}/schema/pm_trace.schema.yaml", """\
+            $schema: "http://json-schema.org/draft-07/schema#"
+            title: "PM Traceability Schema"
+            type: object
+            required:
+              - pm_id
+              - source_type
+              - source_ref
+            properties:
+              pm_id:
+                type: string
+              source_type:
+                type: string
+                enum: ["SSOT", "CSDB_REF", "COMMON_CSDB"]
+              source_ref:
+                type: string
+              derived_utc:
+                type: string
+                format: date-time
+            """)
+        _write(ctx, f"{base_path}/templates/PM-TEMPLATE-COMMON-0001.md", """\
+            # PM-TEMPLATE-COMMON-0001: Common PM Skeleton
+
+            This is a seed template for common publication modules.
+
+            ## Composition Structure
+            - Title Page
+            - Table of Contents
+            - Referenced DM Modules
+            - Appendices
+
+            ---
+
+            **GenKISS**: General Knowledge and Information Standard Systems
+            """)
+        _write(ctx, f"{base_path}/templates/PM-TEMPLATE-COMMON-0001.meta.yaml", """\
+            pm_id: PM-TEMPLATE-COMMON-0001
+            title: Common PM Skeleton
+            type: TEMPLATE
+            language: EN
+            applicability: ALL
+            version: 1.0.0
+            owner_aor: STK_DATA
+            tags: [template, common, seed]
+            source_type: SSOT
+            source_ref: KNU-00-00-005-LC02-GenKISS-SYS_REQ
+            """)
+    else:
+        _write(ctx, f"{base_path}/.gitkeep", "")
+
+
+def _gen_product_structure(ctx: GenContext, product: str) -> None:
+    """Generate comprehensive product-specific CSDB structure."""
+    base_path = f"00-00-general/PUB/ATDP/PRODUCTS/{product}"
+    
+    _write(ctx, f"{base_path}/.gitkeep", "")
+    _write(ctx, f"{base_path}/README.md", f"""\
+        # ATDP / PRODUCTS / {product} — {_get_product_full_name(product)} Domain
+
+        {product} product domain under `PUB/ATDP/PRODUCTS`.
+
+        ## Scope
+        This folder hosts {product}-specific publication assets and configuration.
+        Shared reusable primitives must be consumed from:
+
+        - `../../COMMON_CSDB/DM`
+        - `../../COMMON_CSDB/PM`
+        - `../../COMMON_CSDB/BREX`
+        - `../../COMMON_CSDB/APPLICABILITY`
+        - `../../COMMON_CSDB/COMMON`
+        - `../../COMMON_CSDB/ICN`
+
+        ## Governance
+        - {product} content is publication-layer output and must trace to SSOT/CSDB_REF lineage.
+        - No authority inversion: SSOT remains authoritative lifecycle source.
+        - Product deltas must be explicit and versioned.
+
+        ## Minimal Deliverables
+        - {product} DM/PM seeds
+        - DML seed
+        - Applicability seed
+        - Traceability lineage map
+        - Export target configuration
+
+        ---
+
+        **GenKISS**: General Knowledge and Information Standard Systems
+        """)
+    
+    # Generate index
+    _write(ctx, f"{base_path}/{product.lower()}_index.csv", f"""\
+        Asset_ID,Asset_Type,Path,Status,Source_Type,Source_Ref,Last_Updated_UTC,Owner_AoR,Notes
+        {product}-DM-INTRO-0001,DM,CSDB/DM/{product}-DM-INTRO-0001.md,DRAFT,COMMON_CSDB,DM-TEMPLATE-COMMON-0001,2026-02-16T10:00:00Z,STK_DATA,Seed {product} intro module
+        {product}-PM-MAIN-0001,PM,CSDB/PM/{product}-PM-MAIN-0001.md,DRAFT,COMMON_CSDB,PM-TEMPLATE-COMMON-0001,2026-02-16T10:00:00Z,STK_DATA,Seed {product} main publication module
+        """)
+    
+    # CONFIG subdirectories
+    _write(ctx, f"{base_path}/CONFIG/effectivity.yaml", f"""\
+        # {product} Effectivity Configuration
+        applicability_rules:
+          - rule_id: {product}-EFF-001
+            description: Default applicability for {product}
+            condition: ALL
+        """)
+    _write(ctx, f"{base_path}/CONFIG/publication_profile.yaml", f"""\
+        # {product} Publication Profile
+        product_code: {product}
+        language: EN
+        output_formats: [PDF, HTML, IETP]
+        brex_reference: {product}-BREX-0001
+        """)
+    _write(ctx, f"{base_path}/CONFIG/export_targets.yaml", f"""\
+        # {product} Export Targets
+        targets:
+          - target_id: {product}-EXPORT-PDF
+            format: PDF
+            output_path: ../EXPORT/PDF
+          - target_id: {product}-EXPORT-HTML
+            format: HTML
+            output_path: ../EXPORT/HTML
+          - target_id: {product}-EXPORT-IETP
+            format: IETP_PACKAGE
+            output_path: ../EXPORT/IETP_PACKAGE
+        """)
+    
+    # CSDB subdirectories
+    _write(ctx, f"{base_path}/CSDB/DM/.gitkeep", "")
+    _write(ctx, f"{base_path}/CSDB/DM/README.md", f"# {product} Data Modules\n\nProduct-specific DM content for {product}.\n")
+    _write(ctx, f"{base_path}/CSDB/DM/{product}-DM-INTRO-0001.md", f"""\
+        # {product}-DM-INTRO-0001: {product} Introduction
+
+        This is the introductory data module for {product}.
+
+        ## Purpose
+        Provides overview and scope of {product} documentation.
+
+        ---
+
+        **GenKISS**: General Knowledge and Information Standard Systems
+        """)
+    
+    _write(ctx, f"{base_path}/CSDB/PM/.gitkeep", "")
+    _write(ctx, f"{base_path}/CSDB/PM/README.md", f"# {product} Publication Modules\n\nProduct-specific PM content for {product}.\n")
+    _write(ctx, f"{base_path}/CSDB/PM/{product}-PM-MAIN-0001.md", f"""\
+        # {product}-PM-MAIN-0001: {product} Main Publication
+
+        Main publication module for {product}.
+
+        ## Referenced Modules
+        - {product}-DM-INTRO-0001
+
+        ---
+
+        **GenKISS**: General Knowledge and Information Standard Systems
+        """)
+    
+    _write(ctx, f"{base_path}/CSDB/DML/.gitkeep", "")
+    _write(ctx, f"{base_path}/CSDB/DML/{product}-DML-0001.csv", f"""\
+        DML_Entry_ID,DM_ID,PM_ID,Sequence,Status
+        {product}-DML-E001,{product}-DM-INTRO-0001,{product}-PM-MAIN-0001,1,ACTIVE
+        """)
+    
+    _write(ctx, f"{base_path}/CSDB/BREX/.gitkeep", "")
+    _write(ctx, f"{base_path}/CSDB/BREX/{product}-BREX-0001.md", f"""\
+        # {product}-BREX-0001: {product} Business Rules
+
+        Business rules and validation constraints for {product}.
+
+        ---
+
+        **GenKISS**: General Knowledge and Information Standard Systems
+        """)
+    
+    _write(ctx, f"{base_path}/CSDB/ICN/.gitkeep", "")
+    _write(ctx, f"{base_path}/CSDB/COMMON/.gitkeep", "")
+    
+    _write(ctx, f"{base_path}/CSDB/APPLICABILITY/.gitkeep", "")
+    _write(ctx, f"{base_path}/CSDB/APPLICABILITY/{product}-ACT-0001.yaml", f"""\
+        # {product} Applicability Table
+        act_id: {product}-ACT-0001
+        rules:
+          - rule_id: {product}-APP-001
+            description: Default applicability
+            condition: ALL
+        """)
+    
+    # TRACE subdirectories
+    _write(ctx, f"{base_path}/TRACE/lineage.yaml", f"""\
+        # {product} Lineage Tracking
+        product: {product}
+        ssot_sources:
+          - LC02_SYSTEM_REQUIREMENTS
+          - LC04_DESIGN_DEFINITION
+        csdb_ref_sources:
+          - NU/*
+        """)
+    _write(ctx, f"{base_path}/TRACE/compliance_map.csv", f"""\
+        Requirement_ID,Source_LC,Target_DM,Compliance_Status,Verification_Method
+        REQ-{product}-001,LC02,{product}-DM-INTRO-0001,PENDING,REVIEW
+        """)
+    
+    # EXPORT subdirectories
+    _write(ctx, f"{base_path}/EXPORT/.gitkeep", "")
+    _write(ctx, f"{base_path}/EXPORT/PDF/.gitkeep", "")
+    _write(ctx, f"{base_path}/EXPORT/HTML/.gitkeep", "")
+    _write(ctx, f"{base_path}/EXPORT/IETP_PACKAGE/.gitkeep", "")
+
+
+def _get_product_full_name(product: str) -> str:
+    """Get full name for product code."""
+    names = {
+        "AMM": "Aircraft Maintenance Manual",
+        "IPC": "Illustrated Parts Catalog",
+        "SRM": "Structural Repair Manual",
+        "CMM": "Component Maintenance Manual",
+    }
+    return names.get(product, product)
+
+
+def _gen_atdp_readme(ctx: GenContext) -> None:
+    """Generate enhanced PUB/ATDP README."""
+    _write(ctx, "00-00-general/PUB/ATDP/README.md", """\
+        # PUB / ATDP — Aircraft Technical Data Product Umbrella
+
+        ATDP is the canonical publication umbrella for aircraft technical data products in the GenKISS scaffold.  
+        Within ATDP, **CSDB is shared infrastructure** (COMMON_CSDB), and each product domain (AMM, IPC, SRM, CMM, etc.) provides product-specific deltas under `PRODUCTS/`.
+
+        ---
+
+        ## 1) Mission
+
+        Provide a governed publication surface that:
+
+        - Reuses shared CSDB primitives across products
+        - Preserves product-specific specialization without duplicating common assets
+        - Maintains strict lineage to SSOT and CSDB_REF
+        - Supports deterministic export and IETP packaging flows
+
+        ---
+
+        ## 2) Canonical Structure
+
+        ```text
+        PUB/ATDP/
+        ├── README.md
+        ├── COMMON_CSDB/
+        │   ├── README.md
+        │   ├── DM/
+        │   ├── PM/
+        │   ├── DML/
+        │   ├── BREX/
+        │   ├── ICN/
+        │   ├── COMMON/
+        │   └── APPLICABILITY/
+        ├── PRODUCTS/
+        │   ├── AMM/
+        │   ├── IPC/
+        │   ├── SRM/
+        │   ├── CMM/
+        │   └── ...
+        ├── EXPORT/
+        │   ├── .gitkeep
+        │   ├── PDF/
+        │   ├── HTML/
+        │   └── IETP_PACKAGE/
+        └── IETP/
+            └── .gitkeep
+        ```
+
+        ---
+
+        ## 3) Governance Boundaries
+
+        ### 3.1 Authority Model
+        - SSOT remains the authoritative lifecycle source.
+        - CSDB_REF provides atomic reference units derived from SSOT.
+        - PUB/ATDP is delivery-oriented and must never become an upstream authority.
+
+        ### 3.2 Non-Inversion Rule
+
+        No product folder in `PUB/ATDP/PRODUCTS/*` may redefine lifecycle truth or bypass SSOT provenance.
+
+        ### 3.3 Delta Rule
+
+        Product directories contain only:
+        - product-specific content,
+        - product-specific applicability/configuration,
+        - product-specific trace mappings.
+
+        Shared templates and primitives belong in COMMON_CSDB.
+
+        ---
+
+        ## 4) Product Domains
+
+        A product domain (e.g., PRODUCTS/AMM) should include:
+        - `CONFIG/` (effectivity, publication profile, export targets)
+        - `CSDB/` (DM, PM, DML, BREX, APPLICABILITY, etc.)
+        - `TRACE/` (lineage + compliance mapping)
+        - `EXPORT/` (product-local export outputs if enabled)
+
+        Each product must carry explicit lineage to:
+        - `../../SSOT`
+        - `../../CSDB_REF/NU`
+        - `../../COMMON_CSDB`
+
+        ---
+
+        ## 5) Reuse Philosophy
+
+        COMMON_CSDB hosts:
+        - Generic warnings, cautions, notes
+        - Standard procedures and checklists
+        - Reusable illustrations and graphics
+        - Business rules (BREX) for validation
+        - Applicability logic templates
+
+        Products consume and specialize, but do not duplicate.
+
+        ---
+
+        **GenKISS**: General Knowledge and Information Standard Systems
+        """)
 
 
 def gen_0090(ctx: GenContext, phases: Dict[str, Any], atdp_cfg: Dict[str, Any]) -> None:
