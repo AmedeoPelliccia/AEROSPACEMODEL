@@ -86,7 +86,7 @@ repos:
 default_language_version:
   python: python3
 
-# Fail fast on first error (recommended for constitutional enforcement)
+# Do not fail fast: run all hooks to report all issues in a single run
 fail_fast: false
 
 # Minimum pre-commit version
