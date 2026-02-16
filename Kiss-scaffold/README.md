@@ -18,6 +18,10 @@ Kiss-scaffold generates standard aerospace project structures with lifecycle pha
 - ✅ **Validation Rules** for structure integrity
 - ✅ **Configurable** via YAML files
 - ✅ **Tested** with integration tests
+- ✅ **Logging Support** with configurable levels
+- ✅ **Environment Variables** for deployment flexibility
+- ✅ **Manifest Generation** for file tracking
+- ✅ **Proper Exit Codes** for CI/CD integration
 
 ## Installation
 
@@ -33,12 +37,40 @@ Generate a scaffold:
 python Kiss-scaffold.py --base ./OUT --config-dir ./config --validate --manifest
 ```
 
-Options:
+### Command-Line Options
+
 - `--base`: Base directory for scaffold output
 - `--config-dir`: Directory containing lifecycle.yaml and atdp.yaml
-- `--mode`: Write mode (fail/safe/overwrite)
+- `--mode`: Write mode - `fail` (default), `safe`, or `overwrite`
 - `--validate`: Run validation after generation
-- `--manifest`: Print list of generated files
+- `--manifest`: Write manifest file with list of generated files
+- `--timestamp`: ISO timestamp for generation (default: current UTC time)
+- `--log-level`: Logging level - `DEBUG`, `INFO` (default), `WARNING`, `ERROR`, `CRITICAL`
+
+### Environment Variables
+
+Override command-line arguments with environment variables:
+
+- `KISS_BASE`: Override `--base` argument
+- `KISS_CONFIG_DIR`: Override `--config-dir` argument
+
+Example:
+```bash
+export KISS_BASE=/opt/aerospace/scaffold
+export KISS_CONFIG_DIR=/etc/kiss-scaffold
+python Kiss-scaffold.py --base ./OUT --config-dir ./config
+# Uses /opt/aerospace/scaffold and /etc/kiss-scaffold instead
+```
+
+### Exit Codes
+
+- `0`: Success
+- `2`: Invalid timestamp
+- `3`: Configuration error
+- `4`: Generation conflict (file collision in fail mode)
+- `5`: Generation failure
+- `6`: Validation failed
+- `7`: Manifest write failed
 
 ## Configuration
 
