@@ -190,7 +190,14 @@ python3 .github/hooks/constitutional_commit_validator.py <commit-msg-file>
 
 ## Edge Cases and `.constitution-ignore`
 
-For legitimate edge cases (e.g., automated bot commits, merge commits), create `.constitution-ignore`:
+**Note:** `.constitution-ignore` is currently a template/design document for a future feature. The current implementation does not automatically read or apply these exceptions.
+
+For now, exceptions are handled via:
+- **`--no-verify` flag**: Emergency bypass (requires steward notification)
+- **Manual review**: Constitution Steward reviews and approves exceptions
+
+**Future Implementation:**
+When implemented, `.constitution-ignore` will allow structured exceptions:
 
 ```yaml
 # .constitution-ignore
@@ -201,14 +208,9 @@ exceptions:
     reason: "GitHub merge commits lack human-authored content"
     justification: "Merge commits reference PRs which contain constitutional documentation"
     approved_by: "Repository Steward"
-    
-  - pattern: "^dependabot"
-    reason: "Automated dependency updates"
-    justification: "Dependency updates reviewed in PR process, minimal human impact"
-    approved_by: "Security Team"
 ```
 
-**Important:** All exceptions trigger audit log entries.
+Until implementation, all commits must comply with constitutional requirements or use `--no-verify` with proper justification.
 
 ## Limitations and Human Review
 
