@@ -8,6 +8,7 @@
 | ATA Mapping | 28-11 LH₂ Primary Tank |
 | Subject Token Pattern | `MTK-28-11-{DOMAIN}-{SEQ}` |
 | Process Token Pattern | `MTP-28-11-{DOMAIN}-{SEQ}` |
+| Procedure Token Pattern | `STP-28-11-{SEQ}` |
 | Status | DEV (non-baselined) |
 
 ## Contents
@@ -18,10 +19,13 @@
 | `MTL-28-11-00_method_token_library.md` | Human-readable companion |
 | `MTL-28-11-00_process_methods.yaml` | Process and scaling method tokens (21 tokens across 5 domains) |
 | `MTL-28-11-00_process_methods.md` | Human-readable companion |
+| `STP-28-11-00_standard_procedures.yaml` | Standard Token Procedures — 5 composed procedures (40 token refs) |
+| `STP-28-11-00_standard_procedures.md` | Human-readable companion |
 
-## What Is an MTL?
+## Three-Layer Token Architecture
 
-A Method Token Library has two layers:
+The MTL has three layers.  Each layer builds on the previous one,
+and a model can consume tokens at any layer:
 
 1. **Subject tokens** (`MTK-*`): tokenise every subject title from trade
    studies, compliance matrices, evaluation criteria, and special conditions
@@ -31,6 +35,12 @@ A Method Token Library has two layers:
    processes (closed-form analytical methods) and scaling relationships
    (empirical correlations where no inference boundary exists) embedded
    in every YAML file.
+
+3. **Standard Token Procedures** (`STP-*`): compose subject and process
+   tokens into end-to-end standard procedures.  A model consuming one
+   STP token receives the full procedure — inputs, sequenced steps,
+   intermediate hand-offs, terminal outputs, and acceptance gates —
+   enabling a complete standard procedure in a single token call.
 
 Each token defines `method_class`, `inputs`, and `outputs` for model
 programming and can be referenced by parametric models, scoring
