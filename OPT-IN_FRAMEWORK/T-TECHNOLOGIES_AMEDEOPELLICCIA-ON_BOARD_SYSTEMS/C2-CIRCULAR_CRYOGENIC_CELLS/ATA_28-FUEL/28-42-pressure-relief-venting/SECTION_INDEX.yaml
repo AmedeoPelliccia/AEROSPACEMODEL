@@ -1,0 +1,32 @@
+# SECTION_INDEX.yaml — Section-Level Artifact Index
+# ATA 28-42 Pressure Relief and Venting — C2 Circular Cryogenic Cells
+
+ata_section: "28-42"
+title: "Pressure Relief and Venting — LH₂ Circular Cryogenic Cells"
+variant: "C2"
+
+subjects:
+  - id: "28-42-00"
+    title: "Pressure Relief and Venting General"
+    path: "28-42-00-pressure-relief-venting-general/"
+    description: "General pressure relief and venting artifacts"
+
+metrics:
+  total_artifacts: 0
+  requirements_count: 0
+  design_count: 0
+  safety_count: 0
+  test_count: 0
+  publication_count: 0
+
+genesis_summary:
+  o_knots: 0
+  y_knots: 0
+  graduated: 0
+  open: 0
+
+status_summary:
+  active: 0
+  draft: 0
+  pending_review: 0
+  graduated: 0

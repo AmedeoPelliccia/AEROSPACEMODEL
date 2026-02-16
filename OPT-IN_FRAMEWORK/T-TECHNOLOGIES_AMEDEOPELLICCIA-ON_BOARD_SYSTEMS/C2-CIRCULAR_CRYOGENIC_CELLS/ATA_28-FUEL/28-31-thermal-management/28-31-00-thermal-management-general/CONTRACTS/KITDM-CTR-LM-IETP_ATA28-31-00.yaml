@@ -1,0 +1,8 @@
+# KITDM-CTR-LM-IETP_ATA28-31-00.yaml
+# Contract for ATA 28-31-00 — Thermal Management General
+
+contract_id: "KITDM-CTR-LM-IETP_ATA28-31-00"
+ata_code: "28-31-00"
+technology_domain: "C2"
+status: "draft"
+created: "2026-02-16"
