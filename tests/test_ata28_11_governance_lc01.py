@@ -276,12 +276,13 @@ class TestSafetyPrecedence:
 
     def test_human_harm_first(self, data):
         order = data["safety_and_human_harm_precedence"]["precedence_order"]
+        assert 1 in order, "precedence_order must have key 1"
         assert "harm" in order[1].lower() or "human" in order[1].lower()
 
     def test_has_required_actions(self, data):
         actions = data["safety_and_human_harm_precedence"]["uncertainty_policy"]["required_actions"]
         for action in ["DEGRADE", "PAUSE", "ESCALATE"]:
-            assert action in actions
+            assert action in actions, f"Required action '{action}' not found in uncertainty_policy"
 
     def test_autonomous_harm_forbidden(self, data):
         policy = data["safety_and_human_harm_precedence"]["uncertainty_policy"]
