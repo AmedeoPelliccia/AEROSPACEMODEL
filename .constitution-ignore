@@ -1,0 +1,110 @@
+# Constitutional Hook Exceptions
+#
+# This file documents legitimate exceptions to constitutional pre-commit hooks.
+# All exceptions require justification and Constitution Steward approval.
+#
+# Format:
+#   exceptions:
+#     - pattern: <regex or literal pattern>
+#       reason: <why this pattern should be excepted>
+#       justification: <detailed rationale per Articles 1-11>
+#       approved_by: <Constitution Steward name and date>
+#       expiry_date: <optional - when exception should be reviewed>
+#       audit_log: <required - where exception usage is logged>
+#
+# Note: All uses of exceptions trigger audit log entries.
+# Excessive use of exceptions may indicate constitutional violations.
+
+exceptions:
+  # Example 1: GitHub automated merge commits
+  - pattern: "^Merge pull request #[0-9]+"
+    reason: "GitHub merge commits lack human-authored constitutional sections"
+    justification: |
+      Merge commits reference PRs which contain full constitutional documentation.
+      The PR itself was reviewed and approved with proper INTENT, RATIONALE, 
+      HUMAN_IMPACT, REVERSIBILITY, and AUTHOR sections. Merge commit is 
+      mechanical aggregation of reviewed changes.
+      
+      Per Article 4, the PR commit history maintains legitimacy chain.
+      Merge commits inherit accountability from constituent commits.
+    approved_by: "Repository Steward, 2026-02-16"
+    expiry_date: null  # No expiry - this is a structural pattern
+    audit_log: "git log --grep='^Merge pull request'"
+  
+  # Example 2: Dependabot automated dependency updates
+  - pattern: "^dependabot"
+    reason: "Automated dependency updates by bot"
+    justification: |
+      Dependabot PRs are reviewed by security team before merge.
+      Dependencies are security-critical but have minimal human labor impact.
+      
+      Per Article 8, dependency updates don't affect workforce.
+      Per Article 6, security vulnerabilities have harm precedence.
+      
+      Security team review constitutes human accountability (Article 4).
+      Bot is tool serving humans (Article 3), not autonomous decision-maker.
+    approved_by: "Security Team Lead & Constitution Steward, 2026-02-16"
+    expiry_date: "2027-02-16"  # Review annually
+    audit_log: "git log --author=dependabot"
+  
+  # Example 3: Emergency hotfix commits (temporary)
+  - pattern: "^EMERGENCY:"
+    reason: "Critical production fixes requiring immediate deployment"
+    justification: |
+      Per safety protocol SP-EMERG-001, critical safety issues may require
+      immediate fixes bypassing normal constitutional documentation.
+      
+      Article 6 (Human Harm Precedence) takes priority over Article 4 
+      (Commit Documentation) in acute safety scenarios.
+      
+      Requirements:
+      1. Emergency protocol must be invoked explicitly
+      2. Constitution Steward notified within 1 hour
+      3. Follow-up constitutional commit required within 24 hours
+      4. Post-incident review mandatory
+      
+      This exception may NOT be used for:
+      - Business pressure
+      - Missed deadlines
+      - Workforce reduction
+      - Cost optimization
+    approved_by: "Safety Committee & Constitution Steward, 2026-02-16"
+    expiry_date: null  # Emergency protocol is permanent
+    audit_log: "git log --grep='^EMERGENCY:'"
+    conditions:
+      - "Emergency protocol SP-EMERG-001 invoked"
+      - "Constitution Steward notified within 1 hour"
+      - "Follow-up constitutional commit within 24 hours"
+      - "Post-incident review scheduled"
+
+# Exceptions NOT Permitted (Explicit Denials):
+#
+# The following patterns are explicitly NOT excepted and require full constitutional documentation:
+#
+# ❌ Business optimization commits
+#    Reason: Article 8 applies - workforce impact must be documented
+#
+# ❌ Vendor-required changes
+#    Reason: Article 2 - capital/vendor cannot override constitution
+#
+# ❌ Time pressure / deadline commits
+#    Reason: Article 4 - legitimacy requires documentation regardless of timeline
+#
+# ❌ "Nobody reads commit messages anyway"
+#    Reason: Article 5 - traceability is constitutional requirement, not optional
+#
+# ❌ Refactoring without human impact documentation
+#    Reason: Article 7 - explicit purpose required, Article 8 - labor impact must be stated
+#
+# ❌ AI-generated commits without human review
+#    Reason: Article 3 - technology serves, humans remain accountable agents
+
+# Audit and Review:
+#
+# This file itself requires constitutional commit format when modified.
+# Exception usage is audited quarterly by Constitution Steward.
+# Patterns of exception abuse trigger immediate review and potential revocation.
+#
+# Last Review: 2026-02-16
+# Next Review: 2026-05-16
+# Reviewer: Constitution Steward
