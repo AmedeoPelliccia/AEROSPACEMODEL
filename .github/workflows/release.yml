@@ -14,26 +14,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
-      
+
       - name: Install build dependencies
         run: |
           python -m pip install --upgrade pip
           pip install build twine
-      
+
       - name: Build package
         run: |
           python -m build
-      
+
       - name: Check package
         run: |
           twine check dist/*
-      
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -48,16 +48,16 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
+
       - name: Generate changelog
         id: changelog
         run: |
           # Get the previous tag
           PREVIOUS_TAG=$(git tag --sort=-creatordate | sed -n '2p')
           CURRENT_TAG=${GITHUB_REF#refs/tags/}
-          
+
           echo "Generating changelog from ${PREVIOUS_TAG} to ${CURRENT_TAG}"
-          
+
           # Generate changelog
           if [ -z "$PREVIOUS_TAG" ]; then
             # First release
@@ -65,13 +65,13 @@ jobs:
           else
             CHANGELOG=$(git log --pretty=format:"- %s (%h)" ${PREVIOUS_TAG}..${CURRENT_TAG})
           fi
-          
+
           # Save changelog
           echo "${CHANGELOG}" > CHANGELOG.txt
-          
+
           echo "Changelog generated:"
           cat CHANGELOG.txt
-      
+
       - name: Upload changelog
         uses: actions/upload-artifact@v4
         with:
@@ -85,64 +85,64 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
           name: python-package-distributions
           path: dist/
-      
+
       - name: Download changelog
         uses: actions/download-artifact@v4
         with:
           name: changelog
-      
+
       - name: Extract version from tag
         id: version
         run: |
           VERSION=${GITHUB_REF#refs/tags/v}
           echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
           echo "Version: ${VERSION}"
-      
+
       - name: Create Release Notes
         run: |
           cat << EOF > RELEASE_NOTES.md
           # AEROSPACEMODEL v${{ steps.version.outputs.VERSION }}
-          
+
           ## Release Information
-          
+
           - **Version:** ${{ steps.version.outputs.VERSION }}
           - **Release Date:** $(date +%Y-%m-%d)
           - **Tag:** ${GITHUB_REF#refs/tags/}
-          
+
           ## Changes
-          
+
           $(cat CHANGELOG.txt)
-          
+
           ## Installation
-          
+
           \`\`\`bash
           pip install aerospacemodel==${{ steps.version.outputs.VERSION }}
           \`\`\`
-          
+
           Or download the wheel file from the assets below.
-          
+
           ## Documentation
-          
+
           - [README](https://github.com/AmedeoPelliccia/AEROSPACEMODEL/blob/main/README.md)
           - [S1000D Documentation](https://github.com/AmedeoPelliccia/AEROSPACEMODEL/tree/main/docs)
-          
+
           ## Compliance
-          
+
           - ✅ S1000D Issue 5.0 compliant
           - ✅ ATA iSpec 2200 aligned
           - ✅ DO-178C/ARP4754A traceable
           - ✅ BREX-governed transformations
-          
+
           EOF
-          
+
           cat RELEASE_NOTES.md
-      
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
@@ -166,7 +166,7 @@ jobs:
         with:
           name: python-package-distributions
           path: dist/
-      
+
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
@@ -174,7 +174,7 @@ jobs:
           skip-existing: true
           verbose: true
         continue-on-error: true
-      
+
       - name: Note about PyPI publishing
         run: |
           echo "PyPI publishing attempted (requires PYPI_API_TOKEN secret)"
