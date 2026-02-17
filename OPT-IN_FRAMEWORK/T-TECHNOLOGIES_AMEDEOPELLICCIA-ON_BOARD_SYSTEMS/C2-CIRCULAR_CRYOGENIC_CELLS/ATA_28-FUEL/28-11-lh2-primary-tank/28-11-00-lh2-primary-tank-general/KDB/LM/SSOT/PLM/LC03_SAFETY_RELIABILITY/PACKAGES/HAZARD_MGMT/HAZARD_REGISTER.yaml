@@ -4,7 +4,7 @@ hazard_register:
   program: "AMPEL360 Q100"
   version: "0.2.0"
   status: "DEV"
-  date: "2026-02-17"
+  date: "2026-02-16"
   owner: "STK_SAF"
 
   methodology:
