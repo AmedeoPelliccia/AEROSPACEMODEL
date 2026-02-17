@@ -17,7 +17,9 @@ The **OPT-IN_FRAMEWORK** provides the structural foundation for organizing ATA i
 The OPT-IN_FRAMEWORK is organized into five top-level domains:
 
 ### 1. **O-ORGANIZATIONS** (ATA 00–05)
-Organizational and governance documentation including maintenance policies, operational procedures, and airworthiness limitations.
+Organizational and governance documentation including maintenance policies, operational procedures, and airworthiness limitations. Organized into two subdomains:
+- **A — Authoritative** (ATA 00, 04, 05): Agency, regulatory, and legal-derived requirements
+- **B — Business Enforcement** (ATA 01, 02, 03): Operator business policies and enforcement
 
 ### 2. **P-PROGRAMS** (ATA 06–12)
 Program-level documentation including dimensions, servicing, and operational procedures. Organized into two subdomains:
@@ -188,6 +190,7 @@ The OPT-IN_FRAMEWORK is designed to support:
 |---------|------|--------|-------------|
 | 1.0.0 | 2026-02-12 | ASIT | Initial OPT-IN_FRAMEWORK creation for TLI v2.1 |
 | 1.1.0 | 2026-02-17 | ASIT | Add P/I/N subdomain structure (P/S, M1/M2/O, D/A/P*) |
+| 1.2.0 | 2026-02-17 | ASIT | Add O-ORGANIZATIONS subdomain split (A/B) |
 
 ---
 

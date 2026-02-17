@@ -41,6 +41,15 @@
 
 ---
 
+## Organization Subdomains (O-ORGANIZATIONS)
+
+| Subdomain | Code | ATA Chapters | Description |
+|-----------|------|--------------|-------------|
+| Authoritative | **A** | 00, 04, 05 | Agency, regulatory, and legal-derived requirements |
+| Business Enforcement | **B** | 01, 02, 03 | Operator business policies and enforcement |
+
+---
+
 ## Program Subdomains (P-PROGRAMS)
 
 | Subdomain | Code | ATA Chapters | Description |
@@ -98,6 +107,7 @@
 
 - **5** Top-Level Domains + **1** Engineering SSOT Front-End
 - **15** Technology Subdomains within T-TECHNOLOGIES
+- **2** Organization Subdomains within O-ORGANIZATIONS (A, B)
 - **2** Program Subdomains within P-PROGRAMS (P, S)
 - **3** Infrastructure Subdomains within I-INFRASTRUCTURES (M1, M2, O)
 - **3** Neural Network Subdomains within N-NEURAL_NETWORKS (D, A, P*)

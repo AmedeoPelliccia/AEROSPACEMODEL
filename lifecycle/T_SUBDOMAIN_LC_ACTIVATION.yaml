@@ -449,6 +449,28 @@ subdomains:
     description: "Use standard_profile for conventional ATA chapters without novel technology"
 
 # =============================================================================
+# O-ORGANIZATIONS SUBDOMAINS
+# =============================================================================
+
+  O_AUTHORITATIVE:
+    title: "Authoritative (A)"
+    optin_path: "OPT-IN_FRAMEWORK/O-ORGANIZATIONS/A-AUTHORITATIVE"
+    ata_scope: ["ATA_00-GENERAL", "ATA_04-AIRWORTHINESS_LIMITATIONS", "ATA_05-TIME_LIMITS_MAINT_CHECKS"]
+    doa_criticality: "STANDARD"
+    novel_technology: false
+    profile: "standard_profile"
+    description: "Agency, regulatory, and legal-derived requirements — airworthiness mandates and certification framework."
+
+  O_BUSINESS_ENFORCEMENT:
+    title: "Business Enforcement (B)"
+    optin_path: "OPT-IN_FRAMEWORK/O-ORGANIZATIONS/B-BUSINESS_ENFORCEMENT"
+    ata_scope: ["ATA_01-MAINTENANCE_POLICY", "ATA_02-OPERATIONS_ORG", "ATA_03-SUPPORT_INFORMATION"]
+    doa_criticality: "STANDARD"
+    novel_technology: false
+    profile: "standard_profile"
+    description: "Operator business policies and enforcement — maintenance programs, operations org, and support logistics."
+
+# =============================================================================
 # P-PROGRAMS SUBDOMAINS
 # =============================================================================
 
