@@ -29,12 +29,12 @@ formats:
 - placement_register_CSV
 - zoning_definition_YAML
 files:
-- file: LC04_DESIGN_DEFINITION/ATA_28-41-00/WP-28-06-02/placement/LDS-28-41-00-placement-map.dxf
+- file: 28-41-h2-leak-detection/28-41-00-h2-leak-detection-general/KDB/LM/SSOT/PLM/LC04_DESIGN_DEFINITION_DMU/PACKAGES/DESIGN/placement/LDS-28-41-00-placement-map.dxf
   id: LDS-28-41-00-placement-map
   type: CAD_DRAWING
-- file: LC04_DESIGN_DEFINITION/ATA_28-41-00/WP-28-06-02/placement/LDS-28-41-00-placement-register.csv
+- file: 28-41-h2-leak-detection/28-41-00-h2-leak-detection-general/KDB/LM/SSOT/PLM/LC04_DESIGN_DEFINITION_DMU/PACKAGES/DESIGN/placement/LDS-28-41-00-placement-register.csv
   id: LDS-28-41-00-placement-register
   type: DATA_FILE
-- file: LC04_DESIGN_DEFINITION/ATA_28-41-00/WP-28-06-02/placement/LDS-28-41-00-zoning-definition.yaml
+- file: 28-41-h2-leak-detection/28-41-00-h2-leak-detection-general/KDB/LM/SSOT/PLM/LC04_DESIGN_DEFINITION_DMU/PACKAGES/DESIGN/placement/LDS-28-41-00-zoning-definition.yaml
   id: LDS-28-41-00-zoning-definition
   type: DATA_FILE

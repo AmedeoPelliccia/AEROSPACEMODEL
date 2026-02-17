@@ -29,12 +29,12 @@ formats:
 - threshold_spec_PDF
 - parameter_table_CSV
 files:
-- file: LC04_DESIGN_DEFINITION/ATA_28-41-00/WP-28-06-03/calibration/CAL-28-41-00-threshold-spec.yaml
+- file: 28-41-h2-leak-detection/28-41-00-h2-leak-detection-general/KDB/LM/SSOT/PLM/LC04_DESIGN_DEFINITION_DMU/PACKAGES/DESIGN/calibration/CAL-28-41-00-threshold-spec.yaml
   id: CAL-28-41-00-threshold-spec
   type: DATA_FILE
-- file: LC04_DESIGN_DEFINITION/ATA_28-41-00/WP-28-06-03/calibration/CAL-28-41-00-threshold-spec.pdf
+- file: 28-41-h2-leak-detection/28-41-00-h2-leak-detection-general/KDB/LM/SSOT/PLM/LC04_DESIGN_DEFINITION_DMU/PACKAGES/DESIGN/calibration/CAL-28-41-00-threshold-spec.pdf
   id: CAL-28-41-00-threshold-spec
   type: DOCUMENT
-- file: LC04_DESIGN_DEFINITION/ATA_28-41-00/WP-28-06-03/calibration/CAL-28-41-00-parameter-table.csv
+- file: 28-41-h2-leak-detection/28-41-00-h2-leak-detection-general/KDB/LM/SSOT/PLM/LC04_DESIGN_DEFINITION_DMU/PACKAGES/DESIGN/calibration/CAL-28-41-00-parameter-table.csv
   id: CAL-28-41-00-parameter-table
   type: DATA_FILE

@@ -30,15 +30,15 @@ formats:
 - block_diagram_SVG
 - block_diagram_PDF
 files:
-- file: LC04_DESIGN_DEFINITION/ATA_28-41-00/WP-28-06-02/architecture/LDS-28-41-00-architecture.md
+- file: 28-41-h2-leak-detection/28-41-00-h2-leak-detection-general/KDB/LM/SSOT/PLM/LC04_DESIGN_DEFINITION_DMU/PACKAGES/DESIGN/architecture/LDS-28-41-00-architecture.md
   id: LDS-28-41-00-architecture
   type: DOCUMENT
-- file: LC04_DESIGN_DEFINITION/ATA_28-41-00/WP-28-06-02/architecture/LDS-28-41-00-architecture.pdf
+- file: 28-41-h2-leak-detection/28-41-00-h2-leak-detection-general/KDB/LM/SSOT/PLM/LC04_DESIGN_DEFINITION_DMU/PACKAGES/DESIGN/architecture/LDS-28-41-00-architecture.pdf
   id: LDS-28-41-00-architecture
   type: DOCUMENT
-- file: LC04_DESIGN_DEFINITION/ATA_28-41-00/WP-28-06-02/architecture/LDS-28-41-00-block-diagram.svg
+- file: 28-41-h2-leak-detection/28-41-00-h2-leak-detection-general/KDB/LM/SSOT/PLM/LC04_DESIGN_DEFINITION_DMU/PACKAGES/DESIGN/architecture/LDS-28-41-00-block-diagram.svg
   id: LDS-28-41-00-block-diagram
   type: DIAGRAM
-- file: LC04_DESIGN_DEFINITION/ATA_28-41-00/WP-28-06-02/architecture/LDS-28-41-00-block-diagram.pdf
+- file: 28-41-h2-leak-detection/28-41-00-h2-leak-detection-general/KDB/LM/SSOT/PLM/LC04_DESIGN_DEFINITION_DMU/PACKAGES/DESIGN/architecture/LDS-28-41-00-block-diagram.pdf
   id: LDS-28-41-00-block-diagram
   type: DOCUMENT

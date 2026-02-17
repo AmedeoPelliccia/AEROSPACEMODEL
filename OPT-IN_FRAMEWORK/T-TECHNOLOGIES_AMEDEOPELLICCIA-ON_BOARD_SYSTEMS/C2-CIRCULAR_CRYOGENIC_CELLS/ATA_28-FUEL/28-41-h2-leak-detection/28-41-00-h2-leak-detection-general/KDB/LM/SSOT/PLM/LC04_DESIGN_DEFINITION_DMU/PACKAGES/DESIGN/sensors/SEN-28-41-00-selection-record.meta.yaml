@@ -28,12 +28,12 @@ formats:
 - datasheet_bundle_PDF
 - qualification_requirements_CSV
 files:
-- file: LC04_DESIGN_DEFINITION/ATA_28-41-00/WP-28-06-01/sensors/SEN-28-41-00-selection-record.yaml
+- file: 28-41-h2-leak-detection/28-41-00-h2-leak-detection-general/KDB/LM/SSOT/PLM/LC04_DESIGN_DEFINITION_DMU/PACKAGES/DESIGN/sensors/SEN-28-41-00-selection-record.yaml
   id: SEN-28-41-00-selection-record
   type: DATA_FILE
-- file: LC04_DESIGN_DEFINITION/ATA_28-41-00/WP-28-06-01/sensors/SEN-28-41-00-datasheet-bundle.pdf
+- file: 28-41-h2-leak-detection/28-41-00-h2-leak-detection-general/KDB/LM/SSOT/PLM/LC04_DESIGN_DEFINITION_DMU/PACKAGES/DESIGN/sensors/SEN-28-41-00-datasheet-bundle.pdf
   id: SEN-28-41-00-datasheet-bundle
   type: DOCUMENT
-- file: LC04_DESIGN_DEFINITION/ATA_28-41-00/WP-28-06-01/sensors/SEN-28-41-00-qualification-requirements.csv
+- file: 28-41-h2-leak-detection/28-41-00-h2-leak-detection-general/KDB/LM/SSOT/PLM/LC04_DESIGN_DEFINITION_DMU/PACKAGES/DESIGN/sensors/SEN-28-41-00-qualification-requirements.csv
   id: SEN-28-41-00-qualification-requirements
   type: DATA_FILE
