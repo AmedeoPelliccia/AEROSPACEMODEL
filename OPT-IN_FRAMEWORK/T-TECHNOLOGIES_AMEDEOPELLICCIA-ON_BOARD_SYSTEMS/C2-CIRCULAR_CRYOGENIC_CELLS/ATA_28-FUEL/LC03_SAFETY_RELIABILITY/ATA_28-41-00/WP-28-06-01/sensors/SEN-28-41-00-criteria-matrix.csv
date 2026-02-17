@@ -1,0 +1,15 @@
+Requirement,Metric,Weight,Electrochemical,TCD (HLD),Catalytic Bead,MOS Semiconductor,MEMS TCD,Optical (Fiber),Ultrasonic
+Minimum detectable concentration,<100 ppm H₂,High,✔ (≈10 ppm),✔ (50 ppm),– (≈0.5%),✔ (10–100 ppm),✔ (≈50 ppm),✔ (~10 ppm),n/a (not concentration-based)
+Fast response,<5 s to T90,High,✗ (~75 s),✔ (<2 s),✔ (3 s),✗ (30 s),✔ (2 s),✗ (~10 s),✔ (<1 s)
+Low-temperature operation,down to –40 °C,High,Marginal (–30°C typical),✔,✗ (cold impairs),Marginal (–20°C typical),✔,✔ (typically),✔ (–40 °C)
+Cross-sensitivity (low false alarm),Minimal response to other gases,Medium,✔ (CO small),✔ (except He/CO₂),✗ (hydrocarbons),✗ (HC/alcohol),✔,✔ (H₂-specific),✔ (any gas)
+Power consumption,<0.5 W,Medium,✔ (~0.1 W),✔ (~0.2 W),✗ (~2–3 W),✗ (~1–2 W),✔ (~0.05 W avg),✗ (laser ~1–5 W),✗ (~5–10 W)
+Maintenance / Calibration,≤1/year (no drift),Medium,✗ (drift ~2 yr life),✔ (auto-cal),✗ (replace bead),✗ (frequent recal),✔ (auto-comp),✔ (self-cal),✔ (self-test)
+Size / Integration,Compact,Low,✔ (17 g),✔ (50 g),✗ (bulky),✔ (small),✔ (SMD package),✗ (large unit),✗ (7.5 kg)
+Certification,ISO 26142 / ATEX / IECEx,Critical,✔ (industrial),✔ (automotive),✗ (not certified),✗ (not certified),✔ (designed for),✔ (IS rated),✔ (IEC 61508 SIL3)
+Detection principle,Technology basis,Info,H₂ oxidation (3-electrode),Thermal diffusivity change,Heated catalytic bead,Resistive film (heated),Thermal conductivity (MEMS),Pd-coated fiber (optical),Acoustic (ANN)
+Detection range,Concentration range,Info,~10–2000 ppm,~50 ppm to several %,~0.5% to 100% (LEL),~5–1000 ppm,0–10000 ppm (0–1%),~10–1000 ppm,Leak rate (not ppm)
+Temperature range,Operating temperature,Info,–30 to +55 °C,–40 to +85 °C,–20 to +60 °C,–20 to +80 °C,–40 to +85 °C,–40 to +85 °C (est),–40 to +60 °C
+Typical lifespan,Expected operational life,Info,~2 years,>10 years,~5 years,Variable (drift),>10 years (est),Variable,>10 years
+Notes,Additional considerations,Info,"Needs O₂, slow response, frequent calibration",Fast response; long life; intrinsically safe,High power; cross-sensitive; poisonable,"High drift, not aerospace-certified","Best overall: fast, low power, IS design","Experimental, high cost, large size","Detects active leaks only, not ambient H₂"
+Recommended for baseline,Selection recommendation,Decision,Backup (secondary),Primary candidate,Not recommended,Not recommended,Primary candidate,Not recommended,Not recommended (adjunct only)
