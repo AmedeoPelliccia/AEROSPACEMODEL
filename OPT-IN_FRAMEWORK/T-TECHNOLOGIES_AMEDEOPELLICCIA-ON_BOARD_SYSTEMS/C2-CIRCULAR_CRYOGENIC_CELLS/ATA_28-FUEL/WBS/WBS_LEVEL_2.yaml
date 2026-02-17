@@ -235,10 +235,10 @@ work_packages:
       - id: sensor_trade_study
         formats: [trade_study_MD, trade_study_PDF, criteria_matrix_CSV]
         files:
-          - "LC03_SAFETY_RELIABILITY/ATA_28-41-00/WP-28-06-01/sensors/SEN-28-41-00-trade-study.md"
-          - "LC03_SAFETY_RELIABILITY/ATA_28-41-00/WP-28-06-01/sensors/SEN-28-41-00-trade-study.pdf"
-          - "LC03_SAFETY_RELIABILITY/ATA_28-41-00/WP-28-06-01/sensors/SEN-28-41-00-criteria-matrix.csv"
-        meta_file: "LC03_SAFETY_RELIABILITY/ATA_28-41-00/WP-28-06-01/sensors/SEN-28-41-00-trade-study.meta.yaml"
+          - "28-41-h2-leak-detection/28-41-00-h2-leak-detection-general/KDB/LM/SSOT/PLM/LC03_SAFETY_RELIABILITY/WP-28-06-01/sensors/SEN-28-41-00-trade-study.md"
+          - "28-41-h2-leak-detection/28-41-00-h2-leak-detection-general/KDB/LM/SSOT/PLM/LC03_SAFETY_RELIABILITY/WP-28-06-01/sensors/SEN-28-41-00-trade-study.pdf"
+          - "28-41-h2-leak-detection/28-41-00-h2-leak-detection-general/KDB/LM/SSOT/PLM/LC03_SAFETY_RELIABILITY/WP-28-06-01/sensors/SEN-28-41-00-criteria-matrix.csv"
+        meta_file: "28-41-h2-leak-detection/28-41-00-h2-leak-detection-general/KDB/LM/SSOT/PLM/LC03_SAFETY_RELIABILITY/WP-28-06-01/sensors/SEN-28-41-00-trade-study.meta.yaml"
 
       - id: selected_sensor_baseline
         formats: [selection_record_YAML, datasheet_bundle_PDF, qualification_requirements_CSV]
