@@ -1,0 +1,224 @@
+# Parametric Model PM-28-10-PM01
+# Tank Geometry — Circular Cross-Section Optimisation
+# ATA 28-10-00 Fuel Storage General
+# AMPEL360 Q100 — C2 Circular Cryogenic Cells
+
+model_id: "PM-28-10-PM01"
+title: "Tank Geometry — Circular Cross-Section Optimisation"
+ata_code: "28-10-00"
+technology_domain: "C2"
+aircraft_program: "AMPEL360 Q100"
+lifecycle_phase: "LC05"
+status: "preliminary"
+author: "STK_ENG"
+date: "2026-02-15"
+version: "0.1.1"
+
+objective: >
+  Define the parametric model for circular cryogenic cell cross-section
+  optimisation.  The model captures geometry, structural sizing, and
+  volumetric efficiency as functions of internal radius, operating
+  pressure, wall thickness, and material properties in order to minimise
+  structural mass while meeting pressure containment and fatigue
+  requirements per CS 25.571.
+
+parameters:
+  - symbol: "r_i"
+    name: "Internal radius"
+    unit: "m"
+    range: [0.3, 1.2]
+    description: "Inner radius of the circular cylindrical shell"
+
+  - symbol: "t_w"
+    name: "Wall thickness"
+    unit: "mm"
+    range: [1.5, 6.0]
+    description: "Nominal wall thickness; equations use t_w_m in meters"
+
+  - symbol: "t_w_m"
+    name: "Wall thickness (SI)"
+    unit: "m"
+    derived: "t_w_m = t_w * 1e-3"
+    description: "Converted wall thickness in meters for governing equations"
+
+  - symbol: "P_limit"
+    name: "Limit pressure"
+    unit: "bar"
+    range: [2.0, 6.0]
+    description: "Design max operating pressure including margins (limit load case)"
+
+  - symbol: "P_ultimate"
+    name: "Ultimate pressure"
+    unit: "bar"
+    derived: "P_ultimate = 1.5 * P_limit"
+    description: "Ultimate pressure per CS 25.305 (1.5 × limit)"
+
+  - symbol: "L"
+    name: "Cylinder length"
+    unit: "m"
+    range: [1.0, 6.0]
+    description: "Barrel length excluding end-caps"
+
+  - symbol: "sigma_allow_limit"
+    name: "Allowable stress (limit)"
+    unit: "MPa"
+    range: [120, 450]
+    description: "Material allowable at -253 °C for limit load case"
+
+  - symbol: "sigma_allow_ult"
+    name: "Allowable stress (ultimate)"
+    unit: "MPa"
+    range: [120, 450]
+    description: "Material allowable at -253 °C for ultimate load case"
+
+  - symbol: "rho_mat"
+    name: "Material density"
+    unit: "kg/m³"
+    range: [2700, 8000]
+    description: "Structural material density (Al-alloy to stainless steel range)"
+
+  - symbol: "eta_j"
+    name: "Joint efficiency factor"
+    unit: "–"
+    range: [0.6, 1.0]
+    description: "Weld / joint efficiency knockdown factor"
+
+governing_equations:
+  - name: "Pressure conversion"
+    expression: "P_Pa = P_bar * 1e5"
+    notes: "All stress equations use SI: pressure in Pa, dimensions in m"
+
+  - name: "Wall thickness conversion"
+    expression: "t_w_m = t_w * 1e-3"
+    notes: "Convert mm input to meters for governing equations"
+
+  - name: "Thin-wall validity gate"
+    expression: "t_w_m / r_i <= 0.10"
+    notes: "If violated, switch to thick-wall (Lamé) model below"
+
+  - name: "Hoop stress (thin-wall)"
+    expression: "sigma_theta = P_Pa * r_i / t_w_m"
+    notes: "Thin-wall membrane hoop stress (closed-end cylinder); units Pa"
+
+  - name: "Longitudinal stress (thin-wall)"
+    expression: "sigma_z = P_Pa * r_i / (2 * t_w_m)"
+    notes: "Thin-wall membrane longitudinal stress; units Pa"
+
+  - name: "Von Mises equivalent stress (thin-wall)"
+    expression: "sigma_vM = sqrt(3)/2 * P_Pa * r_i / t_w_m"
+    constraint_limit: "sigma_vM(P_limit) <= sigma_allow_limit"
+    constraint_ultimate: "sigma_vM(P_ultimate) <= sigma_allow_ult"
+    notes: "Derived from sqrt(sigma_theta^2 + sigma_z^2 - sigma_theta*sigma_z)"
+
+  - name: "Minimum wall thickness (von Mises, limit)"
+    expression: "t_w_m_min = sqrt(3)/2 * P_limit_Pa * r_i / (eta_j * sigma_allow_limit_Pa)"
+    notes: "Includes joint efficiency eta_j; apply max(t_w_m_min, t_mfg, t_NDE, t_corr)"
+
+  - name: "Shell mass (barrel)"
+    expression: "m_barrel = 2 * pi * r_i * t_w_m * L * rho_mat"
+    notes: "Thin-shell mid-surface approximation; all dimensions in m"
+
+  - name: "End-cap mass (hemispherical)"
+    expression: "m_endcap = 4 * pi * r_i^2 * t_w_m * rho_mat"
+    notes: "Two hemispheres = full sphere surface area 4*pi*r^2"
+
+  - name: "Total shell mass"
+    expression: "m_total = 2 * pi * rho_mat * t_w_m * (r_i * L + 2 * r_i^2)"
+    notes: "Barrel + endcaps combined"
+
+  - name: "Internal volume"
+    expression: "V_int = pi * r_i^2 * L + (4/3) * pi * r_i^3"
+    notes: "Cylinder barrel + two hemispheres"
+
+  - name: "External surface area"
+    expression: "A_ext = 2 * pi * r_i * L + 4 * pi * r_i^2"
+    notes: "Relevant for thermal/MLI trade (links to PM-28-10-PM02)"
+
+  - name: "Volumetric efficiency"
+    expression: "eta_vol = V_int / V_envelope"
+    notes: "V_envelope = bounding box of insulated assembly"
+
+  - name: "Thick-wall hoop stress at ID (Lamé, if t_w_m/r_i > 0.10)"
+    expression: "sigma_theta_ID = P_Pa * (r_o^2 + r_i^2) / (r_o^2 - r_i^2)"
+    notes: "r_o = r_i + t_w_m; maximum hoop stress occurs at inner radius"
+
+  - name: "Thick-wall radial stress at ID (Lamé)"
+    expression: "sigma_r_ID = -P_Pa"
+    notes: "Equal to negative of internal pressure at the bore"
+
+  - name: "Thick-wall von Mises at ID (Lamé)"
+    expression: "sigma_vM_Lame = sqrt(sigma_theta_ID^2 + sigma_r_ID^2 - sigma_theta_ID * sigma_r_ID)"
+    notes: "Use for sizing when thin-wall gate is violated"
+
+optimisation:
+  objective_function: >
+    Minimise J = m_total
+    + lambda_L * max(0, L - L_max)^2
+    + lambda_A * (A_ext - A_target)^2
+  objective_notes: >
+    Multi-objective: mass + length penalty + surface-area penalty.
+    Area term connects to MLI heat-leak trade (PM-28-10-PM02 / KNU-C2-001).
+    Under pure stress-limited thin-wall sizing (t_w proportional to P*r_i/sigma),
+    mass scales as V/pi + (2/3)*r_i^3, which is monotonic in r_i.
+    Therefore the optimisation collapses to min-radius unless additional
+    constraints (max length, max area, bay geometry, feed hardware clearance)
+    are active.
+  constraints:
+    - "sigma_vM(P_limit) <= sigma_allow_limit"
+    - "sigma_vM(P_ultimate) <= sigma_allow_ult"
+    - "t_w / r_i <= 0.10 (thin-wall validity)"
+    - "t_w >= max(t_w_min, t_mfg, t_NDE, t_corr)"
+    - "V_int >= V_required"
+    - "Fatigue life >= N_cycles (CS 25.571 pressure cycle spectrum)"
+    - "r_i <= r_envelope (BWB bay clearance)"
+    - "L <= L_max (bay length constraint)"
+    - "Leak-before-burst fracture control at cryo (damage tolerance)"
+    - "P_proof and P_burst margins vs relief set points"
+    - "Buckling under external pressure (vacuum jacket outer shell)"
+    - "Thermal contraction mismatch at bi-material interfaces"
+  design_variables: ["r_i", "L", "t_w"]
+  method: "Gradient-based + parametric sweep + multi-objective Pareto"
+
+material_candidates:
+  - id: "MAT-A"
+    name: "Al 5083-H321"
+    sigma_allow_cryo: "350 MPa"
+    rho: "2660 kg/m³"
+    notes: "Heritage cryogenic alloy; high weldability"
+
+  - id: "MAT-B"
+    name: "316L Stainless Steel"
+    sigma_allow_cryo: "450 MPa"
+    rho: "8000 kg/m³"
+    notes: "Excellent cryogenic toughness; higher density"
+
+  - id: "MAT-C"
+    name: "Al 2219-T87"
+    sigma_allow_cryo: "340 MPa"
+    rho: "2840 kg/m³"
+    notes: "Shuttle ET heritage; good weldability"
+
+outputs:
+  - name: "Pareto-derived r/L ratio"
+    description: "r_i / L ratio from multi-objective Pareto front under active constraints (not a unique analytic optimum in stress-limited thin-wall regime)"
+  - name: "Wall thickness map"
+    description: "t_w vs P_limit for each material candidate"
+  - name: "Mass sensitivity"
+    description: "dm/dr_i, dm/dL partial derivatives"
+  - name: "Fatigue margin"
+    description: "Cryogenic cycle count at design thickness vs CS 25.571 target"
+
+feeds:
+  - lifecycle: "LC06"
+    artifact: "FEA verification of selected geometry"
+  - lifecycle: "LC05"
+    artifact: "Mass model update (WBS level 3)"
+
+traceability:
+  derives_from:
+    - "TS-28-10-TS01"
+    - "FBL-Q100-ATA28-001"
+  satisfies:
+    - "FBL-REQ-001"
+    - "FBL-REQ-010"
+  verifies: []

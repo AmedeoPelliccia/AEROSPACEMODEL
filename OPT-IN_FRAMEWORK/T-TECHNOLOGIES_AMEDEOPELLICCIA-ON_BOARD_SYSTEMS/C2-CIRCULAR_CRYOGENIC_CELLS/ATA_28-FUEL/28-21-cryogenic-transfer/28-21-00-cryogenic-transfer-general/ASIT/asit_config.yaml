@@ -1,0 +1,20 @@
+# ASIT Configuration — 28-21-00
+
+asit_subject: "28-21-00"
+technology_domain: "C2"
+brex_profile: "AEROSPACEMODEL-PRJ-01"
+determinism: "strict"
+
+pipelines:
+  csdb: "pipelines/"
+  export: "pipelines/"
+
+rules:
+  brex: "rules/"
+
+authority: "ASIT"
+compliance:
+  - "S1000D Issue 5.0"
+  - "CS-25 Special Conditions"
+  - "ARP4754A"
+  - "ARP4761"

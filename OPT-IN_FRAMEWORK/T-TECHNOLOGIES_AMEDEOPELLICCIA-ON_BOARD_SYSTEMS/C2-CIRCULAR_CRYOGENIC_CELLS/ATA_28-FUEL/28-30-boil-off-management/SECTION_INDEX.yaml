@@ -1,0 +1,32 @@
+# SECTION_INDEX.yaml — Section-Level Artifact Index
+# ATA 28-30 Boil-Off Management — C2 Circular Cryogenic Cells
+
+ata_section: "28-30"
+title: "Boil-Off Management — LH₂ Circular Cryogenic Cells"
+variant: "C2"
+
+subjects:
+  - id: "28-30-00"
+    title: "Boil-Off Management General"
+    path: "28-30-00-boil-off-management-general/"
+    description: "General boil-off gas (bog) management artifacts"
+
+metrics:
+  total_artifacts: 0
+  requirements_count: 0
+  design_count: 0
+  safety_count: 0
+  test_count: 0
+  publication_count: 0
+
+genesis_summary:
+  o_knots: 0
+  y_knots: 0
+  graduated: 0
+  open: 0
+
+status_summary:
+  active: 0
+  draft: 0
+  pending_review: 0
+  graduated: 0

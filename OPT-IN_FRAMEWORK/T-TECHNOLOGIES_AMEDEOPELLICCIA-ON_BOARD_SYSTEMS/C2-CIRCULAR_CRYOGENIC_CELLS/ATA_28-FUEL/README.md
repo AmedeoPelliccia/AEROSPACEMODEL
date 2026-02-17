@@ -32,7 +32,18 @@ hydrogen (LH₂) at –253 °C using circular cryogenic cell architecture.
 | [WBS/](WBS/) | Work Breakdown Structure and task packages |
 | [GOVERNANCE/](GOVERNANCE/) | Baseline policy, change authority, approval gates |
 | [INDEX/](INDEX/) | Master index of KNOTs, KNUs, requirements, and data modules |
+| [28-00-general/](28-00-general/) | H₂ Cryogenic Fuel — General |
 | [28-10-storage/](28-10-storage/) | LH₂ tank design, insulation, and structural data |
+| [28-11-lh2-primary-tank/](28-11-lh2-primary-tank/) | LH₂ primary storage tank design and certification |
+| [28-13-lh2-auxiliary-tank/](28-13-lh2-auxiliary-tank/) | LH₂ auxiliary/extended-range storage tank |
+| [28-21-cryogenic-transfer/](28-21-cryogenic-transfer/) | Cryogenic transfer pumps and systems |
+| [28-22-insulated-transfer-lines/](28-22-insulated-transfer-lines/) | Vacuum-insulated hydrogen distribution piping |
+| [28-23-pressure-control/](28-23-pressure-control/) | Tank pressurization and pressure regulation |
+| [28-30-boil-off-management/](28-30-boil-off-management/) | Boil-off gas capture, venting, and management |
+| [28-31-thermal-management/](28-31-thermal-management/) | Active/passive cooling and thermal control |
+| [28-41-h2-leak-detection/](28-41-h2-leak-detection/) | Multi-sensor hydrogen leak detection |
+| [28-42-pressure-relief-venting/](28-42-pressure-relief-venting/) | Over-pressure protection and emergency venting |
+| [28-43-fire-detection-suppression/](28-43-fire-detection-suppression/) | H₂ fire detection and suppression |
 
 ## 4. Key Contacts
 
