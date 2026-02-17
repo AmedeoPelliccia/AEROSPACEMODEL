@@ -114,6 +114,7 @@ ATA_28-FUEL/
 ├── LC05_VERIFICATION_VALIDATION/
 │   ├── ATA_28-10-00/WP-28-03-02/{thermal,tests}/
 │   ├── ATA_28-11-00/WP-28-03-04/materials/
+│   └── ATA_28-41-00/WP-28-06-{02,03}/{reliability,calibration}/
 │   └── ATA_28-20-00/WP-28-03-03/safety/
 ├── LC06_CERTIFICATION_EVIDENCE/
 │   └── ATA_28-11-00/WP-28-03-{04,05}/{materials,manufacturing,tooling}/
