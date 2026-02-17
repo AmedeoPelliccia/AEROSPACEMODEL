@@ -93,11 +93,6 @@
 ### Infrastructure
 - [I-INFRASTRUCTURES README](I-INFRASTRUCTURES/README.md)
 
-### Engineering SSOT Front-End
-- [ENGINEERING_SSOT README](ENGINEERING_SSOT/README.md)
-- [SSOT Registry (YAML)](ENGINEERING_SSOT/00_SSOT_REGISTRY.yaml)
-- [Interactive Front-End (HTML)](ENGINEERING_SSOT/index.html)
-
 ### AI Governance
 - [N-NEURAL_NETWORKS README](N-NEURAL_NETWORKS/README.md)
 
@@ -105,7 +100,7 @@
 
 ## Total Coverage
 
-- **5** Top-Level Domains + **1** Engineering SSOT Front-End
+- **5** Top-Level Domains 
 - **15** Technology Subdomains within T-TECHNOLOGIES
 - **2** Organization Subdomains within O-ORGANIZATIONS (A, B)
 - **2** Program Subdomains within P-PROGRAMS (P, S)
