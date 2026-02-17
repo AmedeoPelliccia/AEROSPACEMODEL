@@ -84,7 +84,7 @@
 ### Organizational & Governance
 - [O-ORGANIZATIONS README](O-ORGANIZATIONS/README.md)
 
-### Programs & Procedures  
+### Programs  
 - [P-PROGRAMS README](P-PROGRAMS/README.md)
 
 ### On-Board Systems
@@ -93,7 +93,7 @@
 ### Infrastructure
 - [I-INFRASTRUCTURES README](I-INFRASTRUCTURES/README.md)
 
-### AI Governance
+### AI GENERAL
 - [N-NEURAL_NETWORKS README](N-NEURAL_NETWORKS/README.md)
 
 ---
