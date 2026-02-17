@@ -1,0 +1,93 @@
+hazard_register:
+  register_id: "HR-28-11-00-001"
+  ata_scope: "28-11-00"
+  program: "AMPEL360 Q100"
+  version: "0.1.0"
+  status: "DEV"
+  date: "2026-02-16"
+  owner: "STK_SAF"
+
+  hazards:
+    - id: "HAZ-28-11-001"
+      function: "Containment integrity"
+      failure_condition: "Tank rupture / structural leak"
+      classification: "Catastrophic"
+      rate_target: "< 1E-9/FH"
+      mitigation:
+        - "Structural analysis + cryogenic margin definition (CM-A-001)"
+        - "Cryogenic test campaign — pressure, cycles, thermal shock (CM-A-002)"
+        - "FEM + vibration tests + limit/ultimate load analysis (CM-A-003)"
+        - "Cryogenic fatigue tests/analysis + DT substantiation (CM-A-004)"
+      trace_to:
+        requirements: ["CM-A-001", "CM-A-002", "CM-A-003", "CM-A-004"]
+        design: ["TS-28-11-TS01", "TS-28-11-TS02"]
+        safety: ["SAF-28-11-001"]
+
+    - id: "HAZ-28-11-002"
+      function: "Ignition prevention"
+      failure_condition: "H₂ ignition / explosion in tank bay"
+      classification: "Catastrophic"
+      rate_target: "< 1E-9/FH"
+      mitigation:
+        - "FHA/SSA + zonal safety + ignition source control (CM-C-001)"
+        - "ARP4761 (FHA→PSSA→SSA) + DAL/IDAL allocation (CM-C-002)"
+        - "H₂ sensors — location, threshold, alert logic (SC-LH2-02)"
+      trace_to:
+        requirements: ["CM-C-001", "CM-C-002"]
+        special_conditions: ["SC-LH2-02"]
+        safety: ["SAF-28-11-002"]
+
+    - id: "HAZ-28-11-003"
+      function: "Pressure management"
+      failure_condition: "Over-pressure / relief valve failure"
+      classification: "Hazardous"
+      rate_target: "< 1E-7/FH"
+      mitigation:
+        - "Vent/relief sizing + plume analysis (CM-B-002)"
+        - "Ullage definition + transient analysis (CM-B-001)"
+        - "Pressure control at 255–351 kPa operating range"
+      trace_to:
+        requirements: ["CM-B-001", "CM-B-002"]
+        special_conditions: ["SC-LH2-01"]
+        safety: ["SAF-28-11-004"]
+
+    - id: "HAZ-28-11-004"
+      function: "Thermal protection"
+      failure_condition: "Vacuum loss → MLI degradation → excessive boil-off"
+      classification: "Major"
+      rate_target: "< 1E-5/FH"
+      mitigation:
+        - "Vacuum monitoring + degradation detection (SC-LH2-04)"
+        - "Required vacuum: 0.0133–0.266 Pa; degraded threshold ~1.33 Pa"
+        - "Support/penetration heat-leak decomposition"
+      trace_to:
+        trade_studies: ["TS-28-11-TS03"]
+        special_conditions: ["SC-LH2-04"]
+        risks: ["RISK-01", "RISK-02"]
+        safety: ["SAF-28-11-005"]
+
+    - id: "HAZ-28-11-005"
+      function: "Crash protection"
+      failure_condition: "Tank release / perforation in crash event"
+      classification: "Catastrophic"
+      rate_target: "< 1E-9/FH"
+      mitigation:
+        - "Two-layer safety approach: crashworthy airframe + crash-safe tank"
+      trace_to:
+        special_conditions: ["SC-LH2-05"]
+        safety: ["SAF-28-11-006"]
+
+    - id: "HAZ-28-11-006"
+      function: "Material degradation"
+      failure_condition: "Embrittlement / fatigue crack growth under cryogenic cycling"
+      classification: "Hazardous"
+      rate_target: "< 1E-7/FH"
+      mitigation:
+        - "Cryogenic fatigue tests/analysis + DT substantiation (CM-A-004)"
+        - "Crack growth assumptions for Al-Li 2195 at 20 K"
+        - "Test coupons — parent and weld material"
+      trace_to:
+        requirements: ["CM-A-004", "CM-D-001"]
+        trade_studies: ["TS-28-11-TS02"]
+        risks: ["RISK-03"]
+        safety: ["SAF-28-11-008"]
