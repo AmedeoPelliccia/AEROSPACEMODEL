@@ -1,0 +1,628 @@
+# Connector Pinout and Protocol Maps for C2 Circular Cryogenic Cell
+# Work Package: WP-28-03-01 Cell Design
+# ATA Chapter: 28-11-00
+# Owner: STK_ENG
+# Revision: 0.1.0
+# Date: 2026-02-17
+
+document_metadata:
+  id: "ICD-28-11-00-pinout-protocol-map"
+  title: "Connector Pinout and Protocol Maps for C2 Circular Cryogenic Cell"
+  work_package: "WP-28-03-01"
+  ata_chapter: "28-11-00"
+  domain: "C2-CIRCULAR_CRYOGENIC_CELLS"
+  owner: "STK_ENG"
+  lifecycle_phase: "LC04_DESIGN_DEFINITION"
+  revision: "0.1.0"
+  date: "2026-02-17"
+  status: "Draft"
+
+# =============================================================================
+# ELECTRICAL CONNECTORS
+# =============================================================================
+
+connectors:
+  # ---------------------------------------------------------------------------
+  # Level Sensor Array (IF-28-11-E01)
+  # ---------------------------------------------------------------------------
+  - connector_id: "J1"
+    interface_id: "IF-28-11-E01"
+    name: "Level Sensor 1 Connector"
+    type: "Hermetic D-sub 9-pin"
+    manufacturer: "Glenair"
+    part_number: "GEL-MIL-DTL-38999/20FE09PN"
+    gender: "Receptacle (on tank side)"
+    mating_cycles: "> 500"
+    temperature_rating: "-55°C to +125°C"
+    ip_rating: "IP67"
+    
+    pinout:
+      - pin: 1
+        signal: "Current Output +"
+        description: "4-20 mA current loop positive"
+        wire_gauge: "22 AWG"
+        wire_color: "Red"
+        
+      - pin: 2
+        signal: "Current Output -"
+        description: "4-20 mA current loop negative (return)"
+        wire_gauge: "22 AWG"
+        wire_color: "Black"
+        
+      - pin: 3
+        signal: "Power Supply +"
+        description: "24 VDC power supply"
+        wire_gauge: "22 AWG"
+        wire_color: "Orange"
+        
+      - pin: 4
+        signal: "Power Supply -"
+        description: "24 VDC power return (GND)"
+        wire_gauge: "22 AWG"
+        wire_color: "Brown"
+        
+      - pin: 5
+        signal: "Chassis Ground"
+        description: "Chassis/shield ground"
+        wire_gauge: "22 AWG"
+        wire_color: "Green/Yellow"
+        
+      - pin: 6
+        signal: "Not Connected"
+        description: "Reserved for future use"
+        wire_gauge: "-"
+        wire_color: "-"
+        
+      - pin: 7
+        signal: "Not Connected"
+        description: "Reserved for future use"
+        wire_gauge: "-"
+        wire_color: "-"
+        
+      - pin: 8
+        signal: "Not Connected"
+        description: "Reserved for future use"
+        wire_gauge: "-"
+        wire_color: "-"
+        
+      - pin: 9
+        signal: "Not Connected"
+        description: "Reserved for future use"
+        wire_gauge: "-"
+        wire_color: "-"
+    
+    notes:
+      - "Sensors 2, 3, and 4 use identical pinout on connectors J2, J3, J4"
+      - "Current loop isolated to 500 V"
+      - "Shield connected to chassis ground at tank end only (avoid ground loops)"
+
+  # ---------------------------------------------------------------------------
+  # Temperature Sensor Array (IF-28-11-E02)
+  # ---------------------------------------------------------------------------
+  - connector_id: "J5"
+    interface_id: "IF-28-11-E02"
+    name: "Temperature Sensor Block Connector"
+    type: "Hermetic 8-pin circular"
+    manufacturer: "Amphenol"
+    part_number: "97-3106A-20-29P"
+    gender: "Plug (on tank side)"
+    mating_cycles: "> 500"
+    temperature_rating: "-65°C to +175°C"
+    ip_rating: "IP68"
+    
+    pinout:
+      - pin: "A"
+        signal: "RTD1 Excitation +"
+        description: "Pt-100 RTD #1, current source positive"
+        wire_gauge: "24 AWG"
+        wire_color: "Red"
+        
+      - pin: "B"
+        signal: "RTD1 Sense +"
+        description: "Pt-100 RTD #1, voltage sense positive"
+        wire_gauge: "24 AWG"
+        wire_color: "White"
+        
+      - pin: "C"
+        signal: "RTD1 Sense -"
+        description: "Pt-100 RTD #1, voltage sense negative"
+        wire_gauge: "24 AWG"
+        wire_color: "Blue"
+        
+      - pin: "D"
+        signal: "RTD1 Excitation -"
+        description: "Pt-100 RTD #1, current source negative"
+        wire_gauge: "24 AWG"
+        wire_color: "Black"
+        
+      - pin: "E"
+        signal: "Chassis Ground"
+        description: "Chassis/shield ground"
+        wire_gauge: "24 AWG"
+        wire_color: "Green/Yellow"
+        
+      - pin: "F"
+        signal: "Not Connected"
+        description: "Reserved"
+        wire_gauge: "-"
+        wire_color: "-"
+        
+      - pin: "G"
+        signal: "Not Connected"
+        description: "Reserved"
+        wire_gauge: "-"
+        wire_color: "-"
+        
+      - pin: "H"
+        signal: "Not Connected"
+        description: "Reserved"
+        wire_gauge: "-"
+        wire_color: "-"
+    
+    notes:
+      - "Eight RTD sensors are daisy-chained, one connector per sensor"
+      - "4-wire measurement compensates for lead resistance"
+      - "Excitation current: 1 mA (provided by avionics)"
+
+  # ---------------------------------------------------------------------------
+  # Pressure Transducers (IF-28-11-E03)
+  # ---------------------------------------------------------------------------
+  - connector_id: "J9"
+    interface_id: "IF-28-11-E03"
+    name: "Pressure Transducer 1 Connector"
+    type: "Hermetic 6-pin circular"
+    manufacturer: "Fischer Connectors"
+    part_number: "S104Z056-130"
+    gender: "Receptacle (on tank side)"
+    mating_cycles: "> 1000"
+    temperature_rating: "-40°C to +125°C"
+    ip_rating: "IP68"
+    
+    pinout:
+      - pin: 1
+        signal: "Voltage Output +"
+        description: "0-5 VDC analog output positive"
+        wire_gauge: "22 AWG"
+        wire_color: "Yellow"
+        
+      - pin: 2
+        signal: "Voltage Output -"
+        description: "0-5 VDC analog output negative (isolated)"
+        wire_gauge: "22 AWG"
+        wire_color: "Gray"
+        
+      - pin: 3
+        signal: "Power Supply +"
+        description: "12 VDC power supply"
+        wire_gauge: "22 AWG"
+        wire_color: "Red"
+        
+      - pin: 4
+        signal: "Power Supply -"
+        description: "12 VDC power return (isolated)"
+        wire_gauge: "22 AWG"
+        wire_color: "Black"
+        
+      - pin: 5
+        signal: "Chassis Ground"
+        description: "Chassis/shield ground"
+        wire_gauge: "22 AWG"
+        wire_color: "Green/Yellow"
+        
+      - pin: 6
+        signal: "Not Connected"
+        description: "Reserved"
+        wire_gauge: "-"
+        wire_color: "-"
+    
+    notes:
+      - "Transducers 2 and 3 use identical pinout on connectors J10, J11"
+      - "Output isolated to 500 V"
+      - "Shield connected at tank end only"
+
+  # ---------------------------------------------------------------------------
+  # CAN Bus Interface (IF-28-11-D01)
+  # ---------------------------------------------------------------------------
+  - connector_id: "J12"
+    interface_id: "IF-28-11-D01"
+    name: "Tank Control Unit CAN Bus Connector"
+    type: "D-sub 9-pin"
+    manufacturer: "TE Connectivity"
+    part_number: "1-1734248-0"
+    gender: "Plug (on tank side)"
+    mating_cycles: "> 500"
+    temperature_rating: "-55°C to +125°C"
+    ip_rating: "IP67 (with protective cap)"
+    
+    pinout:
+      - pin: 1
+        signal: "Not Connected"
+        description: "Reserved"
+        wire_gauge: "-"
+        wire_color: "-"
+        
+      - pin: 2
+        signal: "CAN_L"
+        description: "CAN Low signal"
+        wire_gauge: "24 AWG twisted pair"
+        wire_color: "Blue"
+        impedance: "120 Ω (with termination)"
+        
+      - pin: 3
+        signal: "CAN_GND"
+        description: "CAN ground reference"
+        wire_gauge: "24 AWG"
+        wire_color: "Black"
+        
+      - pin: 4
+        signal: "Not Connected"
+        description: "Reserved"
+        wire_gauge: "-"
+        wire_color: "-"
+        
+      - pin: 5
+        signal: "CAN_SHIELD"
+        description: "Shield/chassis ground"
+        wire_gauge: "Drain wire"
+        wire_color: "Green/Yellow"
+        
+      - pin: 6
+        signal: "Not Connected"
+        description: "Reserved (optional GND)"
+        wire_gauge: "-"
+        wire_color: "-"
+        
+      - pin: 7
+        signal: "CAN_H"
+        description: "CAN High signal"
+        wire_gauge: "24 AWG twisted pair"
+        wire_color: "White"
+        impedance: "120 Ω (with termination)"
+        
+      - pin: 8
+        signal: "Not Connected"
+        description: "Reserved"
+        wire_gauge: "-"
+        wire_color: "-"
+        
+      - pin: 9
+        signal: "Not Connected"
+        description: "Reserved (optional +12V)"
+        wire_gauge: "-"
+        wire_color: "-"
+    
+    notes:
+      - "CAN_H and CAN_L are differential twisted pair (120 Ω impedance)"
+      - "Termination resistor (120 Ω) installed at each end of bus"
+      - "Shield connected to chassis ground at one point only"
+
+# =============================================================================
+# CAN BUS MESSAGE DEFINITIONS (IF-28-11-D01)
+# =============================================================================
+
+can_messages:
+  - message_id: "0x101"
+    name: "Tank Level Telemetry"
+    direction: "Tank -> Vehicle Controller"
+    frequency: "10 Hz"
+    dlc: 8
+    format: "Big-endian"
+    
+    payload:
+      - byte: 0
+        bits: "0-7"
+        name: "Level Sensor 1"
+        type: "uint8"
+        units: "percent"
+        scale: "1"
+        range: "0-100"
+        
+      - byte: 1
+        bits: "0-7"
+        name: "Level Sensor 2"
+        type: "uint8"
+        units: "percent"
+        scale: "1"
+        range: "0-100"
+        
+      - byte: 2
+        bits: "0-7"
+        name: "Level Sensor 3"
+        type: "uint8"
+        units: "percent"
+        scale: "1"
+        range: "0-100"
+        
+      - byte: 3
+        bits: "0-7"
+        name: "Level Sensor 4"
+        type: "uint8"
+        units: "percent"
+        scale: "1"
+        range: "0-100"
+        
+      - byte: 4
+        bits: "0-7"
+        name: "Averaged Level"
+        type: "uint8"
+        units: "percent"
+        scale: "1"
+        range: "0-100"
+        
+      - byte: 5
+        bits: "0-7"
+        name: "Sensor Status Flags"
+        type: "bitfield"
+        description: "Bit 0: Sensor1 valid, Bit 1: Sensor2 valid, Bit 2: Sensor3 valid, Bit 3: Sensor4 valid, Bits 4-7: Reserved"
+        
+      - byte: 6
+        bits: "0-7"
+        name: "Message Counter"
+        type: "uint8"
+        description: "Rolling counter 0-255"
+        
+      - byte: 7
+        bits: "0-7"
+        name: "CRC-8"
+        type: "uint8"
+        description: "CRC-8/AUTOSAR checksum"
+
+  - message_id: "0x102"
+    name: "Tank Temperature Telemetry"
+    direction: "Tank -> Vehicle Controller"
+    frequency: "10 Hz"
+    dlc: 8
+    format: "Big-endian"
+    
+    payload:
+      - byte: "0-1"
+        bits: "0-15"
+        name: "Temperature 1"
+        type: "int16"
+        units: "Kelvin × 10"
+        scale: "0.1"
+        range: "20 K to 400 K"
+        offset: "0"
+        
+      - byte: "2-3"
+        bits: "0-15"
+        name: "Temperature 2"
+        type: "int16"
+        units: "Kelvin × 10"
+        scale: "0.1"
+        range: "20 K to 400 K"
+        
+      - byte: "4-5"
+        bits: "0-15"
+        name: "Temperature 3 (average)"
+        type: "int16"
+        units: "Kelvin × 10"
+        scale: "0.1"
+        range: "20 K to 400 K"
+        
+      - byte: 6
+        bits: "0-7"
+        name: "Message Counter"
+        type: "uint8"
+        description: "Rolling counter 0-255"
+        
+      - byte: 7
+        bits: "0-7"
+        name: "CRC-8"
+        type: "uint8"
+        description: "CRC-8/AUTOSAR checksum"
+    
+    notes:
+      - "Additional temperature sensors reported in subsequent messages (0x103, 0x104, etc.)"
+      - "Resolution: 0.1 K, Accuracy: ±0.5 K at cryogenic temperatures"
+
+  - message_id: "0x103"
+    name: "Tank Pressure Telemetry"
+    direction: "Tank -> Vehicle Controller"
+    frequency: "10 Hz"
+    dlc: 4
+    format: "Big-endian"
+    
+    payload:
+      - byte: "0-1"
+        bits: "0-15"
+        name: "Pressure 1"
+        type: "uint16"
+        units: "mbar"
+        scale: "1"
+        range: "0-10000 mbar (0-10 bar)"
+        
+      - byte: 2
+        bits: "0-7"
+        name: "Message Counter"
+        type: "uint8"
+        description: "Rolling counter 0-255"
+        
+      - byte: 3
+        bits: "0-7"
+        name: "CRC-8"
+        type: "uint8"
+        description: "CRC-8/AUTOSAR checksum"
+    
+    notes:
+      - "Pressure sensors 2 and 3 reported in messages 0x104 and 0x105"
+      - "Resolution: 1 mbar, Accuracy: ±10 mbar (±0.1% FS)"
+
+  - message_id: "0x104"
+    name: "Sensor Health Status"
+    direction: "Tank -> Vehicle Controller"
+    frequency: "1 Hz"
+    dlc: 8
+    format: "Big-endian"
+    
+    payload:
+      - byte: 0
+        bits: "0-7"
+        name: "Level Sensor Faults"
+        type: "bitfield"
+        description: "Bit 0-3: Sensor 1-4 fault, Bit 4-7: Reserved"
+        
+      - byte: 1
+        bits: "0-7"
+        name: "Temperature Sensor Faults"
+        type: "bitfield"
+        description: "Bit 0-7: Sensor 1-8 fault"
+        
+      - byte: 2
+        bits: "0-7"
+        name: "Pressure Sensor Faults"
+        type: "bitfield"
+        description: "Bit 0-2: Sensor 1-3 fault, Bit 3-7: Reserved"
+        
+      - byte: 3
+        bits: "0-7"
+        name: "Controller Status"
+        type: "bitfield"
+        description: "Bit 0: Power OK, Bit 1: CAN OK, Bit 2: Self-test passed, Bits 3-7: Reserved"
+        
+      - byte: "4-5"
+        bits: "0-15"
+        name: "Uptime"
+        type: "uint16"
+        units: "seconds"
+        description: "Controller uptime in seconds (rolls over at 65535)"
+        
+      - byte: 6
+        bits: "0-7"
+        name: "Message Counter"
+        type: "uint8"
+        description: "Rolling counter 0-255"
+        
+      - byte: 7
+        bits: "0-7"
+        name: "CRC-8"
+        type: "uint8"
+        description: "CRC-8/AUTOSAR checksum"
+
+  - message_id: "0x201"
+    name: "Fill Command"
+    direction: "Vehicle Controller -> Tank"
+    frequency: "On-demand"
+    dlc: 2
+    format: "Big-endian"
+    
+    payload:
+      - byte: 0
+        bits: "0-7"
+        name: "Fill Enable"
+        type: "uint8"
+        values:
+          0x00: "Disable fill"
+          0x01: "Enable fill"
+          0xFF: "Emergency stop"
+        
+      - byte: 1
+        bits: "0-7"
+        name: "CRC-8"
+        type: "uint8"
+        description: "CRC-8/AUTOSAR checksum"
+    
+    notes:
+      - "Command acknowledged with message 0x301"
+      - "Safety interlock: fill only enabled when vehicle grounded"
+
+  - message_id: "0x202"
+    name: "Vent Command"
+    direction: "Vehicle Controller -> Tank"
+    frequency: "On-demand"
+    dlc: 2
+    format: "Big-endian"
+    
+    payload:
+      - byte: 0
+        bits: "0-7"
+        name: "Vent Mode"
+        type: "uint8"
+        values:
+          0x00: "Close vent"
+          0x01: "Normal vent"
+          0x02: "Emergency vent"
+          0xFF: "Reserved"
+        
+      - byte: 1
+        bits: "0-7"
+        name: "CRC-8"
+        type: "uint8"
+        description: "CRC-8/AUTOSAR checksum"
+    
+    notes:
+      - "Command acknowledged with message 0x302"
+      - "Emergency vent overrides all other commands"
+
+# =============================================================================
+# PROTOCOL TIMING AND ERROR HANDLING
+# =============================================================================
+
+protocol_specifications:
+  can_bus:
+    standard: "ISO 11898-1 (CAN 2.0B)"
+    baud_rate: "500 kbps"
+    bit_timing:
+      nominal_bit_time: "2 µs"
+      sample_point: "87.5%"
+      sjw: "1 bit time"
+    
+    error_handling:
+      crc: "CRC-15 (hardware) + CRC-8 (payload)"
+      ack: "Automatic acknowledge"
+      retransmission: "Automatic, up to 8 attempts"
+      bus_off_recovery: "Automatic after 128× 11 bit times"
+      error_frame_limit: "Error passive after 128 errors"
+    
+    message_priority:
+      highest: "0x100-0x1FF (telemetry)"
+      medium: "0x200-0x2FF (commands)"
+      lowest: "0x300-0x3FF (acknowledgments)"
+    
+    latency:
+      max_telemetry_latency: "100 ms (from sensor to controller)"
+      max_command_latency: "50 ms (from controller to actuator)"
+      max_acknowledgment_latency: "20 ms"
+
+# =============================================================================
+# CABLE SPECIFICATIONS
+# =============================================================================
+
+cables:
+  - cable_id: "CBL-28-11-E01"
+    interface_id: "IF-28-11-E01"
+    description: "Level sensor cable assembly"
+    length: "5 m (nominal), up to 10 m (max)"
+    construction: "Shielded twisted pair, 22 AWG"
+    insulation: "PTFE (cryogenic-rated)"
+    shield: "Braided tinned copper, 85% coverage"
+    connector_end_1: "Hermetic D-sub 9-pin plug"
+    connector_end_2: "Terminal block or mating connector"
+    temperature_rating: "-65°C to +200°C"
+    voltage_rating: "600 V"
+    
+  - cable_id: "CBL-28-11-D01"
+    interface_id: "IF-28-11-D01"
+    description: "CAN bus cable assembly"
+    length: "Up to 30 m (depending on location)"
+    construction: "Twisted pair, 24 AWG, 120 Ω characteristic impedance"
+    insulation: "PVC or XLPE"
+    shield: "Foil + drain wire"
+    connector_end_1: "D-sub 9-pin plug"
+    connector_end_2: "D-sub 9-pin receptacle or terminal block"
+    temperature_rating: "-40°C to +85°C"
+    voltage_rating: "30 V"
+
+# =============================================================================
+# CHANGE LOG
+# =============================================================================
+
+change_log:
+  - revision: "0.1.0"
+    date: "2026-02-17"
+    author: "STK_ENG"
+    description: "Initial pinout and protocol map creation"
+    changes:
+      - "Defined connector pinouts for level, temperature, and pressure sensors"
+      - "Specified CAN bus message definitions and protocol"
+      - "Added cable specifications and wiring guidelines"

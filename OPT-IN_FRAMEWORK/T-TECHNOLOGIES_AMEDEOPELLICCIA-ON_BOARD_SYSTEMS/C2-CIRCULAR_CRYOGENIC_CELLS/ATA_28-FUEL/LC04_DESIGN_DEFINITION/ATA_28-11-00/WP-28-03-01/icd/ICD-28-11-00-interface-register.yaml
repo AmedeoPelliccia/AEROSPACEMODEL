@@ -1,0 +1,359 @@
+# Interface Register for C2 Circular Cryogenic Cell
+# Work Package: WP-28-03-01 Cell Design
+# ATA Chapter: 28-11-00
+# Owner: STK_ENG
+# Revision: 0.1.0
+# Date: 2026-02-17
+
+register_metadata:
+  id: "ICD-28-11-00-interface-register"
+  title: "Interface Register for C2 Circular Cryogenic Cell"
+  work_package: "WP-28-03-01"
+  ata_chapter: "28-11-00"
+  domain: "C2-CIRCULAR_CRYOGENIC_CELLS"
+  owner: "STK_ENG"
+  lifecycle_phase: "LC04_DESIGN_DEFINITION"
+  revision: "0.1.0"
+  date: "2026-02-17"
+  status: "Draft"
+
+interfaces:
+  # =====================================================
+  # Fluid Interfaces
+  # =====================================================
+  - interface_id: "IF-28-11-F01"
+    name: "LH₂ Fill/Drain Line"
+    type: "Fluid"
+    classification: "Critical"
+    owner: "Tank Team (STK_ENG)"
+    partner: "Ground Support Equipment"
+    description: "Vacuum-jacketed line for ground fill and drain operations"
+    status: "Under Review"
+    
+    specifications:
+      diameter: "25 mm"
+      material: "SS316L"
+      insulation: "Vacuum-jacketed with MLI"
+      operating_pressure: "1-6 bar"
+      max_pressure: "10 bar (proof), 20 bar (burst)"
+      flow_rate: "100-500 L/min"
+      temperature_range: "-253°C to -240°C"
+      leak_rate_requirement: "< 1×10⁻⁶ mbar·L/s"
+    
+    verification:
+      method: "Test"
+      test_id: "TEST-28-11-F01-001"
+      acceptance_criteria: "Leak rate < 1×10⁻⁶ mbar·L/s at -253°C"
+    
+    traceability:
+      requirements: ["SYS-REQ-28-11-015", "SYS-REQ-28-11-032"]
+      safety_analysis: ["HAZ-28-11-003"]
+      standards: ["ISO 21013-1", "ECSS-E-ST-32-10C"]
+
+  - interface_id: "IF-28-11-F02"
+    name: "LH₂ Feed Line to Propulsion"
+    type: "Fluid"
+    classification: "Critical"
+    owner: "Tank Team (STK_ENG)"
+    partner: "Propulsion System"
+    description: "Main fuel feed line to propulsion system or fuel cell"
+    status: "Under Review"
+    
+    specifications:
+      diameter: "50 mm"
+      material: "SS316L"
+      insulation: "Vacuum-jacketed with MLI"
+      operating_pressure: "3-10 bar"
+      max_pressure: "15 bar (proof), 30 bar (burst)"
+      flow_rate: "Up to 2000 L/min"
+      temperature_range: "-253°C to -240°C"
+      leak_rate_requirement: "< 1×10⁻⁶ mbar·L/s"
+    
+    verification:
+      method: "Test"
+      test_id: "TEST-28-11-F02-001"
+      acceptance_criteria: "Flow rate 2000 L/min @ 10 bar, leak rate < 1×10⁻⁶ mbar·L/s"
+    
+    traceability:
+      requirements: ["SYS-REQ-28-11-016", "SYS-REQ-28-11-033"]
+      safety_analysis: ["HAZ-28-11-001", "HAZ-28-11-003"]
+      standards: ["ISO 21013-1", "NASA-STD-5001B"]
+
+  - interface_id: "IF-28-11-F03"
+    name: "Vent and Relief Line"
+    type: "Fluid"
+    classification: "Critical"
+    owner: "Tank Team (STK_ENG)"
+    partner: "Vent System"
+    description: "Pressure relief and emergency vent line"
+    status: "Under Review"
+    
+    specifications:
+      diameter: "20 mm"
+      material: "SS316L"
+      relief_pressure_setpoint: "8 bar"
+      burst_disc_pressure: "10 bar"
+      flow_capacity: "≥ 5 kg/s (gas)"
+      temperature_range: "-253°C to +85°C"
+      routing: "External vent mast, >5 m from personnel areas"
+    
+    verification:
+      method: "Test + Analysis"
+      test_id: "TEST-28-11-F03-001"
+      acceptance_criteria: "Relief valve opens at 8 ± 0.2 bar, burst disc at 10 ± 0.5 bar"
+    
+    traceability:
+      requirements: ["SYS-REQ-28-11-040", "SAF-REQ-28-11-005"]
+      safety_analysis: ["HAZ-28-11-002", "HAZ-28-11-006"]
+      standards: ["ISO 21013-2", "ARP4761"]
+
+  # =====================================================
+  # Structural Interfaces
+  # =====================================================
+  - interface_id: "IF-28-11-S01"
+    name: "Tank Mounting Struts"
+    type: "Structural"
+    classification: "Critical"
+    owner: "Tank Team (STK_ENG)"
+    partner: "Vehicle Structure"
+    description: "Six G-10 fiberglass struts for tank mounting and load transfer"
+    status: "Under Review"
+    
+    specifications:
+      number_of_struts: 6
+      material: "G-10 fiberglass composite"
+      load_capacity_per_strut: "5000 N (axial), 2000 N (lateral)"
+      thermal_conductance: "< 0.5 W/K per strut"
+      mounting: "Bolted, M12 SS316L fasteners, torque 50 N·m"
+      safety_factor: "2.0 (ultimate), 1.4 (yield)"
+    
+    verification:
+      method: "Analysis + Test"
+      test_id: "TEST-28-11-S01-001"
+      acceptance_criteria: "FEA stress < 100 MPa, physical load test to 1.5× design load, no yield"
+    
+    traceability:
+      requirements: ["SYS-REQ-28-11-050", "STR-REQ-28-11-010"]
+      safety_analysis: ["HAZ-28-11-005"]
+      standards: ["NASA-STD-5001B", "ECSS-E-ST-10-24C"]
+
+  - interface_id: "IF-28-11-S02"
+    name: "Vacuum Jacket Support Ring"
+    type: "Structural"
+    classification: "Major"
+    owner: "Tank Team (STK_ENG)"
+    partner: "Vehicle Structure"
+    description: "Aluminum support ring for vacuum jacket outer shell"
+    status: "Under Review"
+    
+    specifications:
+      material: "Aluminum 6061-T6"
+      diameter: "1200 mm"
+      thickness: "10 mm"
+      load_capacity: "10000 N (distributed)"
+      mounting: "Bolted, M10 aluminum fasteners"
+    
+    verification:
+      method: "Analysis + Inspection"
+      test_id: "ANAL-28-11-S02-001"
+      acceptance_criteria: "FEA stress < 80 MPa, dimensional inspection within ±0.5 mm"
+    
+    traceability:
+      requirements: ["STR-REQ-28-11-015"]
+      safety_analysis: []
+      standards: ["ECSS-E-ST-32-10C"]
+
+  # =====================================================
+  # Electrical Interfaces
+  # =====================================================
+  - interface_id: "IF-28-11-E01"
+    name: "Level Sensor Array"
+    type: "Electrical"
+    classification: "Critical"
+    owner: "Tank Team (STK_ENG)"
+    partner: "Avionics System"
+    description: "Four capacitance-based level sensors for LH₂ level measurement"
+    status: "Under Review"
+    
+    specifications:
+      number_of_sensors: 4
+      sensor_type: "Capacitance-based"
+      measurement_range: "0-100% tank height"
+      accuracy: "±1% full scale"
+      output_signal: "4-20 mA, isolated"
+      power_supply: "24 VDC, < 50 mA per sensor"
+      connector: "Hermetic D-sub 9-pin"
+      cable: "Shielded twisted pair, 22 AWG"
+      temperature_range: "-253°C to +85°C"
+    
+    verification:
+      method: "Test"
+      test_id: "TEST-28-11-E01-001"
+      acceptance_criteria: "Calibration curve within ±1% over full range at -253°C"
+    
+    traceability:
+      requirements: ["INST-REQ-28-11-010", "AVNC-REQ-24-10-005"]
+      safety_analysis: []
+      standards: ["DO-160G Section 16", "IEC 60529 IP67"]
+
+  - interface_id: "IF-28-11-E02"
+    name: "Temperature Sensor Array"
+    type: "Electrical"
+    classification: "Critical"
+    owner: "Tank Team (STK_ENG)"
+    partner: "Avionics System"
+    description: "Eight platinum RTD sensors for temperature monitoring"
+    status: "Under Review"
+    
+    specifications:
+      number_of_sensors: 8
+      sensor_type: "Platinum RTD (Pt-100)"
+      measurement_range: "-253°C to +85°C"
+      accuracy: "±0.5 K at -253°C, ±0.3 K at 0°C"
+      connection: "4-wire resistance measurement"
+      excitation_current: "1 mA"
+      connector: "Hermetic 8-pin circular"
+      cable: "Shielded quad, 24 AWG"
+    
+    verification:
+      method: "Test"
+      test_id: "TEST-28-11-E02-001"
+      acceptance_criteria: "Calibration traceable to NIST, accuracy within spec over full range"
+    
+    traceability:
+      requirements: ["INST-REQ-28-11-015", "AVNC-REQ-24-10-010"]
+      safety_analysis: []
+      standards: ["IEC 60751", "DO-160G Section 16"]
+
+  - interface_id: "IF-28-11-E03"
+    name: "Pressure Transducers"
+    type: "Electrical"
+    classification: "Critical"
+    owner: "Tank Team (STK_ENG)"
+    partner: "Avionics System"
+    description: "Three piezoresistive pressure transducers"
+    status: "Under Review"
+    
+    specifications:
+      number_of_sensors: 3
+      sensor_type: "Piezoresistive"
+      measurement_range: "0-10 bar absolute"
+      accuracy: "±0.1% full scale"
+      output_signal: "0-5 VDC, isolated"
+      power_supply: "12 VDC, < 30 mA per sensor"
+      connector: "Hermetic 6-pin circular"
+      cable: "Shielded twisted pair, 22 AWG"
+      temperature_range: "-40°C to +125°C"
+    
+    verification:
+      method: "Test"
+      test_id: "TEST-28-11-E03-001"
+      acceptance_criteria: "Calibration within ±0.1% FS, thermal stability within ±0.05% FS over temp range"
+    
+    traceability:
+      requirements: ["INST-REQ-28-11-020", "SAF-REQ-28-11-010"]
+      safety_analysis: ["HAZ-28-11-002"]
+      standards: ["DO-160G Section 16", "ISO 21013-1"]
+
+  # =====================================================
+  # Data Interfaces
+  # =====================================================
+  - interface_id: "IF-28-11-D01"
+    name: "Tank Control Unit CAN Bus"
+    type: "Data"
+    classification: "Major"
+    owner: "Tank Team (STK_ENG)"
+    partner: "Vehicle Control System"
+    description: "CAN 2.0B bus for tank telemetry and commands"
+    status: "Under Review"
+    
+    specifications:
+      protocol: "CAN 2.0B"
+      baud_rate: "500 kbps"
+      connector: "D-sub 9-pin"
+      termination: "120 Ω at each end"
+      message_list:
+        - "Tank Level (0x101): 10 Hz, 8 bytes"
+        - "Tank Temperature (0x102): 10 Hz, 8 bytes"
+        - "Tank Pressure (0x103): 10 Hz, 4 bytes"
+        - "Sensor Health (0x104): 1 Hz, 8 bytes"
+        - "Fill Command (0x201): On-demand, 2 bytes"
+        - "Vent Command (0x202): On-demand, 2 bytes"
+      error_handling: "CRC-15, automatic retransmission"
+      max_latency: "100 ms"
+    
+    verification:
+      method: "Test"
+      test_id: "TEST-28-11-D01-001"
+      acceptance_criteria: "< 1 error per 10⁶ messages, latency < 100 ms, all messages correct format"
+    
+    traceability:
+      requirements: ["DATA-REQ-28-11-005", "CTRL-REQ-22-10-015"]
+      safety_analysis: []
+      standards: ["ISO 11898-1", "SAE J1939"]
+
+  # =====================================================
+  # Thermal Interfaces
+  # =====================================================
+  - interface_id: "IF-28-11-T01"
+    name: "MLI Vacuum Jacket Thermal Boundary"
+    type: "Thermal"
+    classification: "Critical"
+    owner: "Tank Team (STK_ENG)"
+    partner: "Vehicle Thermal Control"
+    description: "Vacuum-jacketed MLI insulation boundary for cryogenic LH₂ storage"
+    status: "Under Review"
+    
+    specifications:
+      insulation_system: "40-layer MLI (per INS-28-10-00-MLI-stack)"
+      reflector_material: "Double-aluminized Mylar, 6.35 μm"
+      spacer_material: "Polyester netting"
+      vacuum_level: "< 1×10⁻⁴ Pa"
+      effective_thermal_conductivity: "k_eff = 0.15 mW/(m·K)"
+      heat_flux: "< 1.5 W/m²"
+      total_heat_leak_budget: "< 10 W"
+      boil_off_rate: "< 0.5% per day"
+    
+    verification:
+      method: "Test"
+      test_id: "TEST-28-11-T01-001"
+      acceptance_criteria: "Boil-off rate < 0.5%/day with full tank, vacuum < 1×10⁻⁴ Pa"
+    
+    traceability:
+      requirements: ["THRM-REQ-28-11-005", "PERF-REQ-28-11-020"]
+      safety_analysis: ["HAZ-28-11-004"]
+      standards: ["ISO 21013-1", "ECSS-E-ST-32-10C"]
+      related_documents: ["INS-28-10-00-MLI-stack", "INS-28-10-00-architecture"]
+
+# =====================================================
+# Summary Statistics
+# =====================================================
+summary:
+  total_interfaces: 11
+  by_type:
+    fluid: 3
+    structural: 2
+    electrical: 3
+    data: 1
+    thermal: 1
+  by_criticality:
+    critical: 9
+    major: 2
+    minor: 0
+  by_status:
+    approved: 0
+    under_review: 11
+    draft: 0
+
+# =====================================================
+# Change Log
+# =====================================================
+change_log:
+  - revision: "0.1.0"
+    date: "2026-02-17"
+    author: "STK_ENG"
+    description: "Initial interface register creation for WP-28-03-01"
+    changes:
+      - "Defined 11 primary interfaces for C2 cryogenic cell"
+      - "Included fluid, structural, electrical, data, and thermal interfaces"
+      - "Added traceability to requirements and safety analysis"
