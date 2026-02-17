@@ -90,7 +90,7 @@ Safety content generation requires escalation per **SAFETY-H2-001**.
 
 ## 5. Minimum Evidence Package (Certification-Ready)
 
-| # | Artefact | Status |
+| # | Artifact | Status |
 |---|----------|--------|
 | 1 | FHA_PSSA_SSA_ATA28-11_LH2.pdf | To be developed |
 | 2 | Zonal Hazard Analysis (tank bay) | To be developed |
