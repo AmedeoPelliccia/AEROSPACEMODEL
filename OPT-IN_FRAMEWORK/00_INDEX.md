@@ -41,6 +41,35 @@
 
 ---
 
+## Program Subdomains (P-PROGRAMS)
+
+| Subdomain | Code | ATA Chapters | Description |
+|-----------|------|--------------|-------------|
+| Product Definition | **P** | 06, 08, 11 | What the product is — dimensions, weight, markings |
+| Service Instruction | **S** | 07, 09, 10, 12 | How you handle it — lifting, towing, servicing |
+
+---
+
+## Infrastructure Subdomains (I-INFRASTRUCTURES)
+
+| Subdomain | Code | Categories | Description |
+|-----------|------|------------|-------------|
+| Manufacturing Facilities | **M1** | ATA 85 | Production lines, test rigs, assembly benches |
+| Maintenance Environments | **M2** | ATA 08I, 10I, 12I | In-line, hangars, shops |
+| Operations & Service Structures | **O** | ATA 03I, ATA IN H₂ GSE | Airport facilities, fuel logistics, ground services |
+
+---
+
+## Neural Network Subdomains (N-NEURAL_NETWORKS)
+
+| Subdomain | Code | ATA / Scope | Description |
+|-----------|------|-------------|-------------|
+| Digital Thread & Traceability | **D** | ATA 96 | Ledger, DPP, hash chain, identifiers, schemas, audit packs |
+| AI Governance & Assurance | **A** | Governance | Certification pathway, ethics, human authority protocols, explainability |
+| Program Reserved | **P*** | ATA 98 | Expansion slot for future systems |
+
+---
+
 ## Quick Navigation
 
 ### Organizational & Governance
@@ -69,6 +98,9 @@
 
 - **5** Top-Level Domains + **1** Engineering SSOT Front-End
 - **15** Technology Subdomains within T-TECHNOLOGIES
+- **2** Program Subdomains within P-PROGRAMS (P, S)
+- **3** Infrastructure Subdomains within I-INFRASTRUCTURES (M1, M2, O)
+- **3** Neural Network Subdomains within N-NEURAL_NETWORKS (D, A, P*)
 - **75+** ATA Chapter Directories
 - **3** Novel Technology Designations
 

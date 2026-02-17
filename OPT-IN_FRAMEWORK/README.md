@@ -20,7 +20,9 @@ The OPT-IN_FRAMEWORK is organized into five top-level domains:
 Organizational and governance documentation including maintenance policies, operational procedures, and airworthiness limitations.
 
 ### 2. **P-PROGRAMS** (ATA 06–12)
-Program-level documentation including dimensions, servicing, and operational procedures.
+Program-level documentation including dimensions, servicing, and operational procedures. Organized into two subdomains:
+- **P — Product Definition** (ATA 06, 08, 11): What the product is — dimensions, weight, markings
+- **S — Service Instruction** (ATA 07, 09, 10, 12): How you handle it — lifting, towing, servicing
 
 ### 3. **T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS**
 Comprehensive on-board systems organized into 15 technology subdomains covering ATA 20–80, 95–97. This is the largest domain containing all aircraft systems from airframe to propulsion to intelligence systems.
@@ -43,10 +45,16 @@ Comprehensive on-board systems organized into 15 technology subdomains covering 
 - **P-PROPULSION**: Power plant and propulsion systems (Novel Technology for fuel cells)
 
 ### 4. **I-INFRASTRUCTURES**
-Ground support equipment, servicing infrastructure, and hydrogen supply chain.
+Ground support equipment, servicing infrastructure, and hydrogen supply chain. Organized into three subdomains:
+- **M1 — Manufacturing Facilities** (ATA 85): Production lines, test rigs, assembly benches
+- **M2 — Maintenance Environments** (ATA 08I, 10I, 12I): In-line, hangars, shops
+- **O — Operations & Service Structures** (ATA 03I, ATA IN H₂ GSE): Airport facilities, fuel logistics, ground services
 
 ### 5. **N-NEURAL_NETWORKS**
-AI governance, traceability systems, Digital Product Passport (DPP), and ledger systems.
+AI governance, traceability systems, Digital Product Passport (DPP), and ledger systems. Organized into three subdomains:
+- **D — Digital Thread & Traceability** (ATA 96): Ledger, DPP, hash chain, identifiers, schemas, audit packs
+- **A — AI Governance & Assurance**: Certification pathway, ethics, human authority protocols, explainability
+- **P\* — Program Reserved** (ATA 98): Expansion slot for future systems
 
 ### 6. **ENGINEERING_SSOT** (Front-End)
 Posting location for completed **Engineering SSOT** entries and **Custom Information Data Sheets**. Includes an interactive HTML front-end (`index.html`) for browsing the SSOT registry and generating structured data sheets. All posted entries are ASIT-governed, BREX-compliant, and traceable to KDB sources and baselines.
@@ -179,6 +187,7 @@ The OPT-IN_FRAMEWORK is designed to support:
 | Version | Date | Author | Description |
 |---------|------|--------|-------------|
 | 1.0.0 | 2026-02-12 | ASIT | Initial OPT-IN_FRAMEWORK creation for TLI v2.1 |
+| 1.1.0 | 2026-02-17 | ASIT | Add P/I/N subdomain structure (P/S, M1/M2/O, D/A/P*) |
 
 ---
 
