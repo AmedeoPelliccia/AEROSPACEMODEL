@@ -16,7 +16,7 @@ Factory-floor infrastructure for production and assembly.
 
 | Category | Directory | Description |
 |----------|-----------|-------------|
-| Fuel Cell | `ATA_85-FUEL_CELL_SYSTEMS_INFRA/` | Fuel cell ground support equipment, production lines, test rigs |
+| Fuel Cell | `M1-MANUFACTURING_FACILITIES/ATA_85-FUEL_CELL_SYSTEMS_INFRA/` | Fuel cell ground support equipment, production lines, test rigs |
 
 ## M2 — Maintenance Environments
 
@@ -24,9 +24,9 @@ Maintenance ecosystem from line stations through heavy-maintenance hangars to co
 
 | Category | Directory | Description |
 |----------|-----------|-------------|
-| Weighing | `ATA_08-LEVELING_AND_WEIGHING_INFRA/` | Leveling and weighing facilities |
-| Ground Handling | `ATA_10-PARKING_MOORING_STORAGE_RTS_INFRA/` | Parking, mooring, and storage infrastructure |
-| Servicing | `ATA_12-SERVICING_INFRA/` | Servicing equipment and fluid handling |
+| Weighing | `M2-MAINTENANCE_ENVIRONMENTS/ATA_08-LEVELING_AND_WEIGHING_INFRA/` | Leveling and weighing facilities |
+| Ground Handling | `M2-MAINTENANCE_ENVIRONMENTS/ATA_10-PARKING_MOORING_STORAGE_RTS_INFRA/` | Parking, mooring, and storage infrastructure |
+| Servicing | `M2-MAINTENANCE_ENVIRONMENTS/ATA_12-SERVICING_INFRA/` | Servicing equipment and fluid handling |
 
 ## O — Operations & Service Structures
 
@@ -34,8 +34,8 @@ Operational airport and logistics infrastructure including the H₂ supply chain
 
 | Category | Directory | Description |
 |----------|-----------|-------------|
-| Support | `ATA_03-SUPPORT_INFRA/` | Ground support equipment and tooling |
-| **Hydrogen** ⭐ | `ATA_IN_H2_GSE_AND_SUPPLY_CHAIN/` | **H2 refueling, storage, and supply chain** |
+| Support | `O-OPERATIONS_SERVICE_STRUCTURES/ATA_03-SUPPORT_INFRA/` | Ground support equipment and tooling |
+| **Hydrogen** ⭐ | `O-OPERATIONS_SERVICE_STRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN/` | **H2 refueling, storage, and supply chain** |
 
 ---
 

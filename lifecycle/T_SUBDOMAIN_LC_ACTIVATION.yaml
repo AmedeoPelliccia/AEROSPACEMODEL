@@ -454,7 +454,7 @@ subdomains:
 
   P_PRODUCT_DEFINITION:
     title: "Product Definition (P)"
-    optin_path: "OPT-IN_FRAMEWORK/P-PROGRAMS"
+    optin_path: "OPT-IN_FRAMEWORK/P-PROGRAMS/P-PRODUCT_DEFINITION"
     ata_scope: ["ATA_06-DIMENSIONS_AND_AREAS", "ATA_08-LEVELING_AND_WEIGHING", "ATA_11-PLACARDS_AND_MARKINGS"]
     doa_criticality: "STANDARD"
     novel_technology: false
@@ -463,7 +463,7 @@ subdomains:
 
   P_SERVICE_INSTRUCTION:
     title: "Service Instruction (S)"
-    optin_path: "OPT-IN_FRAMEWORK/P-PROGRAMS"
+    optin_path: "OPT-IN_FRAMEWORK/P-PROGRAMS/S-SERVICE_INSTRUCTION"
     ata_scope: ["ATA_07-LIFTING_AND_SHORING", "ATA_09-TOWING_AND_TAXIING", "ATA_10-PARKING_MOORING_STORAGE_RETURN_TO_SERVICE", "ATA_12-SERVICING"]
     doa_criticality: "STANDARD"
     novel_technology: false
@@ -476,7 +476,7 @@ subdomains:
 
   I_MANUFACTURING_FACILITIES:
     title: "Manufacturing Facilities (M1)"
-    optin_path: "OPT-IN_FRAMEWORK/I-INFRASTRUCTURES"
+    optin_path: "OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/M1-MANUFACTURING_FACILITIES"
     ata_scope: ["ATA_85-FUEL_CELL_SYSTEMS_INFRA"]
     doa_criticality: "STANDARD"
     novel_technology: false
@@ -485,7 +485,7 @@ subdomains:
 
   I_MAINTENANCE_ENVIRONMENTS:
     title: "Maintenance Environments (M2)"
-    optin_path: "OPT-IN_FRAMEWORK/I-INFRASTRUCTURES"
+    optin_path: "OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/M2-MAINTENANCE_ENVIRONMENTS"
     ata_scope: ["ATA_08-LEVELING_AND_WEIGHING_INFRA", "ATA_10-PARKING_MOORING_STORAGE_RTS_INFRA", "ATA_12-SERVICING_INFRA"]
     doa_criticality: "STANDARD"
     novel_technology: false
@@ -494,7 +494,7 @@ subdomains:
 
   I_OPERATIONS_SERVICE_STRUCTURES:
     title: "Operations & Service Structures (O)"
-    optin_path: "OPT-IN_FRAMEWORK/I-INFRASTRUCTURES"
+    optin_path: "OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES"
     ata_scope: ["ATA_03-SUPPORT_INFRA", "ATA_IN_H2_GSE_AND_SUPPLY_CHAIN"]
     doa_criticality: "VARIES"
     novel_technology: false
@@ -507,7 +507,7 @@ subdomains:
 
   N_DIGITAL_THREAD_TRACEABILITY:
     title: "Digital Thread & Traceability (D)"
-    optin_path: "OPT-IN_FRAMEWORK/N-NEURAL_NETWORKS"
+    optin_path: "OPT-IN_FRAMEWORK/N-NEURAL_NETWORKS/D-DIGITAL_THREAD_TRACEABILITY"
     ata_scope: ["ATA_96-TRACEABILITY_DPP_LEDGER"]
     doa_criticality: "STANDARD"
     novel_technology: false
@@ -516,7 +516,7 @@ subdomains:
 
   N_AI_GOVERNANCE_ASSURANCE:
     title: "AI Governance & Assurance (A)"
-    optin_path: "OPT-IN_FRAMEWORK/N-NEURAL_NETWORKS"
+    optin_path: "OPT-IN_FRAMEWORK/N-NEURAL_NETWORKS/A-AI_GOVERNANCE_ASSURANCE"
     ata_scope: ["ATA_AI_GOVERNANCE_ASSURANCE"]
     doa_criticality: "VARIES"
     novel_technology: false
@@ -525,7 +525,7 @@ subdomains:
 
   N_PROGRAM_RESERVED:
     title: "Program Reserved (P*)"
-    optin_path: "OPT-IN_FRAMEWORK/N-NEURAL_NETWORKS"
+    optin_path: "OPT-IN_FRAMEWORK/N-NEURAL_NETWORKS/PSTAR-PROGRAM_RESERVED"
     ata_scope: ["ATA_98-RESERVED_PROGRAM_SLOT"]
     doa_criticality: "VARIES"
     novel_technology: false

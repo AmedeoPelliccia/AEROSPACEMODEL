@@ -55,6 +55,12 @@ class TestPProgramsSubdomains:
     def test_readme_exists(self):
         assert (P_PROGRAMS / "README.md").exists()
 
+    def test_p_subdomain_directory_exists(self):
+        assert (P_PROGRAMS / "P-PRODUCT_DEFINITION").is_dir()
+
+    def test_s_subdomain_directory_exists(self):
+        assert (P_PROGRAMS / "S-SERVICE_INSTRUCTION").is_dir()
+
     @pytest.fixture
     def index_text(self) -> str:
         return (P_PROGRAMS / "00_INDEX.md").read_text(encoding="utf-8")
@@ -91,11 +97,13 @@ class TestPProgramsSubdomains:
 
     @pytest.mark.parametrize("ata_dir", P_PRODUCT_DEFINITION)
     def test_product_definition_directories_exist(self, ata_dir: str):
-        assert (P_PROGRAMS / ata_dir).is_dir(), f"{ata_dir} must exist in P-PROGRAMS"
+        assert (P_PROGRAMS / "P-PRODUCT_DEFINITION" / ata_dir).is_dir(), \
+            f"{ata_dir} must exist in P-PRODUCT_DEFINITION/"
 
     @pytest.mark.parametrize("ata_dir", S_SERVICE_INSTRUCTION)
     def test_service_instruction_directories_exist(self, ata_dir: str):
-        assert (P_PROGRAMS / ata_dir).is_dir(), f"{ata_dir} must exist in P-PROGRAMS"
+        assert (P_PROGRAMS / "S-SERVICE_INSTRUCTION" / ata_dir).is_dir(), \
+            f"{ata_dir} must exist in S-SERVICE_INSTRUCTION/"
 
     def test_p_subdomain_ata_chapters_total_seven(self):
         total = len(self.P_PRODUCT_DEFINITION) + len(self.S_SERVICE_INSTRUCTION)
@@ -127,6 +135,15 @@ class TestIInfrastructuresSubdomains:
 
     def test_readme_exists(self):
         assert (I_INFRA / "README.md").exists()
+
+    def test_m1_subdomain_directory_exists(self):
+        assert (I_INFRA / "M1-MANUFACTURING_FACILITIES").is_dir()
+
+    def test_m2_subdomain_directory_exists(self):
+        assert (I_INFRA / "M2-MAINTENANCE_ENVIRONMENTS").is_dir()
+
+    def test_o_subdomain_directory_exists(self):
+        assert (I_INFRA / "O-OPERATIONS_SERVICE_STRUCTURES").is_dir()
 
     @pytest.fixture
     def index_text(self) -> str:
@@ -167,15 +184,18 @@ class TestIInfrastructuresSubdomains:
 
     @pytest.mark.parametrize("cat_dir", M1_MANUFACTURING)
     def test_m1_directories_exist(self, cat_dir: str):
-        assert (I_INFRA / cat_dir).is_dir(), f"{cat_dir} must exist in I-INFRASTRUCTURES"
+        assert (I_INFRA / "M1-MANUFACTURING_FACILITIES" / cat_dir).is_dir(), \
+            f"{cat_dir} must exist in M1-MANUFACTURING_FACILITIES/"
 
     @pytest.mark.parametrize("cat_dir", M2_MAINTENANCE)
     def test_m2_directories_exist(self, cat_dir: str):
-        assert (I_INFRA / cat_dir).is_dir(), f"{cat_dir} must exist in I-INFRASTRUCTURES"
+        assert (I_INFRA / "M2-MAINTENANCE_ENVIRONMENTS" / cat_dir).is_dir(), \
+            f"{cat_dir} must exist in M2-MAINTENANCE_ENVIRONMENTS/"
 
     @pytest.mark.parametrize("cat_dir", O_OPERATIONS)
     def test_o_directories_exist(self, cat_dir: str):
-        assert (I_INFRA / cat_dir).is_dir(), f"{cat_dir} must exist in I-INFRASTRUCTURES"
+        assert (I_INFRA / "O-OPERATIONS_SERVICE_STRUCTURES" / cat_dir).is_dir(), \
+            f"{cat_dir} must exist in O-OPERATIONS_SERVICE_STRUCTURES/"
 
     def test_i_subdomain_categories_total_six(self):
         total = len(self.M1_MANUFACTURING) + len(self.M2_MAINTENANCE) + len(self.O_OPERATIONS)
@@ -237,15 +257,24 @@ class TestNNeuralNetworksSubdomains:
         assert "Program Reserved" in readme_text
         assert "Expansion slot" in readme_text
 
+    def test_d_subdomain_directory_exists(self):
+        assert (N_NEURAL / "D-DIGITAL_THREAD_TRACEABILITY").is_dir()
+
+    def test_a_subdomain_directory_exists(self):
+        assert (N_NEURAL / "A-AI_GOVERNANCE_ASSURANCE").is_dir()
+
+    def test_pstar_subdomain_directory_exists(self):
+        assert (N_NEURAL / "PSTAR-PROGRAM_RESERVED").is_dir()
+
     def test_ata96_directory_exists(self):
-        assert (N_NEURAL / "ATA_96-TRACEABILITY_DPP_LEDGER").is_dir()
+        assert (N_NEURAL / "D-DIGITAL_THREAD_TRACEABILITY" / "ATA_96-TRACEABILITY_DPP_LEDGER").is_dir()
 
     def test_ata98_directory_exists(self):
-        assert (N_NEURAL / "ATA_98-RESERVED_PROGRAM_SLOT").is_dir()
+        assert (N_NEURAL / "PSTAR-PROGRAM_RESERVED" / "ATA_98-RESERVED_PROGRAM_SLOT").is_dir()
 
     def test_ai_governance_directory_exists(self):
-        assert (N_NEURAL / "ATA_AI_GOVERNANCE_ASSURANCE").is_dir(), \
-            "ATA_AI_GOVERNANCE_ASSURANCE/ directory must exist"
+        assert (N_NEURAL / "A-AI_GOVERNANCE_ASSURANCE" / "ATA_AI_GOVERNANCE_ASSURANCE").is_dir(), \
+            "ATA_AI_GOVERNANCE_ASSURANCE/ directory must exist in A-AI_GOVERNANCE_ASSURANCE/"
 
     def test_readme_ai_governance_content(self, readme_text: str):
         assert "certification pathway" in readme_text.lower()
@@ -365,3 +394,19 @@ class TestLifecycleActivationSubdomains:
         for key in pin_keys:
             assert sd[key]["profile"] == "standard_profile", \
                 f"{key} must use standard_profile"
+
+    def test_optin_paths_contain_subdomain_dirs(self, lc_data: dict):
+        sd = lc_data["subdomains"]
+        expected = {
+            "P_PRODUCT_DEFINITION": "P-PRODUCT_DEFINITION",
+            "P_SERVICE_INSTRUCTION": "S-SERVICE_INSTRUCTION",
+            "I_MANUFACTURING_FACILITIES": "M1-MANUFACTURING_FACILITIES",
+            "I_MAINTENANCE_ENVIRONMENTS": "M2-MAINTENANCE_ENVIRONMENTS",
+            "I_OPERATIONS_SERVICE_STRUCTURES": "O-OPERATIONS_SERVICE_STRUCTURES",
+            "N_DIGITAL_THREAD_TRACEABILITY": "D-DIGITAL_THREAD_TRACEABILITY",
+            "N_AI_GOVERNANCE_ASSURANCE": "A-AI_GOVERNANCE_ASSURANCE",
+            "N_PROGRAM_RESERVED": "PSTAR-PROGRAM_RESERVED",
+        }
+        for key, subdir in expected.items():
+            assert subdir in sd[key]["optin_path"], \
+                f"{key} optin_path must contain {subdir}"

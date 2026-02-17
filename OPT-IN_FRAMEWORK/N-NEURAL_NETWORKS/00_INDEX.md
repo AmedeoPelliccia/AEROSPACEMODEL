@@ -16,7 +16,7 @@ The "plumbing" of digital traceability — identifiers, DPP mechanics, and ledge
 
 | ATA | Directory | Description |
 |-----|-----------|-------------|
-| 96 | `ATA_96-TRACEABILITY_DPP_LEDGER/` | Digital Product Passport, traceability, and ledger systems |
+| 96 | `D-DIGITAL_THREAD_TRACEABILITY/ATA_96-TRACEABILITY_DPP_LEDGER/` | Digital Product Passport, traceability, and ledger systems |
 
 ## A — AI Governance & Assurance
 
@@ -25,7 +25,7 @@ Oversees how AI/ML models are certified, kept accountable, and made transparent.
 
 | Scope | Directory | Description |
 |-------|-----------|-------------|
-| Governance | `ATA_AI_GOVERNANCE_ASSURANCE/` | AI certification pathway, ethics & bias policy, human authority protocols, explainability requirements |
+| Governance | `A-AI_GOVERNANCE_ASSURANCE/ATA_AI_GOVERNANCE_ASSURANCE/` | AI certification pathway, ethics & bias policy, human authority protocols, explainability requirements |
 
 ## P* — Program Reserved
 
@@ -33,7 +33,7 @@ Expansion slot reserved for future program-specific implementations.
 
 | ATA | Directory | Description |
 |-----|-----------|-------------|
-| 98 | `ATA_98-RESERVED_PROGRAM_SLOT/` | Reserved for future AI governance and neural network systems |
+| 98 | `PSTAR-PROGRAM_RESERVED/ATA_98-RESERVED_PROGRAM_SLOT/` | Reserved for future AI governance and neural network systems |
 
 ---
 
