@@ -1,0 +1,33 @@
+Connector ID,Interface ID,Connector Name,Type,Manufacturer,Part Number,Pin,Signal,Description,Wire Gauge,Wire Color
+J1,IF-28-11-E01,Level Sensor 1 Connector,Hermetic D-sub 9-pin,Glenair,GEL-MIL-DTL-38999/20FE09PN,1,Current Output +,4-20 mA current loop positive,22 AWG,Red
+J1,IF-28-11-E01,Level Sensor 1 Connector,Hermetic D-sub 9-pin,Glenair,GEL-MIL-DTL-38999/20FE09PN,2,Current Output -,4-20 mA current loop negative (return),22 AWG,Black
+J1,IF-28-11-E01,Level Sensor 1 Connector,Hermetic D-sub 9-pin,Glenair,GEL-MIL-DTL-38999/20FE09PN,3,Power Supply +,24 VDC power supply,22 AWG,Orange
+J1,IF-28-11-E01,Level Sensor 1 Connector,Hermetic D-sub 9-pin,Glenair,GEL-MIL-DTL-38999/20FE09PN,4,Power Supply -,24 VDC power return (GND),22 AWG,Brown
+J1,IF-28-11-E01,Level Sensor 1 Connector,Hermetic D-sub 9-pin,Glenair,GEL-MIL-DTL-38999/20FE09PN,5,Chassis Ground,Chassis/shield ground,22 AWG,Green/Yellow
+J1,IF-28-11-E01,Level Sensor 1 Connector,Hermetic D-sub 9-pin,Glenair,GEL-MIL-DTL-38999/20FE09PN,6,Not Connected,Reserved for future use,-,-
+J1,IF-28-11-E01,Level Sensor 1 Connector,Hermetic D-sub 9-pin,Glenair,GEL-MIL-DTL-38999/20FE09PN,7,Not Connected,Reserved for future use,-,-
+J1,IF-28-11-E01,Level Sensor 1 Connector,Hermetic D-sub 9-pin,Glenair,GEL-MIL-DTL-38999/20FE09PN,8,Not Connected,Reserved for future use,-,-
+J1,IF-28-11-E01,Level Sensor 1 Connector,Hermetic D-sub 9-pin,Glenair,GEL-MIL-DTL-38999/20FE09PN,9,Not Connected,Reserved for future use,-,-
+J5,IF-28-11-E02,Temperature Sensor Block Connector,Hermetic 8-pin circular,Amphenol,97-3106A-20-29P,A,RTD1 Excitation +,"Pt-100 RTD #1, current source positive",24 AWG,Red
+J5,IF-28-11-E02,Temperature Sensor Block Connector,Hermetic 8-pin circular,Amphenol,97-3106A-20-29P,B,RTD1 Sense +,"Pt-100 RTD #1, voltage sense positive",24 AWG,White
+J5,IF-28-11-E02,Temperature Sensor Block Connector,Hermetic 8-pin circular,Amphenol,97-3106A-20-29P,C,RTD1 Sense -,"Pt-100 RTD #1, voltage sense negative",24 AWG,Blue
+J5,IF-28-11-E02,Temperature Sensor Block Connector,Hermetic 8-pin circular,Amphenol,97-3106A-20-29P,D,RTD1 Excitation -,"Pt-100 RTD #1, current source negative",24 AWG,Black
+J5,IF-28-11-E02,Temperature Sensor Block Connector,Hermetic 8-pin circular,Amphenol,97-3106A-20-29P,E,Chassis Ground,Chassis/shield ground,24 AWG,Green/Yellow
+J5,IF-28-11-E02,Temperature Sensor Block Connector,Hermetic 8-pin circular,Amphenol,97-3106A-20-29P,F,Not Connected,Reserved,-,-
+J5,IF-28-11-E02,Temperature Sensor Block Connector,Hermetic 8-pin circular,Amphenol,97-3106A-20-29P,G,Not Connected,Reserved,-,-
+J5,IF-28-11-E02,Temperature Sensor Block Connector,Hermetic 8-pin circular,Amphenol,97-3106A-20-29P,H,Not Connected,Reserved,-,-
+J9,IF-28-11-E03,Pressure Transducer 1 Connector,Hermetic 6-pin circular,Fischer Connectors,S104Z056-130,1,Voltage Output +,0-5 VDC analog output positive,22 AWG,Yellow
+J9,IF-28-11-E03,Pressure Transducer 1 Connector,Hermetic 6-pin circular,Fischer Connectors,S104Z056-130,2,Voltage Output -,0-5 VDC analog output negative (isolated),22 AWG,Gray
+J9,IF-28-11-E03,Pressure Transducer 1 Connector,Hermetic 6-pin circular,Fischer Connectors,S104Z056-130,3,Power Supply +,12 VDC power supply,22 AWG,Red
+J9,IF-28-11-E03,Pressure Transducer 1 Connector,Hermetic 6-pin circular,Fischer Connectors,S104Z056-130,4,Power Supply -,12 VDC power return (isolated),22 AWG,Black
+J9,IF-28-11-E03,Pressure Transducer 1 Connector,Hermetic 6-pin circular,Fischer Connectors,S104Z056-130,5,Chassis Ground,Chassis/shield ground,22 AWG,Green/Yellow
+J9,IF-28-11-E03,Pressure Transducer 1 Connector,Hermetic 6-pin circular,Fischer Connectors,S104Z056-130,6,Not Connected,Reserved,-,-
+J12,IF-28-11-D01,Tank Control Unit CAN Bus Connector,D-sub 9-pin,TE Connectivity,1-1734248-0,1,Not Connected,Reserved,-,-
+J12,IF-28-11-D01,Tank Control Unit CAN Bus Connector,D-sub 9-pin,TE Connectivity,1-1734248-0,2,CAN_L,CAN Low signal,24 AWG twisted pair,Blue
+J12,IF-28-11-D01,Tank Control Unit CAN Bus Connector,D-sub 9-pin,TE Connectivity,1-1734248-0,3,CAN_GND,CAN ground reference,24 AWG,Black
+J12,IF-28-11-D01,Tank Control Unit CAN Bus Connector,D-sub 9-pin,TE Connectivity,1-1734248-0,4,Not Connected,Reserved,-,-
+J12,IF-28-11-D01,Tank Control Unit CAN Bus Connector,D-sub 9-pin,TE Connectivity,1-1734248-0,5,CAN_SHIELD,Shield/chassis ground,Drain wire,Green/Yellow
+J12,IF-28-11-D01,Tank Control Unit CAN Bus Connector,D-sub 9-pin,TE Connectivity,1-1734248-0,6,Not Connected,Reserved (optional GND),-,-
+J12,IF-28-11-D01,Tank Control Unit CAN Bus Connector,D-sub 9-pin,TE Connectivity,1-1734248-0,7,CAN_H,CAN High signal,24 AWG twisted pair,White
+J12,IF-28-11-D01,Tank Control Unit CAN Bus Connector,D-sub 9-pin,TE Connectivity,1-1734248-0,8,Not Connected,Reserved,-,-
+J12,IF-28-11-D01,Tank Control Unit CAN Bus Connector,D-sub 9-pin,TE Connectivity,1-1734248-0,9,Not Connected,Reserved (optional +12V),-,-
