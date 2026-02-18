@@ -303,7 +303,6 @@ Examples:
 | Metadata Schema | `schemas/ampel360_metadata_record.schema.json` |
 | Artifact Types | `schemas/ampel360_artifact_types.yaml` |
 | PBS/WBS Module | `src/aerospacemodel/ampel360/pbs_wbs.py` |
-| Validation Rules | `src/aerospacemodel/ampel360/validators.py` |
 | OPT-IN Registry | `OPT-IN_FRAMEWORK/00_INDEX.md` |
 | TLI Registry | `lifecycle/LC_PHASE_REGISTRY.yaml` |
 
