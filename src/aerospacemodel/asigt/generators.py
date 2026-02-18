@@ -954,7 +954,13 @@ class ProceduralDMGenerator(BaseGenerator):
             regulatory_refs = content.get("regulatory_refs") or content.get("standards") or []
             best_practices = content.get("best_practices") or []
             if regulatory_refs or best_practices:
-                self.create_regulatory_refs(dm_status, regulatory_refs, best_practices)
+                refs_element = self.create_regulatory_refs(dm_status, regulatory_refs, best_practices)
+                # Ensure refs is not appended after all other dmStatus children
+                if isinstance(refs_element, ET.Element):
+                    # Move refs_element to the beginning of dm_status children to satisfy schema ordering
+                    if refs_element in list(dm_status):
+                        dm_status.remove(refs_element)
+                    dm_status.insert(0, refs_element)
 
             # Content section
             content_elem = self.create_sub_element(dmodule, "content")
