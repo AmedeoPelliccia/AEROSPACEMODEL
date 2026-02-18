@@ -142,6 +142,44 @@ class TestArtifactID:
         )
         assert "ATAIN-50-00" in artifact_id.to_compact()
     
+    def test_infrastructure_ata_chapter(self):
+        """Test infrastructure ATA chapters with I suffix (08I, 10I, 12I)."""
+        # Test 08I
+        artifact_id_08i = ArtifactID(
+            msn="MSN001",
+            ata_chapter="08I",
+            section="10",
+            subject="00",
+            lc_phase="LC12",
+            artifact_type="SBL",
+            sequence="001"
+        )
+        assert "ATA08I-10-00" in artifact_id_08i.to_compact()
+        
+        # Test 10I
+        artifact_id_10i = ArtifactID(
+            msn="MSN001",
+            ata_chapter="10I",
+            section="20",
+            subject="00",
+            lc_phase="LC12",
+            artifact_type="SBL",
+            sequence="002"
+        )
+        assert "ATA10I-20-00" in artifact_id_10i.to_compact()
+        
+        # Test 12I
+        artifact_id_12i = ArtifactID(
+            msn="MSN001",
+            ata_chapter="12I",
+            section="30",
+            subject="00",
+            lc_phase="LC12",
+            artifact_type="SBL",
+            sequence="003"
+        )
+        assert "ATA12I-30-00" in artifact_id_12i.to_compact()
+    
     def test_get_phase_type(self):
         """Test phase type detection."""
         plm_artifact = ArtifactID(

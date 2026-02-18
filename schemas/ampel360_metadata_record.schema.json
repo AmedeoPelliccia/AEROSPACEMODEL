@@ -40,7 +40,7 @@
     "record_id": {
       "type": "string",
       "description": "Canonical artifact identifier",
-      "pattern": "^AMPEL360_Q100_MSN[0-9]{3}_ATA[0-9]{2,}-[0-9]{2}-[0-9]{2}_LC[0-9]{2}_[A-Z0-9\\-]+_[0-9]{3}$",
+      "pattern": "^AMPEL360_Q100_MSN[0-9]{3}_ATA([0-9]{2}I?|IN)-[0-9]{2}-[0-9]{2}_LC(0[1-9]|1[0-4])_[A-Z0-9\\-]+_[0-9]{3}$",
       "examples": [
         "AMPEL360_Q100_MSN001_ATA25-10-00_LC02_REQ_001",
         "AMPEL360_Q100_MSN001_ATA28-10-00_LC04_DES_042"
@@ -64,7 +64,7 @@
     },
     "ata_chapter": {
       "type": "string",
-      "pattern": "^([0-9]{2}|IN)$",
+      "pattern": "^([0-9]{2}I?|IN)$",
       "description": "ATA chapter code (00-98 or IN)",
       "examples": ["25", "28", "71", "IN"]
     },
@@ -179,7 +179,7 @@
     },
     "pbs_id": {
       "type": "string",
-      "pattern": "^PBS-[OPTIN][A-Z0-9\\*]+-ATA[0-9]{2,}(-[0-9]{2})*-[A-Z0-9_]+$",
+      "pattern": "^PBS-[OPTIN][A-Z0-9\\*]+-ATA([0-9]{2}I?|IN)(-[0-9]{2})*-[A-Z0-9_]+$",
       "description": "Product Breakdown Structure identifier",
       "examples": [
         "PBS-TA-ATA25-10-00-SEAT_ASSY",

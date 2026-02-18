@@ -99,14 +99,15 @@ class PBSID:
                 f"Valid options: {valid_subdomains}"
             )
         
-        # ATA chapter validation
-        if not re.match(r'^(\d{2}|IN)$', self.ata_chapter):
-            raise ValueError(f"Invalid ATA chapter: {self.ata_chapter}")
-        if self.ata_chapter != "IN":
+        # ATA chapter validation: 00-98, IN, or infrastructure suffix (08I, 10I, 12I)
+        if not re.match(r'^(\d{2}I?|IN)$', self.ata_chapter):
+            raise ValueError(f"Invalid ATA chapter: {self.ata_chapter}. Must be 00-98, IN, or infrastructure suffix (e.g., 08I)")
+        if self.ata_chapter not in ("IN",) and not self.ata_chapter.endswith('I'):
+            # Validate numeric range for standard chapters (not infrastructure)
             ata_value = int(self.ata_chapter)
             if ata_value < 0 or ata_value > 98:
                 raise ValueError(
-                    f"Invalid ATA chapter: {self.ata_chapter}. Must be between 00 and 98, or 'IN'"
+                    f"Invalid ATA chapter: {self.ata_chapter}. Must be between 00 and 98, IN, or infrastructure suffix"
                 )
         
         # Section and subject validation
@@ -236,7 +237,7 @@ class PBSParser:
     """Parse PBS identifiers."""
     
     PBS_PATTERN = re.compile(
-        r'^PBS-([OPTIN])([A-Z0-9\*]+)-ATA(\d{2}|IN)-(\d{2})-(\d{2})-([A-Z0-9_]+)$'
+        r'^PBS-([OPTIN])([A-Z0-9\*]+)-ATA(\d{2}I?|IN)-(\d{2})-(\d{2})-([A-Z0-9_]+)$'
     )
     
     @classmethod

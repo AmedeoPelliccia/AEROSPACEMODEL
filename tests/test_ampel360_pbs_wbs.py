@@ -310,12 +310,21 @@ class TestWBSParser:
             ("WBS-VER-3.1.2", "VER"),
             ("WBS-MRO-4.2.1", "MRO"),
             ("WBS-EOL-5.1", "EOL"),
+            ("WBS-PUB-1.2.3", "PUB"),  # Cross-cutting publication phase
         ]
         
         for wbs_str, expected_phase in test_cases:
             wbs_id = WBSParser.parse(wbs_str)
             assert wbs_id is not None
             assert wbs_id.phase_code == expected_phase
+    
+    def test_pub_phase_no_lc_mapping(self):
+        """Test that PUB phase code returns None for LC phase (cross-cutting)."""
+        wbs_id = WBSParser.parse("WBS-PUB-1.2.3")
+        assert wbs_id is not None
+        assert wbs_id.phase_code == "PUB"
+        # PUB is cross-cutting, not tied to a specific LC phase
+        assert wbs_id.get_lc_phase() is None
     
     def test_parse_invalid_wbs(self):
         """Test parsing invalid WBS identifiers."""
@@ -483,6 +492,24 @@ class TestRealWorldExamples:
         assert pbs_id.axis == "N"
         assert pbs_id.subdomain == "D"  # Digital Thread & Traceability
         assert pbs_id.ata_chapter == "96"
+    
+    def test_infrastructure_ata_chapters(self):
+        """Test PBS with infrastructure ATA chapter suffixes (08I, 10I, 12I)."""
+        # Test M2 Maintenance Environments with 08I
+        pbs_08i = parse_pbs("PBS-IM2-ATA08I-10-00-INLINE_MAINT")
+        assert pbs_08i is not None
+        assert pbs_08i.ata_chapter == "08I"
+        assert pbs_08i.subdomain == "M2"
+        
+        # Test M2 with 10I
+        pbs_10i = parse_pbs("PBS-IM2-ATA10I-20-00-HANGAR_BAY")
+        assert pbs_10i is not None
+        assert pbs_10i.ata_chapter == "10I"
+        
+        # Test M2 with 12I
+        pbs_12i = parse_pbs("PBS-IM2-ATA12I-30-00-SHOP_FACILITY")
+        assert pbs_12i is not None
+        assert pbs_12i.ata_chapter == "12I"
 
 
 class TestConstants:

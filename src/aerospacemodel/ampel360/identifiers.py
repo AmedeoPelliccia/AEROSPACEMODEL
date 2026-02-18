@@ -69,13 +69,14 @@ class ArtifactID:
         if not re.match(r'^MSN\d{3}$', self.msn):
             raise ValueError(f"Invalid MSN: {self.msn}. Must be MSNnnn (e.g., MSN001)")
         
-        # ATA chapter validation: 00-98 or IN
-        if not re.match(r'^(\d{2}|IN)$', self.ata_chapter):
-            raise ValueError(f"Invalid ATA chapter: {self.ata_chapter}. Must be 00-98 or IN")
-        if self.ata_chapter.isdigit():
+        # ATA chapter validation: 00-98, IN, or infrastructure suffix (08I, 10I, 12I)
+        if not re.match(r'^(\d{2}I?|IN)$', self.ata_chapter):
+            raise ValueError(f"Invalid ATA chapter: {self.ata_chapter}. Must be 00-98, IN, or infrastructure suffix (e.g., 08I)")
+        if self.ata_chapter not in ("IN",) and not self.ata_chapter.endswith('I'):
+            # Validate numeric range for standard chapters (not infrastructure)
             value = int(self.ata_chapter)
             if not (0 <= value <= 98):
-                raise ValueError(f"Invalid ATA chapter: {self.ata_chapter}. Must be 00-98 or IN")
+                raise ValueError(f"Invalid ATA chapter: {self.ata_chapter}. Must be 00-98, IN, or infrastructure suffix")
         
         # Section and subject validation
         if not re.match(r'^\d{2}$', self.section):
@@ -188,17 +189,17 @@ class IDParser:
     
     # Regex patterns for different formats
     COMPACT_PATTERN = re.compile(
-        r'^AMPEL360_Q100_(MSN\d{3})_ATA(\d{2}|IN)-(\d{2})-(\d{2})_'
+        r'^AMPEL360_Q100_(MSN\d{3})_ATA(\d{2}I?|IN)-(\d{2})-(\d{2})_'
         r'(LC(?:0[1-9]|1[0-4]))_([A-Z0-9\-]+)_(\d{3})$'
     )
     
     HYPHENATED_PATTERN = re.compile(
-        r'^AMPEL360-Q100-(MSN\d{3})-ATA(\d{2}|IN)-(\d{2})-(\d{2})-'
+        r'^AMPEL360-Q100-(MSN\d{3})-ATA(\d{2}I?|IN)-(\d{2})-(\d{2})-'
         r'(LC(?:0[1-9]|1[0-4]))-([A-Z0-9\-]+)-(\d{3})$'
     )
     
     URN_PATTERN = re.compile(
-        r'^urn:ampel360:q100:(msn\d{3}):ata(\d{2}|in)-(\d{2})-(\d{2}):'
+        r'^urn:ampel360:q100:(msn\d{3}):ata(\d{2}i?|in)-(\d{2})-(\d{2}):'
         r'(lc(?:0[1-9]|1[0-4])):([a-z0-9\-]+):(\d{3})$'
     )
     
