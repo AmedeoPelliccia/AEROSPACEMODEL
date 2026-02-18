@@ -304,6 +304,10 @@ function filterTable() {
 /* ── Populate SSOT ref dropdown ────────────────────────────────────── */
 function populateRefDropdown() {
   const sel = document.getElementById("ds-ssot-ref");
+  // Clear all options except the placeholder (index 0) before populating
+  while (sel.options.length > 1) {
+    sel.remove(1);
+  }
   SSOT_ENTRIES.forEach(e => {
     const opt = document.createElement("option");
     opt.value = e.id;
