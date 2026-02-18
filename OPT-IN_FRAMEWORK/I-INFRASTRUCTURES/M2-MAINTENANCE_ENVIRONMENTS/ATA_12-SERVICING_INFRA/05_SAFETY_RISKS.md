@@ -19,7 +19,7 @@
 | **Root causes** | Defective coupling, hose rupture, overpressure, coupling connect/disconnect error |
 | **Mitigations** | Zone 1/2 ATEX classification; fixed H₂ detection (alarm 10%, evacuation 25% LEL); forced ventilation ≥ 15 ACH; bonding/earthing; personal H₂ detectors; no ignition sources within 7.5 m; slow coupling connect/disconnect procedure |
 | **Residual risk** | ALARP — STK_SAF sign-off required per BREX SAFETY-H2-001 |
-| **Reference** | [`../../../.github/instructions/ata28_h2_cryogenic.instructions.md`](../../../.github/instructions/ata28_h2_cryogenic.instructions.md) |
+| **Reference** | [`../../../../.github/instructions/ata28_h2_cryogenic.instructions.md`](../../../../.github/instructions/ata28_h2_cryogenic.instructions.md) |
 
 ---
 
