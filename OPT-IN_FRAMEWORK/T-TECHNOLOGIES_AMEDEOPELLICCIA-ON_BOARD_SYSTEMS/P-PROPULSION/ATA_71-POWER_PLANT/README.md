@@ -56,7 +56,7 @@ a minimum. Zone 1 equipment must be **Category 2G** minimum (Ex db, Ex ia, or Ex
 - Electrical connectors within Zone 1: Ex e (increased safety) terminal boxes
 
 > Detailed zone map and full equipment ATEX register to be developed in
-> WP-71-03-01 (ATEX Zone Classification — Fuel Cell Bay), cross-referencing
+> a TBD ATA 71 work package (ATEX Zone Classification — Fuel Cell Bay), cross-referencing
 > ATX-28-41-00-atex-esd-zone-classification.md.
 
 ### 3.2 ESD Control (Fuel Cell Bay)
