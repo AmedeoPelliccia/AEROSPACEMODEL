@@ -84,8 +84,7 @@ class TestRelocatedFilesExist:
             VALIDATION_28_10 / "WP-28-03-02" / "tests" / "ITP-28-10-00-insulation-test-plan.meta.yaml",
             VALIDATION_28_11 / "WP-28-03-04" / "materials" / "MAT-28-11-00-test-plan.meta.yaml",
             VALIDATION_28_11 / "WP-28-03-04" / "materials" / "MAT-28-11-00-allowables.meta.yaml",
-            VALIDATION_28_23 / "WP-28-03-03" / "safety" / "FMEA-28-20-00-pressure.meta.yaml",
-            VALIDATION_28_41 / "WP-28-06-02" / "reliability" / "LDS-28-41-00-redundancy.meta.yaml",
+            VALIDATION_28_23 / "WP-28-03-03" / "safety" / "FMEA-28-23-00-pressure.meta.yaml",            VALIDATION_28_41 / "WP-28-06-02" / "reliability" / "LDS-28-41-00-redundancy.meta.yaml",
             VALIDATION_28_41 / "WP-28-06-03" / "calibration" / "CAL-28-41-00-procedure.meta.yaml",
         ],
         ids=[
@@ -93,7 +92,7 @@ class TestRelocatedFilesExist:
             "ITP-28-10-00-insulation-test-plan",
             "MAT-28-11-00-test-plan",
             "MAT-28-11-00-allowables",
-            "FMEA-28-20-00-pressure",
+            "FMEA-28-23-00-pressure",
             "LDS-28-41-00-redundancy",
             "CAL-28-41-00-procedure",
         ],
@@ -115,7 +114,7 @@ class TestMetaYAMLContent:
         VALIDATION_28_10 / "WP-28-03-02" / "tests" / "ITP-28-10-00-insulation-test-plan.meta.yaml",
         VALIDATION_28_11 / "WP-28-03-04" / "materials" / "MAT-28-11-00-test-plan.meta.yaml",
         VALIDATION_28_11 / "WP-28-03-04" / "materials" / "MAT-28-11-00-allowables.meta.yaml",
-        VALIDATION_28_23 / "WP-28-03-03" / "safety" / "FMEA-28-20-00-pressure.meta.yaml",
+        VALIDATION_28_23 / "WP-28-03-03" / "safety" / "FMEA-28-23-00-pressure.meta.yaml",
         VALIDATION_28_41 / "WP-28-06-02" / "reliability" / "LDS-28-41-00-redundancy.meta.yaml",
         VALIDATION_28_41 / "WP-28-06-03" / "calibration" / "CAL-28-41-00-procedure.meta.yaml",
     ])
