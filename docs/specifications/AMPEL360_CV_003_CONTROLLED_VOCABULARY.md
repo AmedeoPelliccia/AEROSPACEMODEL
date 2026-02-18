@@ -202,8 +202,8 @@ Examples:
   PBS-IM1-ATA85-10-00-TEST_RIG_FCS    (I/Manufacturing, fuel cell test rig)
   PBS-IO-ATAIN-50-00-GSE_COUPLER      (I/Ops&Service, H₂ GSE coupler)
   PBS-ND-ATA96-30-00-HASH_CHAIN       (N/Digital Thread, ledger hash chain)
-  PBS-OA-ATA04-00-00                   (O/Authoritative, airworthiness limitations)
-  PBS-PS-ATA12-10-00                   (P/Service Instruction, replenishing)
+  PBS-OA-ATA04-00-00-AL_LIMITS        (O/Authoritative, airworthiness limitations)
+  PBS-PS-ATA12-10-00-SERVICE_REPL     (P/Service Instruction, replenishing)
 ```
 
 ### 7.2 WBS Phase Codes (TLI v2.1 Aligned)
