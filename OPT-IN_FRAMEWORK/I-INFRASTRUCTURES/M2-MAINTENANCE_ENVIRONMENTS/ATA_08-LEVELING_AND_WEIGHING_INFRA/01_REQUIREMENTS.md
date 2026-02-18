@@ -49,7 +49,7 @@ These requirements apply to:
 
 | Requirement | Description |
 |-------------|-------------|
-| REQ-08I-020 | Weighing area shall be level to within ±0.1° in any direction |
+| REQ-08I-020 | Weighing area shall be level to within ±0.05° in any direction |
 | REQ-08I-021 | Facility shall be wind-protected (enclosed or with appropriate shielding) |
 | REQ-08I-022 | Floor load capacity shall exceed maximum aircraft ramp weight by ≥25% margin |
 | REQ-08I-023 | Ambient temperature shall be stable within ±5°C during weighing operations |
