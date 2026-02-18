@@ -721,6 +721,21 @@ class DescriptiveDMGenerator(BaseGenerator):
             if regulatory_refs or best_practices:
                 self.create_regulatory_refs(dm_status, regulatory_refs, best_practices)
 
+                # Ensure refs element is positioned according to S1000D schema
+                dm_status_children = list(dm_status)
+                security_index = None
+                refs_elem = None
+                for idx, child in enumerate(dm_status_children):
+                    if child.tag == "security" and security_index is None:
+                        security_index = idx
+                    if child.tag == "refs":
+                        refs_elem = child
+                if security_index is not None and refs_elem is not None:
+                    current_index = dm_status_children.index(refs_elem)
+                    desired_index = security_index + 1
+                    if current_index != desired_index:
+                        dm_status.remove(refs_elem)
+                        dm_status.insert(desired_index, refs_elem)
             # Content section
             content_elem = self.create_sub_element(dmodule, "content")
             description = self.create_sub_element(content_elem, "description")
