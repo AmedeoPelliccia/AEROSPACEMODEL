@@ -48,7 +48,7 @@ The AMPEL360 Q100 LH₂ propulsion system introduces special requirements for pa
 |---|---|
 | T/C2-CIRCULAR_CRYOGENIC_CELLS (ATA 28) | LH₂ boil-off management interfaces with ATA 10 bay infrastructure |
 | T/P-PROPULSION (ATA 71) | Fuel cell standby mode during storage |
-| I/O/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN | H₂ GSE bay safety requirements for parking zones |
+| [I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN](../O-OPERATIONS_SERVICE_STRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN/) | H₂ GSE bay safety requirements for parking zones |
 | P/S-SERVICE_INSTRUCTION/ATA_10 | Aircraft-side parking, mooring, and RTS procedures |
 
 ---
