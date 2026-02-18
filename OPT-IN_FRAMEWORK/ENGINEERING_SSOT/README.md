@@ -12,7 +12,7 @@ The **Engineering SSOT** (Single Source of Truth) front-end provides a web-based
 It is a self-contained, CDN-free HTML front-end that resides within the OPT-IN_FRAMEWORK and enables:
 
 - Browsing the SSOT registry (`00_SSOT_REGISTRY.yaml`) in a structured table
-- Filtering entries by ATA chapter, technology domain, and lifecycle phase
+- Filtering entries by free-text (ID/title), technology domain, and status
 - Submitting Custom Information Data Sheets linked to SSOT entries
 - Cross-referencing novel-technology entries with their special conditions
 
