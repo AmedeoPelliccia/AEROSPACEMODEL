@@ -69,9 +69,13 @@ class ArtifactID:
         if not re.match(r'^MSN\d{3}$', self.msn):
             raise ValueError(f"Invalid MSN: {self.msn}. Must be MSNnnn (e.g., MSN001)")
         
-        # ATA chapter validation
+        # ATA chapter validation: 00-98 or IN
         if not re.match(r'^(\d{2}|IN)$', self.ata_chapter):
             raise ValueError(f"Invalid ATA chapter: {self.ata_chapter}. Must be 00-98 or IN")
+        if self.ata_chapter.isdigit():
+            value = int(self.ata_chapter)
+            if not (0 <= value <= 98):
+                raise ValueError(f"Invalid ATA chapter: {self.ata_chapter}. Must be 00-98 or IN")
         
         # Section and subject validation
         if not re.match(r'^\d{2}$', self.section):
