@@ -82,7 +82,7 @@ All changes to M2 structure, standards, or controls require:
 
 | Document | Path | Purpose |
 |----------|------|---------|
-| OPT-IN_FRAMEWORK README | `../README.md` | Canonical architecture overview |
+| OPT-IN_FRAMEWORK README | `../../README.md` | Canonical architecture overview |
 | I-INFRASTRUCTURES Index | `../00_INDEX.md` | I-INFRASTRUCTURES subdomain index |
 | M1 README | `../M1-MANUFACTURING_FACILITIES/README.md` | Manufacturing Facilities subdomain |
 | O subdomain directory | `../O-OPERATIONS_SERVICE_STRUCTURES/` | Operations & Service Structures subdomain |
