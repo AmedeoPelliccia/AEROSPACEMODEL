@@ -835,6 +835,20 @@ class TestRegulatoryReferenceCitations:
         )
         assert "<externalPubCode>ISO 14687-2</externalPubCode>" in xml
 
+    def test_standards_ignored_when_regulatory_refs_present(self, tmp_path):
+        """When both are present, regulatory_refs take precedence over standards."""
+        xml = self._transform_source(
+            {
+                "title": "Regulatory Precedence",
+                "description": ".",
+                "regulatory_refs": ["CS-25"],
+                "standards": ["ISO 14687-2"],
+            },
+            tmp_path,
+        )
+        # Expect only the regulatory_refs entry to be emitted
+        assert "<externalPubCode>CS-25</externalPubCode>" in xml
+        assert "<externalPubCode>ISO 14687-2</externalPubCode>" not in xml
     # ------------------------------------------------------------------
     # ValidateEnrichStage tests
     # ------------------------------------------------------------------
