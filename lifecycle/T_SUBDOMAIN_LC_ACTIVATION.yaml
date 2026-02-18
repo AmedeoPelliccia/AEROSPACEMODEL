@@ -234,6 +234,13 @@ subdomains:
         packages: ["DISMANTLING", "MATERIAL_RECOVERY", "DPP_CLOSURE"]
         rationale: "H2 tank decommissioning and material recovery"
 
+    cross_domain_traceability:
+      N_DIGITAL_THREAD_TRACEABILITY:
+        path: "OPT-IN_FRAMEWORK/N-NEURAL_NETWORKS/D-DIGITAL_THREAD_TRACEABILITY"
+        rationale: "All H₂ cryogenic artifacts (tanks, boil-off, leak detection) must be registered in ATA 96 Digital Product Passport ledger for DPP_CLOSURE at LC14"
+        mandatory_at: ["LC02", "LC08", "LC14"]
+        link_type: "allocates_to"
+
     gates:
       - "G-LC02-FBL"
       - "G-LC04-DBL"
@@ -329,6 +336,18 @@ subdomains:
         active: true
         packages: ["DISMANTLING", "MATERIAL_RECOVERY", "DPP_CLOSURE"]
         rationale: "Fuel cell stack decommissioning and material recovery"
+
+    cross_domain_traceability:
+      C2_CIRCULAR_CRYOGENIC_CELLS:
+        path: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CELLS"
+        rationale: "Fuel cell H₂ supply interface (ATA 28-22) is owned by C2; P_PROPULSION ICD requirements must derive_from C2 FBL requirements"
+        mandatory_at: ["LC02", "LC04"]
+        link_type: "derives_from"
+      N_DIGITAL_THREAD_TRACEABILITY:
+        path: "OPT-IN_FRAMEWORK/N-NEURAL_NETWORKS/D-DIGITAL_THREAD_TRACEABILITY"
+        rationale: "All fuel cell stack and propulsion system artifacts must be registered in ATA 96 Digital Product Passport ledger"
+        mandatory_at: ["LC02", "LC08", "LC14"]
+        link_type: "allocates_to"
 
     gates:
       - "G-LC02-FBL"
@@ -426,6 +445,18 @@ subdomains:
         active: true
         packages: ["DPP_CLOSURE"]
         rationale: "Optional: AI model decommissioning and data deletion"
+
+    cross_domain_traceability:
+      N_AI_GOVERNANCE_ASSURANCE:
+        path: "OPT-IN_FRAMEWORK/N-NEURAL_NETWORKS/A-AI_GOVERNANCE_ASSURANCE"
+        rationale: "All AI/ML model requirements (ATA 95/97) must be governed by N/A AI Governance policy; model assurance, ethics, and human authority protocols derive from N/A governance layer"
+        mandatory_at: ["LC01", "LC02", "LC08"]
+        link_type: "derives_from"
+      N_DIGITAL_THREAD_TRACEABILITY:
+        path: "OPT-IN_FRAMEWORK/N-NEURAL_NETWORKS/D-DIGITAL_THREAD_TRACEABILITY"
+        rationale: "AI/ML model versions, training data lineage, and inference deployments must be registered in ATA 96 Digital Product Passport ledger for full lifecycle auditability"
+        mandatory_at: ["LC02", "LC05", "LC08", "LC14"]
+        link_type: "allocates_to"
 
     gates:
       - "G-LC02-FBL"
@@ -588,6 +619,16 @@ validation_rules:
     name: "Operational Lineage"
     rule: "LC12/LC13 must reference certified baseline lineage (LC08 → LC10)"
     enforcement: "block"
+
+  - id: "VAL-007"
+    name: "Cross-Domain Traceability for Novel Technologies"
+    rule: "Novel technology subdomains (C2, P, I2) must declare cross_domain_traceability links to corresponding T/N domains at mandatory lifecycle phases"
+    enforcement: "block"
+    applies_to: ["C2_CIRCULAR_CRYOGENIC_CELLS", "P_PROPULSION", "I2_INTELLIGENCE"]
+    details:
+      C2_CIRCULAR_CRYOGENIC_CELLS: "Must link to N_DIGITAL_THREAD_TRACEABILITY at LC02, LC08, LC14"
+      P_PROPULSION: "Must link to C2_CIRCULAR_CRYOGENIC_CELLS at LC02, LC04 and N_DIGITAL_THREAD_TRACEABILITY at LC02, LC08, LC14"
+      I2_INTELLIGENCE: "Must link to N_AI_GOVERNANCE_ASSURANCE at LC01, LC02, LC08 and N_DIGITAL_THREAD_TRACEABILITY at LC02, LC05, LC08, LC14"
 
 # =============================================================================
 # CI Hints
