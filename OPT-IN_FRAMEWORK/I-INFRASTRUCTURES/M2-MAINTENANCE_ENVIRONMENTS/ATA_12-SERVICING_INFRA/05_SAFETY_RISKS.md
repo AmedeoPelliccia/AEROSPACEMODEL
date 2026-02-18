@@ -19,7 +19,7 @@ This document identifies safety risks associated with aircraft servicing operati
 | Risk ID | Hazard | Consequence | Likelihood | Severity | Mitigation |
 |---------|--------|-------------|-----------|----------|------------|
 | RISK-12I-001 | Hydraulic fluid contamination (wrong fluid) | System failure, aircraft unserviceability | Medium | Major | Dedicated carts per fluid type; color-coded connectors; log verification |
-| RISK-12I-002 | Engine oil overfill | Engine damage | Medium | Major | Quantity limits in AMM; log fuel quantity; visual check |
+| RISK-12I-002 | Engine oil overfill | Engine damage | Medium | Major | Quantity limits in AMM; log oil quantity/added amount and batch/part details; visual check |
 | RISK-12I-003 | GPU overvoltage | Avionics damage | Low | Major | GPU with automatic overvoltage protection; verify output before connection |
 | RISK-12I-004 | Oxygen contamination (grease contact) | Fire/explosion | Low | Hazardous | Oxygen-clean equipment mandatory; no hydrocarbon in O₂ area |
 | RISK-12I-005 | Water contamination of fuel | Engine power loss, fuel system damage | Low | Hazardous | Sump drain before fueling; fuel quality check |
