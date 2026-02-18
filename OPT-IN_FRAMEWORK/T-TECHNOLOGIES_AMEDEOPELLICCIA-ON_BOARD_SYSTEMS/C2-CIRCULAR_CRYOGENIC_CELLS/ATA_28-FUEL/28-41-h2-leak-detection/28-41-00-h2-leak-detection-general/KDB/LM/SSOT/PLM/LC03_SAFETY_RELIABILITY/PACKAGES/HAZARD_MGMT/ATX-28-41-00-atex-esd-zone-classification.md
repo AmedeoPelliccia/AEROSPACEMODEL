@@ -89,7 +89,7 @@ frequency and duration of explosive atmosphere occurrence:
 | Z0-28-11-INT | Interior of LH₂ primary tank (28-11) | Continuous LH₂/GH₂ atmosphere |
 | Z0-28-13-INT | Interior of LH₂ auxiliary tank (28-13) | Continuous LH₂/GH₂ atmosphere |
 | Z0-28-21-PUMP | Inside cryogenic transfer pump housing (28-21) | Continuous H₂ contact |
-| Z0-28-30-VЕНТ | Interior of boil-off management vent lines (28-30) | Continuous GH₂ flow |
+| Z0-28-30-VENT | Interior of boil-off management vent lines (28-30) | Continuous GH₂ flow |
 
 Equipment in Zone 0 locations: Category 1G minimum (IECEx Ex ia or Ex ma).
 
