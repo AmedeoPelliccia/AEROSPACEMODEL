@@ -176,7 +176,7 @@ The **ENGINEERING_SSOT** directory provides a self-contained front-end for navig
 - **Entry point:** `ENGINEERING_SSOT/index.html` — open in any browser (no server required)
 - **Registry:** `ENGINEERING_SSOT/00_SSOT_REGISTRY.yaml` — all SSOT entries for AMPEL360 Q100
 
-The front-end displays the SSOT Registry table with filtering by domain, status, and lifecycle phase,
+The front-end displays the SSOT Registry table with filtering by text search, domain, and status,
 and includes a Custom Information Data Sheet submission form.
 
 ---
