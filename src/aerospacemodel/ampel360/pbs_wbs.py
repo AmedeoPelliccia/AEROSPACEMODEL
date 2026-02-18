@@ -61,8 +61,9 @@ WBS_PHASE_CODES = {
     "LC14": "EOL",  # End of Life
 }
 
-# Reverse mapping
+# Reverse mapping, including cross-cutting PUB phase code with no LC phase
 PHASE_CODE_TO_LC = {v: k for k, v in WBS_PHASE_CODES.items()}
+PHASE_CODE_TO_LC["PUB"] = None
 
 
 @dataclass
