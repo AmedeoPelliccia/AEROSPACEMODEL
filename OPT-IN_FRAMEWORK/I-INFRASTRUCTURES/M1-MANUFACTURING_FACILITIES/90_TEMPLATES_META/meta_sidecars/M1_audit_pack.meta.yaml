@@ -6,7 +6,6 @@ revision: 0.1.0
 status: draft
 lc_phase: LC07_QA_PROCESS
 work_package: M1-TEMPLATE
-ata: 85-00-00
 domain: I-INFRASTRUCTURES/M1
 created_on: to be set during baseline finalization
 last_updated_on: to be set during baseline finalization
@@ -53,8 +52,6 @@ audit_pack:
     lc_phases:
       - LC07_QA_PROCESS
       - LC10_INDUSTRIAL_SUPPLY_CHAIN
-    ata_chapters:
-      - 85-00-00
     opt_in_domains:
       - I-INFRASTRUCTURES/M1
     standards_audited:
@@ -70,7 +67,6 @@ links:
 tags:
   - M1
   - audit
-  - ATA85
   - quality
 
 # Usage Instructions:

@@ -1,7 +1,6 @@
 # 03 — Environment HAZMAT
 
 **Subdomain:** M1 / Environment & Hazardous Materials  
-**ATA Chapter:** 85-00-00  
 **Lifecycle Phases:** LC09 (ESG), LC10
 
 ---
@@ -64,11 +63,6 @@ Located in `controls/`:
 ### Lifecycle Phases
 - **LC09 (ESG Sustainability Assessment):** Environmental impact assessment, carbon footprint, circular economy
 - **LC10 (Industrial & Supply Chain):** HAZMAT procurement, storage design, waste management
-
-### ATA Chapters
-- **ATA 85-00-00:** Manufacturing Facilities (primary)
-- **ATA 28-00-00:** Fuel (hydrogen handling, cryogenic fluids)
-- **ATA 26-00-00:** Fire Protection (hydrogen fire detection and suppression)
 
 ### OPT-IN Domains
 - **T/C2-CIRCULAR_CRYOGENIC_CELLS:** LH₂ handling safety (NFPA 2/55 primary interface)

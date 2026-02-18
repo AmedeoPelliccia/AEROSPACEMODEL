@@ -1,7 +1,6 @@
 # M1 — Manufacturing Facilities Index
 
 **Domain:** I-INFRASTRUCTURES / M1  
-**ATA Chapter:** ATA 85 — Integrated Systems  
 **Program:** AMPEL360 Q100
 
 ---
@@ -169,7 +168,6 @@
 | **LC10** | `../../../lifecycle/LC_PHASE_REGISTRY.yaml` | Industrial & Supply Chain |
 | **LC12** | `../../../lifecycle/LC_PHASE_REGISTRY.yaml` | Continued Airworthiness & MRO |
 | **T/C2** | `../../T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CELLS/` | Hydrogen Cryogenic Fuel Systems (NFPA 2/55 interface) |
-| **ATA 85** | OPT-IN_FRAMEWORK | Integrated Systems (Manufacturing) |
 | **Master BREX Authority** | `../../../ASIT/GOVERNANCE/master_brex_authority.yaml` | BREX decision rules |
 
 ---
@@ -183,7 +181,6 @@
 - 1 external references directory (99)
 
 **Primary Lifecycle Phases:** LC07, LC10, LC12  
-**ATA Chapter:** 85-00-00 (Manufacturing Facilities)  
 **Authority:** ASIT
 
 ---

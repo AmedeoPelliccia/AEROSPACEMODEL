@@ -1,7 +1,6 @@
 # 07 — Airworthiness Production
 
 **Subdomain:** M1 / Airworthiness Production Organisation Approvals  
-**ATA Chapter:** 85-00-00  
 **Lifecycle Phases:** LC07, LC10
 
 ---
@@ -87,10 +86,6 @@ Located in `EASA_FAA/`:
 ### Lifecycle Phases
 - **LC07 (QA & Process Compliance):** Primary activation — POA/PC preparation, quality system validation, conformity inspections
 - **LC10 (Industrial & Supply Chain):** Production system setup, supplier qualification, continuous surveillance
-
-### ATA Chapters
-- **ATA 85-00-00:** Manufacturing Facilities (primary)
-- **ATA 06-00-00:** Dimensions & Areas (conformity to type design)
 
 ### OPT-IN Domains
 - **O-ORGANIZATIONS/A-AUTHORITATIVE:** Airworthiness requirements and limitations

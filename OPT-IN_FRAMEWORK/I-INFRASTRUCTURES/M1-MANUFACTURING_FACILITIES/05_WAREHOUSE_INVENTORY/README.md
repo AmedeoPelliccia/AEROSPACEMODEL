@@ -1,7 +1,6 @@
 # 05 — Warehouse Inventory
 
 **Subdomain:** M1 / Warehouse, Inventory & Logistics  
-**ATA Chapter:** 85-00-00  
 **Lifecycle Phases:** LC10, LC12
 
 ---
@@ -62,10 +61,6 @@ Located in `controls/`:
 ### Lifecycle Phases
 - **LC10 (Industrial & Supply Chain):** Primary activation — material procurement, supplier coordination, inventory setup
 - **LC12 (Continued Airworthiness & MRO):** Spare parts inventory, traceability continuity
-
-### ATA Chapters
-- **ATA 85-00-00:** Manufacturing Facilities (primary)
-- **ATA 45-00-00:** Maintenance System (maintenance parts traceability)
 
 ### OPT-IN Domains
 - **T/C2-CIRCULAR_CRYOGENIC_CELLS:** LH₂ tank material traceability

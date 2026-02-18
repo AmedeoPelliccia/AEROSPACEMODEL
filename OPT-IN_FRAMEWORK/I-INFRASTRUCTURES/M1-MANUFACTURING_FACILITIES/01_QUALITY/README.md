@@ -1,7 +1,6 @@
 # 01 — Quality
 
 **Subdomain:** M1 / Quality Management System  
-**ATA Chapter:** 85-00-00  
 **Lifecycle Phases:** LC07, LC08
 
 ---
@@ -62,10 +61,6 @@ Located in `templates/`:
 ### Lifecycle Phases
 - **LC07 (QA & Process Compliance):** Primary activation — FAI execution, QMS audits, non-conformance tracking
 - **LC08 (Certification):** Quality records support type certification and production organization approval
-
-### ATA Chapters
-- **ATA 85-00-00:** Manufacturing Facilities (primary)
-- **ATA 06-00-00:** Dimensions & Areas (FAI dimensional inspection)
 
 ### OPT-IN Domains
 - **T/C2-CIRCULAR_CRYOGENIC_CELLS:** LH₂ tank manufacturing quality requirements

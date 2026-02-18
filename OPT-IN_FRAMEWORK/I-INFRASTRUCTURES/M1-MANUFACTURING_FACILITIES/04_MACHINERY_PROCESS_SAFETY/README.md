@@ -1,7 +1,6 @@
 # 04 — Machinery Process Safety
 
 **Subdomain:** M1 / Machinery & Process Safety Operations  
-**ATA Chapter:** 85-00-00  
 **Lifecycle Phases:** LC07, LC10
 
 ---
@@ -59,11 +58,6 @@ Located in `controls/`:
 ### Lifecycle Phases
 - **LC07 (QA & Process Compliance):** Safety system validation, functional safety testing
 - **LC10 (Industrial & Supply Chain):** Production line design, machinery qualification
-
-### ATA Chapters
-- **ATA 85-00-00:** Manufacturing Facilities (primary)
-- **ATA 22-00-00:** Auto Flight (functional safety principles)
-- **ATA 24-00-00:** Electrical Power (electrical safety integration)
 
 ### OPT-IN Domains
 - **M1/02_OHS_SAFETY_WORKPLACE:** Personnel safety coordination

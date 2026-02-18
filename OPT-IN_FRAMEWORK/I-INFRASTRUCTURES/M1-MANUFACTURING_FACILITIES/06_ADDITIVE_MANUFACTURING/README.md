@@ -1,7 +1,6 @@
 # 06 — Additive Manufacturing
 
 **Subdomain:** M1 / Additive Manufacturing / On-Demand 3D Print  
-**ATA Chapter:** 85-00-00  
 **Lifecycle Phases:** LC04, LC06, LC07, LC10
 
 ---
@@ -75,11 +74,6 @@ Located in `controls/`:
 - **LC06 (Integration & Test):** AM part testing and validation
 - **LC07 (QA & Process Compliance):** AM process qualification, operator training, quality audits
 - **LC10 (Industrial & Supply Chain):** AM machine procurement, powder supply chain
-
-### ATA Chapters
-- **ATA 85-00-00:** Manufacturing Facilities (primary)
-- **ATA 28-00-00:** Fuel (AM fuel system components)
-- **ATA 71-00-00:** Power Plant (AM fuel cell components)
 
 ### OPT-IN Domains
 - **T/C2-CIRCULAR_CRYOGENIC_CELLS:** AM brackets and supports for LH₂ tanks

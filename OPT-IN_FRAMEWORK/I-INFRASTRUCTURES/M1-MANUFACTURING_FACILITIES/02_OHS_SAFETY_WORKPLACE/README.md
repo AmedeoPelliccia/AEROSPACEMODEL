@@ -1,7 +1,6 @@
 # 02 — OHS Safety Workplace
 
 **Subdomain:** M1 / Occupational Health & Safety / Workplace  
-**ATA Chapter:** 85-00-00  
 **Lifecycle Phases:** LC07, LC10
 
 ---
@@ -69,11 +68,6 @@ Located in `controls/`:
 ### Lifecycle Phases
 - **LC07 (QA & Process Compliance):** OHS compliance audits, safety procedure validation
 - **LC10 (Industrial & Supply Chain):** Production line safety design, PPE procurement
-
-### ATA Chapters
-- **ATA 85-00-00:** Manufacturing Facilities (primary)
-- **ATA 28-00-00:** Fuel (hydrogen safety interface)
-- **ATA 24-00-00:** Electrical Power (arc flash hazards)
 
 ### OPT-IN Domains
 - **T/C2-CIRCULAR_CRYOGENIC_CELLS:** Cryogenic handling safety (NFPA 2/55 interface)

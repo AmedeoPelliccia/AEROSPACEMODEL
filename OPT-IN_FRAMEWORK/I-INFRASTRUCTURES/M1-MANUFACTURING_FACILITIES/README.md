@@ -1,7 +1,6 @@
 # M1 — Manufacturing Facilities
 
 **Domain:** I-INFRASTRUCTURES / M1  
-**ATA Chapter:** ATA 85 — Integrated Systems  
 **Program:** AMPEL360 Q100  
 **Authority:** ASIT (Aircraft Systems Information Transponder)
 
@@ -83,8 +82,6 @@ interfaces:
     - LC07_QA_PROCESS
     - LC10_INDUSTRIAL_SUPPLY_CHAIN
     - LC12_MRO_CONTINUED_AIRWORTHINESS
-  ata_chapters:
-    - 85-00-00
   opt_in_domains:
     - T/C2-CIRCULAR_CRYOGENIC_CELLS
     - T/P-PROPULSION
