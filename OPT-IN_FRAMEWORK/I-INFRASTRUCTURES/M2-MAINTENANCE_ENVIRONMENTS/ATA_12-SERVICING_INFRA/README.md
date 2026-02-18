@@ -1,66 +1,75 @@
 # ATA 12 — Servicing Infrastructure
 
-**Subdomain:** M2 / Maintenance Environments — ATA 12  
-**Domain:** I-INFRASTRUCTURES  
-**Lifecycle Phases:** LC11, LC12
+**Domain:** I-INFRASTRUCTURES / M2  
+**ATA Chapter:** 12 — Servicing  
+**Directory:** `ATA_12-SERVICING_INFRA/`  
+**Program:** AMPEL360 Q100  
+**Authority:** ASIT
 
 ---
 
 ## Scope
 
-The **ATA_12-SERVICING_INFRA** directory documents the maintenance environment infrastructure for routine
-servicing operations at AMPEL360 Q100 line stations and maintenance facilities, including fluid
-replenishment, oil servicing, and ground support.
+The **ATA_12-SERVICING_INFRA** directory covers all ground infrastructure required to perform scheduled and unscheduled servicing of the AMPEL360 Q100 aircraft fluids, gases, and consumables.
+
+Key service capabilities:
+- Hydraulic fluid servicing (filling, sampling, flushing)
+- Engine oil and lubrication servicing
+- Oxygen system servicing (crew and passenger)
+- Nitrogen and pneumatic system servicing
+- Potable water and waste servicing
+- **⭐ Liquid hydrogen (LH₂) fuel servicing** — novel technology
 
 ---
 
-## Applicable Standards and Regulations
+## ATA Chapter Decomposition
 
-- **EASA Part-M / FAR 43** — Continuing airworthiness maintenance requirements for servicing tasks
-- **EASA Part 145 / FAR 145** — Maintenance organisation approval requirements (facility standards)
-- **IATA Dangerous Goods Regulations (DGR)** — Handling and storage of aviation fluids
-- **NFPA 2 / NFPA 55** — Hydrogen safety during H₂-related servicing operations (interface with ATA 28)
-- **Manufacturer's AMM ATA 12** — Servicing procedures specific to AMPEL360 Q100
-
----
-
-## Infrastructure Requirements
-
-### Fluid Servicing
-- Hydraulic fluid servicing carts (Skydrol or equivalent, per AMM specification)
-- Engine oil servicing equipment with correct oil grade dispensers
-- Potable water and wastewater servicing connections
-- Nitrogen / dry air servicing equipment for strut servicing
-
-### H₂ and Fuel Cell Servicing Interface
-- H₂ leak detection monitors at all LH₂ servicing points (see ATA 28 H₂ Cryogenic docs)
-- Bonding and grounding cables for LH₂ refuelling operations
-- Emergency isolation valves accessible from outside the aircraft
-
-### Ground Power
-- External power unit (GPU) or fixed ground power supply rated for AMPEL360 Q100 electrical loads
-- Pre-conditioned air (PCA) units for cabin conditioning during ground operations
-
-### Safety Equipment
-- Spill kits and absorbents rated for aviation fluids and cryogenic liquids
-- Emergency eye-wash and safety shower stations within 10 m of fluid servicing areas
-- Fire extinguishers rated for aviation fluid and hydrogen fires
+| Sub-Section | Description |
+|---|---|
+| 12-10 | Replenishing — fluids and gases filling |
+| 12-20 | Scheduled servicing — periodic lubrication and fluid checks |
+| 12-30 | Unscheduled servicing — fault-driven fluid or gas servicing |
+| 12-40 | Waste and water — potable water, waste system servicing |
+| 12-50 | LH₂ fuel servicing ⭐ — cryogenic hydrogen refuelling |
 
 ---
 
-## Interface Notes
+## Novel Technology Aspects ⭐
 
-### Lifecycle Phases
-- **LC11 (Customer Integration):** Customer facility servicing equipment qualification and handover
-- **LC12 (Continued Airworthiness & MRO):** Routine line servicing, tool calibration, and fluid replenishment records
+The AMPEL360 Q100 LH₂ propulsion system introduces a qualitatively different servicing tier:
 
-### Related M2 Directories
-- [`../ATA_08-LEVELING_AND_WEIGHING_INFRA/README.md`](../ATA_08-LEVELING_AND_WEIGHING_INFRA/README.md) — Leveling and weighing infrastructure
-- [`../ATA_10-PARKING_MOORING_STORAGE_RTS_INFRA/README.md`](../ATA_10-PARKING_MOORING_STORAGE_RTS_INFRA/README.md) — Parking and mooring infrastructure
-
-### Related ATA Domains
-- [ATA 28 H₂ Cryogenic Instructions](../../../../.github/instructions/ata28_h2_cryogenic.instructions.md) — Hydrogen safety interface
+- **⭐ LH₂ refuelling:** Requires cryogenic fuel servicing carts, vacuum-jacketed hoses, and bayonet cryogenic couplings rated to −253 °C.
+- **⭐ Boil-off recovery during fuelling:** Boil-off gas from displacement of LH₂ into the tank must be captured and managed; venting to atmosphere is permitted only as secondary emergency measure.
+- **⭐ H₂ purity check:** LH₂ purity must meet ISO 14687-2 (> 99.97% H₂, CO < 0.2 ppm, CO₂ < 2 ppm) before each fuel upload.
+- **⭐ Post-fuelling purge verification:** After LH₂ coupling disconnect, the fuelling port must be purged with GN₂ before any personnel approach within 1 m.
 
 ---
 
-*End of ATA_12-SERVICING_INFRA README*
+## Cross-References
+
+| Domain | Interface |
+|---|---|
+| T/C2-CIRCULAR_CRYOGENIC_CELLS (ATA 28) | LH₂ system interface: pressures, purities, coupling specs |
+| T/P-PROPULSION (ATA 71) | Fuel cell fluid servicing (coolant, air filter) |
+| [`I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN`](../../O-OPERATIONS_SERVICE_STRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN/) | LH₂ delivery from airport supply to servicing cart |
+| P/S-SERVICE_INSTRUCTION/ATA_12 | Aircraft-side servicing procedures |
+
+---
+
+## Document Index
+
+| File | Section | Description |
+|---|---|---|
+| `README.md` ← *this file* | 1 — Overview & Scope | Scope, ATA decomposition, cross-refs |
+| `01_REQUIREMENTS.md` | 2 — Normative Requirements | Regulations and standards |
+| `02_DESIGN_SPEC.md` | 3 — Design Specification | Cart and facility design specifications |
+| `03_SERVICES.md` | 4 — Services | Service portfolio and capability matrix |
+| `04_PROCEDURES.md` | 5 — Procedures | Step-by-step servicing procedures |
+| `05_SAFETY_RISKS.md` | 6 — Safety & Risk Assessment | Hazards, mitigations, failure modes |
+| `06_CASE_STUDIES.md` | 7 — Case Studies | Reference implementations and lessons learned |
+
+See [`../CROSSWALK.md`](../CROSSWALK.md) for the full 7-section summary crosswalk.
+
+---
+
+*End of ATA 12 — Servicing Infrastructure README*
