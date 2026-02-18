@@ -1,87 +1,127 @@
-# ATA 12 — Servicing Infrastructure: Procedures
+# ATA 12I — Servicing Infrastructure: Procedures
 
-**Section:** 5 — Procedures  
-**Parent:** [`README.md`](README.md) | **Crosswalk:** [`../CROSSWALK.md`](../CROSSWALK.md)
-
----
-
-## Overview
-
-This document captures the step-by-step operational procedures for servicing the AMPEL360 Q100. Infrastructure-specific steps (cart positioning, bay setup, safety system checks) supplement the aircraft AMM ATA 12 task procedures.
-
-> **Safety prerequisite:** Read [`05_SAFETY_RISKS.md`](05_SAFETY_RISKS.md) before starting any procedure.
+**Domain:** I-INFRASTRUCTURES / M2-MAINTENANCE_ENVIRONMENTS / ATA_12  
+**Document Type:** Operational Procedures  
+**Revision:** 0.1.0
 
 ---
 
-## Procedure 12-PRO-001 — Standard Fluid Servicing (Hydraulic / Oil)
+## 1. Purpose
 
-### Prerequisites
-- [ ] Aircraft on ground, parking brake set, wheel chocks in place.
-- [ ] Applicable service cart inspected and confirmed within calibration.
-- [ ] AMM ATA 12 task reference identified.
+This document describes the standard operating procedures for aircraft servicing operations using M2 infrastructure.
 
-### Steps
-1. Position service cart adjacent to aircraft service point.
-2. Connect bonding cable (cart to aircraft).
-3. Connect service hose to aircraft servicing point.
-4. Perform fluid sampling (if required by AMM) before replenishment.
-5. Fill to quantity specified in AMM.
-6. Disconnect hose; secure aircraft service point cap.
-7. Remove bonding cable.
-8. Discard sample (if applicable) per HAZMAT disposal procedure.
-9. Record in aircraft technical log.
+> **Note:** This document covers infrastructure procedures. Aircraft-specific servicing procedures are in the AMM (ATA 12). Facility operators must cross-reference both documents.
 
 ---
 
-## Procedure 12-PRO-002 — LH₂ Refuelling ⭐
+## 2. General Servicing Procedure
 
-> **⭐ Special Condition — Hydrogen Hazard:** This procedure involves cryogenic liquid hydrogen at −253 °C. Personnel must have completed H₂ safety training. Read full hazard assessment in [`05_SAFETY_RISKS.md`](05_SAFETY_RISKS.md) before starting.
+### 2.1 Pre-Servicing Safety Checks
 
-> **DANGER:** Hydrogen is extremely flammable (flammable in air between 4% and 75% by volume). No open flames or ignition sources within 7.5 m. Ensure forced ventilation is operating. Use approved ATEX equipment only.
+Before commencing any servicing operation:
 
-### Prerequisites
-- [ ] LH₂ fuelling bay ventilation confirmed running (≥ 15 ACH).
-- [ ] H₂ fixed detection system confirmed operational (bump test within 24 h).
-- [ ] All personnel equipped with personal H₂ detectors and cryogenic PPE.
-- [ ] Aircraft bonded and grounded (resistance verified ≤ 1 Ω).
-- [ ] LH₂ servicing cart bonded to aircraft.
-- [ ] LH₂ certificate of analysis (CoA) available; purity confirmed per ISO 14687-2.
-- [ ] Aircraft isolation valves confirmed in fuelling-open position (per AMM ATA 28).
+- [ ] Aircraft parking brake confirmed set / wheel chocks in place
+- [ ] Bonding cable attached (mandatory before any fluid/fuel service)
+- [ ] GSE positioned clear of aircraft movement path
+- [ ] Required PPE identified and available
+- [ ] ⭐ For H₂ aircraft: H₂ monitoring active; no ignition sources in zone
 
-### Steps
-1. Position LH₂ servicing cart at fuelling port; verify hose length permits connection without strain.
-2. Connect bonding cable: cart → aircraft fuelling port vicinity.
-3. Slowly connect cryogenic coupling to aircraft fuelling port (per manufacturer coupling procedure).
-4. Confirm boil-off recovery line connected (or vent stack open if recovery unavailable).
-5. Open LH₂ supply valve slowly; monitor fuel quantity indication.
-6. Monitor H₂ detectors throughout fuelling; halt if pre-alarm activates.
-7. Close supply valve when target quantity reached (per dispatch fuel load).
-8. Allow 30 s for pressure equalisation; confirm boil-off flow stops.
-9. Disconnect boil-off recovery line; cap recovery port.
-10. Slowly disconnect cryogenic coupling from aircraft.
-11. **Immediately** purge aircraft fuelling port with GN₂ for ≥ 30 s.
-12. Confirm fuelling port cap secure; log fuel mass and temperature in tech record.
-13. Disconnect bonding cable.
-14. Move servicing cart to safe distance (≥ 7.5 m).
+### 2.2 Ground Power Connection
 
-### Post-Fuelling H₂ Purity Recording
-- Record in-line purity sensor readings for CO, CO₂, and H₂O to aircraft tech record.
-- If any parameter exceeds ISO 14687-2 limit: halt fuelling immediately; notify Safety Officer and ATA 28 responsible engineer.
+1. Confirm aircraft receiving circuit breakers per AMM.
+2. Connect GPU cable to aircraft ground power receptacle.
+3. Power up GPU; verify correct voltage and frequency.
+4. Transfer aircraft from battery to ground power per AMM ATA 24.
+5. Verify aircraft systems nominal on ground power.
 
 ---
 
-## Procedure 12-PRO-003 — LH₂ Defuelling (Before Maintenance) ⭐
+## 3. Fluid Servicing Procedures
 
-1. Position LH₂ servicing cart (reverse transfer mode) at fuelling port.
-2. Bond and ground aircraft and cart.
-3. Connect recovery hose from aircraft fuelling port to cart.
-4. Reverse transfer LH₂ to cart Dewar (monitor pressure throughout).
-5. When tank level < 5% (minimum residual), close transfer valve.
-6. Initiate controlled boil-off of residual with vent stack open.
-7. When quantity = 0 and pressure ≤ 0.05 MPa gauge, close isolation valves.
-8. Purge with GN₂; verify H₂ concentration in tank < 1% by volume before handing over for maintenance.
-9. Record defuelling in tech log.
+### 3.1 Hydraulic Fluid Servicing
+
+1. Position hydraulic service cart (correct fluid type for aircraft).
+2. Connect hydraulic hose to aircraft service point (per AMM ATA 29).
+3. Transfer fluid to required quantity (monitor level indicator).
+4. Disconnect hose; cap service point.
+5. Log: fluid type, batch number, quantity added, operator.
+
+### 3.2 Oil Servicing (Engine/Fuel Cell Coolant)
+
+1. Access oil filler per AMM.
+2. Check level; add approved oil/coolant as required.
+3. Close filler; check for leaks.
+4. Log: oil type, quantity, batch number, operator.
+
+### 3.3 Potable Water
+
+1. Connect water hose (food-grade fitting) to aircraft water service port.
+2. Fill per AMM quantity.
+3. Disconnect; cap port.
 
 ---
 
-*End of ATA 12 — Procedures*
+## 4. ⭐ LH₂ Fueling Procedure
+
+### 4.1 Pre-Fueling Safety Brief
+
+> ⭐ **DANGER:** Liquid hydrogen at -253°C. Hydrogen is extremely flammable (4–75% in air explosive). All personnel must be qualified in H₂ fueling.
+
+Before commencing LH₂ fueling:
+
+- [ ] ⭐ All non-essential personnel evacuated from H₂ zone (15 m radius)
+- [ ] ⭐ H₂ monitoring active; sensors responding
+- [ ] ⭐ No open flames or ignition sources in zone
+- [ ] ⭐ ATEX-rated equipment only in zone
+- [ ] ⭐ Aircraft bonding cable attached
+- [ ] ⭐ Fueling vehicle bonded and grounded
+- [ ] ⭐ Emergency stop locations identified
+- [ ] ⭐ PPE: H₂ gas detector, face shield, cryogenic gloves, apron
+
+### 4.2 LH₂ Fueling Steps
+
+| Step | Action |
+|------|--------|
+| 1 | Attach aircraft bonding cable; attach fueling vehicle bonding cable |
+| 2 | Connect LH₂ fueling hose to aircraft fuel panel |
+| 3 | Open aircraft fuel panel isolation valve per AMM ATA 28 |
+| 4 | Set transfer rate on dispenser (per AMM ATA 28 max fill rate) |
+| 5 | Initiate LH₂ transfer; monitor tank quantity and pressure |
+| 6 | Monitor H₂ detectors throughout; stop immediately if alarm |
+| 7 | Transfer to required quantity; stop transfer |
+| 8 | Close aircraft isolation valve |
+| 9 | Disconnect fueling hose (with hose drain/purge per AMM) |
+| 10 | Cap aircraft fueling connection |
+| 11 | Remove bonding cables (aircraft last) |
+| 12 | Record: quantity transferred, LH₂ batch, purity cert ref, operator |
+
+### 4.3 LH₂ Fueling Emergency Stop
+
+If H₂ alarm activates during fueling:
+
+1. **STOP TRANSFER** immediately (hit emergency stop button).
+2. **DO NOT** disconnect any lines while H₂ is detected — risk of static spark.
+3. **EVACUATE** all non-essential personnel.
+4. Wait for H₂ level to fall below 10% LEL before approaching.
+5. Vent and purge LH₂ hose per emergency procedure.
+6. Report incident to safety officer; do not resume until cleared.
+
+---
+
+## 5. Post-Servicing
+
+1. Confirm all service points closed and capped.
+2. Remove all GSE from aircraft vicinity.
+3. Complete servicing log (quantities, fluid types, batch numbers, operator signatures).
+4. Update aircraft technical log if required.
+5. ⭐ Confirm H₂ zone clear and monitoring returns to normal before departing.
+
+---
+
+## 6. Related Documents
+
+- [ATA 12I Services Catalog](03_SERVICES.md)
+- [ATA 12I Safety Risks](05_SAFETY_RISKS.md)
+- [ATA 12I Requirements](01_REQUIREMENTS.md)
+- AMM ATA 12 — Servicing Procedures (aircraft-specific)
+- AMM ATA 28 — H₂ Fuel System Servicing Procedures

@@ -1,89 +1,125 @@
-# ATA 12 — Servicing Infrastructure: Safety & Risk Assessment
+# ATA 12I — Servicing Infrastructure: Safety Risks
 
-**Section:** 6 — Safety & Risk Assessment  
-**Parent:** [`README.md`](README.md) | **Crosswalk:** [`../CROSSWALK.md`](../CROSSWALK.md)
-
-> **Escalation:** Any update to this section requires review by **STK_SAF** per BREX rules `SAFETY-002`, `SAFETY-H2-001`, and `SAFETY-H2-002`.
-
----
-
-## Hazard Identification
-
-### H12-01 — H₂ Leak During LH₂ Refuelling (Explosion / Asphyxiation) ⭐
-
-| Attribute | Detail |
-|---|---|
-| **Hazard** | H₂ leak during fuelling accumulates to explosive concentration (4–75% vol in air) |
-| **Severity** | Catastrophic |
-| **Probability** | Very Low with Zone 1/2 classification and controls |
-| **Root causes** | Defective coupling, hose rupture, overpressure, coupling connect/disconnect error |
-| **Mitigations** | Zone 1/2 ATEX classification; fixed H₂ detection (alarm 10%, evacuation 25% LEL); forced ventilation ≥ 15 ACH; bonding/earthing; personal H₂ detectors; no ignition sources within 7.5 m; slow coupling connect/disconnect procedure |
-| **Residual risk** | ALARP — STK_SAF sign-off required per BREX SAFETY-H2-001 |
-| **Reference** | [`../../../../.github/instructions/ata28_h2_cryogenic.instructions.md`](../../../../.github/instructions/ata28_h2_cryogenic.instructions.md) |
+**Domain:** I-INFRASTRUCTURES / M2-MAINTENANCE_ENVIRONMENTS / ATA_12  
+**Document Type:** Safety Risks and Mitigations  
+**Revision:** 0.1.0
 
 ---
 
-### H12-02 — Cryogenic Burn During Coupling or LH₂ Cart Operation ⭐
+## 1. Purpose
 
-| Attribute | Detail |
-|---|---|
-| **Hazard** | Skin or eye contact with LH₂ at −253 °C causing cryogenic burn / frostbite |
-| **Severity** | Major |
-| **Probability** | Low with correct PPE and coupling procedure |
-| **Mitigations** | Mandatory PPE: EN 511 cryogenic gloves, EN 166 face shield, cryogenic apron; slow coupling procedure (no forced connection); personnel training on cryogenic hazards; emergency shower within 10 m of fuelling bay |
-| **Residual risk** | ALARP |
+This document identifies safety risks associated with aircraft servicing operations at M2 maintenance facilities, including hydrogen fueling and cryogenic servicing risks for AMPEL360 Q100.
 
 ---
 
-### H12-03 — LH₂ Purity Non-Conformance (Fuel Contamination) ⭐
+## 2. Risk Register
 
-| Attribute | Detail |
-|---|---|
-| **Hazard** | Off-spec LH₂ (CO, CO₂, or hydrocarbon contamination) damages fuel cell membranes or causes system failure |
-| **Severity** | Hazardous |
-| **Probability** | Low with ISO 14687-2 verification |
-| **Mitigations** | In-line purity sensor with ISO 14687-2 thresholds as hard hold; CoA required for each delivery; sensor calibrated every 6 months; fuel upload halted on any purity exceedance |
-| **Residual risk** | ALARP |
+### 2.1 Conventional Servicing Risks
 
----
+| Risk ID | Hazard | Consequence | Likelihood | Severity | Mitigation |
+|---------|--------|-------------|-----------|----------|------------|
+| RISK-12I-001 | Hydraulic fluid contamination (wrong fluid) | System failure, aircraft unserviceability | Medium | Major | Dedicated carts per fluid type; color-coded connectors; log verification |
+| RISK-12I-002 | Engine oil overfill | Engine damage | Medium | Major | Quantity limits in AMM; log oil quantity/added amount and batch/part details; visual check |
+| RISK-12I-003 | GPU overvoltage | Avionics damage | Low | Major | GPU with automatic overvoltage protection; verify output before connection |
+| RISK-12I-004 | Oxygen contamination (grease contact) | Fire/explosion | Low | Hazardous | Oxygen-clean equipment mandatory; no hydrocarbon in O₂ area |
+| RISK-12I-005 | Water contamination of fuel | Engine power loss, fuel system damage | Low | Hazardous | Sump drain before fueling; fuel quality check |
+| RISK-12I-006 | GSE collision with aircraft | Structural damage, injury | Medium | Major | Speed limits in servicing area; spotters; markings |
 
-### H12-04 — High-Pressure Hydraulic Line Failure
+### 2.2 ⭐ Special Condition Risks (H₂ and Cryogenic)
 
-| Attribute | Detail |
-|---|---|
-| **Hazard** | Hydraulic fluid injected into skin or eyes during servicing; fire risk from Skydrol vapour |
-| **Severity** | Major |
-| **Probability** | Low with correct cart and hose condition |
-| **Mitigations** | Hose rated ≥ 1.5× working pressure; pre-use visual inspection; face shield mandatory during hydraulic connections; work clothing covers all skin |
-| **Residual risk** | ALARP |
-
----
-
-## Emergency Procedures
-
-### H₂ Alarm During LH₂ Fuelling
-> **DANGER: Do not operate any electrical switch.**
-1. Close LH₂ supply valve on servicing cart (manual lever — approved for Zone 1 operation).
-2. Sound evacuation alarm.
-3. All personnel evacuate to upwind muster point (≥ 15 m).
-4. Contact Safety Officer and ATA 28 responsible engineer.
-5. Do not re-enter bay until H₂ < 10% LEL confirmed.
-
-### Cryogenic Spill / Contact
-1. Move away from spill area immediately.
-2. If skin/eye contact: irrigate immediately with copious water for ≥ 15 min; seek medical attention.
-3. Do not attempt to blot or remove frozen LH₂ from clothing; allow to evaporate.
-4. Contact Safety Officer and escalate to emergency services if burn is severe.
+| Risk ID | Hazard | Consequence | Likelihood | Severity | Mitigation |
+|---------|--------|-------------|-----------|----------|------------|
+| RISK-12I-010 | ⭐ LH₂ leak during fueling | Explosion/fire, fatality | Very Low | Catastrophic | Emergency stop; H₂ detectors; bonding; zone exclusion; trained personnel only |
+| RISK-12I-011 | ⭐ Static discharge igniting H₂ | Explosion/fire, fatality | Very Low | Catastrophic | Bonding and grounding before any H₂ operation; no synthetic clothing |
+| RISK-12I-012 | ⭐ Cryogenic burn (contact with LH₂ or cold surfaces) | Cryogenic burns, frostbite | Low | Major | PPE mandatory (cryo gloves, face shield, apron); no bare skin contact with cold lines |
+| RISK-12I-013 | ⭐ H₂ accumulation in fueling area | Explosion | Very Low | Catastrophic | Active ventilation; H₂ detectors (10% LEL alarm, 25% LEL shutdown); no ignition sources |
+| RISK-12I-014 | ⭐ Wrong fuel type dispensed (LH₂ instead of GH₂ or vice versa) | System incompatibility, damage | Very Low | Hazardous | Aircraft-specific coupling prevents wrong connection; training |
+| RISK-12I-015 | ⭐ LH₂ quality failure (contamination) | Fuel cell degradation, reduced life | Low | Major | On-site purity check per ISO 14687-2 before fueling; batch certificate required |
+| RISK-12I-016 | ⭐ Asphyxiation (H₂ displaces O₂ in enclosed servicing area) | Unconsciousness, death | Very Low | Catastrophic | O₂ monitoring in all enclosed H₂ servicing areas; ventilation; confined space entry procedures |
 
 ---
 
-## PPE Requirements Summary
+## 3. Emergency Response
 
-| Service | Required PPE |
-|---|---|
-| Standard fluid servicing | Safety shoes, gloves, safety glasses |
-| LH₂ fuelling / defuelling | EN 511 cryogenic gloves, EN 166 face shield, cryogenic apron, safety shoes, personal H₂ detector |
+### 3.1 Hydraulic Fluid Spill
+
+1. Stop dispensing immediately.
+2. Apply spill kit (absorbent) to contain fluid.
+3. Dispose per environmental procedures (HAZMAT).
+4. Clean area; inspect for slip hazard.
+5. Report to safety officer.
+
+### 3.2 ⭐ LH₂ Spill or Major Leak
+
+> ⭐ **DANGER — Immediate Action Required**
+
+1. **STOP** LH₂ transfer immediately (emergency stop button).
+2. **EVACUATE** all personnel from 15 m radius. Do NOT run — walk briskly.
+3. Do **NOT** operate electrical switches.
+4. Call emergency services — H₂ fire brigade capability required.
+5. Activate facility H₂ emergency shutdown.
+6. Ventilate area using intrinsically safe fans (from outside zone).
+7. Do **NOT** re-enter until H₂ < 10% LEL and O₂ > 19.5%.
+
+### 3.3 ⭐ H₂ Fire (Invisible Flame)
+
+> ⭐ **WARNING:** Hydrogen flame is nearly invisible in daylight. Use thermal camera to detect.
+
+1. If H₂ fire is confirmed (thermal camera, heat radiation):
+   - **Evacuate** — H₂ fire with unlimited supply can cause explosion.
+   - Do NOT attempt to extinguish — allow to burn if H₂ flow cannot be isolated.
+2. Isolate H₂ supply from safe distance (remote emergency valve if available).
+3. Cool adjacent surfaces with water spray to prevent structure fire.
+4. Emergency services: Fire brigade with H₂ capability.
+
+### 3.4 ⭐ Cryogenic Contact
+
+1. Remove cold material from skin immediately (shake off LH₂ — do not wipe).
+2. Do NOT rub affected area.
+3. Rewarm with lukewarm water (37–41°C); do NOT use hot water.
+4. Seek medical attention immediately.
+5. Emergency eyewash if eyes affected.
 
 ---
 
-*End of ATA 12 — Safety & Risk Assessment*
+## 4. PPE Requirements
+
+### 4.1 Standard Servicing Operations
+
+| Activity | PPE |
+|----------|-----|
+| GPU connection | Safety shoes, high-vis vest |
+| Hydraulic servicing | Safety shoes, high-vis vest, splash goggles |
+| Oxygen servicing | Oil-free gloves, face shield, no synthetic clothing |
+
+### 4.2 ⭐ H₂ Servicing Operations
+
+| Activity | PPE |
+|----------|-----|
+| All H₂ area operations | + H₂ personal gas detector (worn, alarm at 10% LEL) |
+| LH₂ hose connection/disconnection | + Cryogenic gloves, face shield, apron |
+| LH₂ tank/system work | + Cryogenic apron, safety shoes (cryogenic-rated) |
+| Enclosed H₂ spaces | + O₂ monitor |
+
+---
+
+## 5. Regulatory References
+
+| Regulation | Relevance |
+|------------|-----------|
+| EASA Part-145 | MRO safety and approved maintenance |
+| ATEX 2014/34/EU | ⭐ Electrical equipment in H₂ explosive atmosphere |
+| IECEx | ⭐ International H₂ zone equipment certification |
+| NFPA 2 | ⭐ Hydrogen Technologies Code — fueling safety |
+| ISO 14687-2 | ⭐ Hydrogen fuel quality — purity requirements |
+| IATA DGR | Dangerous goods regulations (O₂, H₂) |
+
+---
+
+## 6. Related Documents
+
+- [ATA 12I Requirements](01_REQUIREMENTS.md)
+- [ATA 12I Procedures](04_PROCEDURES.md)
+- [ATA 08I Safety Risks](../ATA_08-LEVELING_AND_WEIGHING_INFRA/05_SAFETY_RISKS.md)
+- [ATA 10I Safety Risks](../ATA_10-PARKING_MOORING_STORAGE_RTS_INFRA/05_SAFETY_RISKS.md)
+- [ATA 28 H₂ Cryogenic Instructions](../../../../../.github/instructions/ata28_h2_cryogenic.instructions.md)

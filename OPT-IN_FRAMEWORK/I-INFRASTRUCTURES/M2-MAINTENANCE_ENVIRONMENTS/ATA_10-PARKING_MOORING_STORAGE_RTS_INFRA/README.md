@@ -1,72 +1,69 @@
 # ATA 10 — Parking, Mooring, Storage, and RTS Infrastructure
 
-**Domain:** I-INFRASTRUCTURES / M2  
-**ATA Chapter:** 10 — Parking, Mooring, Storage and Return to Service  
-**Directory:** `ATA_10-PARKING_MOORING_STORAGE_RTS_INFRA/`  
-**Program:** AMPEL360 Q100  
-**Authority:** ASIT
+**Domain:** I-INFRASTRUCTURES / M2-MAINTENANCE_ENVIRONMENTS  
+**ATA Code:** 10I (Infrastructure variant of ATA 10)  
+**Lifecycle Profile:** Standard  
+**Novel Technology:** ⭐ Special Condition for H₂ aircraft parking and storage (boil-off, H₂ safety zones)
 
 ---
 
 ## Scope
 
-The **ATA_10-PARKING_MOORING_STORAGE_RTS_INFRA** directory covers all ground infrastructure required for the safe parking, mooring, and storage of the AMPEL360 Q100 aircraft, as well as the facilities and procedures enabling its return to service (RTS) after scheduled or unscheduled maintenance.
+This directory covers all ground-based infrastructure required to support **parking, mooring, storage, and return-to-service (RTS)** operations for the AMPEL360 Q100 aircraft. This includes apron and hangar parking positions, tie-down and mooring systems, aircraft storage environments, and the checks and infrastructure required to return aircraft to service after storage.
 
-Key capabilities:
-- Dedicated aircraft parking bays with hydrogen-compatible infrastructure
-- Mooring and tie-down systems rated for AMPEL360 Q100 gross weight
-- Short-term and long-term storage facilities
-- Return-to-service (RTS) tooling and inspection infrastructure
+### Coverage
 
----
-
-## ATA Chapter Decomposition
-
-| Sub-Section | Description |
-|---|---|
-| 10-10 | Parking — bay configuration, wheel chocks, GPU/APU connection |
-| 10-20 | Mooring — tie-down patterns, anchor load requirements |
-| 10-30 | Storage — indoor and outdoor storage, preservation procedures |
-| 10-40 | Return to Service — RTS inspection infrastructure, signoff equipment |
+- Parking position design and markings (apron and hangar)
+- Wheel chock and tie-down/mooring infrastructure
+- Aircraft covers and protective equipment for storage
+- Short-term parking facilities (line station)
+- Long-term storage facility requirements
+- RTS infrastructure and inspection capability
+- **⭐ H₂ aircraft storage**: boil-off management, cryogenic tank pressure monitoring, H₂ safety zone requirements during storage
 
 ---
 
-## Novel Technology Aspects ⭐
+## ATA Cross-References
 
-The AMPEL360 Q100 LH₂ propulsion system introduces special requirements for parking and storage:
-
-- **⭐ H₂ bay classification:** Parking bays where the aircraft rests with LH₂ aboard are classified as H₂ occupancy areas (NFPA 2); ventilation, detection, and electrical classification are mandatory.
-- **⭐ Boil-off management during storage:** Extended storage (> 4 h) with LH₂ aboard requires either a boil-off recovery line connection or controlled venting procedure; the bay must have an outdoor vent stack.
-- **⭐ Extended RTS checks after H₂ refueling:** RTS checklist includes LH₂ isolation valve verification, vent line reconnection, and H₂ detector functional test before engine start.
-- **⭐ Tie-down load accounting for LH₂:** Tie-down calculations must use maximum gross weight including full LH₂ load; LH₂ density temperature correction applies to weight estimation.
-
----
-
-## Cross-References
-
-| Domain | Interface |
-|---|---|
-| T/C2-CIRCULAR_CRYOGENIC_CELLS (ATA 28) | LH₂ boil-off management interfaces with ATA 10 bay infrastructure |
-| T/P-PROPULSION (ATA 71) | Fuel cell standby mode during storage |
-| [I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN](../O-OPERATIONS_SERVICE_STRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN/) | H₂ GSE bay safety requirements for parking zones |
-| P/S-SERVICE_INSTRUCTION/ATA_10 | Aircraft-side parking, mooring, and RTS procedures |
+| ATA Chapter | System | Relationship |
+|-------------|--------|--------------|
+| ATA 10 (P-PROGRAMS/S) | Parking, Mooring, Storage Procedures | Aircraft-side procedures; this directory covers facilities |
+| ATA 12 (M2) | Servicing Infrastructure | Servicing performed before or after RTS |
+| ATA 28 | Hydrogen Cryogenic Fuel | LH₂ boil-off management during storage |
+| ATA 32 | Landing Gear | Tie-down attachment points |
 
 ---
 
-## Document Index
+## Regulatory References
 
-| File | Section | Description |
-|---|---|---|
-| `README.md` ← *this file* | 1 — Overview & Scope | Scope, ATA decomposition, cross-refs |
-| `01_REQUIREMENTS.md` | 2 — Normative Requirements | Regulations and standards |
-| `02_DESIGN_SPEC.md` | 3 — Design Specification | Bay design and mooring load specifications |
-| `03_EQUIPMENT.md` | 4 — Equipment | Hardware inventory (chocks, tie-downs, GPU, etc.) |
-| `04_OPERATIONS.md` | 5 — Operations | Operational procedures for parking, mooring, RTS |
-| `05_SAFETY_RISKS.md` | 6 — Safety & Risk Assessment | Hazards, mitigations, failure modes |
-| `06_CASE_STUDIES.md` | 7 — Case Studies | Reference implementations and lessons learned |
-
-See [`../CROSSWALK.md`](../CROSSWALK.md) for the full 7-section summary crosswalk.
+| Standard | Title |
+|----------|-------|
+| EASA Part-145 | Maintenance Organisation Requirements |
+| EASA Part-M / Part-ML | Continuing Airworthiness |
+| ICAO Annex 14 | Aerodrome Standards |
+| IATA AHM 900 | Ground Operations Manual |
+| DOT/FAA Advisory | Aircraft Storage Procedures |
 
 ---
 
-*End of ATA 10 — Parking, Mooring, Storage, and RTS Infrastructure README*
+## File Structure
+
+| File | Purpose |
+|------|---------|
+| `README.md` | This file — scope, ATA reference, cross-references |
+| `01_REQUIREMENTS.md` | Normative requirements |
+| `02_DESIGN_SPEC.md` | Facility and equipment design specifications |
+| `03_OPERATIONS.md` | Parking, mooring, and storage operational standards |
+| `04_PROCEDURES.md` | RTS and parking operational procedures |
+| `05_SAFETY_RISKS.md` | Safety risks and mitigations |
+| `06_CASE_STUDIES.md` | Case studies and lessons learned |
+
+---
+
+## Related Documents
+
+- [M2-MAINTENANCE_ENVIRONMENTS README](../README.md)
+- [M2-MAINTENANCE_ENVIRONMENTS Index](../00_INDEX.md)
+- [I-INFRASTRUCTURES README](../../README.md)
+- [P-PROGRAMS ATA 10 Service Instruction](../../../P-PROGRAMS/S-SERVICE_INSTRUCTION/ATA_10-PARKING_MOORING_STORAGE_RETURN_TO_SERVICE/)
+- [ATA 12 Servicing Infrastructure](../ATA_12-SERVICING_INFRA/README.md)

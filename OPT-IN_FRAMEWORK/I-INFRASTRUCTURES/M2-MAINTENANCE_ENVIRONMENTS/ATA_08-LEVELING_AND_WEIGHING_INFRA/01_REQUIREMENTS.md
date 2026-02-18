@@ -1,66 +1,99 @@
-# ATA 08 — Leveling and Weighing Infrastructure: Normative Requirements
+# ATA 08I — Leveling and Weighing Infrastructure: Requirements
 
-**Section:** 2 — Normative Requirements  
-**Parent:** [`README.md`](README.md) | **Crosswalk:** [`../CROSSWALK.md`](../CROSSWALK.md)
-
----
-
-## Applicable Regulations
-
-### EASA Part-M — Continuing Airworthiness Requirements
-- **Subpart C (Airworthiness Review):** Weight and balance records must be current and maintained as part of the aircraft technical record.
-- **Subpart E (Components):** Weighing equipment classified as ground support equipment (GSE) subject to calibration and maintenance controls.
-- **Evidence required:** Calibrated weighing records, weight and balance reports signed by licensed engineer.
-
-### FAA AC 43.13-1B — Acceptable Methods, Techniques, and Practices
-- **Chapter 10 (Aircraft Weighing):** Defines acceptable weighing methods, tare corrections, and scale calibration requirements.
-- **Evidence required:** Weighing report per AC 43.13-1B format, scale calibration certificates.
-
-### CS-25 — Certification Specifications for Large Aeroplanes
-- **CS 25.25 (Weight Limits):** Maximum take-off weight, maximum zero-fuel weight, and minimum weight to be verified by weighing.
-- **CS 25.27 (Centre of Gravity Limits):** CG envelope to be confirmed by weight and balance report.
-- **Evidence required:** Approved Weight and Balance Manual (WBM), individual aircraft weighing record.
-
-### EASA Part-145 — Maintenance Organisation Approvals
-- **145.A.40 (Equipment, tools and material):** Maintenance organisation must have access to calibrated weighing equipment sufficient for the aircraft type.
-- **Evidence required:** MO capability list including weighing GSE, calibration records.
+**Domain:** I-INFRASTRUCTURES / M2-MAINTENANCE_ENVIRONMENTS / ATA_08  
+**Document Type:** Normative Requirements  
+**Revision:** 0.1.0
 
 ---
 
-## Applicable Standards
+## 1. General Requirements
 
-### ISO 17025 — General Requirements for Testing and Calibration Laboratories
-- **Scope:** Calibration traceability for weighing equipment.
-- **Evidence required:** Calibration certificates traceable to national standards (BIPM chain), uncertainty budgets.
+### 1.1 Purpose
 
-### OIML R 76 — Non-Automatic Weighing Instruments
-- **Scope:** Performance requirements for platform scales used in aircraft weighing.
-- **Evidence required:** Type-approval certificate, verification certificate, calibration interval log.
+This document defines normative requirements for leveling and weighing infrastructure used to support AMPEL360 Q100 weight and balance operations at all maintenance facilities.
 
----
+### 1.2 Applicability
 
-## Hydrogen-Specific Requirements ⭐
-
-### NFPA 2 — Hydrogen Technologies Code
-- **Section 7 (Indoor Storage and Use):** Weighing bays housing an LH₂-fuelled aircraft are classified as H₂ occupancy areas; forced ventilation, H₂ detection, and bonding/grounding are mandatory.
-- **Evidence required:** Bay ventilation design approval, H₂ detector calibration records, electrical bonding inspection records.
-
-### EASA Special Condition — Hydrogen Storage and Distribution (SC-28-H2-001)
-- **Scope:** Weight and balance reports must account for LH₂ density at actual fuel temperature; nominal density (0.0709 kg/L at 20 K) must not be assumed without temperature correction.
-- **Evidence required:** Approved LH₂ mass-correction procedure, recorded fuel temperature at time of weighing.
+These requirements apply to:
+- Maintenance, Repair, and Overhaul (MRO) organizations holding Part-145 approval
+- Manufacturer's final assembly line (FAL) facility
+- Line maintenance stations performing scheduled weight checks
 
 ---
 
-## Compliance Matrix
+## 2. Regulatory Requirements
 
-| Requirement | Source | Evidence File | Status |
-|---|---|---|---|
-| Weighing record format | AC 43.13-1B Ch.10 | `04_PROCEDURES.md` | Draft |
-| Scale calibration traceability | ISO 17025 / OIML R 76 | `03_EQUIPMENT.md` | Draft |
-| Weight and balance report | CS-25.25/27 | `04_PROCEDURES.md` | Draft |
-| H₂ bay ventilation design | NFPA 2 §7 | `02_DESIGN_SPEC.md` | Draft |
-| LH₂ density correction | SC-28-H2-001 | `04_PROCEDURES.md` | Draft |
+### 2.1 Certification Basis
+
+| Requirement | Source | Description |
+|-------------|--------|-------------|
+| REQ-08I-001 | CS-25.25 | Maximum weights must be established for the aircraft |
+| REQ-08I-002 | CS-25.1519 | Weight and CG must be recorded in the Airplane Flight Manual |
+| REQ-08I-003 | EASA Part-145 | MRO facilities must have calibrated weighing equipment |
+| REQ-08I-004 | CAT.POL.A.100 | Mass and balance data must be maintained per approved procedures |
+
+### 2.2 Equipment Calibration
+
+| Requirement | Description |
+|-------------|-------------|
+| REQ-08I-010 | All weighing equipment shall be calibrated to traceable national standards (ISO/IEC 17025) |
+| REQ-08I-011 | Calibration interval shall not exceed 12 months or after any repair/modification |
+| REQ-08I-012 | Calibration records shall be retained for a minimum of 5 years |
+| REQ-08I-013 | Equipment accuracy shall be within ±0.05% of full-scale reading |
 
 ---
 
-*End of ATA 08 — Normative Requirements*
+## 3. Facility Requirements
+
+### 3.1 Hangar/Workspace
+
+| Requirement | Description |
+|-------------|-------------|
+| REQ-08I-020 | Weighing area shall be level to within ±0.05° in any direction |
+| REQ-08I-021 | Facility shall be wind-protected (enclosed or with appropriate shielding) |
+| REQ-08I-022 | Floor load capacity shall exceed maximum aircraft ramp weight by ≥25% margin |
+| REQ-08I-023 | Ambient temperature shall be stable within ±5°C during weighing operations |
+
+### 3.2 Leveling Infrastructure
+
+| Requirement | Description |
+|-------------|-------------|
+| REQ-08I-030 | Leveling system shall achieve ±0.05° accuracy |
+| REQ-08I-031 | Jack pad locations shall conform to aircraft maintenance manual (AMM) specifications |
+| REQ-08I-032 | Jacks shall be rated for combined aircraft weight with ≥2:1 safety factor |
+
+---
+
+## 4. Novel Technology Requirements
+
+### 4.1 ⭐ Special Condition: Hydrogen Fuel State Compensation
+
+For AMPEL360 Q100 aircraft with LH₂ cryogenic fuel systems:
+
+| Requirement | Description |
+|-------------|-------------|
+| REQ-08I-040 | ⭐ Weight and balance computation system shall account for LH₂ fuel density variation with temperature |
+| REQ-08I-041 | ⭐ LH₂ tank pressure and temperature sensors shall be integrated with weight computation |
+| REQ-08I-042 | ⭐ Weighing procedures shall specify fuel state (full, empty, or known partial) |
+| REQ-08I-043 | ⭐ CG computation shall include correction factor for cryogenic fuel mass vs. indicated quantity |
+| REQ-08I-044 | ⭐ Maintenance personnel performing weight checks on H₂ aircraft shall hold H₂ safety qualification |
+
+---
+
+## 5. Traceability
+
+| Requirement | Cross-Reference | Lifecycle Phase |
+|-------------|----------------|-----------------|
+| REQ-08I-001 to 004 | CS-25, EASA Part-145 | LC04, LC08 |
+| REQ-08I-010 to 013 | ISO/IEC 17025 | LC04, LC10 |
+| REQ-08I-020 to 023 | AMM Section 08 | LC04, LC06 |
+| REQ-08I-040 to 044 | ATA 28 (H₂ systems), SC-28-H2-001 | LC04, LC08 |
+
+---
+
+## 6. Related Documents
+
+- [ATA 08I README](README.md)
+- [ATA 08I Design Specifications](02_DESIGN_SPEC.md)
+- [ATA 08I Safety Risks](05_SAFETY_RISKS.md)
+- [P-PROGRAMS ATA 08 Procedures](../../../P-PROGRAMS/P-PRODUCT_DEFINITION/ATA_08-LEVELING_AND_WEIGHING/)

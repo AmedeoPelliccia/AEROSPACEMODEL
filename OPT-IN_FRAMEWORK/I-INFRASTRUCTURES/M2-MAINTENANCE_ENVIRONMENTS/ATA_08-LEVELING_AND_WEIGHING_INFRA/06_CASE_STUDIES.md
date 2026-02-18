@@ -1,61 +1,76 @@
-# ATA 08 — Leveling and Weighing Infrastructure: Case Studies
+# ATA 08I — Leveling and Weighing Infrastructure: Case Studies
 
-**Section:** 7 — Case Studies  
-**Parent:** [`README.md`](README.md) | **Crosswalk:** [`../CROSSWALK.md`](../CROSSWALK.md)
-
----
-
-## CS-08-001 — Post-Modification Weighing After Fuel System Retrofit
-
-**Context:** A regional operator retrofitted a conventional Jet-A fuel system with a hybrid H₂ boost system (analogous to AMPEL360 Q100 stage-1 configuration). Post-modification weighing was required to update the aircraft's approved weight and balance data.
-
-**Challenge:** The new LH₂ tank added 87 kg of structural mass and shifted CG aft by 12 cm. The existing weighing bay was not H₂-classified.
-
-**Actions Taken:**
-1. Weighing bay upgraded to Zone 2 classification with ATEX electrical equipment and forced ventilation.
-2. H₂ fixed detection installed (four electrochemical sensors).
-3. Scale calibration re-verified to ISO 17025 after bay modification.
-4. LH₂ density correction procedure developed and approved by airworthiness authority.
-5. Post-modification weighing performed with dry (empty) LH₂ tank and again with nominal LH₂ load to validate correction formula.
-
-**Outcome:** Revised Weight and Balance Manual approved by EASA. Weighing bay upgrade template adopted as best practice for the M2-MAINTENANCE_ENVIRONMENTS ATA 08 design specification.
-
-**Lessons Learned:**
-- Bay H₂ classification must be planned before LH₂ system installation, not retrofitted.
-- Density correction formula must be validated against at least two fuel temperatures.
-- Personnel training on cryogenic hazards added ≈ 4 h to project timeline.
+**Domain:** I-INFRASTRUCTURES / M2-MAINTENANCE_ENVIRONMENTS / ATA_08  
+**Document Type:** Case Studies and Lessons Learned  
+**Revision:** 0.1.0
 
 ---
 
-## CS-08-002 — Annual Weighing Programme Optimisation
+## 1. Purpose
 
-**Context:** An MRO organisation managing 40 narrowbody aircraft implemented a risk-based weighing programme, reducing required weighing frequency for well-maintained aircraft while maintaining safety.
-
-**Key Finding:** Aircraft with no structural repairs, no configuration changes, and fully documented mass-item tracking for 24 months could be extended from annual to 48-month weighing intervals with regulatory authority agreement (EASA acceptable means of compliance).
-
-**Relevance for AMPEL360 Q100:**
-- The LH₂ tank and fuel cell stack represent significant mass items that must be tracked continuously; any replacement or repair triggers a new weighing.
-- Digital mass-item tracking (integrated into the digital thread) can satisfy the documentation evidence requirement for extended weighing intervals.
-- Reference: `OPT-IN_FRAMEWORK/N-NEURAL_NETWORKS/D-DIGITAL_THREAD_TRACEABILITY/` for mass-change traceability via digital thread.
+This document captures case studies, reference examples, and lessons learned relevant to leveling and weighing infrastructure for novel-technology aircraft maintenance environments.
 
 ---
 
-## CS-08-003 ⭐ — LH₂ Mass Correction Validation Trial (Concept)
+## 2. Case Study: Conventional Aircraft — CG Shift During LH₂ Adoption
 
-**Context:** As of the date of this document, no certified LH₂-fuelled commercial aircraft has been weighed under operational conditions. This case study documents the proposed validation approach for the AMPEL360 Q100 programme.
+### Background
+Early hydrogen aircraft programs (e.g., Airbus ZEROe feasibility studies) identified that liquid hydrogen fuel systems introduce greater weight variability than jet fuel due to the low density of LH₂ and its sensitivity to temperature. The same fuel quantity sensor reading can correspond to very different masses depending on tank temperature.
 
-**Proposed Approach:**
-1. Weigh aircraft with empty LH₂ tanks (known dry mass baseline).
-2. Load known mass of LH₂ (measured at fill point by Coriolis mass flow meter traceable to ISO 17025).
-3. Re-weigh aircraft on calibrated scales.
-4. Compare scale-derived mass with Coriolis-derived mass.
-5. Validate density correction formula (ρ(T) per NIST SR 69) against test results.
-6. Submit validation report to EASA for SC-28-H2-001 compliance credit.
+### Lesson Learned
+Weight and balance computation systems must integrate real-time tank temperature and pressure data when LH₂ is the primary fuel. Traditional fuel quantity to mass conversion tables (based on constant density) are inadequate.
 
-**Expected Outcome:** ≤ 0.5% error between scale and flow-meter mass measurements across fuel temperatures from 20 K to 25 K.
-
-**Status:** Planned for LC06 (Integration & Test) phase.
+### ⭐ AMPEL360 Q100 Action
+- REQ-08I-040 to 043 implement LH₂ density correction as a mandatory requirement.
+- W&B computer design (02_DESIGN_SPEC.md Section 6) includes cryogenic temperature interface.
 
 ---
 
-*End of ATA 08 — Case Studies*
+## 3. Case Study: Scale Calibration Gap — Industry Reference
+
+### Background
+Aviation industry audits have identified instances where aircraft were weighed using scales that had lapsed calibration certificates. In some cases, CG positions were recorded outside AMM limits, leading to airworthiness directives.
+
+### Lesson Learned
+- Calibration tracking must be automatic, not manual.
+- Equipment should be tagged with next-due calibration date visible to operators.
+- Pre-operation checklist must include explicit calibration currency check.
+
+### AMPEL360 Q100 Action
+- REQ-08I-010 to 013 require calibration traceability.
+- Equipment checklist (04_PROCEDURES.md Section 2.1) includes calibration check as first item.
+
+---
+
+## 4. Case Study: H₂ Zone Classification for Maintenance Hangars
+
+### Background
+Several research programs (NASA, DLR) have investigated hydrogen safety zone requirements for maintenance hangars when servicing H₂ aircraft. Key finding: natural ventilation may not be sufficient to prevent H₂ accumulation in roof areas during maintenance with minor leaks.
+
+### Lesson Learned
+- Maintenance hangars accommodating H₂ aircraft must have dedicated ventilation assessment.
+- Roof-mounted H₂ sensors are required due to hydrogen buoyancy.
+- ATEX zone classification must be conducted by qualified safety engineer before first H₂ aircraft entry.
+
+### ⭐ AMPEL360 Q100 Action
+- Design specifications (02_DESIGN_SPEC.md Section 6.2) include weighing bay zone classification.
+- Safety risks document (05_SAFETY_RISKS.md) captures H₂ accumulation risk RISK-08I-013.
+
+---
+
+## 5. Lessons Learned Summary
+
+| ID | Lesson | Implemented In |
+|----|--------|---------------|
+| LL-08I-001 | LH₂ density must be temperature/pressure-corrected | REQ-08I-040 to 043, 02_DESIGN_SPEC.md |
+| LL-08I-002 | Calibration must be tracked and pre-checked | REQ-08I-010 to 013, 04_PROCEDURES.md |
+| LL-08I-003 | H₂ zone classification required for weighing bay | 02_DESIGN_SPEC.md, 05_SAFETY_RISKS.md |
+| LL-08I-004 | H₂ isolation must be verified before any maintenance operations | 04_PROCEDURES.md, 05_SAFETY_RISKS.md |
+
+---
+
+## 6. Related Documents
+
+- [ATA 08I Safety Risks](05_SAFETY_RISKS.md)
+- [ATA 08I Design Specifications](02_DESIGN_SPEC.md)
+- [ATA 12I Case Studies](../ATA_12-SERVICING_INFRA/06_CASE_STUDIES.md)

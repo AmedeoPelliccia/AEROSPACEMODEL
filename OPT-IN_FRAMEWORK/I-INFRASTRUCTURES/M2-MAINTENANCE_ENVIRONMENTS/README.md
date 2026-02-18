@@ -1,122 +1,86 @@
 # M2 — Maintenance Environments
 
-**Domain:** I-INFRASTRUCTURES / M2  
-**ATA Designations:** ATA 08 (Leveling & Weighing), ATA 10 (Parking/Mooring/Storage/RTS), ATA 12 (Servicing)  
-**Program:** AMPEL360 Q100  
-**Authority:** ASIT (Aircraft Systems Information Transponder)
+**Maintenance Ecosystem Infrastructure: Hangars, Line Stations, Component Shops**
 
 ---
 
-## Purpose
+## Scope
 
-The **M2-MAINTENANCE_ENVIRONMENTS** subdomain organises the ground-based maintenance infrastructure—from line stations through heavy-maintenance hangars to component shops—required to keep the AMPEL360 Q100 airworthy throughout its operational life.
+The M2-MAINTENANCE_ENVIRONMENTS subdomain covers the ground-based infrastructure required to maintain, service, and return aircraft to service. This includes leveling and weighing facilities, parking and mooring infrastructure, storage environments, and all servicing equipment and fluid-handling systems.
 
-M2 establishes the infrastructure baseline for:
-- Aircraft leveling and weighing facilities (ATA 08)
-- Parking, mooring, storage, and return-to-service (RTS) ground handling (ATA 10)
-- Scheduled and unscheduled servicing equipment and fluid handling (ATA 12)
+For AMPEL360 Q100 novel-technology aircraft (hydrogen fuel cell propulsion, cryogenic systems), these environments include **⭐ Special Condition** infrastructure items beyond the conventional MRO baseline.
 
 ---
 
 ## Subdomain Structure
 
-| ATA Directory | Code | Description | Key Standards/Regulations |
-|---|---|---|---|
-| `ATA_08-LEVELING_AND_WEIGHING_INFRA` | 08I | Leveling jacks, weighing platforms, and calibration equipment | EASA Part-M, FAA AC 43.13-1B, CS-25 |
-| `ATA_10-PARKING_MOORING_STORAGE_RTS_INFRA` | 10I | Tow bars, chocks, tie-down gear, ground power, storage bays, RTS checklist infrastructure | EASA Part-M, Part-145, FAA AC 43.13-1B |
-| `ATA_12-SERVICING_INFRA` | 12I | Fluid servicing carts, special tools, hydrogen-compatible servicing equipment | EASA Part-145, FAA Part 43, NFPA 2 |
+The M2 subdomain is organized into three ATA-aligned infrastructure categories:
+
+### ATA 08 – Leveling and Weighing Infrastructure
+Facilities and equipment for aircraft leveling operations and precise weighing. Includes jacking pads, weighing platforms, optical leveling systems, and center-of-gravity computation infrastructure.
+
+### ATA 10 – Parking, Mooring, Storage, and RTS Infrastructure
+Ground infrastructure for aircraft parking, mooring, and long-term storage, including return-to-service (RTS) checks. Special conditions apply for H₂ aircraft storage environments.
+
+### ATA 12 – Servicing Infrastructure
+Full-spectrum servicing infrastructure: ground power, pneumatic start, hydraulic servicing, potable water, waste, tire inflation, and **⭐ cryogenic hydrogen (LH₂) fueling systems**.
 
 ---
 
-## Directory Conventions
+## ATA Chapter Directories
 
-Each ATA subdirectory contains seven canonical section files plus a crosswalk:
-
-| File | Section | Content |
-|---|---|---|
-| `README.md` | 1 — Overview & Scope | ATA scope, cross-refs, special conditions |
-| `01_REQUIREMENTS.md` | 2 — Normative Requirements | Regulatory and standard requirements |
-| `02_DESIGN_SPEC.md` | 3 — Design Specification | Infrastructure design and performance specs |
-| `03_EQUIPMENT.md` / `03_SERVICES.md` | 4 — Equipment / Services | Hardware list or service portfolio (per ATA) |
-| `04_PROCEDURES.md` / `04_OPERATIONS.md` | 5 — Procedures / Operations | Step-by-step maintenance or operational procedures |
-| `05_SAFETY_RISKS.md` | 6 — Safety & Risk Assessment | Hazard identification, mitigations, ARP4761 failure modes |
-| `06_CASE_STUDIES.md` | 7 — Case Studies | Reference implementations and lessons learned |
-
-See [`CROSSWALK.md`](CROSSWALK.md) for the detailed mapping of each executive-summary section to the corresponding file(s).
+| ATA | Directory | Description |
+|-----|-----------|-------------|
+| 08 | `ATA_08-LEVELING_AND_WEIGHING_INFRA/` | Leveling and weighing facilities and equipment |
+| 10 | `ATA_10-PARKING_MOORING_STORAGE_RTS_INFRA/` | Parking, mooring, storage, and RTS infrastructure |
+| 12 | `ATA_12-SERVICING_INFRA/` | Servicing equipment, fluid handling, and H₂ fueling ⭐ |
 
 ---
 
-## Novel Technology Aspects
+## Novel Technology Infrastructure
 
-Where the AMPEL360 Q100 hydrogen propulsion system introduces special conditions, content is tagged **⭐ Special Condition**:
+### ⭐ Special Conditions
 
-- **LH₂-compatible servicing equipment** (ATA 12): Hydrogen-rated hoses, cryogenic connectors, boil-off management lines
-- **H₂ leak detection in maintenance bays** (ATA 08/10/12): Multi-sensor detection, ventilation interlocks
-- **Extended RTS procedures after H₂ refueling** (ATA 10): Purge verification, isolation valve checks
-- **Weighing after LH₂ loading** (ATA 08): Density correction procedures for cryogenic fuel mass
+The AMPEL360 Q100 introduces special maintenance environment requirements not present in conventional aircraft:
 
----
-
-## Lifecycle Integration
-
-M2 primarily activates during:
-
-### LC10 — Industrial & Supply Chain
-- Infrastructure procurement and installation
-- Tooling and special equipment qualification
-
-### LC12 — Continued Airworthiness & MRO
-- Line-maintenance servicing
-- Heavy-maintenance facility operations
-- Weighing and re-certification after modifications
-
-### LC14 — End of Life
-- Aircraft decommissioning and storage infrastructure
-- LH₂ system safe defueling and inerting
+- **Hydrogen Safety Zones**: All maintenance areas must comply with ATEX/IECEx zoning for hydrogen (H₂ concentration 4–75% flammable range).
+- **Cryogenic Handling**: LH₂ fueling infrastructure at -253°C requires dedicated cryogenic-rated equipment, PPE, and trained personnel.
+- **Weight Variability**: LH₂ density varies significantly with temperature; center-of-gravity computation must account for fuel state.
+- **Extended Storage**: Long-term storage of H₂ aircraft requires boil-off management and pressure monitoring.
 
 ---
 
-## Traceability to Other Domains
+## Lifecycle Applicability
 
-| Domain | Interface |
-|---|---|
-| T/C2-CIRCULAR_CRYOGENIC_CELLS (ATA 28) | LH₂ servicing and leak-detection interfaces |
-| T/P-PROPULSION (ATA 71) | Fuel cell maintenance tooling and procedures |
-| I/M1-MANUFACTURING_FACILITIES | Quality standards shared with MRO operations |
-| O/O-OPERATIONS_SERVICE_STRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN | Airport-side H₂ supply chain coordination |
-| N/A-AI_GOVERNANCE_ASSURANCE | AI-assisted predictive maintenance tools |
+| LC Phase | Applicability | Notes |
+|----------|--------------|-------|
+| LC04 | Infrastructure design and specification | Equipment design, facility layout |
+| LC06 | Infrastructure verification | Commissioning, acceptance tests |
+| LC08 | Certification (where applicable) | Regulatory approval for novel infra |
+| LC10 | Deployment | Production/operational deployment |
+| LC11 | Customer integration | Airline facility adaptation |
+| LC12 | Maintenance | Infrastructure upkeep and upgrades |
 
 ---
 
-## Governance
+## Cross-References
 
-- **Owner:** ASIT (Aircraft Systems Information Transponder)
-- **Responsible Stakeholder:** STK_MRO (MRO Manager), STK_SAF (Safety Officer)
-- **Change Control:** ECR/ECO via Configuration Control Board (CCB)
-- **Baseline Authority:** `ASIT/GOVERNANCE/master_brex_authority.yaml`
-- **Lifecycle Activation Rules:** `lifecycle/T_SUBDOMAIN_LC_ACTIVATION.yaml`
+| System | Reference |
+|--------|-----------|
+| ATA 28 – H₂ Cryogenic Fuel Systems | [`T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CELLS/ATA_28-FUEL/`](../../T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CELLS/ATA_28-FUEL/) |
+| ATA 71 – Fuel Cell Power Plant | [`T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/P-PROPULSION/`](../../T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/P-PROPULSION/) |
+| O-OPERATIONS (ATA IN – H₂ GSE) | [`O-OPERATIONS_SERVICE_STRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN/`](../../O-OPERATIONS_SERVICE_STRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN/) |
+| I-INFRASTRUCTURES Main README | [`../README.md`](../README.md) |
 
 ---
 
 ## Related Documents
 
-| Document | Path | Purpose |
-|---|---|---|
-| I-INFRASTRUCTURES Index | `../00_INDEX.md` | Parent domain index |
-| M2 Crosswalk | `CROSSWALK.md` | 7-section summary → file mapping |
-| ATA 08 | `ATA_08-LEVELING_AND_WEIGHING_INFRA/README.md` | Leveling & Weighing scope |
-| ATA 10 | `ATA_10-PARKING_MOORING_STORAGE_RTS_INFRA/README.md` | Parking, Mooring & Storage scope |
-| ATA 12 | `ATA_12-SERVICING_INFRA/README.md` | Servicing infrastructure scope |
-| ATA 28 H2 Cryogenic Instructions | `../../../.github/instructions/ata28_h2_cryogenic.instructions.md` | Hydrogen safety procedures |
+- [I-INFRASTRUCTURES README](../README.md)
+- [I-INFRASTRUCTURES Index](../00_INDEX.md)
+- [ATA 28 H₂ Cryogenic Instructions](../../../.github/instructions/ata28_h2_cryogenic.instructions.md)
+- [ATA 71 Fuel Cell Instructions](../../../.github/instructions/ata71_fuel_cell.instructions.md)
 
 ---
 
-## Version History
-
-| Version | Date | Author | Description |
-|---|---|---|---|
-| 1.0.0 | 2026-02-18 | ASIT | Initial M2 subdomain structure for AMPEL360 Q100 maintenance |
-
----
-
-*End of M2 — Maintenance Environments README*
+*⭐ = Novel Technology Special Condition infrastructure for hydrogen/fuel-cell aircraft*
