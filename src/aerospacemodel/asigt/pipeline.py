@@ -577,26 +577,48 @@ class TransformStage:
         title = escape(content.get("title", "Untitled"))
         description = escape(content.get("description", ""))
 
-        # Collect regulatory references and best practices for inline citations
-        reg_refs_value = content.get("regulatory_refs")
-        if reg_refs_value is None:
-            reg_refs_value = content.get("standards")
-        reg_refs: list = list(reg_refs_value or [])
-        best_practices: list = list(content.get("best_practices") or [])
+        # Collect regulatory references from the enrichment dict when available (set by
+        # ValidateEnrichStage); otherwise fall back to raw content.  Both 'regulatory_refs'
+        # and 'standards' are merged so neither is silently ignored when both are present.
+        enrichment = source.get("enrichment", {})
+        if enrichment.get("regulatory_refs") is not None:
+            reg_refs: list = list(enrichment["regulatory_refs"])
+        else:
+            reg_refs_raw = content.get("regulatory_refs")
+            standards_raw = content.get("standards")
+            if reg_refs_raw is not None:
+                reg_refs = list(reg_refs_raw) + list(standards_raw or [])
+            else:
+                reg_refs = list(standards_raw or [])
+
+        if enrichment.get("best_practices") is not None:
+            best_practices: list = list(enrichment["best_practices"])
+        else:
+            best_practices = list(content.get("best_practices") or [])
+
         all_citations = reg_refs + best_practices
 
-        # Build refs XML block for dmStatus
+        def _parse(entry: Any):
+            """Return (code, title) from a string or dict ref entry."""
+            if isinstance(entry, str):
+                return entry, ""
+            if isinstance(entry, dict):
+                code = (
+                    entry.get("standard")
+                    or entry.get("code")
+                    or entry.get("name")
+                    or ""
+                )
+                title = entry.get("title") or entry.get("description") or ""
+                return code, title
+            return "", ""
+
+        # Build refs XML block for dmStatus (single loop via shared _parse helper)
         refs_xml = ""
         if all_citations:
             ref_lines = []
             for entry in all_citations:
-                if isinstance(entry, str):
-                    code, pub_title = entry, ""
-                elif isinstance(entry, dict):
-                    code = entry.get("standard") or entry.get("code") or entry.get("name", "")
-                    pub_title = entry.get("title") or entry.get("description", "")
-                else:
-                    continue
+                code, pub_title = _parse(entry)
                 if not code:
                     continue
                 title_elem = (
@@ -614,18 +636,12 @@ class TransformStage:
             if ref_lines:
                 refs_xml = "\n    <refs>\n" + "\n".join(ref_lines) + "\n    </refs>"
 
-        # Build inline citations content block
+        # Build inline citations content block (reuses _parse helper, no duplication)
         citations_xml = ""
         if all_citations:
             citation_lines = []
             for entry in all_citations:
-                if isinstance(entry, str):
-                    code, pub_title = entry, ""
-                elif isinstance(entry, dict):
-                    code = entry.get("standard") or entry.get("code") or entry.get("name", "")
-                    pub_title = entry.get("title") or entry.get("description", "")
-                else:
-                    continue
+                code, pub_title = _parse(entry)
                 if not code:
                     continue
                 text = f"[{escape(code)}] {escape(pub_title)}" if pub_title else f"[{escape(code)}]"

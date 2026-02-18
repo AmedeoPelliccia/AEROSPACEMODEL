@@ -824,7 +824,7 @@ class TestRegulatoryReferenceCitations:
         assert "externalPubRef" not in xml
 
     def test_standards_field_alias(self, tmp_path):
-        """The 'standards' field is treated as an alias for 'regulatory_refs'."""
+        """The 'standards' field is treated as a supplement/alias for 'regulatory_refs'."""
         xml = self._transform_source(
             {
                 "title": "Standards Check",
@@ -835,26 +835,95 @@ class TestRegulatoryReferenceCitations:
         )
         assert "<externalPubCode>ISO 14687-2</externalPubCode>" in xml
 
-    def test_standards_ignored_when_regulatory_refs_present(self, tmp_path):
-        """When both are present, regulatory_refs take precedence over standards."""
+    def test_both_regulatory_refs_and_standards_merged(self, tmp_path):
+        """When both 'regulatory_refs' and 'standards' are present both are emitted."""
         xml = self._transform_source(
             {
-                "title": "Regulatory Precedence",
+                "title": "Merged Fields",
                 "description": ".",
                 "regulatory_refs": ["CS-25"],
                 "standards": ["ISO 14687-2"],
             },
             tmp_path,
         )
-        # Expect only the regulatory_refs entry to be emitted
         assert "<externalPubCode>CS-25</externalPubCode>" in xml
-        assert "<externalPubCode>ISO 14687-2</externalPubCode>" not in xml
+        assert "<externalPubCode>ISO 14687-2</externalPubCode>" in xml
+
+    def test_empty_regulatory_refs_does_not_suppress_standards(self, tmp_path):
+        """An explicit empty regulatory_refs list does not suppress the 'standards' field."""
+        xml = self._transform_source(
+            {
+                "title": "Empty Reg Refs",
+                "description": ".",
+                "regulatory_refs": [],
+                "standards": ["ARP4754A"],
+            },
+            tmp_path,
+        )
+        assert "<externalPubCode>ARP4754A</externalPubCode>" in xml
+
+    def test_xml_special_characters_escaped_in_refs(self, tmp_path):
+        """Ref entries containing XML special characters are properly escaped."""
+        xml = self._transform_source(
+            {
+                "title": "Special Chars",
+                "description": ".",
+                "regulatory_refs": [
+                    {"standard": "CS-25 Amendment 27", "title": "Applicability: <All> & More"},
+                ],
+            },
+            tmp_path,
+        )
+        assert "<externalPubCode>CS-25 Amendment 27</externalPubCode>" in xml
+
+    def test_empty_string_ref_skipped(self, tmp_path):
+        """Ref entries that resolve to an empty code are silently skipped."""
+        xml = self._transform_source(
+            {
+                "title": "Empty Ref",
+                "description": ".",
+                "regulatory_refs": ["", "ARP4761"],
+            },
+            tmp_path,
+        )
+        assert xml.count("<externalPubRef>") == 1
+        assert "<externalPubCode>ARP4761</externalPubCode>" in xml
+
+    def test_dict_ref_with_unknown_keys_skipped(self, tmp_path):
+        """Dict entries without a recognisable code key are silently skipped."""
+        xml = self._transform_source(
+            {
+                "title": "Unknown Keys",
+                "description": ".",
+                "regulatory_refs": [
+                    {"revision": "C", "year": 2020},   # no standard/code/name key
+                    "DO-178C",                          # valid entry
+                ],
+            },
+            tmp_path,
+        )
+        assert xml.count("<externalPubRef>") == 1
+        assert "<externalPubCode>DO-178C</externalPubCode>" in xml
+
+    def test_non_string_non_dict_ref_skipped(self, tmp_path):
+        """Non-string, non-dict entries in the refs list are silently skipped."""
+        xml = self._transform_source(
+            {
+                "title": "Invalid Type Ref",
+                "description": ".",
+                "regulatory_refs": [42, None, "CS-25"],
+            },
+            tmp_path,
+        )
+        assert xml.count("<externalPubRef>") == 1
+        assert "<externalPubCode>CS-25</externalPubCode>" in xml
+
     # ------------------------------------------------------------------
     # ValidateEnrichStage tests
     # ------------------------------------------------------------------
 
-    def test_enrich_preserves_regulatory_refs(self):
-        """_enrich_content forwards regulatory_refs into the enrichment dict."""
+    def test_enrich_merges_regulatory_refs_and_standards(self):
+        """_enrich_content merges 'regulatory_refs' and 'standards' into enrichment."""
         stage = ValidateEnrichStage(
             self._make_stage_cfg(PipelineStageType.VALIDATE_ENRICH)
         )
@@ -864,12 +933,14 @@ class TestRegulatoryReferenceCitations:
                 "type": "requirement",
                 "content": {
                     "title": "T",
-                    "regulatory_refs": ["EASA CS-25", "ARP4761"],
+                    "regulatory_refs": ["EASA CS-25"],
+                    "standards": ["ARP4761"],
                 },
             }
         ]
         enriched = stage._enrich_content(sources)
-        assert enriched[0]["enrichment"]["regulatory_refs"] == ["EASA CS-25", "ARP4761"]
+        assert "EASA CS-25" in enriched[0]["enrichment"]["regulatory_refs"]
+        assert "ARP4761" in enriched[0]["enrichment"]["regulatory_refs"]
 
     def test_enrich_preserves_best_practices(self):
         """_enrich_content forwards best_practices into the enrichment dict."""
