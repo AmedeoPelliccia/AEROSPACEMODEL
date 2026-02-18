@@ -1,0 +1,89 @@
+metadata:
+  program: "AMPEL360 Q100"
+  authority: "ASIT"
+  version: "1.0.0"
+  description: "Engineering SSOT Registry for AMPEL360 Q100"
+
+ssot_entries:
+  - id: "SSOT-Q100-C2-001"
+    title: "LH2 Primary Tank – System SSOT"
+    ata_chapter: "28"
+    technology_domain: "C2-CIRCULAR_CRYOGENIC_CELLS"
+    baseline_ref: "BL-28-001"
+    lifecycle_phase: "LC04"
+    status: "approved"
+    special_conditions:
+      - "SC-28-H2-001"
+      - "SC-28-CRYO-002"
+
+  - id: "SSOT-Q100-C2-002"
+    title: "H2 Leak Detection – System SSOT"
+    ata_chapter: "28"
+    technology_domain: "C2-CIRCULAR_CRYOGENIC_CELLS"
+    baseline_ref: "BL-28-002"
+    lifecycle_phase: "LC04"
+    status: "approved"
+    special_conditions:
+      - "SC-28-H2-001"
+
+  - id: "SSOT-Q100-C2-003"
+    title: "Boil-Off Management – System SSOT"
+    ata_chapter: "28"
+    technology_domain: "C2-CIRCULAR_CRYOGENIC_CELLS"
+    baseline_ref: "BL-28-003"
+    lifecycle_phase: "LC04"
+    status: "in_review"
+    special_conditions:
+      - "SC-28-H2-001"
+      - "SC-28-CRYO-002"
+
+  - id: "SSOT-Q100-P-001"
+    title: "Fuel Cell Power Plant – System SSOT"
+    ata_chapter: "71"
+    technology_domain: "P-PROPULSION"
+    baseline_ref: "BL-71-001"
+    lifecycle_phase: "LC04"
+    status: "approved"
+    special_conditions:
+      - "SC-71-FUELCELL-001"
+
+  - id: "SSOT-Q100-P-002"
+    title: "Engine Fuel and Control – System SSOT"
+    ata_chapter: "73"
+    technology_domain: "P-PROPULSION"
+    baseline_ref: "BL-73-001"
+    lifecycle_phase: "LC04"
+    status: "in_review"
+    special_conditions: []
+
+  - id: "SSOT-Q100-I2-001"
+    title: "AI/ML Models – System SSOT"
+    ata_chapter: "95"
+    technology_domain: "I2-INTELLIGENCE"
+    baseline_ref: "BL-95-001"
+    lifecycle_phase: "LC04"
+    status: "draft"
+    special_conditions:
+      - "SC-AI-ASSURANCE-001"
+
+  - id: "SSOT-Q100-I2-002"
+    title: "Synthetic Data Validation – System SSOT"
+    ata_chapter: "97"
+    technology_domain: "I2-INTELLIGENCE"
+    baseline_ref: "BL-97-001"
+    lifecycle_phase: "LC05"
+    status: "draft"
+    special_conditions: []
+
+  - id: "SSOT-Q100-M-001"
+    title: "Flight Controls – System SSOT"
+    ata_chapter: "27"
+    technology_domain: "M-MECHANICS"
+    baseline_ref: "BL-27-001"
+    lifecycle_phase: "LC04"
+    status: "approved"
+    special_conditions: []
+
+custom_data_sheets:
+  description: "Custom Information Data Sheets linked to SSOT entries"
+  entries: []

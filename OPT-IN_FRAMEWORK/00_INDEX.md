@@ -95,6 +95,10 @@
 ### Neural Networks & AI Governance
 - [N-NEURAL_NETWORKS README](N-NEURAL_NETWORKS/README.md)
 
+### Engineering SSOT Front-End
+- [ENGINEERING_SSOT README](ENGINEERING_SSOT/README.md)
+- [SSOT Registry Browser (front-end)](ENGINEERING_SSOT/index.html)
+
 ---
 
 ## Total Coverage
