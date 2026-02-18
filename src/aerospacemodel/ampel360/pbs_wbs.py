@@ -101,6 +101,12 @@ class PBSID:
         # ATA chapter validation
         if not re.match(r'^(\d{2}|IN)$', self.ata_chapter):
             raise ValueError(f"Invalid ATA chapter: {self.ata_chapter}")
+        if self.ata_chapter != "IN":
+            ata_value = int(self.ata_chapter)
+            if ata_value < 0 or ata_value > 98:
+                raise ValueError(
+                    f"Invalid ATA chapter: {self.ata_chapter}. Must be between 00 and 98, or 'IN'"
+                )
         
         # Section and subject validation
         if not re.match(r'^\d{2}$', self.section):
