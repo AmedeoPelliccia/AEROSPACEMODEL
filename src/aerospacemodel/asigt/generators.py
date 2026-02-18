@@ -855,7 +855,12 @@ class DescriptiveDMGenerator(BaseGenerator):
             self.create_sub_element(location, "para", text=content["location_access"])
 
         # Regulatory references and industry best practices – inline citations
-        reg_refs: List[Any] = list(content.get("regulatory_refs") or content.get("standards") or [])
+        reg_refs_value = content.get("regulatory_refs")
+        if reg_refs_value is None:
+            reg_refs_value = content.get("standards")
+        if reg_refs_value is None:
+            reg_refs_value = []
+        reg_refs: List[Any] = list(reg_refs_value)
         best_practices: List[Any] = list(content.get("best_practices") or [])
         all_citations = reg_refs + best_practices
         if all_citations:
