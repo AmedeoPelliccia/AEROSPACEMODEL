@@ -144,4 +144,4 @@ For aircraft parked with LH₂ aboard:
 - [ATA 10I Requirements](01_REQUIREMENTS.md)
 - [ATA 10I Operations](03_OPERATIONS.md)
 - [ATA 10I Safety Risks](05_SAFETY_RISKS.md)
-- [ATA 28 H₂ Cryogenic Instructions](../../../../../.github/instructions/ata28_h2_cryogenic.instructions.md)
+- [ATA 28 H₂ Cryogenic Instructions](../../../../.github/instructions/ata28_h2_cryogenic.instructions.md)
