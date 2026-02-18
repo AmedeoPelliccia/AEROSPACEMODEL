@@ -47,7 +47,7 @@ The AMPEL360 Q100 introduces liquid hydrogen (LH₂) as propellant, creating uni
 |---|---|
 | T/C2-CIRCULAR_CRYOGENIC_CELLS (ATA 28) | LH₂ tank mass and CG data feed into weight & balance |
 | T/P-PROPULSION (ATA 71) | Fuel cell stack mass contribution to weighing |
-| I/O/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN | H₂ GSE bay safety requirements for weighing zone |
+| [`I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN`](../../O-OPERATIONS_SERVICE_STRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN/) | H₂ GSE bay safety requirements for weighing zone |
 | P/S-SERVICE_INSTRUCTION/ATA_08 | Aircraft-side leveling and weighing procedures |
 
 ---
