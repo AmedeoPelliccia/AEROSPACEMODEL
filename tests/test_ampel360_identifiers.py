@@ -96,7 +96,17 @@ class TestArtifactID:
         with pytest.raises(ValueError, match="Invalid ATA chapter"):
             ArtifactID(
                 msn="MSN001",
-                ata_chapter="999",  # Out of range
+                ata_chapter="999",  # Clearly out of range
+                lc_phase="LC02",
+                artifact_type="REQ"
+            )
+    
+    def test_invalid_ata_chapter_boundary(self):
+        """Test ATA chapter upper boundary (99) is rejected per 00–98 spec."""
+        with pytest.raises(ValueError, match="Invalid ATA chapter"):
+            ArtifactID(
+                msn="MSN001",
+                ata_chapter="99",  # Boundary out of range (valid is 00–98)
                 lc_phase="LC02",
                 artifact_type="REQ"
             )
