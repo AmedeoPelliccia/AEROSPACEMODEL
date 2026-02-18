@@ -44,7 +44,7 @@
 | **Root causes** | Pressure relief valve activation, damaged vent line, tank overfill during weighing |
 | **Mitigations** | H₂ fixed detection (alarm at 10% LEL, evacuation at 25% LEL); forced ventilation ≥ 10 ACH; bay classified Zone 2 (ATEX); LH₂ isolation valves closed before personnel enter zone; personal H₂ detectors; PPE (cryogenic gloves, face shield) |
 | **Residual risk** | ALARP — requires STK_SAF sign-off per BREX SAFETY-H2-001 |
-| **Reference** | [`../../../.github/instructions/ata28_h2_cryogenic.instructions.md`](../../../.github/instructions/ata28_h2_cryogenic.instructions.md) |
+| **Reference** | [`../../../../.github/instructions/ata28_h2_cryogenic.instructions.md`](../../../../.github/instructions/ata28_h2_cryogenic.instructions.md) |
 
 ---
 
