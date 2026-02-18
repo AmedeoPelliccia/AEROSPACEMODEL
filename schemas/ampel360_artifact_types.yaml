@@ -1,0 +1,529 @@
+# =============================================================================
+# AMPEL360 Q100 Artifact Type Registry
+# Document ID: AMPEL360-CV-003
+# Authority: ASIT (Aircraft Systems Information Transponder)
+# =============================================================================
+#
+# This file defines all 63 artifact type codes used in AMPEL360 Q100
+# identifier grammar. Each type is linked to its originating lifecycle phase
+# package per TLI v2.1.
+#
+# Format: AMPEL360_Q100_MSN{nnn}_ATA{cc}-{ss}-{ss}_LC{nn}_{TYPE}_{seq}
+#
+# =============================================================================
+
+meta:
+  document_id: "AMPEL360-CV-003-ARTIFACT-TYPES"
+  revision: "3.0"
+  date: "2026-02-18"
+  status: "ACTIVE"
+  authority: "ASIT"
+  compliance:
+    - "TLI v2.1"
+    - "OPT-IN Framework Index v3"
+
+# =============================================================================
+# LC01: Problem Statement (7 types)
+# =============================================================================
+
+LC01_PROBLEM_STATEMENT:
+  - code: "KNOT"
+    name: "Knowledge Node Orchestration Template"
+    description: "Top-level problem definition and scope boundary"
+    package: "KNOT_MGMT"
+    precedence_layer: "L2"
+    
+  - code: "KNU"
+    name: "Knowledge Unit"
+    description: "Decomposed knowledge element or sub-problem"
+    package: "KNU_PLANNING"
+    precedence_layer: "L2"
+    
+  - code: "GOV"
+    name: "Governance Charter"
+    description: "Decision authority matrix, roles, responsibilities"
+    package: "GOVERNANCE"
+    precedence_layer: "L1"
+    
+  - code: "TKN"
+    name: "Tokenomics Model"
+    description: "Incentive structure, labor reabsorption alignment"
+    package: "INCENTIVES"
+    precedence_layer: "L2"
+    
+  - code: "RACI"
+    name: "RACI Matrix"
+    description: "Responsibility assignment matrix"
+    package: "GOVERNANCE"
+    precedence_layer: "L2"
+    
+  - code: "TML"
+    name: "Timeline & Milestones"
+    description: "Project schedule, gate targets, dependencies"
+    package: "KNU_PLANNING"
+    precedence_layer: "L2"
+    
+  - code: "AWD"
+    name: "Award Criteria"
+    description: "Performance metrics, KPI definitions"
+    package: "INCENTIVES"
+    precedence_layer: "L2"
+
+# =============================================================================
+# LC02: System Requirements (5 types)
+# =============================================================================
+
+LC02_SYSTEM_REQUIREMENTS:
+  - code: "REQ"
+    name: "System Requirement"
+    description: "Functional, performance, interface, or constraint requirement"
+    package: "REQUIREMENTS"
+    baseline: "FBL"
+    precedence_layer: "L2"
+    
+  - code: "REQ-TRC"
+    name: "Requirement Trace Matrix"
+    description: "Upstream/downstream requirement traceability"
+    package: "TRACEABILITY"
+    baseline: "FBL"
+    precedence_layer: "L2"
+    
+  - code: "ICD"
+    name: "Interface Control Document"
+    description: "System interface definition and control"
+    package: "INTERFACES"
+    baseline: "FBL"
+    precedence_layer: "L2"
+    
+  - code: "DATA"
+    name: "Data Contract"
+    description: "Data exchange format, schema, protocol"
+    package: "DATA_MGMT"
+    precedence_layer: "L4"
+    
+  - code: "CMP-I"
+    name: "Compliance Matrix (Input)"
+    description: "Regulatory requirement mapping"
+    package: "COMPLIANCE"
+    baseline: "FBL"
+    precedence_layer: "L2"
+
+# =============================================================================
+# LC03: Safety & Reliability (3 types)
+# =============================================================================
+
+LC03_SAFETY_RELIABILITY:
+  - code: "SAF"
+    name: "Safety Assessment"
+    description: "FHA, PSSA, SSA per ARP4761"
+    package: "SAFETY"
+    precedence_layer: "L7"
+    safety_critical: true
+    
+  - code: "REL"
+    name: "Reliability Analysis"
+    description: "FMEA, FTA, MTBF, availability analysis"
+    package: "RELIABILITY"
+    precedence_layer: "L6"
+    
+  - code: "HAZ"
+    name: "Hazard Identification"
+    description: "Hazard log, risk register, mitigation tracking"
+    package: "SAFETY"
+    precedence_layer: "L7"
+    safety_critical: true
+
+# =============================================================================
+# LC04: Design Definition (4 types)
+# =============================================================================
+
+LC04_DESIGN_DEFINITION:
+  - code: "DES"
+    name: "Design Description"
+    description: "Detailed design specification, architecture"
+    package: "DESIGN"
+    baseline: "DBL"
+    precedence_layer: "L2"
+    
+  - code: "DWG"
+    name: "Engineering Drawing"
+    description: "CAD model, 2D/3D drawing, assembly"
+    package: "DRAWINGS"
+    baseline: "DBL"
+    precedence_layer: "L2"
+    
+  - code: "CFG"
+    name: "Configuration Definition"
+    description: "Product configuration, effectivity, variants"
+    package: "CONFIG_MGMT"
+    baseline: "DBL"
+    precedence_layer: "L3"
+    
+  - code: "IFC"
+    name: "Interface Control (Design)"
+    description: "Physical, electrical, data interface design"
+    package: "INTERFACES"
+    baseline: "DBL"
+    precedence_layer: "L2"
+
+# =============================================================================
+# LC05: Analysis Models (4 types)
+# =============================================================================
+
+LC05_ANALYSIS_MODELS:
+  - code: "ANA"
+    name: "Analysis Report"
+    description: "Structural, thermal, aerodynamic, electromagnetic analysis"
+    package: "ANALYSIS"
+    precedence_layer: "L6"
+    
+  - code: "TRD"
+    name: "Trade Study"
+    description: "Design trade-off analysis, decision rationale"
+    package: "TRADE_STUDIES"
+    precedence_layer: "L6"
+    
+  - code: "MDL"
+    name: "Simulation Model"
+    description: "FEM, CFD, system dynamics, digital twin model"
+    package: "MODELS"
+    precedence_layer: "L5"
+    
+  - code: "SIM-V"
+    name: "Simulation Validation"
+    description: "Model V&V, correlation to test data"
+    package: "VALIDATION"
+    precedence_layer: "L6"
+
+# =============================================================================
+# LC06: Integration & Test (4 types)
+# =============================================================================
+
+LC06_VERIFICATION:
+  - code: "TPR"
+    name: "Test Procedure"
+    description: "Test plan, procedure, success criteria"
+    package: "TEST_PLANNING"
+    precedence_layer: "L6"
+    
+  - code: "TRS"
+    name: "Test Result"
+    description: "Test execution results, data logs, observations"
+    package: "TEST_RESULTS"
+    precedence_layer: "L6"
+    
+  - code: "INT"
+    name: "Integration Report"
+    description: "System integration, interface verification"
+    package: "INTEGRATION"
+    precedence_layer: "L6"
+    
+  - code: "CNF"
+    name: "Conformity Statement"
+    description: "Verification of compliance to requirements"
+    package: "CONFORMITY"
+    precedence_layer: "L6"
+
+# =============================================================================
+# LC07: QA & Process Compliance (3 types)
+# =============================================================================
+
+LC07_QA_PROCESS:
+  - code: "QAR"
+    name: "Quality Assurance Report"
+    description: "QA audit, inspection, corrective action"
+    package: "QA"
+    precedence_layer: "L6"
+    
+  - code: "PRC"
+    name: "Process Document"
+    description: "Standard operating procedure, work instruction"
+    package: "PROCESS"
+    precedence_layer: "L6"
+    
+  - code: "ACC"
+    name: "Acceptance Criteria"
+    description: "Product acceptance criteria, inspection checklist"
+    package: "ACCEPTANCE"
+    precedence_layer: "L6"
+
+# =============================================================================
+# LC08: Certification (3 types)
+# =============================================================================
+
+LC08_CERTIFICATION:
+  - code: "CBA"
+    name: "Certification Basis"
+    description: "Applicable regulations, special conditions, exemptions"
+    package: "CERT_BASIS"
+    precedence_layer: "L1"
+    
+  - code: "CMP"
+    name: "Compliance Demonstration"
+    description: "Means of compliance, test evidence, analysis"
+    package: "COMPLIANCE"
+    precedence_layer: "L6"
+    
+  - code: "FTR"
+    name: "Flight Test Report"
+    description: "Flight test results, performance validation"
+    package: "FLIGHT_TEST"
+    precedence_layer: "L6"
+
+# =============================================================================
+# LC09: ESG & Sustainability (3 types)
+# =============================================================================
+
+LC09_ESG_SUSTAINABILITY:
+  - code: "ESG"
+    name: "ESG Assessment"
+    description: "Environmental, social, governance impact"
+    package: "ESG"
+    precedence_layer: "L2"
+    
+  - code: "LCA"
+    name: "Life Cycle Assessment"
+    description: "Cradle-to-grave environmental impact"
+    package: "LIFECYCLE_ENV"
+    precedence_layer: "L2"
+    
+  - code: "ENC"
+    name: "Environmental Compliance"
+    description: "Environmental regulation compliance"
+    package: "COMPLIANCE"
+    precedence_layer: "L2"
+
+# =============================================================================
+# LC10: Industrial & Supply Chain (3 types)
+# =============================================================================
+
+LC10_INDUSTRIAL_SUPPLY:
+  - code: "IND"
+    name: "Industrialization Plan"
+    description: "Manufacturing plan, tooling, facilities"
+    package: "INDUSTRIAL"
+    baseline: "PBL"
+    precedence_layer: "L2"
+    
+  - code: "SUP"
+    name: "Supply Chain Definition"
+    description: "Supplier selection, procurement strategy"
+    package: "SUPPLY_CHAIN"
+    baseline: "PBL"
+    precedence_layer: "L2"
+    
+  - code: "QPR"
+    name: "Qualified Product Record"
+    description: "Production release, first article inspection"
+    package: "PRODUCTION"
+    baseline: "PBL"
+    precedence_layer: "L6"
+
+# =============================================================================
+# LC11: Operations Customization (3 types)
+# =============================================================================
+
+LC11_OPERATIONS_CUSTOMIZATION:
+  - code: "CDL"
+    name: "Customer Data List"
+    description: "Operator-specific configuration, effectivity"
+    package: "CUSTOMER_DATA"
+    precedence_layer: "L3"
+    
+  - code: "OCF"
+    name: "Operations Configuration"
+    description: "Flight operations manual, MEL, CDL"
+    package: "OPS_CONFIG"
+    precedence_layer: "L3"
+    
+  - code: "RLN"
+    name: "Release Note"
+    description: "Aircraft delivery, service bulletin, configuration change"
+    package: "RELEASE"
+    precedence_layer: "L8"
+
+# =============================================================================
+# LC12: Continued Airworthiness & MRO (6 types)
+# =============================================================================
+
+LC12_MAINTENANCE_REPAIR:
+  - code: "SBL"
+    name: "Service Bulletin"
+    description: "Maintenance action, modification, inspection"
+    package: "SERVICE"
+    precedence_layer: "L8"
+    
+  - code: "RPR"
+    name: "Repair Procedure"
+    description: "Approved repair scheme, SRM reference"
+    package: "REPAIR"
+    precedence_layer: "L7"
+    
+  - code: "QRY"
+    name: "Engineering Query"
+    description: "Technical query, disposition, corrective action"
+    package: "ENG_QUERY"
+    precedence_layer: "L7"
+    
+  - code: "AOG"
+    name: "AOG Support Record"
+    description: "Aircraft-on-ground support, urgent troubleshooting"
+    package: "AOG"
+    precedence_layer: "L8"
+    
+  - code: "COC"
+    name: "Certificate of Conformity"
+    description: "Part conformity, release certificate"
+    package: "CONFORMITY"
+    precedence_layer: "L6"
+    
+  - code: "CMP-O"
+    name: "Compliance Matrix (Operations)"
+    description: "Continued airworthiness compliance"
+    package: "COMPLIANCE"
+    precedence_layer: "L8"
+
+# =============================================================================
+# LC13: Maintenance Source Data (6 types)
+# =============================================================================
+
+LC13_MAINTENANCE_SOURCE:
+  - code: "MSR"
+    name: "Maintenance Source Record"
+    description: "Maintenance task definition, interval, procedure"
+    package: "MAINT_SOURCE"
+    precedence_layer: "L7"
+    
+  - code: "MSR-E"
+    name: "Maintenance Source Record (Encoded)"
+    description: "Structured maintenance data (ATA iSpec 2200)"
+    package: "MAINT_SOURCE"
+    precedence_layer: "L5"
+    
+  - code: "RSR"
+    name: "Repair Source Record"
+    description: "Repair scheme definition, SRM source"
+    package: "REPAIR_SOURCE"
+    precedence_layer: "L7"
+    
+  - code: "RSR-E"
+    name: "Repair Source Record (Encoded)"
+    description: "Structured repair data"
+    package: "REPAIR_SOURCE"
+    precedence_layer: "L5"
+    
+  - code: "OSR"
+    name: "Operations Source Record"
+    description: "Flight operations procedure source"
+    package: "OPS_SOURCE"
+    precedence_layer: "L7"
+    
+  - code: "OSR-E"
+    name: "Operations Source Record (Encoded)"
+    description: "Structured operations data"
+    package: "OPS_SOURCE"
+    precedence_layer: "L5"
+
+# =============================================================================
+# LC14: End of Life (4 types)
+# =============================================================================
+
+LC14_END_OF_LIFE:
+  - code: "DSM"
+    name: "Decommissioning Plan"
+    description: "Aircraft retirement, part-out, disposal plan"
+    package: "DECOMMISSION"
+    precedence_layer: "L2"
+    
+  - code: "MRC"
+    name: "Material Recycling Certificate"
+    description: "Recycling and material recovery record"
+    package: "RECYCLING"
+    precedence_layer: "L6"
+    
+  - code: "DPC"
+    name: "Disposal Certificate"
+    description: "Hazardous material disposal, environmental compliance"
+    package: "DISPOSAL"
+    precedence_layer: "L6"
+    
+  - code: "EEL"
+    name: "End-of-Life Lessons"
+    description: "Decommissioning lessons learned, knowledge capture"
+    package: "LESSONS"
+    precedence_layer: "L8"
+
+# =============================================================================
+# PUB: Publication (5 types)
+# =============================================================================
+
+PUB_PUBLICATION:
+  - code: "DM"
+    name: "Data Module (S1000D)"
+    description: "S1000D data module, technical content unit"
+    package: "S1000D_DM"
+    precedence_layer: "L5"
+    
+  - code: "PM"
+    name: "Publication Module (S1000D)"
+    description: "S1000D publication structure, book assembly"
+    package: "S1000D_PM"
+    precedence_layer: "L5"
+    
+  - code: "DML"
+    name: "Data Module List (S1000D)"
+    description: "DM inventory, publication content list"
+    package: "S1000D_DML"
+    precedence_layer: "L5"
+    
+  - code: "ICN"
+    name: "Illustration (S1000D)"
+    description: "Technical illustration, graphic, CGM"
+    package: "S1000D_ICN"
+    precedence_layer: "L5"
+    
+  - code: "BREX"
+    name: "Business Rules Exchange (S1000D)"
+    description: "BREX validation rules, project-specific constraints"
+    package: "S1000D_BREX"
+    precedence_layer: "L4"
+
+# =============================================================================
+# Artifact Type Statistics
+# =============================================================================
+
+statistics:
+  total_types: 63
+  by_phase:
+    LC01: 7
+    LC02: 5
+    LC03: 3
+    LC04: 4
+    LC05: 4
+    LC06: 4
+    LC07: 3
+    LC08: 3
+    LC09: 3
+    LC10: 3
+    LC11: 3
+    LC12: 6
+    LC13: 6
+    LC14: 4
+    PUB: 5
+  
+  safety_critical_types: ["SAF", "HAZ"]
+  baseline_producing: ["REQ", "REQ-TRC", "ICD", "CMP-I", "DES", "DWG", "CFG", "IFC", "IND", "SUP", "QPR"]
+  
+  precedence_distribution:
+    L1: 2  # GOV, CBA
+    L2: 28  # Most domain-level types
+    L3: 3  # CFG, CDL, OCF
+    L4: 2  # DATA, BREX
+    L5: 7  # MDL, MSR-E, RSR-E, OSR-E, DM, PM, DML, ICN
+    L6: 13  # Analysis, test, QA types
+    L7: 6  # SAF, HAZ, RPR, QRY, MSR, RSR, OSR
+    L8: 4  # RLN, SBL, AOG, EEL
+
+# =============================================================================
+# End of Artifact Type Registry
+# =============================================================================
