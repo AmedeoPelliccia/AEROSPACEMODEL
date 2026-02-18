@@ -122,8 +122,8 @@ Equipment in Zone 2 locations: Category 3G acceptable (IECEx Ex n, Ex e, or Ex d
 
 All areas outside the Zone 2 boundaries are classified as non-hazardous provided
 adequate forced ventilation is maintained. The minimum ventilation rate to maintain
-a non-hazardous classification outside Zone 2 is defined in the Ventilation Design
-Specification (VDS-28-00-00).
+a non-hazardous classification outside Zone 2 will be defined in the Ventilation Design
+Specification (VDS-28-XX-XX, TBD).
 
 ---
 
