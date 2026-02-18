@@ -411,7 +411,16 @@ class ValidateEnrichStage:
             content = source.get("content", {})
 
             # Extract and preserve regulatory references and best practices
-            reg_refs = list(content.get("regulatory_refs") or content.get("standards") or [])
+            reg_refs_raw = content.get("regulatory_refs")
+            standards_raw = content.get("standards")
+
+            combined_reg_refs: List[Any] = []
+            if reg_refs_raw is not None:
+                combined_reg_refs.extend(list(reg_refs_raw))
+            if standards_raw is not None:
+                combined_reg_refs.extend(list(standards_raw))
+
+            reg_refs = combined_reg_refs
             best_practices = list(content.get("best_practices") or [])
 
             enriched_source["enrichment"] = {
