@@ -1,6 +1,7 @@
 # M1 — Manufacturing Facilities
 
 **Domain:** I-INFRASTRUCTURES / M1  
+**ATA Designation:** 85-00-00 (Manufacturing Facilities)  
 **Program:** AMPEL360 Q100  
 **Authority:** ASIT (Aircraft Systems Information Transponder)
 
@@ -62,31 +63,58 @@ Each standard or regulation record in M1 follows this structure:
 
 ```yaml
 id: M1-STD-<CODE>
-type: STANDARD_RECORD | REGULATION_RECORD | CONTROL_CHECKLIST | AUDIT_PACK
+type: STANDARD_RECORD
 title: <Full Standard/Regulation Title>
-issuing_body: <ISO, EASA, FAA, OSHA, etc.>
-norm_type: system_management | regulation | technical_process | control
-edition: <Edition/Version>
-scope: <Brief description>
-why_it_applies_to_M1: <Justification for M1 domain>
-evidence_expected:
-  - <Evidence type 1>
-  - <Evidence type 2>
-  - ...
-audit_questions:
-  - <Audit question 1>
-  - <Audit question 2>
-  - ...
-interfaces:
-  lc_phases:
-    - LC07_QA_PROCESS
-    - LC10_INDUSTRIAL_SUPPLY_CHAIN
-    - LC12_MRO_CONTINUED_AIRWORTHINESS
-  opt_in_domains:
-    - T/C2-CIRCULAR_CRYOGENIC_CELLS
-    - T/P-PROPULSION
-    - I/M2-MAINTENANCE_ENVIRONMENTS
+owner: ASIT
+revision: 0.1.0
+status: draft
+lc_phase: LC07_QA_PROCESS
+work_package: M1-<WP-CODE>
+ata: 85-00-00
+domain: I-INFRASTRUCTURES/M1
+created_on: to be set during baseline finalization
+last_updated_on: to be set during baseline finalization
+integrity:
+  checksum: to be generated upon baseline finalization
+  algorithm: sha256
+standard:
+  id: <STANDARD_ID>
+  full_title: <Full Standard/Regulation Title>
+  issuing_body: <ISO, EASA, FAA, OSHA, etc.>
+  norm_type: system_management | regulation | technical_process | control
+  edition: <Edition/Version>
+  scope: <Brief description>
+  why_it_applies_to_M1: <Justification for M1 domain>
+  evidence_expected:
+    - <Evidence type 1>
+    - <Evidence type 2>
+    - ...
+  audit_questions:
+    - <Audit question 1>
+    - <Audit question 2>
+    - ...
+  interfaces:
+    lc_phases:
+      - LC07_QA_PROCESS
+      - LC10_INDUSTRIAL_SUPPLY_CHAIN
+      - LC12_MRO_CONTINUED_AIRWORTHINESS
+    ata_chapters:
+      - 85-00-00
+    opt_in_domains:
+      - I-INFRASTRUCTURES/M1
+      - T/C2-CIRCULAR_CRYOGENIC_CELLS
+      - T/P-PROPULSION
+links:
+  reqs: []
+  safety: []
+  verification: []
+tags:
+  - M1
+  - manufacturing
+  - standard
 ```
+
+**Note:** This is the complete structure. See `90_TEMPLATES_META/meta_sidecars/M1_standard_record.meta.yaml` for the full template.
 
 This format ensures:
 - **Traceability** to lifecycle phases, ATA chapters, and OPT-IN domains

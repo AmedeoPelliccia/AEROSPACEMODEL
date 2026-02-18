@@ -12,6 +12,7 @@
     "revision",
     "status",
     "lc_phase",
+    "ata",
     "domain",
     "integrity"
   ],
@@ -64,6 +65,11 @@
     "work_package": {
       "type": "string",
       "description": "Associated work package identifier"
+    },
+    "ata": {
+      "type": "string",
+      "pattern": "^\\d{2}-\\d{2}-\\d{2}$",
+      "description": "ATA chapter code (e.g., 85-00-00)"
     },
     "domain": {
       "type": "string",
@@ -174,6 +180,14 @@
                 "pattern": "^LC\\d{2}"
               },
               "description": "Lifecycle phases where this standard applies"
+            },
+            "ata_chapters": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^\\d{2}-\\d{2}-\\d{2}$"
+              },
+              "description": "ATA chapters interfacing with this standard"
             },
             "opt_in_domains": {
               "type": "array",
