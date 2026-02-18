@@ -21,7 +21,24 @@ from .identifiers import (
     create_identifier,
 )
 
+from .pbs_wbs import (
+    PBSID,
+    WBSID,
+    OPTINAxis,
+    PBSParser,
+    WBSParser,
+    PBSWBSLinker,
+    create_pbs_id,
+    create_wbs_id,
+    parse_pbs,
+    parse_wbs,
+    WBS_PHASE_CODES,
+    SUBDOMAIN_CODES,
+    NOVEL_TECHNOLOGY_SUBDOMAINS,
+)
+
 __all__ = [
+    # Identifiers
     "ArtifactID",
     "IDFormat",
     "PhaseType",
@@ -30,4 +47,18 @@ __all__ = [
     "parse_identifier",
     "validate_identifier",
     "create_identifier",
+    # PBS/WBS
+    "PBSID",
+    "WBSID",
+    "OPTINAxis",
+    "PBSParser",
+    "WBSParser",
+    "PBSWBSLinker",
+    "create_pbs_id",
+    "create_wbs_id",
+    "parse_pbs",
+    "parse_wbs",
+    "WBS_PHASE_CODES",
+    "SUBDOMAIN_CODES",
+    "NOVEL_TECHNOLOGY_SUBDOMAINS",
 ]
