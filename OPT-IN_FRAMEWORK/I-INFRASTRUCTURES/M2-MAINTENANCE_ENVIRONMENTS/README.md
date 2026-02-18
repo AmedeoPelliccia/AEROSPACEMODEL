@@ -83,7 +83,7 @@ M2 primarily activates during:
 | T/C2-CIRCULAR_CRYOGENIC_CELLS (ATA 28) | LH₂ servicing and leak-detection interfaces |
 | T/P-PROPULSION (ATA 71) | Fuel cell maintenance tooling and procedures |
 | I/M1-MANUFACTURING_FACILITIES | Quality standards shared with MRO operations |
-| O/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN | Airport-side H₂ supply chain coordination |
+| O/O-OPERATIONS_SERVICE_STRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN | Airport-side H₂ supply chain coordination |
 | N/A-AI_GOVERNANCE_ASSURANCE | AI-assisted predictive maintenance tools |
 
 ---
