@@ -6,11 +6,13 @@ on:
       - 'OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/M2-MAINTENANCE_ENVIRONMENTS/**'
       - '.markdownlint.json'
       - '.github/workflows/m2-content-lint.yml'
+      - '.github/markdown-link-check.json'
   pull_request:
     paths:
       - 'OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/M2-MAINTENANCE_ENVIRONMENTS/**'
       - '.markdownlint.json'
       - '.github/workflows/m2-content-lint.yml'
+      - '.github/markdown-link-check.json'
 
 jobs:
   structure-check:
