@@ -31,7 +31,7 @@
 | **Root causes** | Pressure relief valve open, damaged vent line, boil-off recovery line disconnection failure |
 | **Mitigations** | Bay Zone 2 classification (ATEX); H₂ fixed detection (alarm at 10% LEL, evacuation at 25% LEL); forced ventilation ≥ 10 ACH; personal H₂ detectors; bonding and earthing |
 | **Residual risk** | ALARP — requires STK_SAF sign-off per BREX SAFETY-H2-001 |
-| **Reference** | [`../../../.github/instructions/ata28_h2_cryogenic.instructions.md`](../../../.github/instructions/ata28_h2_cryogenic.instructions.md) |
+| **Reference** | [`../../../../.github/instructions/ata28_h2_cryogenic.instructions.md`](../../../../.github/instructions/ata28_h2_cryogenic.instructions.md) |
 
 ---
 
