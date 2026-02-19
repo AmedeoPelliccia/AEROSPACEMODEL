@@ -1,0 +1,143 @@
+# WBS_LEVEL_2.yaml — Work Breakdown Structure for ATA 26 Fire Protection
+# AMPEL360 Q100 — E1-ENVIRONMENT Domain
+
+ata_system: "26"
+variant: "E1-ENVIRONMENT"
+last_updated: "2026-02-19"
+
+work_packages:
+
+  # WP 2.1 — Fire Detection System
+  - wbs_id: "WBS-PRB-26-11"
+    phase: "LC01-LC04"
+    title: "Fire Detection System"
+    description: "Design and integrate smoke/heat/flame detection for all protected zones"
+    deliverables:
+      - "Detection system architecture"
+      - "Detector specifications"
+      - "Detection logic and algorithms"
+      - "Interface to fire warning system"
+    resources:
+      - role: "Detection Systems Engineer"
+        allocation: "1.0 FTE"
+      - role: "Safety Engineer"
+        allocation: "0.3 FTE"
+    
+  # WP 2.2 — Overheat Detection
+  - wbs_id: "WBS-PRB-26-21"
+    phase: "LC01-LC04"
+    title: "Overheat Detection"
+    description: "Overheat detection for engines, APU, and critical equipment"
+    deliverables:
+      - "Overheat sensor specifications"
+      - "Temperature thresholds and logic"
+      - "Integration with engine control"
+    resources:
+      - role: "Detection Systems Engineer"
+        allocation: "0.5 FTE"
+    
+  # WP 2.3 — Cargo Fire Suppression
+  - wbs_id: "WBS-PRB-26-30"
+    phase: "LC01-LC04"
+    title: "Cargo Fire Suppression"
+    description: "Design cargo compartment fire suppression system"
+    deliverables:
+      - "Suppression system architecture"
+      - "Agent selection and compatibility analysis"
+      - "Discharge system design"
+      - "Cargo compartment sealing requirements"
+    resources:
+      - role: "Fire Suppression Engineer"
+        allocation: "1.0 FTE"
+      - role: "Safety Engineer"
+        allocation: "0.3 FTE"
+    
+  # WP 2.4 — Engine/APU Fire Suppression
+  - wbs_id: "WBS-PRB-26-40"
+    phase: "LC01-LC04"
+    title: "Engine/APU Fire Suppression"
+    description: "Engine and APU fire suppression system"
+    deliverables:
+      - "Engine/APU suppression system design"
+      - "Agent discharge timing and sequencing"
+      - "Integration with engine/APU systems"
+    resources:
+      - role: "Fire Suppression Engineer"
+        allocation: "1.0 FTE"
+    
+  # WP 2.5 — H₂ Fire Protection
+  - wbs_id: "WBS-PRB-26-41"
+    phase: "LC01-LC04"
+    title: "Hydrogen Fire Protection"
+    description: "Fire protection for hydrogen fuel system interfaces"
+    deliverables:
+      - "H₂ fire hazard assessment"
+      - "H₂-compatible detection and suppression"
+      - "Integration with ATA 28 fuel system"
+      - "Special Condition SC-26-H2-001 compliance"
+    resources:
+      - role: "Fire Suppression Engineer"
+        allocation: "0.8 FTE"
+      - role: "H₂ Safety Specialist"
+        allocation: "0.5 FTE"
+      - role: "Safety Engineer"
+        allocation: "0.5 FTE"
+    
+  # WP 2.6 — Portable Fire Equipment
+  - wbs_id: "WBS-PRB-26-50"
+    phase: "LC01-LC04"
+    title: "Portable Fire Equipment"
+    description: "Hand-held fire extinguishers and protective equipment"
+    deliverables:
+      - "Extinguisher specifications and locations"
+      - "Extinguisher quantity and type analysis"
+      - "Crew training requirements"
+    resources:
+      - role: "Fire Protection Engineer"
+        allocation: "0.3 FTE"
+    
+  # WP 2.7 — Fire Indication and Warning
+  - wbs_id: "WBS-PRB-26-60"
+    phase: "LC01-LC04"
+    title: "Fire Indication and Warning"
+    description: "Flight deck and cabin crew fire alerting systems"
+    deliverables:
+      - "Fire warning system architecture"
+      - "Cockpit indication design"
+      - "Cabin crew alerting design"
+      - "Integration with aircraft alerting system"
+    resources:
+      - role: "Avionics Engineer"
+        allocation: "0.8 FTE"
+      - role: "Human Factors Engineer"
+        allocation: "0.3 FTE"
+    
+  # WP 2.8 — System Testing and Verification
+  - wbs_id: "WBS-VER-26-70"
+    phase: "LC06"
+    title: "System Testing and Verification"
+    description: "Fire protection system integrity checks and testing"
+    deliverables:
+      - "Test procedures for detection systems"
+      - "Test procedures for suppression systems"
+      - "System integration tests"
+      - "Certification test reports"
+    resources:
+      - role: "Test Engineer"
+        allocation: "1.2 FTE"
+      - role: "Safety Engineer"
+        allocation: "0.5 FTE"
+
+# Cross-cutting activities
+cross_cutting:
+  - activity: "Safety Assessment (FHA/PSSA/SSA)"
+    allocation: "Continuous LC01-LC08"
+    lead: "STK_SAF"
+    
+  - activity: "Certification Coordination"
+    allocation: "Continuous LC01-LC08"
+    lead: "STK_CERT"
+    
+  - activity: "Documentation (S1000D)"
+    allocation: "LC08-LC10"
+    lead: "STK_TECH_PUB"
