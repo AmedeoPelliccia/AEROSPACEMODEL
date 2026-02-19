@@ -253,7 +253,7 @@ A fully classical, versioned specification of an experiment that can be re-run.
 ### QoQ (Quantum Observables & Quality)
 
 Measured outputs and quality metrics with uncertainty bounds.  
-**Examples:** QBER, key rate, integrity score, Allan deviation, fidelity proxy.
+**Examples:** quantum bit error rate (QBER), key rate, integrity score, Allan deviation, fidelity proxy.
 
 ### Dynamic Error Budgeting
 
