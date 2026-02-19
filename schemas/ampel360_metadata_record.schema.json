@@ -1,0 +1,355 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ampel360.com/schemas/metadata_record.schema.json",
+  "title": "AMPEL360 Q100 Metadata Record Schema",
+  "description": "Canonical metadata schema for all engineering and publication artifacts in AMPEL360 Q100 program per CV-003 specification",
+  "type": "object",
+  "required": [
+    "record_id",
+    "aircraft_id",
+    "model_id",
+    "msn",
+    "ata_chapter",
+    "ata_chapter_title",
+    "section",
+    "section_title",
+    "subject",
+    "optin_axis",
+    "optin_subaxis",
+    "optin_subaxis_name",
+    "novel_technology",
+    "phase_type",
+    "lc_phase",
+    "lc_canonical_name",
+    "package_origin",
+    "artifact_type",
+    "artifact_type_name",
+    "artifact_title",
+    "owner_aor",
+    "status",
+    "revision",
+    "prepared_by",
+    "date_created",
+    "date_modified",
+    "ssot_root",
+    "ssot_dir",
+    "classification",
+    "gate_id"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "description": "Canonical artifact identifier",
+      "pattern": "^AMPEL360_Q100_MSN[0-9]{3}_ATA([0-9]{2}I?|IN)-[0-9]{2}-[0-9]{2}_LC(0[1-9]|1[0-4])_[A-Z0-9\\-]+_[0-9]{3}$",
+      "examples": [
+        "AMPEL360_Q100_MSN001_ATA25-10-00_LC02_REQ_001",
+        "AMPEL360_Q100_MSN001_ATA28-10-00_LC04_DES_042"
+      ]
+    },
+    "aircraft_id": {
+      "type": "string",
+      "const": "AMPEL360",
+      "description": "Aircraft program identifier"
+    },
+    "model_id": {
+      "type": "string",
+      "const": "Q100",
+      "description": "Aircraft model designation"
+    },
+    "msn": {
+      "type": "string",
+      "pattern": "^MSN[0-9]{3}$",
+      "description": "Manufacturer Serial Number",
+      "examples": ["MSN001", "MSN042"]
+    },
+    "ata_chapter": {
+      "type": "string",
+      "pattern": "^([0-9]{2}I?|IN)$",
+      "description": "ATA chapter code (00-98 or IN)",
+      "examples": ["25", "28", "71", "IN"]
+    },
+    "ata_chapter_title": {
+      "type": "string",
+      "description": "Human-readable ATA chapter name",
+      "examples": ["Equipment/Furnishings", "Fuel", "Power Plant"]
+    },
+    "section": {
+      "type": "string",
+      "pattern": "^[0-9]{2}$",
+      "description": "ATA section code (00-99)",
+      "examples": ["00", "10", "42"]
+    },
+    "section_title": {
+      "type": "string",
+      "description": "Human-readable section name",
+      "examples": ["General", "Storage", "Indicating"]
+    },
+    "subject": {
+      "type": "string",
+      "pattern": "^[0-9]{2}$",
+      "description": "ATA subject code (00-99)",
+      "examples": ["00", "10", "42"]
+    },
+    "optin_axis": {
+      "type": "string",
+      "enum": ["O", "P", "T", "I", "N"],
+      "description": "OPT-IN Framework primary domain axis"
+    },
+    "optin_subaxis": {
+      "type": "string",
+      "enum": [
+        "A", "B",
+        "P", "S",
+        "A", "M", "E1", "D", "I", "E2", "E3", "L1", "L2", "C1", "C2", "I2", "A2", "O", "P",
+        "M1", "M2", "O",
+        "D", "A", "P*"
+      ],
+      "description": "OPT-IN Framework sub-domain code"
+    },
+    "optin_subaxis_name": {
+      "type": "string",
+      "description": "Human-readable sub-domain name",
+      "examples": [
+        "Authoritative",
+        "Cryogenic Cells",
+        "Intelligence",
+        "Propulsion",
+        "Manufacturing Facilities"
+      ]
+    },
+    "novel_technology": {
+      "type": "boolean",
+      "description": "True if sub-domain is Novel Technology (⭐) requiring full LC01-LC14 activation",
+      "default": false
+    },
+    "phase_type": {
+      "type": "string",
+      "enum": ["PLM", "OPS"],
+      "description": "Lifecycle phase type: Product Lifecycle Management or Operations"
+    },
+    "lc_phase": {
+      "type": "string",
+      "pattern": "^LC(0[1-9]|1[0-4])$",
+      "description": "Lifecycle phase code (LC01-LC14)",
+      "examples": ["LC01", "LC02", "LC04", "LC12"]
+    },
+    "lc_canonical_name": {
+      "type": "string",
+      "description": "TLI v2.1 canonical lifecycle phase name",
+      "examples": [
+        "Problem Statement",
+        "System Requirements",
+        "Design Definition",
+        "Continued Airworthiness & MRO"
+      ]
+    },
+    "package_origin": {
+      "type": "string",
+      "description": "TLI package that produces this artifact type",
+      "examples": [
+        "REQUIREMENTS",
+        "DESIGN",
+        "SAFETY",
+        "TEST_RESULTS",
+        "S1000D_DM"
+      ]
+    },
+    "artifact_type": {
+      "type": "string",
+      "pattern": "^[A-Z0-9\\-]+$",
+      "description": "Controlled artifact type code (63 types)",
+      "examples": ["REQ", "DES", "DWG", "SAF", "TPR", "DM", "MSR"]
+    },
+    "artifact_type_name": {
+      "type": "string",
+      "description": "Descriptive artifact type name",
+      "examples": [
+        "System Requirement",
+        "Design Description",
+        "Safety Assessment",
+        "Test Procedure",
+        "Data Module (S1000D)"
+      ]
+    },
+    "artifact_title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Human-readable artifact title"
+    },
+    "pbs_id": {
+      "type": "string",
+      "pattern": "^PBS-[OPTIN][A-Z0-9\\*]+-ATA([0-9]{2}I?|IN)(-[0-9]{2})*-[A-Z0-9_]+$",
+      "description": "Product Breakdown Structure identifier",
+      "examples": [
+        "PBS-TA-ATA25-10-00-SEAT_ASSY",
+        "PBS-TC2-ATA28-10-00-CRYO_TANK_FWD",
+        "PBS-IM1-ATA85-10-00-TEST_RIG_FCS"
+      ]
+    },
+    "wbs_id": {
+      "type": "string",
+      "pattern": "^WBS-[A-Z]{3}-[0-9]+(\\.[0-9]+)*$",
+      "description": "Work Breakdown Structure identifier",
+      "examples": [
+        "WBS-REQ-1.2.3",
+        "WBS-DES-2.4.1",
+        "WBS-VER-3.1.2"
+      ]
+    },
+    "trace_links": {
+      "type": "array",
+      "description": "Array of upstream/downstream artifact IDs for traceability",
+      "items": {
+        "type": "object",
+        "required": ["type", "target_id"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["parent", "child", "derived_from", "verified_by", "implements", "references"],
+            "description": "Type of trace relationship"
+          },
+          "target_id": {
+            "type": "string",
+            "description": "Target artifact record_id"
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional trace relationship description"
+          }
+        }
+      }
+    },
+    "knot_id": {
+      "type": "string",
+      "pattern": "^AMPEL360_Q100_MSN[0-9]{3}_ATA[0-9]{2,}-[0-9]{2}-[0-9]{2}_LC01_KNOT_[0-9]{3}$",
+      "description": "Parent KNOT identifier if this artifact is part of a KNOT structure"
+    },
+    "owner_aor": {
+      "type": "string",
+      "description": "Area of Responsibility (person or team owning this artifact)",
+      "examples": [
+        "Systems Engineering",
+        "Design Engineering",
+        "Flight Test",
+        "Certification"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "PLANNED",
+        "DRAFT",
+        "REVIEW",
+        "APPROVED",
+        "SUPERSEDED",
+        "REJECTED"
+      ],
+      "description": "Artifact lifecycle status"
+    },
+    "revision": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
+      "description": "Semantic version (major.minor or major.minor.patch)",
+      "examples": ["1.0", "2.1", "3.4.2"]
+    },
+    "prepared_by": {
+      "type": "string",
+      "description": "Author identifier (name, email, or user ID)"
+    },
+    "date_created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 creation timestamp"
+    },
+    "date_modified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 last modification timestamp"
+    },
+    "ssot_root": {
+      "type": "string",
+      "enum": ["KDB/LM/SSOT/PLM", "IDB/OPS/LM"],
+      "description": "Single Source of Truth root directory"
+    },
+    "ssot_dir": {
+      "type": "string",
+      "pattern": "^LC[0-9]{2}_[A-Z_]+$",
+      "description": "TLI v2.1 canonical lifecycle directory name",
+      "examples": [
+        "LC01_PROBLEM_STATEMENT",
+        "LC02_SYSTEM_REQUIREMENTS",
+        "LC04_DESIGN_DEFINITION"
+      ]
+    },
+    "ssot_path": {
+      "type": "string",
+      "description": "Full computed SSOT path (optional, derived from other fields)"
+    },
+    "pub_path": {
+      "type": "string",
+      "description": "Publication tree path (optional, for published artifacts)"
+    },
+    "classification": {
+      "type": "string",
+      "enum": ["SSOT", "PUB", "BOTH"],
+      "description": "Artifact classification: SSOT-only, Publication-only, or both"
+    },
+    "baseline_ref": {
+      "type": "string",
+      "enum": ["FBL", "DBL", "PBL"],
+      "description": "Baseline reference if this artifact is part of a formal baseline"
+    },
+    "gate_id": {
+      "type": "string",
+      "pattern": "^G-LC[0-9]{2}-[A-Z]+$",
+      "description": "TLI gate identifier",
+      "examples": [
+        "G-LC01-ENTRY",
+        "G-LC02-FBL",
+        "G-LC04-DBL",
+        "G-LC08-CERT"
+      ]
+    },
+    "verification_method": {
+      "type": "string",
+      "enum": ["Review", "Inspection", "Test", "Analysis", "BREX+CI"],
+      "description": "Verification/validation method"
+    },
+    "certification_ref": {
+      "type": "string",
+      "description": "Certification regulation reference (e.g., CS-25.1309, Part 25.1309)",
+      "examples": ["CS-25.1309", "Part 25.1309", "SC-28-H2-001"]
+    },
+    "precedence_layer": {
+      "type": "string",
+      "pattern": "^L[0-8]$",
+      "description": "Precedence model layer (L0-L8) governing this artifact",
+      "examples": ["L0", "L1", "L2", "L4", "L7"]
+    }
+  },
+  "additionalProperties": true,
+  "definitions": {
+    "novel_technology_subdomains": {
+      "description": "Novel Technology sub-domains requiring full LC01-LC14 activation",
+      "enum": ["C2", "I2", "P"]
+    },
+    "plm_phases": {
+      "description": "Product Lifecycle Management phases (LC01-LC10)",
+      "enum": [
+        "LC01", "LC02", "LC03", "LC04", "LC05",
+        "LC06", "LC07", "LC08", "LC09", "LC10"
+      ]
+    },
+    "ops_phases": {
+      "description": "Operations phases (LC11-LC14)",
+      "enum": ["LC11", "LC12", "LC13", "LC14"]
+    },
+    "exclusive_baselines": {
+      "description": "Exclusive baseline producers",
+      "FBL": "LC02",
+      "DBL": "LC04",
+      "PBL": "LC10"
+    }
+  }
+}

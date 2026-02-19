@@ -2,6 +2,10 @@
 
 **AIRCRAFT TLI v2.1 Canonical Architecture**
 
+> **Controlled Vocabulary:** This structure is governed by [AMPEL360-CV-003](../docs/specifications/AMPEL360_CV_003_CONTROLLED_VOCABULARY.md)  
+> **Identifier Grammar:** `AMPEL360_Q100_MSN{nnn}_ATA{cc}-{ss}-{ss}_LC{nn}_{TYPE}_{seq}`  
+> **PBS Grammar:** `PBS-{AXIS}{SUBDOM}-{ATA}-{SECTION}-{SUBJECT}-{ITEM}`
+
 ---
 
 ## Domain Structure
@@ -101,16 +105,33 @@
 
 ---
 
-## Total Coverage
+## Total Coverage (CV-003 Specification)
 
-- **5** Top-Level Domains
-- **15** Technology Subdomains within T-TECHNOLOGIES
-- **2** Organization Subdomains within O-ORGANIZATIONS (A, B)
-- **2** Program Subdomains within P-PROGRAMS (P, S)
-- **3** Infrastructure Subdomains within I-INFRASTRUCTURES (M1, M2, O)
-- **3** Neural Network Subdomains within N-NEURAL_NETWORKS (D, A, P*)
-- **75+** ATA Chapter Directories
-- **3** Novel Technology Designations
+- **5** Top-Level Domains (O, P, T, I, N)
+- **25** Sub-Domains Total:
+  - **2** Organization Sub-Domains (O/A, O/B)
+  - **2** Program Sub-Domains (P/P, P/S)
+  - **15** Technology Sub-Domains (T/A, T/M, T/E1, T/D, T/I, T/E2, T/E3, T/L1, T/L2, T/C1, T/C2⭐, T/I2⭐, T/A2, T/O, T/P⭐)
+  - **3** Infrastructure Sub-Domains (I/M1, I/M2, I/O)
+  - **3** Neural Network Sub-Domains (N/D, N/A, N/P*)
+- **3** Novel Technology Designations (⭐): T/C2, T/I2, T/P
+- **66** ATA Chapter Directories
+- **14** Lifecycle Phases (LC01–LC14)
+- **63** Artifact Type Codes
+- **3** Exclusive Baselines (FBL, DBL, PBL)
+
+---
+
+## Related Documents
+
+| Document | Path | Description |
+|----------|------|-------------|
+| **CV-003 Specification** | `docs/specifications/AMPEL360_CV_003_CONTROLLED_VOCABULARY.md` | Complete controlled vocabulary and identifier grammar |
+| **Artifact Types Registry** | `schemas/ampel360_artifact_types.yaml` | 63 artifact types with package origins |
+| **Metadata Schema** | `schemas/ampel360_metadata_record.schema.json` | JSON Schema for artifact metadata |
+| **TLI v2.1 Registry** | `lifecycle/LC_PHASE_REGISTRY.yaml` | Canonical lifecycle phase definitions |
+| **T-Subdomain Activation** | `lifecycle/T_SUBDOMAIN_LC_ACTIVATION.yaml` | Technology subdomain lifecycle rules |
+| **Python Module** | `src/aerospacemodel/ampel360/` | Identifier grammar and PBS/WBS utilities |
 
 ---
 
