@@ -287,7 +287,7 @@ A constrained subset of standards/schemas required for a specific use case.
 ### Green Compute Profile
 
 A measurable sustainability profile for compute/storage/network.  
-**KPIs:** energy/GB, CO₂e/tx, renewable %, PUE.
+**KPIs:** energy/GB, CO₂e/tx, renewable %, PUE (Power Usage Effectiveness).
 
 ### Privacy by Design
 
