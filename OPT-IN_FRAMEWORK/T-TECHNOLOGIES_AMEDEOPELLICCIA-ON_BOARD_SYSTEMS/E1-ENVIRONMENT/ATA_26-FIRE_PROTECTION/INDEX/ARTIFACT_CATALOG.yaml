@@ -66,6 +66,6 @@ artifact_types:
   publications:
     count: 0
     location: "26-00-general/26-00-00-general-general/IDB/PUB/LM/LC08_PUBLICATION/"
-    naming_pattern: "PMC-AMPEL-A-26-{yy}-{zz}"
+    naming_pattern: "PMC-Q100-A-26-{yy}-{zz}"
     formats: ["xml"]
     description: "Publication module codes for compiled output"
