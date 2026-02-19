@@ -90,13 +90,16 @@ The portfolio novelty is grounded in **four pillars** that distinguish AQUA-V fr
 
 ## Filing Strategy Summary
 
+> **EU Framework Mandate:** All intellectual property registries reside in the European Union. The primary registry is the **EPO** (European Patent Office, Munich, Germany 🇩🇪). EU-wide protection via the **Unitary Patent** system. Non-EU jurisdictions (US, UK, JP) are secondary markets accessed via PCT.
+
 **Recommended path (see `FILING_STRATEGY/STRATEGY.md` for full rationale):**
 
-1. **Month 0** — US Provisional for P0 (establishes priority date for all children)
-2. **Month 0–1** — US Provisionals for C1.2 + C2.1 (strongest novel claims)
-3. **Month 12** — PCT application (P0 + C1.2 + C2.1 consolidated or separate)
-4. **Month 30** — EP + US national phase entry
-5. **Ongoing** — C3.x filed as continuation-in-part as BWB-H₂ technology matures
+1. **Month 0** — EP application for P0 at EPO (EU primary registry — sets EU priority date)
+2. **Month 0–1** — EP applications for C1.2 + C2.1 at EPO (strongest novel claims)
+3. **Month 12** — PCT application(s) with EPO as ISA (global umbrella from EU priority)
+4. **Month ~28** — EP grant → **Unitary Patent request** (single EU-wide right, EPO register)
+5. **Month 30** — Non-EU national phase entry: UK (UKIPO), US (USPTO), CA, JP
+6. **Ongoing** — C3.x / C4.x filed as EP divisionals at EPO as BWB-H₂ technology matures
 
 ---
 
