@@ -1,0 +1,71 @@
+# ARTIFACT_CATALOG.yaml — Artifact Type Inventory for ATA 26 (E1)
+# AMPEL360 Q100 — E1-ENVIRONMENT Fire Protection System
+
+ata_system: "26"
+variant: "E1-ENVIRONMENT"
+last_updated: "2026-02-19"
+
+artifact_types:
+
+  requirements:
+    count: 0
+    location: "26-00-general/26-00-00-general-general/IDB/DEV/LM/LC03_REQUIREMENTS/"
+    naming_pattern: "E1-26-REQ-{NNN}"
+    formats: ["yaml", "csv"]
+    description: "System, safety, and interface requirements for fire protection"
+
+  design_specs:
+    count: 0
+    location: "26-00-general/26-00-00-general-general/IDB/DEV/LM/LC04_DESIGN/"
+    naming_pattern: "E1-26-DES-{NNN}"
+    formats: ["yaml", "md"]
+    description: "Design specifications for detection, suppression, and indication systems"
+
+  safety_analyses:
+    count: 0
+    location: "26-00-general/26-00-00-general-general/KDB/LM/SSOT/SAFETY/"
+    naming_pattern: "E1-26-SAF-{NNN}"
+    formats: ["yaml", "csv"]
+    description: "ARP4761 FHA, FMEA, and fault tree analyses"
+
+  test_procedures:
+    count: 0
+    location: "26-00-general/26-00-00-general-general/IDB/DEV/LM/LC06_VERIFICATION/"
+    naming_pattern: "E1-26-TST-{NNN}"
+    formats: ["yaml", "md"]
+    description: "Verification and validation test procedures"
+
+  data_modules:
+    count: 0
+    location: "26-00-general/26-00-00-general-general/IDB/PUB/LM/LC08_PUBLICATION/"
+    naming_pattern: "DMC-Q100-A-26-{yy}-{zz}-{SS}A-{III}A-D"
+    formats: ["xml"]
+    description: "S1000D data modules for AMM/SRM publication"
+
+  trade_studies:
+    count: 0
+    location: "26-00-general/26-00-00-general-general/KDB/DEV/trade-studies/"
+    naming_pattern: "TS-26-{yy}-TS{NN}_{topic}.yaml"
+    formats: ["yaml", "md"]
+    description: "LC04 trade studies for fire protection architecture (detection, suppression agents)"
+
+  compliance_matrices:
+    count: 0
+    location: "26-00-general/26-00-00-general-general/KDB/DEV/trade-studies/"
+    naming_pattern: "CS25_compliance_matrix.{yaml|md}"
+    formats: ["yaml", "md"]
+    description: "EASA CS-25 compliance matrices for fire protection with Special Conditions"
+
+  baselines:
+    count: 0
+    location: "26-00-general/26-00-00-general-general/KDB/LM/SSOT/"
+    naming_pattern: "FBL-Q100-ATA26-{NNN}.{yaml|md}"
+    formats: ["yaml", "md"]
+    description: "Functional Baseline definitions with acceptance criteria for DEV → SSOT promotion"
+
+  publications:
+    count: 0
+    location: "26-00-general/26-00-00-general-general/IDB/PUB/LM/LC08_PUBLICATION/"
+    naming_pattern: "PMC-Q100-A-26-{yy}-{zz}"
+    formats: ["xml"]
+    description: "Publication module codes for compiled output"
