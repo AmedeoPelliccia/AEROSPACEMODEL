@@ -344,7 +344,7 @@ Quantum Key Distribution; optional secure channel overlay with strict assurance 
 
 ### Quantum Navigation (QNAV)
 
-Navigation capability in GNSS-denied contexts; must output integrity metrics and bounds.  
+Navigation capability in Global Navigation Satellite System (GNSS)-denied contexts; must output integrity metrics and bounds.  
 **Role:** overlay gated by `assurance_state`.
 
 ---
