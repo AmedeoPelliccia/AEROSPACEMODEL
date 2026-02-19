@@ -322,7 +322,7 @@ Set of non-dominated candidates; used before applying weights.
 
 ## 8) Technology Glossary (Enablers)
 
-### SWIM / FF-ICE / TBO
+### SWIM / TBO
 
 ATM information exchange and trajectory-based operations concepts used as trajectory data substrate.  
 **Role:** interfaces for `trajectory_intent` exchange.
