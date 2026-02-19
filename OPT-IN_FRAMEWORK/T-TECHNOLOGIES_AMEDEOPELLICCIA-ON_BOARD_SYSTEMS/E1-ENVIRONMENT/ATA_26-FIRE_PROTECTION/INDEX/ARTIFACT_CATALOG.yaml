@@ -38,7 +38,7 @@ artifact_types:
   data_modules:
     count: 0
     location: "26-00-general/26-00-00-general-general/IDB/PUB/LM/LC08_PUBLICATION/"
-    naming_pattern: "DMC-AMPEL-A-26-{yy}-{zz}-{SS}A-{III}A-D"
+    naming_pattern: "DMC-Q100-A-26-{yy}-{zz}-{SS}A-{III}A-D"
     formats: ["xml"]
     description: "S1000D data modules for AMM/SRM publication"
 
