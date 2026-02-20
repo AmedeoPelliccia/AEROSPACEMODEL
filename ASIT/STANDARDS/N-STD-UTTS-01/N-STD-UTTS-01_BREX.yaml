@@ -381,7 +381,6 @@ escalation_procedures:
     trigger_rules:
       - "UTTS-SAFE-001"
       - "UTTS-SAFE-002"
-      - "UTTS-SAFE-003"
       - "UTTS-SAFE-004"
     escalation_target: "STK_SAF"
     timeout: "72 hours"
