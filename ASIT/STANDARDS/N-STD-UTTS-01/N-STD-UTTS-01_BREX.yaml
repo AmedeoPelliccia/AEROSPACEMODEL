@@ -172,9 +172,9 @@ ledger_rules:
     message: "Baseline freeze requires authority signature"
 
   - id: "UTTS-LEDGER-004"
-    condition: "Certification-phase entries (LC08) cannot be altered after authority signature"
+    condition: "No new ledger entries may modify or supersede certification-phase (LC08) artifacts after an authority signature has been recorded for those artifacts"
     enforcement: "block"
-    message: "Post-signature certification entries are immutable"
+    message: "New entries cannot change the state of authority-signed LC08 certification artifacts"
 
   - id: "UTTS-LEDGER-005"
     condition: "Ledger append/verify module changes require STK_SAF review"
