@@ -83,7 +83,8 @@ class TestUTTSStandardYAML:
         assert "MTL3" in tier_ids
 
     def test_mtl3_ledger_entry_schema(self, std_data: dict):
-        mtl3 = [t for t in std_data["tiers"] if t["id"] == "MTL3"][0]
+        mtl3 = next((t for t in std_data["tiers"] if t["id"] == "MTL3"), None)
+        assert mtl3 is not None, "Tier MTL3 not found in tiers"
         required = mtl3["ledger_entry_schema"]["required_fields"]
         assert "entry_id" in required
         assert "payload_hash" in required
@@ -91,14 +92,16 @@ class TestUTTSStandardYAML:
         assert "authority_signature" in required
 
     def test_mtl3_event_types(self, std_data: dict):
-        mtl3 = [t for t in std_data["tiers"] if t["id"] == "MTL3"][0]
+        mtl3 = next((t for t in std_data["tiers"] if t["id"] == "MTL3"), None)
+        assert mtl3 is not None, "Tier MTL3 not found in tiers"
         events = mtl3["ledger_entry_schema"]["event_types"]
         assert "TOKEN_CREATE" in events
         assert "TRANSFORM_PHI" in events
         assert "BASELINE_FREEZE" in events
 
     def test_mtl2_phi_operator(self, std_data: dict):
-        mtl2 = [t for t in std_data["tiers"] if t["id"] == "MTL2"][0]
+        mtl2 = next((t for t in std_data["tiers"] if t["id"] == "MTL2"), None)
+        assert mtl2 is not None, "Tier MTL2 not found in tiers"
         assert mtl2["operator"] == "Φ"
 
     def test_invariants_exist(self, std_data: dict):
