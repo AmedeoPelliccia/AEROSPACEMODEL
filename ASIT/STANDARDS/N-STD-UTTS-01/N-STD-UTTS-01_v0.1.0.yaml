@@ -57,7 +57,8 @@ metadata:
   replay_capable: true
 
   parent_standard: "MTL-META-CORE v1.0.0"
-  ata_domain: "96"
+  ata_domain: "96"          # Canonical operational domain (ATA 96 — Traceability, DPP, Ledger)
+  ata_domain_reserved: "98" # Reserved/future program slot per scope (ATA 98)
   brex_profile: "AEROSPACEMODEL-PRJ-01"
 
 # -----------------------------------------------------------------------------
