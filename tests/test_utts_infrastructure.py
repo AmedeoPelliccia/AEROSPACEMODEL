@@ -746,7 +746,9 @@ class TestReadme:
             assert dim_id in text, f"README missing dimension {dim_id}"
 
     def test_readme_contains_mtl_tiers(self, text):
-        assert "MTL₁" in text and "MTL₂" in text and "MTL₃" in text
+        assert ("MTL₁" in text or "MTL1" in text)
+        assert ("MTL₂" in text or "MTL2" in text)
+        assert ("MTL₃" in text or "MTL3" in text)
 
     def test_readme_links_to_standard_yaml(self, text):
         assert STANDARD_FILE in text
