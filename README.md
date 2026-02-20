@@ -520,7 +520,7 @@ AEROSPACEMODEL serves as the **transformation and intelligence engine** for the 
 
 ## LH₂ Infrastructure & Special Conditions
 
-AEROSPACEMODEL includes a complete **LH₂ Infrastructure** domain under [`OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN/`](OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN/), governing ground support equipment, hydrogen supply chain logistics, and airport-side cryogenic infrastructure.
+AEROSPACEMODEL includes a **planned LH₂ Infrastructure** scaffold under [`OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN/`](OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN/) (currently a placeholder directory pending population), scoped to cover ground support equipment, hydrogen supply chain logistics, and airport-side cryogenic infrastructure. For current infrastructure content see [`OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/00_INDEX.md`](OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/00_INDEX.md).
 
 Special Conditions are formally registered for novel hydrogen and fuel-cell technologies under CS-25:
 
