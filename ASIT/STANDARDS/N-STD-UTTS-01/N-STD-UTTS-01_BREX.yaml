@@ -157,9 +157,9 @@ governance_rules:
 # -----------------------------------------------------------------------------
 ledger_rules:
   - id: "UTTS-LEDGER-001"
-    condition: "Every ledger entry.previous_hash MUST equal SHA3-512 of the preceding entry canonical representation"
+    condition: "Hash chain linkage correctness: every ledger entry.previous_hash MUST equal SHA3-512 of the preceding entry canonical representation"
     enforcement: "block"
-    message: "Hash-chain integrity violation detected"
+    message: "Hash-chain linkage correctness violation detected"
 
   - id: "UTTS-LEDGER-002"
     condition: "Ledger is append-only; no entry may be deleted or modified"
