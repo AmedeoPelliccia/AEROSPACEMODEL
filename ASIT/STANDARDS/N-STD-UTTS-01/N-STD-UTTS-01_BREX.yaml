@@ -395,13 +395,6 @@ escalation_procedures:
       - "CCB decision"
     timeout: "5 business days"
 
-  governance_override:
-    trigger_rules:
-      - "UTTS-GOV-002"
-      - "UTTS-GOV-003"
-    escalation_target: "CCB"
-    timeout: "5 business days"
-
   undefined_condition:
     trigger: "No matching BREX rule"
     escalation_target: "STK_CM"
