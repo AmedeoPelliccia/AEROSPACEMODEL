@@ -36,6 +36,11 @@
 - [Regulatory Applicability Matrix](#regulatory-applicability-matrix)
 - [Standards Alignment](#standards-alignment)
 - [Integration with AMPEL360](#integration-with-ampel360)
+- [LH₂ Infrastructure & Special Conditions](#lh₂-infrastructure--special-conditions)
+- [Manufacturing Technology Layers (MTL)](#manufacturing-technology-layers-mtl)
+- [AQUA-V Programme](#aqua-v-programme)
+- [Manufacturing Pipeline](#manufacturing-pipeline)
+- [How to Cite](#how-to-cite)
 - [Who This Is For](#who-this-is-for)
 - [Documentation Index](#documentation-index)
 - [Enabling Concepts — Glossary](#enabling-concepts--glossary)
@@ -513,6 +518,69 @@ AEROSPACEMODEL serves as the **transformation and intelligence engine** for the 
 
 ---
 
+## LH₂ Infrastructure & Special Conditions
+
+AEROSPACEMODEL includes a complete **LH₂ Infrastructure** domain under [`OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN/`](OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES/ATA_IN_H2_GSE_AND_SUPPLY_CHAIN/), governing ground support equipment, hydrogen supply chain logistics, and airport-side cryogenic infrastructure.
+
+Special Conditions are formally registered for novel hydrogen and fuel-cell technologies under CS-25:
+
+| SC Reference | Title |
+|---|---|
+| **SC-28-H2-001** | Hydrogen Storage and Distribution |
+| **SC-28-CRYO-002** | Cryogenic Temperature Handling |
+| **SC-71-FUELCELL-001** | Fuel Cell Power Plant Certification |
+| **SC-AI-ASSURANCE-001** | AI Model Assurance (EU AI Act / CS-25) |
+
+> 📖 See [`OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/`](OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/) and the ATA 28 H₂ Cryogenic and ATA 71 Fuel Cell instruction files.
+
+---
+
+## Manufacturing Technology Layers (MTL)
+
+The **Method Token Library (MTL)** is AEROSPACEMODEL's engineering tokenisation framework — a machine-processable vocabulary of atomic engineering subjects, process methods, and standard procedures that bridges certified knowledge with AI-executable instructions.
+
+**MTL Layers:**
+- **MTK tokens** — subject-level engineering entities (e.g., cryogenic tank wall segments, material grades)
+- **MTP tokens** — process and scaling methods (e.g., thermal gradient analysis, leak-rate computation)
+- **STP records** — standard procedures derived from MTK + MTP tokens, directly linked to AI training data
+
+The MTL enforces version-locked traceability: every AI model trained on MTL tokens is bound to the exact MTL version, and any library update triggers an automatic HOLD until revalidation.
+
+> 📖 See [`OPT-IN_FRAMEWORK/.../KDB/DEV/mtl/`](OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CELLS/ATA_28-FUEL/28-11-lh2-primary-tank/28-11-00-lh2-primary-tank-general/KDB/DEV/mtl/) for the reference MTL-28-11-00 implementation.
+
+---
+
+## AQUA-V Programme
+
+**AQUA-V** (Artificial Quantum Unified Architectures Venture) is AEROSPACEMODEL's quantum-assisted engineering programme, combining two pillars:
+
+- **QAPD** — Quantum Accelerated Product Development: hybrid QUBO encoding for certified aerospace design, deterministic reproducibility pipelines, and automated certification evidence generation
+- **QAOS** — Quantum Assisted Operation Services: criticality-aware quantum resource orchestration, real-time digital twin synchronisation, and cryptographic certification evidence ledger
+
+All AQUA-V intellectual property is managed under an EU-first patent strategy (EPO / Unitary Patent system), ensuring GAIA-X data sovereignty compliance and alignment with EASA certification principles.
+
+> 📖 See [`AQUA-V-IP/`](AQUA-V-IP/) and the foundational architecture paper [`AQUA-V-IP/AQUA_V_FOUNDATIONAL_PAPER_v1.0.md`](AQUA-V-IP/AQUA_V_FOUNDATIONAL_PAPER_v1.0.md).
+
+---
+
+## Manufacturing Pipeline
+
+The **M1-MANUFACTURING_FACILITIES** subdomain provides a standards-based manufacturing infrastructure registry governing the production, assembly, testing, and quality assurance of the AMPEL360 Q100 aircraft.
+
+| Subdomain | Code | Key Standards |
+|-----------|------|---------------|
+| Quality | 01 | ISO 9001, AS9100 Rev D, NADCAP, AS9102 |
+| OHS Safety Workplace | 02 | ISO 45001, ISO 6385, ES RD 486/1997, OSHA 29 CFR 1910 |
+| Environment HAZMAT | 03 | ISO 14001, REACH/CLP, NFPA 2, NFPA 55 |
+| Machinery Process Safety | 04 | ISO 12100, ISO 13849, ISO 9241 |
+| Warehouse Inventory | 05 | RFID/QR Traceability, ISO 17025 |
+| Additive Manufacturing | 06 | AM Quality Gates, Material Batch Traceability, NADCAP |
+| Airworthiness Production | 07 | EASA Part 21 Subpart G, FAA 14 CFR Part 21 |
+
+> 📖 See [`OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/M1-MANUFACTURING_FACILITIES/`](OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/M1-MANUFACTURING_FACILITIES/).
+
+---
+
 ## Who This Is For
 
 - **Aircraft OEMs** — new or derivative programs requiring digital continuity
@@ -602,6 +670,39 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines, including BREX-compliant 
 **CC0 1.0 Universal** — see [LICENSE](LICENSE).
 
 This work is dedicated to the public domain under the [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) dedication.
+
+---
+
+## How to Cite
+
+To cite the AEROSPACEMODEL framework:
+
+```bibtex
+@software{pelliccia2026aerospacemodel,
+  author  = {Pelliccia, Amedeo},
+  title   = {{AEROSPACEMODEL}: European-governed digital continuity infrastructure
+             for deterministic, traceable aerospace lifecycle transformations},
+  year    = {2026},
+  version = {2.0.0},
+  license = {CC0-1.0},
+  url     = {https://github.com/AmedeoPelliccia/AEROSPACEMODEL}
+}
+```
+
+To cite the AQUA-V foundational architecture (Deterministic Governance Tuple, QAPD/QAOS, Operational Evidence Ledger):
+
+```bibtex
+@techreport{pelliccia2026aquav,
+  author  = {Pelliccia, Amedeo},
+  title   = {{AQUA-V} v1.0: Foundational Architecture for
+             Quantum-Assisted Aerospace Product Development and Operations},
+  year    = {2026},
+  version = {1.0.0},
+  url     = {https://github.com/AmedeoPelliccia/AEROSPACEMODEL/blob/main/AQUA-V-IP/AQUA_V_FOUNDATIONAL_PAPER_v1.0.md}
+}
+```
+
+See [`CITATION.cff`](CITATION.cff) for machine-readable citation metadata.
 
 ---
 
