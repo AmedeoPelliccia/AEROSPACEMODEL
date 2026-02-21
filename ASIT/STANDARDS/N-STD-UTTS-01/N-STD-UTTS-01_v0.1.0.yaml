@@ -297,29 +297,34 @@ hash_chain_integrity:
 # -----------------------------------------------------------------------------
 governance_rules_inline:
   - id: "UTTS-GOV-INLINE-001"
-    name: "Hash Continuity"
-    statement: "Every modification event must chain from the previous hash (SHA3-512)"
+    name: "Authority Node"
+    statement: "Every modification event must carry an ASIT-recognized authority node"
     enforcement: "block"
+    brex_ref: "UTTS-GOV-001"
 
   - id: "UTTS-GOV-INLINE-002"
     name: "Lifecycle Consistency"
     statement: "LC phase regression requires explicit ECR/ECO authorization"
     enforcement: "block"
+    brex_ref: "UTTS-GOV-002"
 
   - id: "UTTS-GOV-INLINE-003"
     name: "Regulatory Anchoring"
     statement: "Every technical change (constraint_update, parameter_revision) must reference at least one regulation or SC"
     enforcement: "block"
+    brex_ref: "UTTS-GOV-003"
 
   - id: "UTTS-GOV-INLINE-004"
-    name: "Authority Node"
-    statement: "Every modification event must carry an ASIT-recognized authority node"
-    enforcement: "block"
-
-  - id: "UTTS-GOV-INLINE-005"
     name: "Impact Scope Declaration"
     statement: "Every modification event must declare impact_scope (empty list permitted for isolated changes)"
     enforcement: "block"
+    brex_ref: "UTTS-GOV-004"
+
+  - id: "UTTS-GOV-INLINE-005"
+    name: "Baseline Change Control"
+    statement: "Modifications to BASELINED tokens require CCB approval"
+    enforcement: "require_approval"
+    brex_ref: "UTTS-GOV-005"
 
 # -----------------------------------------------------------------------------
 # TIERS (id-indexed, compatible with MTL-META-CORE)
