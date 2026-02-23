@@ -1,0 +1,29 @@
+# A-AIRFRAME_CABINS
+
+**Domain:** T-TECHNOLOGIES
+**Subdomain:** A-AIRFRAME_CABINS
+
+---
+
+## ATA Chapters
+
+| ATA Chapter | Title | Boundary | Directory |
+|-------------|-------|----------|-----------|
+| ATA 20 | Standard Practices — Airframe | SHARED | [ATA_20-STANDARD_PRACTICES_AIRFRAME/](ATA_20-STANDARD_PRACTICES_AIRFRAME/) |
+| ATA 25 | Equipment and Furnishings | MIXED | [ATA_25-EQUIPMENT_FURNISHINGS/](ATA_25-EQUIPMENT_FURNISHINGS/) |
+| ATA 44 | Cabin Systems | MIXED | [ATA_44-CABIN_SYSTEMS/](ATA_44-CABIN_SYSTEMS/) |
+| ATA 50 | Cargo and Accessory Compartments | MIXED | [ATA_50-CARGO_AND_ACCESSORY_COMPARTMENTS/](ATA_50-CARGO_AND_ACCESSORY_COMPARTMENTS/) |
+| ATA 51 | Structures — General | SHARED | [ATA_51-STANDARD_PRACTICES_GENERAL/](ATA_51-STANDARD_PRACTICES_GENERAL/) |
+| ATA 52 | Doors | FORKED | [ATA_52-DOORS/](ATA_52-DOORS/) |
+| ATA 53 | Fuselage | FORKED | [ATA_53-FUSELAGE/](ATA_53-FUSELAGE/) |
+| ATA 54 | Nacelles / Pylons | FORKED | [ATA_54-NACELLES_PYLONS/](ATA_54-NACELLES_PYLONS/) |
+| ATA 55 | Stabilizers | FORKED | [ATA_55-STABILIZERS/](ATA_55-STABILIZERS/) |
+| ATA 56 | Windows | FORKED | [ATA_56-WINDOWS/](ATA_56-WINDOWS/) |
+| ATA 57 | Wings | FORKED | [ATA_57-WINGS/](ATA_57-WINGS/) |
+
+---
+
+## Related Documents
+
+- [T-TECHNOLOGIES README](../README.md)
+- [00_INDEX](../00_INDEX.md)
