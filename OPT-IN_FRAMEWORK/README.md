@@ -11,27 +11,27 @@
 The **OPT-IN_FRAMEWORK** provides the structural foundation for organizing ATA iSpec 2200-aligned content across the complete aircraft lifecycle (LC01–LC14).  
 It supports the GenLM v2.1 canonical architecture by establishing a deterministic, traceable directory structure for aircraft systems, technologies, and operational artifacts.
 
-The framework is constrained to **five top-level domains**: **O, P, T, I, N**.
+The framework is constrained to **seven top-level domains**: **O, P, R, T, I, N, S**.
 
 ---
 
 ## Framework Structure
 
-## 1) **O-ORGANIZATIONS** (ATA 00–05)
+## 1) **O-ORGANIZATIONS** (ATA 001–004, 012, 018)
 
 Organizational and governance documentation including maintenance policies, operational procedures, and airworthiness limitations.
 
 - **A — Authoritative** (ATA 00, 04, 05): Agency, regulatory, and legal-derived requirements  
 - **B — Business Enforcement** (ATA 01, 02, 03): Operator business policies and enforcement
 
-## 2) **P-PROGRAMS** (ATA 06–12)
+## 2) **P-PROGRAMS** (ATA 000, 005–011)
 
 Program-level documentation including dimensions, servicing, and operational procedures.
 
 - **P — Product Definition** (ATA 06, 08, 11): What the product is — dimensions, weight, markings  
 - **S — Service Instruction** (ATA 07, 09, 10, 12): How the product is handled — lifting, towing, servicing
 
-## 3) **T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS** (ATA 20–80, 95–97)
+## 3) **T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS** (ATA 020–079, 095–097)
 
 Comprehensive on-board systems organized into 15 technology subdomains.  
 This is the largest domain and covers aircraft systems from airframe to propulsion and intelligence systems.
@@ -54,7 +54,7 @@ This is the largest domain and covers aircraft systems from airframe to propulsi
 - **O-OPERATING_SYSTEMS**: Multisystem integration  
 - **P-PROPULSION**: Power plant and propulsion systems (**Novel Technology**, fuel-cell based)
 
-## 4) **I-INFRASTRUCTURES**
+## 4) **I-INFRASTRUCTURES** (ATA 080–089)
 
 Ground support equipment, servicing infrastructure, and hydrogen supply chain.
 
@@ -62,13 +62,32 @@ Ground support equipment, servicing infrastructure, and hydrogen supply chain.
 - **M2 — Maintenance Environments** (ATA 08I, 10I, 12I): In-line, hangars, shops  
 - **O — Operations & Service Structures** (ATA 03I, ATA IN H2 GSE): Airport facilities, fuel logistics, ground services
 
-## 5) **N-NEURAL_NETWORKS**
+## 5) **N-NEURAL_NETWORKS** (ATA 090–099)
 
 AI governance, traceability systems, Digital Product Passport (DPP), and ledger systems.
 
-- **D — Digital Thread & Traceability** (ATA 96): Ledger, DPP, hash chain, identifiers, schemas, audit packs  
+- **D — Digital Thread & Traceability** (ATA 096): Ledger, DPP, hash chain, identifiers, schemas, audit packs  
 - **A — AI Governance & Assurance** (Governance): Certification pathway, ethics, human authority protocols, explainability  
-- **P\* — Program Reserved** (ATA 98): Expansion slot for future systems
+- **P\* — Program Reserved** (ATA 098): Expansion slot for future systems
+
+## 6) **S-SIMTEST_DIGITAL_TWIN** (ATA 100–124, excl. 113, 117)
+
+Simulation, test, and digital-twin content covering the full AMPEL360 virtual engineering chain.
+
+- **G — Geometry & Mesh** (ATA 100–102): CAD geometry, mesh generation, outer mold-line definitions  
+- **X — CFD/FEM Simulation** (ATA 103–105): Computational fluid dynamics and finite element models  
+- **T — Thermal Simulation** (ATA 106–108): Thermal analysis models and heat transfer  
+- **V — Validation** (ATA 109–111): Model validation against test data  
+- **F — Functional Simulation** (ATA 112, 114–116): System-level functional and mission simulations  
+- **U — Uncertainty Quantification** (ATA 118–123): Monte Carlo, surrogate models, sensitivity analysis  
+- **R — Extended Reality (XR/AR/VR)** (ATA 124): AR/VR/MR training, XR cockpit, immersive digital twin
+
+> **Note:** Chapters 113 (X13 exclusion) and 117 (X17 exclusion) are permanently excluded.  
+> Their content is at 123 (UQ Platform Governance) and 124 (XR Platform Governance) respectively.
+
+## 7) **R-RESERVED** (ATA 014–016, 019)
+
+Reserved chapters held for future programme allocation. Chapters 013 and 017 are permanently void under the X13/X17 cultural exclusion policy.
 
 ---
 
@@ -217,6 +236,43 @@ Open `ENGINEERING_SSOT/index.html` directly in a browser — no server or extern
 
 ---
 
+## Unified Air-Space Primary Code
+
+The **AMPEL360 Unified Primary Code** covers both AMPEL360-AIR-T (Q100 BWB
+aircraft) and AMPEL360-SPACE-T (Q10 PLUS spacecraft) under one deterministic
+numbering system.
+
+### Concept
+
+The same 3-digit chapter number (000–124) is used for both vehicles. The
+**product MODEL code** (Q100 vs Q10) disambiguates the context:
+
+| Chapter | Q100 (AIR-T) | Q10 (SPACE-T) |
+|---------|-------------|---------------|
+| 028 | ATA 28 – Fuel (H2 Cryogenic) | Propellant / Cryogenic Storage |
+| 057 | ATA 57 – Wings | Solar Arrays / Deployment Panels |
+| 034 | ATA 34 – Navigation | Guidance, Navigation & Control |
+| 095 | ATA 95 – AI/ML Models | AI/ML Onboard Intelligence |
+
+This single numbering space eliminates duplication and enables cross-vehicle
+traceability in the UTTS ledger and DPP.
+
+### SSOT Reference
+
+The authoritative chapter list is in:
+[`CHAPTER_MASTER_TABLE.yaml`](CHAPTER_MASTER_TABLE.yaml)
+
+This YAML is the Single Source of Truth (SSOT) for all 121 active chapters,
+their axis/subdomain assignment, and their dual AIR-T / SPACE-T meanings.
+
+### Cultural Exclusion
+
+Chapters containing "13" or "17" are permanently excluded per
+[`AMPEL360-OPTIN-CULTURAL-EXCLUSION-001.yaml`](AMPEL360-OPTIN-CULTURAL-EXCLUSION-001.yaml).
+The excluded set is `{013, 017, 113, 117}`.
+
+---
+
 ## Change History
 
 | Version | Date | Author | Description |
@@ -225,6 +281,7 @@ Open `ENGINEERING_SSOT/index.html` directly in a browser — no server or extern
 | 1.1.0 | 2026-02-17 | ASIT | Added P/I/N subdomain structure (P/S, M1/M2/O, D/A/P*) |
 | 1.2.0 | 2026-02-17 | ASIT | Added O-ORGANIZATIONS subdomain split (A/B) |
 | 1.3.0 | 2026-02-18 | ASIT | Enforced 5-domain scope (O/P/T/I/N), added ENGINEERING_SSOT front-end |
+| 2.0.0 | 2026-02-24 | ASIT | Extended to 7-domain, 33-subdomain, 121-chapter unified primary code (S+R axes, 3-digit format, X13/X17 exclusion) |
 
 ---
 

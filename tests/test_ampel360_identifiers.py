@@ -1,10 +1,10 @@
 """
-Test AMPEL360 Q100 Identifier Grammar
+Test AMPEL360 Q100/Q10 Identifier Grammar
 
 Tests for the canonical identifier grammar implementation per CV-003.
 
 Author: ASIT (Aircraft Systems Information Transponder)
-Document: AMPEL360-CV-003 v3.0
+Document: AMPEL360-CV-003 v4.0
 """
 
 import pytest
@@ -17,6 +17,8 @@ from aerospacemodel.ampel360.identifiers import (
     parse_identifier,
     validate_identifier,
     create_identifier,
+    EXCLUDED_CHAPTERS,
+    MAX_CHAPTER,
 )
 
 
@@ -35,7 +37,8 @@ class TestArtifactID:
             sequence="001"
         )
         assert artifact_id.msn == "MSN001"
-        assert artifact_id.ata_chapter == "25"
+        # 2-digit input "25" is zero-padded to "025" internally
+        assert artifact_id.ata_chapter == "025"
         assert artifact_id.lc_phase == "LC02"
     
     def test_to_compact(self):
@@ -49,7 +52,7 @@ class TestArtifactID:
             artifact_type="REQ",
             sequence="001"
         )
-        expected = "AMPEL360_Q100_MSN001_ATA25-10-00_LC02_REQ_001"
+        expected = "AMPEL360_Q100_MSN001_ATA025-10-00_LC02_REQ_001"
         assert artifact_id.to_compact() == expected
         assert str(artifact_id) == expected
     
@@ -64,7 +67,7 @@ class TestArtifactID:
             artifact_type="DES",
             sequence="042"
         )
-        expected = "AMPEL360-Q100-MSN001-ATA28-10-00-LC04-DES-042"
+        expected = "AMPEL360-Q100-MSN001-ATA028-10-00-LC04-DES-042"
         assert artifact_id.to_hyphenated() == expected
     
     def test_to_urn(self):
@@ -78,7 +81,7 @@ class TestArtifactID:
             artifact_type="TPR",
             sequence="003"
         )
-        expected = "urn:ampel360:q100:msn001:ata71-11-00:lc06:tpr:003"
+        expected = "urn:ampel360:q100:msn001:ata071-11-00:lc06:tpr:003"
         assert artifact_id.to_urn() == expected
     
     def test_invalid_msn(self):
@@ -102,11 +105,11 @@ class TestArtifactID:
             )
     
     def test_invalid_ata_chapter_boundary(self):
-        """Test ATA chapter upper boundary (99) is rejected per 00–98 spec."""
+        """Test ATA chapter upper boundary (125) is rejected per 000–124 spec."""
         with pytest.raises(ValueError, match="Invalid ATA chapter"):
             ArtifactID(
                 msn="MSN001",
-                ata_chapter="99",  # Boundary out of range (valid is 00–98)
+                ata_chapter="125",  # Boundary out of range (valid is 000–124)
                 lc_phase="LC02",
                 artifact_type="REQ"
             )
@@ -179,7 +182,6 @@ class TestArtifactID:
             sequence="003"
         )
         assert "ATA12I-30-00" in artifact_id_12i.to_compact()
-    
     def test_get_phase_type(self):
         """Test phase type detection."""
         plm_artifact = ArtifactID(
@@ -222,12 +224,12 @@ class TestIDParser:
     
     def test_parse_compact_format(self):
         """Test parsing compact format."""
-        identifier = "AMPEL360_Q100_MSN001_ATA25-10-00_LC02_REQ_001"
+        identifier = "AMPEL360_Q100_MSN001_ATA025-10-00_LC02_REQ_001"
         artifact_id = IDParser.parse(identifier)
         
         assert artifact_id is not None
         assert artifact_id.msn == "MSN001"
-        assert artifact_id.ata_chapter == "25"
+        assert artifact_id.ata_chapter == "025"
         assert artifact_id.section == "10"
         assert artifact_id.subject == "00"
         assert artifact_id.lc_phase == "LC02"
@@ -236,24 +238,24 @@ class TestIDParser:
     
     def test_parse_hyphenated_format(self):
         """Test parsing hyphenated format."""
-        identifier = "AMPEL360-Q100-MSN042-ATA28-10-00-LC04-DES-123"
+        identifier = "AMPEL360-Q100-MSN042-ATA028-10-00-LC04-DES-123"
         artifact_id = IDParser.parse(identifier)
         
         assert artifact_id is not None
         assert artifact_id.msn == "MSN042"
-        assert artifact_id.ata_chapter == "28"
+        assert artifact_id.ata_chapter == "028"
         assert artifact_id.lc_phase == "LC04"
         assert artifact_id.artifact_type == "DES"
         assert artifact_id.sequence == "123"
     
     def test_parse_urn_format(self):
         """Test parsing URN format."""
-        identifier = "urn:ampel360:q100:msn001:ata71-11-00:lc06:tpr:003"
+        identifier = "urn:ampel360:q100:msn001:ata071-11-00:lc06:tpr:003"
         artifact_id = IDParser.parse(identifier)
         
         assert artifact_id is not None
         assert artifact_id.msn == "MSN001"
-        assert artifact_id.ata_chapter == "71"
+        assert artifact_id.ata_chapter == "071"
         assert artifact_id.section == "11"
         assert artifact_id.lc_phase == "LC06"
         assert artifact_id.artifact_type == "TPR"
@@ -267,7 +269,7 @@ class TestIDParser:
     
     def test_validate_valid_identifier(self):
         """Test validation of valid identifier."""
-        identifier = "AMPEL360_Q100_MSN001_ATA25-10-00_LC02_REQ_001"
+        identifier = "AMPEL360_Q100_MSN001_ATA025-10-00_LC02_REQ_001"
         is_valid, error = IDParser.validate(identifier)
         assert is_valid is True
         assert error is None
@@ -281,7 +283,7 @@ class TestIDParser:
     
     def test_parse_with_artifact_type_hyphen(self):
         """Test parsing artifact types with hyphens."""
-        identifier = "AMPEL360_Q100_MSN001_ATA25-10-00_LC02_REQ-TRC_001"
+        identifier = "AMPEL360_Q100_MSN001_ATA025-10-00_LC02_REQ-TRC_001"
         artifact_id = IDParser.parse(identifier)
         assert artifact_id is not None
         assert artifact_id.artifact_type == "REQ-TRC"
@@ -415,14 +417,14 @@ class TestConvenienceFunctions:
     
     def test_parse_identifier(self):
         """Test parse_identifier convenience function."""
-        identifier = "AMPEL360_Q100_MSN001_ATA25-10-00_LC02_REQ_001"
+        identifier = "AMPEL360_Q100_MSN001_ATA025-10-00_LC02_REQ_001"
         artifact_id = parse_identifier(identifier)
         assert artifact_id is not None
         assert artifact_id.artifact_type == "REQ"
     
     def test_validate_identifier(self):
         """Test validate_identifier convenience function."""
-        valid_id = "AMPEL360_Q100_MSN001_ATA25-10-00_LC02_REQ_001"
+        valid_id = "AMPEL360_Q100_MSN001_ATA025-10-00_LC02_REQ_001"
         is_valid, error = validate_identifier(valid_id)
         assert is_valid is True
         
@@ -442,7 +444,7 @@ class TestConvenienceFunctions:
             sequence=1,
             format=IDFormat.COMPACT
         )
-        assert identifier == "AMPEL360_Q100_MSN001_ATA25-10-00_LC02_REQ_001"
+        assert identifier == "AMPEL360_Q100_MSN001_ATA025-10-00_LC02_REQ_001"
         
         # Test URN format
         urn = create_identifier(
@@ -455,7 +457,7 @@ class TestConvenienceFunctions:
             sequence=1,
             format=IDFormat.URN
         )
-        assert urn == "urn:ampel360:q100:msn001:ata25-10-00:lc02:req:001"
+        assert urn == "urn:ampel360:q100:msn001:ata025-10-00:lc02:req:001"
 
 
 class TestRealWorldExamples:
@@ -472,7 +474,7 @@ class TestRealWorldExamples:
             artifact_type="REQ",
             sequence="001"
         )
-        assert "ATA28-10-00" in artifact_id.to_compact()
+        assert "ATA028-10-00" in artifact_id.to_compact()
         assert artifact_id.get_phase_type() == PhaseType.PLM
     
     def test_fuel_cell_design(self):
@@ -486,7 +488,7 @@ class TestRealWorldExamples:
             artifact_type="DES",
             sequence="042"
         )
-        assert "ATA71-11-00" in artifact_id.to_compact()
+        assert "ATA071-11-00" in artifact_id.to_compact()
         assert artifact_id.get_ssot_root() == "KDB/LM/SSOT/PLM"
     
     def test_maintenance_source_record(self):
@@ -514,7 +516,7 @@ class TestRealWorldExamples:
             artifact_type="MDL",
             sequence="001"
         )
-        assert "ATA95-10-00" in artifact_id.to_compact()
+        assert "ATA095-10-00" in artifact_id.to_compact()
 
 
 class TestEdgeCases:
@@ -541,16 +543,16 @@ class TestEdgeCases:
             lc_phase="LC01",
             artifact_type="GOV"
         )
-        assert artifact_id_min.ata_chapter == "00"
+        assert artifact_id_min.ata_chapter == "000"
         
-        # Maximum
+        # Maximum (124)
         artifact_id_max = ArtifactID(
             msn="MSN001",
-            ata_chapter="98",
+            ata_chapter="124",
             lc_phase="LC14",
             artifact_type="EEL"
         )
-        assert artifact_id_max.ata_chapter == "98"
+        assert artifact_id_max.ata_chapter == "124"
     
     def test_maximum_sequence(self):
         """Test maximum sequence number."""
@@ -588,6 +590,131 @@ class TestEdgeCases:
         )
         assert artifact_id_max.section == "99"
         assert artifact_id_max.subject == "99"
+
+
+class TestThreeDigitChapters:
+    """Test 3-digit chapter system (000–124, excl. X13/X17)."""
+
+    def test_three_digit_chapter_accepted(self):
+        """Test that 3-digit chapter codes are accepted."""
+        for chapter in ("028", "100", "122"):
+            artifact_id = ArtifactID(
+                msn="MSN001",
+                ata_chapter=chapter,
+                lc_phase="LC02",
+                artifact_type="REQ",
+            )
+            assert artifact_id.ata_chapter == chapter
+
+    def test_x13_x17_excluded_chapters_rejected(self):
+        """Test that X13/X17 excluded chapters are rejected."""
+        for chapter in ("013", "017", "113", "117"):
+            with pytest.raises(ValueError, match="excluded"):
+                ArtifactID(
+                    msn="MSN001",
+                    ata_chapter=chapter,
+                    lc_phase="LC02",
+                    artifact_type="REQ",
+                )
+
+    def test_reassigned_chapters_accepted(self):
+        """Test that reassigned chapters 123 (ex-113) and 124 (ex-117) are valid."""
+        for chapter in ("123", "124"):
+            artifact_id = ArtifactID(
+                msn="MSN001",
+                ata_chapter=chapter,
+                lc_phase="LC02",
+                artifact_type="REQ",
+            )
+            assert artifact_id.ata_chapter == chapter
+
+    def test_backward_compat_two_digit_zero_padded(self):
+        """Test backward compatibility: 2-digit input is zero-padded to 3 digits."""
+        artifact_id = ArtifactID(
+            msn="MSN001",
+            ata_chapter="28",
+            lc_phase="LC02",
+            artifact_type="REQ",
+        )
+        # "28" must be stored as "028"
+        assert artifact_id.ata_chapter == "028"
+        assert "ATA028-" in artifact_id.to_compact()
+
+    def test_full_range_boundary_000_valid(self):
+        """Test that chapter 000 is valid."""
+        artifact_id = ArtifactID(
+            msn="MSN001",
+            ata_chapter="000",
+            lc_phase="LC01",
+            artifact_type="GOV",
+        )
+        assert artifact_id.ata_chapter == "000"
+
+    def test_full_range_boundary_124_valid(self):
+        """Test that chapter 124 is valid."""
+        artifact_id = ArtifactID(
+            msn="MSN001",
+            ata_chapter="124",
+            lc_phase="LC02",
+            artifact_type="REQ",
+        )
+        assert artifact_id.ata_chapter == "124"
+
+    def test_full_range_boundary_125_invalid(self):
+        """Test that chapter 125 (above MAX_CHAPTER) is rejected."""
+        with pytest.raises(ValueError, match="Invalid ATA chapter"):
+            ArtifactID(
+                msn="MSN001",
+                ata_chapter="125",
+                lc_phase="LC02",
+                artifact_type="REQ",
+            )
+
+    def test_excluded_chapters_constant(self):
+        """Test that EXCLUDED_CHAPTERS contains exactly {013, 017, 113, 117}."""
+        assert EXCLUDED_CHAPTERS == {"013", "017", "113", "117"}
+
+    def test_max_chapter_constant(self):
+        """Test that MAX_CHAPTER equals 124."""
+        assert MAX_CHAPTER == 124
+
+    def test_simtest_chapter_100_to_112(self):
+        """Test S-SIMTEST chapters 100–112 (skipping 113) are valid."""
+        for chapter_num in range(100, 113):
+            chapter = f"{chapter_num:03d}"
+            artifact_id = ArtifactID(
+                msn="MSN001",
+                ata_chapter=chapter,
+                lc_phase="LC05",
+                artifact_type="SIM",
+            )
+            assert artifact_id.ata_chapter == chapter
+
+    def test_simtest_chapter_118_to_124(self):
+        """Test S-SIMTEST chapters 118–124 (skipping 117) are valid."""
+        for chapter_num in range(118, 125):
+            chapter = f"{chapter_num:03d}"
+            artifact_id = ArtifactID(
+                msn="MSN001",
+                ata_chapter=chapter,
+                lc_phase="LC05",
+                artifact_type="SIM",
+            )
+            assert artifact_id.ata_chapter == chapter
+
+    def test_parse_3digit_compact(self):
+        """Test parsing a 3-digit compact identifier."""
+        identifier = "AMPEL360_Q100_MSN001_ATA100-00-00_LC05_SIM_001"
+        artifact_id = IDParser.parse(identifier)
+        assert artifact_id is not None
+        assert artifact_id.ata_chapter == "100"
+
+    def test_parse_3digit_urn(self):
+        """Test parsing a 3-digit URN identifier."""
+        identifier = "urn:ampel360:q100:msn001:ata122-00-00:lc05:sim:001"
+        artifact_id = IDParser.parse(identifier)
+        assert artifact_id is not None
+        assert artifact_id.ata_chapter == "122"
 
 
 if __name__ == "__main__":

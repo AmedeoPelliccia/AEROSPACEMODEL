@@ -550,5 +550,91 @@ class TestConstants:
         assert len(WBS_PHASE_CODES) == 14  # LC01-LC14
 
 
+class TestNewAxes:
+    """Test new S (SimTest & Digital Twin) and R (Reserved) axes."""
+
+    def test_s_axis_in_subdomain_codes(self):
+        """Test that S axis is present in SUBDOMAIN_CODES."""
+        assert "S" in SUBDOMAIN_CODES
+
+    def test_r_axis_in_subdomain_codes(self):
+        """Test that R axis is present in SUBDOMAIN_CODES."""
+        assert "R" in SUBDOMAIN_CODES
+
+    def test_s_subdomains_present(self):
+        """Test that all S-SIMTEST subdomains are present."""
+        assert "G" in SUBDOMAIN_CODES["S"]   # S/G – Geometry & Mesh
+        assert "X" in SUBDOMAIN_CODES["S"]   # S/X – CFD/FEM
+        assert "T" in SUBDOMAIN_CODES["S"]   # S/T – Thermal
+        assert "V" in SUBDOMAIN_CODES["S"]   # S/V – Validation
+        assert "F" in SUBDOMAIN_CODES["S"]   # S/F – Functional
+        assert "U" in SUBDOMAIN_CODES["S"]   # S/U – UQ
+        assert "R" in SUBDOMAIN_CODES["S"]   # S/R – XR/AR/VR
+
+    def test_r_subdomain_present(self):
+        """Test that R/R (Reserved) subdomain is present."""
+        assert "R" in SUBDOMAIN_CODES["R"]
+
+    def test_s_axis_total_subdomains(self):
+        """Test that S axis has exactly 7 subdomains."""
+        assert len(SUBDOMAIN_CODES["S"]) == 7
+
+    def test_r_axis_total_subdomains(self):
+        """Test that R axis has exactly 1 subdomain."""
+        assert len(SUBDOMAIN_CODES["R"]) == 1
+
+    def test_total_subdomain_count_is_33(self):
+        """Test that total subdomain count equals 33 (7 domains)."""
+        total = sum(len(v) for v in SUBDOMAIN_CODES.values())
+        assert total == 33
+
+    def test_valid_pbs_s_axis(self):
+        """Test creating a valid PBS ID with S axis."""
+        pbs_id = PBSID(
+            axis="S",
+            subdomain="G",
+            ata_chapter="10",
+            section="00",
+            subject="00",
+            item_name="MESH_Q100_OUTER_MOLD"
+        )
+        assert pbs_id.axis == "S"
+        assert pbs_id.subdomain == "G"
+        assert "PBS-SG-" in pbs_id.to_string()
+
+    def test_valid_pbs_r_axis(self):
+        """Test creating a valid PBS ID with R axis."""
+        pbs_id = PBSID(
+            axis="R",
+            subdomain="R",
+            ata_chapter="14",
+            section="00",
+            subject="00",
+            item_name="RESERVED_CHAPTER"
+        )
+        assert pbs_id.axis == "R"
+        assert pbs_id.subdomain == "R"
+
+    def test_s_axis_xr_subdomain(self):
+        """Test S/R subdomain (Extended Reality) in PBS."""
+        pbs_str = "PBS-SR-ATA10-00-00-XR_COCKPIT_MODEL"
+        pbs_id = PBSParser.parse(pbs_str)
+        assert pbs_id is not None
+        assert pbs_id.axis == "S"
+        assert pbs_id.subdomain == "R"
+
+    def test_invalid_subdomain_for_s_axis(self):
+        """Test that an invalid subdomain for S axis is rejected."""
+        with pytest.raises(ValueError, match="Invalid subdomain"):
+            PBSID(
+                axis="S",
+                subdomain="Z",  # Not valid for S axis
+                ata_chapter="10",
+                section="00",
+                subject="00",
+                item_name="TEST"
+            )
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

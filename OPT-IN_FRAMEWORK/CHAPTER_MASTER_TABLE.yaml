@@ -1,0 +1,602 @@
+---
+# =============================================================================
+# AMPEL360 UNIFIED PRIMARY CODE — CHAPTER MASTER TABLE
+# =============================================================================
+#
+# Single Source of Truth (SSOT) for all ATA chapters in the unified
+# AMPEL360 primary code covering both:
+#   • AMPEL360-AIR-T  (Q100 BWB aircraft)
+#   • AMPEL360-SPACE-T (Q10 PLUS spacecraft)
+#
+# Format:     3-digit zero-padded (000–124)
+# Axes:       7 (O, P, R, T, I, N, S)
+# Sub-domains: 33
+# Active chapters: 121 (000–124 excluding X13/X17 set {013, 017, 113, 117})
+#
+# Authority:  ASIT (Aircraft Systems Information Transponder)
+# Document:   AMPEL360-OPT-IN-CMT-001
+# Date:       2026-02-24
+# Status:     APPROVED
+# =============================================================================
+
+metadata:
+  document_id: "AMPEL360-OPT-IN-CMT-001"
+  title: "AMPEL360 Unified Primary Code — Chapter Master Table"
+  version: "1.0.0"
+  date: "2026-02-24"
+  status: "APPROVED"
+  authority: "ASIT"
+  scope:
+    - "AMPEL360-AIR-T (Q100 BWB)"
+    - "AMPEL360-SPACE-T (Q10 PLUS)"
+  chapter_format: "3-digit zero-padded (000–124)"
+  total_axes: 7
+  total_subdomains: 33
+  total_active_chapters: 121
+
+# ---------------------------------------------------------------------------
+# EXCLUSION POLICY (ref: AMPEL360-OPTIN-CULTURAL-EXCLUSION-001)
+# ---------------------------------------------------------------------------
+exclusion_policy:
+  policy_ref: "AMPEL360-OPTIN-CULTURAL-EXCLUSION-001"
+  rule: "Any chapter code in 000–124 containing substring '13' or '17' is permanently excluded"
+  excluded_chapters:
+    - chapter: "013"
+      reason: "Contains '13' — X13 cultural exclusion"
+    - chapter: "017"
+      reason: "Contains '17' — X17 cultural exclusion"
+    - chapter: "113"
+      reason: "Contains '13' — X13 cultural exclusion; content reassigned to chapter 123"
+      reassigned_to: "123"
+    - chapter: "117"
+      reason: "Contains '17' — X17 cultural exclusion; content reassigned to chapter 124"
+      reassigned_to: "124"
+  status: "NORMATIVE"
+
+# ---------------------------------------------------------------------------
+# AXIS P — PROGRAM
+# Sub-domains: P/P (Product Definition), P/S (Service Instruction)
+# Chapters: 000, 005–011  (8 active chapters)
+# ---------------------------------------------------------------------------
+axes:
+  - axis: "P"
+    name: "Program"
+    subdomains:
+      - code: "P"
+        name: "Product Definition"
+        description: "What the product is — dimensions, weight, markings"
+        chapters:
+          - chapter: "000"
+            title: "Program General"
+            ata_air_t: "ATA 00 – General"
+            ata_space_t: "Space System – General"
+          - chapter: "006"
+            title: "Dimensions & Areas"
+            ata_air_t: "ATA 06 – Dimensions & Areas"
+            ata_space_t: "Vehicle Geometry"
+          - chapter: "008"
+            title: "Leveling & Weighing"
+            ata_air_t: "ATA 08 – Leveling & Weighing"
+            ata_space_t: "Mass Properties"
+          - chapter: "011"
+            title: "Placards & Markings"
+            ata_air_t: "ATA 11 – Placards & Markings"
+            ata_space_t: "Identification Markings"
+      - code: "S"
+        name: "Service Instruction"
+        description: "How to handle it — lifting, towing, servicing"
+        chapters:
+          - chapter: "005"
+            title: "Time Limits / Maintenance Checks"
+            ata_air_t: "ATA 05 – Time Limits"
+            ata_space_t: "Inspection Intervals"
+          - chapter: "007"
+            title: "Lifting & Shoring"
+            ata_air_t: "ATA 07 – Lifting & Shoring"
+            ata_space_t: "Handling Operations"
+          - chapter: "009"
+            title: "Towing & Taxiing"
+            ata_air_t: "ATA 09 – Towing & Taxiing"
+            ata_space_t: "Ground Mobility"
+          - chapter: "010"
+            title: "Parking, Mooring, Storage & Return"
+            ata_air_t: "ATA 10 – Parking, Mooring, Storage"
+            ata_space_t: "Storage & Preservation"
+
+  # -------------------------------------------------------------------------
+  # AXIS O — ORGANIZATION
+  # Sub-domains: O/A (Authoritative), O/B (Business Enforcement)
+  # Chapters: 001–004, 012, 018  (6 active chapters)
+  # -------------------------------------------------------------------------
+  - axis: "O"
+    name: "Organization"
+    subdomains:
+      - code: "A"
+        name: "Authoritative"
+        description: "Agency, regulatory, and legal-derived requirements"
+        chapters:
+          - chapter: "001"
+            title: "Airworthiness Limitations"
+            ata_air_t: "ATA 04 – Airworthiness Limitations"
+            ata_space_t: "Compliance Limitations"
+          - chapter: "002"
+            title: "General / Regulatory"
+            ata_air_t: "ATA 00/05 – General"
+            ata_space_t: "Regulatory General"
+          - chapter: "018"
+            title: "Vibration & Noise"
+            ata_air_t: "ATA 18 – Vibration & Noise"
+            ata_space_t: "Structural Dynamics"
+      - code: "B"
+        name: "Business Enforcement"
+        description: "Operator business policies and enforcement"
+        chapters:
+          - chapter: "003"
+            title: "Operator Policy — Airworthiness"
+            ata_air_t: "ATA 01–03 – Policy & Compliance"
+            ata_space_t: "Operator Compliance Policy"
+          - chapter: "004"
+            title: "Operator Policy — Operations"
+            ata_air_t: "ATA 02 – Operators Certification"
+            ata_space_t: "Mission Operations Policy"
+          - chapter: "012"
+            title: "Servicing — Routine"
+            ata_air_t: "ATA 12 – Servicing"
+            ata_space_t: "Servicing Operations"
+
+  # -------------------------------------------------------------------------
+  # AXIS R — RESERVED
+  # Sub-domain: R/R (Reserved)
+  # Chapters: 014–016, 019  (4 active chapters)
+  # -------------------------------------------------------------------------
+  - axis: "R"
+    name: "Reserved"
+    subdomains:
+      - code: "R"
+        name: "Reserved"
+        description: "Reserved chapters for future programme allocation"
+        chapters:
+          - chapter: "014"
+            title: "Reserved — Future Use"
+            note: "Permanently available; X13/X17 policy shrinks original 013/017 allocation"
+          - chapter: "015"
+            title: "Reserved — Future Use"
+          - chapter: "016"
+            title: "Reserved — Future Use"
+          - chapter: "019"
+            title: "Reserved — Future Use"
+
+  # -------------------------------------------------------------------------
+  # AXIS T — TECHNOLOGY
+  # Sub-domains: T/A, T/M, T/E1, T/D, T/I, T/E2, T/E3, T/L1, T/L2,
+  #              T/C1, T/C2⭐, T/I2⭐, T/A2, T/O, T/P⭐
+  # Chapters: 020–079  (60 active chapters)
+  # -------------------------------------------------------------------------
+  - axis: "T"
+    name: "Technology"
+    subdomains:
+      - code: "A"
+        name: "Airframe & Cabins"
+        description: "Structures, furnishings, doors, windows, wings"
+        chapters:
+          - chapter: "020"
+            ata_air_t: "ATA 20 – Standard Practices (Airframe)"
+            ata_space_t: "Standard Practices (Structure)"
+          - chapter: "025"
+            ata_air_t: "ATA 25 – Equipment & Furnishings"
+            ata_space_t: "Payload & Equipment"
+          - chapter: "044"
+            ata_air_t: "ATA 44 – Cabin Systems"
+            ata_space_t: "Habitation Systems"
+          - chapter: "050"
+            ata_air_t: "ATA 50 – Doors"
+            ata_space_t: "Access Hatches"
+          - chapter: "051"
+            ata_air_t: "ATA 51 – Structures (General)"
+            ata_space_t: "Primary Structure"
+          - chapter: "052"
+            ata_air_t: "ATA 52 – Doors"
+            ata_space_t: "Pressure Doors"
+          - chapter: "053"
+            ata_air_t: "ATA 53 – Fuselage"
+            ata_space_t: "Vehicle Body / Pressure Vessel"
+          - chapter: "054"
+            ata_air_t: "ATA 54 – Nacelles & Pylons"
+            ata_space_t: "Structural Pylons"
+          - chapter: "055"
+            ata_air_t: "ATA 55 – Stabilizers"
+            ata_space_t: "Control Fins / Stabilizers"
+          - chapter: "056"
+            ata_air_t: "ATA 56 – Windows"
+            ata_space_t: "Viewports / Optical Ports"
+          - chapter: "057"
+            ata_air_t: "ATA 57 – Wings"
+            ata_space_t: "Solar Arrays / Deployment Panels"
+      - code: "M"
+        name: "Mechanics"
+        description: "Flight controls, hydraulics, landing gear"
+        chapters:
+          - chapter: "027"
+            ata_air_t: "ATA 27 – Flight Controls"
+            ata_space_t: "Attitude Control Actuation"
+          - chapter: "029"
+            ata_air_t: "ATA 29 – Hydraulic Power"
+            ata_space_t: "Hydraulic Systems"
+          - chapter: "032"
+            ata_air_t: "ATA 32 – Landing Gear"
+            ata_space_t: "Landing / Recovery Systems"
+      - code: "E1"
+        name: "Environment"
+        description: "ECS, fire, ice/rain, oxygen, pneumatic, water"
+        chapters:
+          - chapter: "021"
+            ata_air_t: "ATA 21 – Air Conditioning"
+            ata_space_t: "Thermal & Environmental Control"
+          - chapter: "026"
+            ata_air_t: "ATA 26 – Fire Protection"
+            ata_space_t: "Fire / Hazard Protection"
+          - chapter: "030"
+            ata_air_t: "ATA 30 – Ice & Rain Protection"
+            ata_space_t: "Thermal Protection"
+          - chapter: "035"
+            ata_air_t: "ATA 35 – Oxygen"
+            ata_space_t: "Life Support / Oxygen"
+          - chapter: "036"
+            ata_air_t: "ATA 36 – Pneumatic"
+            ata_space_t: "Pneumatic Systems"
+          - chapter: "037"
+            ata_air_t: "ATA 37 – Vacuum"
+            ata_space_t: "Vacuum / Pressure Systems"
+          - chapter: "038"
+            ata_air_t: "ATA 38 – Water & Waste"
+            ata_space_t: "Water Recovery Systems"
+          - chapter: "047"
+            ata_air_t: "ATA 47 – Nitrogen Generation"
+            ata_space_t: "Inert Gas Systems"
+      - code: "D"
+        name: "Data"
+        description: "Indicating/recording, Central Maintenance"
+        chapters:
+          - chapter: "031"
+            ata_air_t: "ATA 31 – Indicating & Recording"
+            ata_space_t: "Sensors & Recording"
+          - chapter: "045"
+            ata_air_t: "ATA 45 – Central Maintenance"
+            ata_space_t: "Onboard Diagnostics"
+      - code: "I"
+        name: "Information"
+        description: "Information systems"
+        chapters:
+          - chapter: "046"
+            ata_air_t: "ATA 46 – Information Systems"
+            ata_space_t: "Mission Data Systems"
+      - code: "E2"
+        name: "Energy"
+        description: "Electrical power, APU"
+        chapters:
+          - chapter: "024"
+            ata_air_t: "ATA 24 – Electrical Power"
+            ata_space_t: "Electrical Power Generation"
+          - chapter: "049"
+            ata_air_t: "ATA 49 – Airborne APU"
+            ata_space_t: "Auxiliary / Emergency Power"
+      - code: "E3"
+        name: "Electrics"
+        description: "Lights, panels/components"
+        chapters:
+          - chapter: "033"
+            ata_air_t: "ATA 33 – Lights"
+            ata_space_t: "Lighting Systems"
+          - chapter: "039"
+            ata_air_t: "ATA 39 – Electrical — Panels & Components"
+            ata_space_t: "Electrical Panels"
+      - code: "L1"
+        name: "Logics"
+        description: "Reserved for logical control systems"
+        chapters:
+          - chapter: "041"
+            ata_air_t: "ATA 41 – Water Ballast (Reserved/Logics)"
+            ata_space_t: "Reserved — Logical Control"
+      - code: "L2"
+        name: "Links"
+        description: "Navigation"
+        chapters:
+          - chapter: "034"
+            ata_air_t: "ATA 34 – Navigation"
+            ata_space_t: "Guidance, Navigation & Control"
+      - code: "C1"
+        name: "Comms"
+        description: "Communications"
+        chapters:
+          - chapter: "023"
+            ata_air_t: "ATA 23 – Communications"
+            ata_space_t: "RF / Optical Communications"
+      - code: "C2"
+        name: "Cryogenic Cells"
+        novel_technology: true
+        description: "H₂ cryogenic fuel storage and distribution"
+        chapters:
+          - chapter: "028"
+            ata_air_t: "ATA 28 – Fuel (H2 Cryogenic)"
+            ata_space_t: "Propellant / Cryogenic Storage"
+      - code: "I2"
+        name: "Intelligence"
+        novel_technology: true
+        description: "AI/ML models, synthetic data validation"
+        chapters:
+          - chapter: "095"
+            ata_air_t: "ATA 95 – AI/ML Models"
+            ata_space_t: "AI/ML Onboard Intelligence"
+          - chapter: "097"
+            ata_air_t: "ATA 97 – Synthetic Data Validation"
+            ata_space_t: "Simulation Validation Data"
+      - code: "A2"
+        name: "Avionics"
+        description: "Auto flight, Integrated Modular Avionics"
+        chapters:
+          - chapter: "022"
+            ata_air_t: "ATA 22 – Auto Flight"
+            ata_space_t: "Autonomous Flight / GNC"
+          - chapter: "042"
+            ata_air_t: "ATA 42 – Integrated Modular Avionics"
+            ata_space_t: "Integrated Modular Electronics"
+      - code: "O"
+        name: "Operating Systems"
+        description: "Multisystem integration"
+        chapters:
+          - chapter: "040"
+            ata_air_t: "ATA 40 – Multisystem"
+            ata_space_t: "Systems Integration"
+      - code: "P"
+        name: "Propulsion"
+        novel_technology: true
+        description: "H₂-electric hybrid powerplant, fuel cells, engine systems"
+        chapters:
+          - chapter: "060"
+            ata_air_t: "ATA 60 – Standard Practices — Engine"
+            ata_space_t: "Propulsion Standard Practices"
+          - chapter: "061"
+            ata_air_t: "ATA 61 – Propeller / Rotor"
+            ata_space_t: "Thrust Vectoring"
+          - chapter: "071"
+            ata_air_t: "ATA 71 – Power Plant (Fuel Cell)"
+            ata_space_t: "Primary Propulsion Unit"
+          - chapter: "072"
+            ata_air_t: "ATA 72 – Engine"
+            ata_space_t: "Engine / Thruster"
+          - chapter: "073"
+            ata_air_t: "ATA 73 – Engine Fuel & Control"
+            ata_space_t: "Propellant Feed & Control"
+          - chapter: "074"
+            ata_air_t: "ATA 74 – Ignition"
+            ata_space_t: "Ignition / Start System"
+          - chapter: "075"
+            ata_air_t: "ATA 75 – Air (Engine)"
+            ata_space_t: "Oxidiser / Air Supply"
+          - chapter: "076"
+            ata_air_t: "ATA 76 – Engine Controls"
+            ata_space_t: "Propulsion Controls"
+          - chapter: "077"
+            ata_air_t: "ATA 77 – Engine Indicating"
+            ata_space_t: "Propulsion Monitoring"
+          - chapter: "078"
+            ata_air_t: "ATA 78 – Exhaust"
+            ata_space_t: "Exhaust / Nozzle"
+          - chapter: "079"
+            ata_air_t: "ATA 79 – Oil"
+            ata_space_t: "Lubrication / Coolant"
+      # Additional T chapters not covered by above sub-domains
+      # (assigned to nearest T sub-domain per programme steward decision)
+      - code: "T_MISC"
+        name: "T Miscellaneous"
+        description: "Remaining T-domain chapters"
+        chapters:
+          - chapter: "043"
+            ata_air_t: "ATA 43 – Digital Systems (Misc)"
+            ata_space_t: "Digital Systems"
+
+  # -------------------------------------------------------------------------
+  # AXIS I — INFRASTRUCTURES
+  # Sub-domains: I/M1, I/M2, I/O
+  # Chapters: 080–089  (10 active chapters)
+  # -------------------------------------------------------------------------
+  - axis: "I"
+    name: "Infrastructures"
+    subdomains:
+      - code: "M1"
+        name: "Manufacturing Facilities"
+        description: "Production lines, test rigs, assembly benches"
+        chapters:
+          - chapter: "080"
+            title: "Manufacturing — ATA 85 (re-coded)"
+            ata_air_t: "ATA 85 – Manufacturing Test Facilities"
+            ata_space_t: "Integration & Test Facilities"
+          - chapter: "081"
+            title: "Manufacturing General"
+          - chapter: "082"
+            title: "Production Systems"
+          - chapter: "083"
+            title: "Assembly Lines"
+      - code: "M2"
+        name: "Maintenance Environments"
+        description: "In-line, hangars, shops (ATA 08I, 10I, 12I)"
+        chapters:
+          - chapter: "084"
+            title: "In-Line Maintenance Facility"
+          - chapter: "085"
+            title: "Hangar Maintenance Facility"
+          - chapter: "086"
+            title: "Shop Facility"
+      - code: "O"
+        name: "Operations & Service Structures"
+        description: "Airport facilities, fuel logistics, ground services"
+        chapters:
+          - chapter: "087"
+            title: "Airport Infrastructure"
+          - chapter: "088"
+            title: "H2 Fuel Logistics"
+          - chapter: "089"
+            title: "Ground Service Equipment"
+
+  # -------------------------------------------------------------------------
+  # AXIS N — NEURAL NETWORKS / DPP
+  # Sub-domains: N/D, N/A, N/P*
+  # Chapters: 090–099  (10 active chapters)
+  # -------------------------------------------------------------------------
+  - axis: "N"
+    name: "Neural Networks / DPP"
+    subdomains:
+      - code: "D"
+        name: "Digital Thread & Traceability"
+        description: "Ledger, DPP, hash chain, identifiers, schemas, audit packs"
+        chapters:
+          - chapter: "090"
+            ata_air_t: "ATA 96 – Digital Thread (re-coded)"
+            ata_space_t: "Digital Product Passport"
+          - chapter: "091"
+            title: "Hash Chain & Immutable Ledger"
+          - chapter: "092"
+            title: "Identifiers & Schemas"
+          - chapter: "093"
+            title: "Audit Packs"
+      - code: "A"
+        name: "AI Governance & Assurance"
+        description: "Certification pathway, ethics, human authority, explainability"
+        chapters:
+          - chapter: "094"
+            title: "AI Model Governance"
+          - chapter: "096"
+            ata_air_t: "ATA 96 – AI Governance (re-coded)"
+            ata_space_t: "AI Assurance"
+      - code: "P*"
+        name: "Program Reserved"
+        description: "Expansion slot for future systems"
+        chapters:
+          - chapter: "098"
+            ata_air_t: "ATA 98 – Program Reserved"
+            ata_space_t: "Programme Reserved"
+          - chapter: "099"
+            title: "Reserved — N axis"
+      # Gap chapters within N domain
+      - code: "N_GAP"
+        name: "N Unallocated"
+        chapters: []
+
+  # -------------------------------------------------------------------------
+  # AXIS S — SIMTEST & DIGITAL TWIN
+  # Sub-domains: S/G, S/X, S/T, S/V, S/F, S/U, S/R
+  # Chapters: 100–124 excl. {113, 117}  (23 active chapters)
+  # -------------------------------------------------------------------------
+  - axis: "S"
+    name: "SimTest & Digital Twin"
+    subdomains:
+      - code: "G"
+        name: "Geometry & Mesh"
+        description: "CAD geometry, mesh generation, outer mold-line definitions"
+        chapters:
+          - chapter: "100"
+            title: "Geometry & Mesh — General"
+          - chapter: "101"
+            title: "Outer Mold Line Definition"
+          - chapter: "102"
+            title: "Mesh Generation & Quality"
+      - code: "X"
+        name: "CFD / FEM Simulation"
+        description: "Computational fluid dynamics and finite element models"
+        chapters:
+          - chapter: "103"
+            title: "CFD — General"
+          - chapter: "104"
+            title: "FEM — Structural Analysis"
+          - chapter: "105"
+            title: "Aeroelastic Models"
+      - code: "T"
+        name: "Thermal Simulation"
+        description: "Thermal analysis models and heat transfer"
+        chapters:
+          - chapter: "106"
+            title: "Thermal Models — General"
+          - chapter: "107"
+            title: "Cryogenic Thermal Analysis"
+          - chapter: "108"
+            title: "TPS (Thermal Protection System)"
+      - code: "V"
+        name: "Validation"
+        description: "Model validation against test data"
+        chapters:
+          - chapter: "109"
+            title: "Model Validation — General"
+          - chapter: "110"
+            title: "Wind Tunnel / CFD Correlation"
+          - chapter: "111"
+            title: "Structural Test Correlation"
+      - code: "F"
+        name: "Functional Simulation"
+        description: "System-level functional and mission simulations"
+        chapters:
+          - chapter: "112"
+            title: "Functional Simulation — General"
+          # 113 EXCLUDED (X13 policy) — content at 123
+          - chapter: "114"
+            title: "Mission Simulation"
+          - chapter: "115"
+            title: "Failure Simulation & FMEA"
+          - chapter: "116"
+            title: "Hardware-in-the-Loop (HIL)"
+          # 117 EXCLUDED (X17 policy) — content at 124
+      - code: "U"
+        name: "UQ — Uncertainty Quantification"
+        description: "Monte Carlo, surrogate models, sensitivity analysis"
+        chapters:
+          - chapter: "118"
+            title: "UQ — General"
+          - chapter: "119"
+            title: "Monte Carlo Analysis"
+          - chapter: "120"
+            title: "Surrogate / Reduced-Order Models"
+          - chapter: "121"
+            title: "Sensitivity Analysis"
+          - chapter: "122"
+            title: "Probabilistic Risk Assessment"
+          # 123 = reassignment from 113 (UQ/Monte Carlo content)
+          - chapter: "123"
+            title: "UQ Platform Governance (reassigned from 113)"
+            reassigned_from: "113"
+            note: "Chapter 113 is permanently excluded; this chapter inherits its content"
+      - code: "R"
+        name: "Extended Reality (XR/AR/VR)"
+        description: "AR/VR/MR training platforms, XR cockpit, immersive DT"
+        chapters:
+          # 124 = reassignment from 117 (XR Platform Governance content)
+          - chapter: "124"
+            title: "XR Platform Governance (reassigned from 117)"
+            reassigned_from: "117"
+            note: "Chapter 117 is permanently excluded; this chapter inherits its content"
+
+# ---------------------------------------------------------------------------
+# ACTIVE CHAPTER SUMMARY
+# ---------------------------------------------------------------------------
+active_chapter_count:
+  P_axis: 8
+  O_axis: 6
+  R_axis: 4
+  T_axis: 60
+  I_axis: 10
+  N_axis: 10
+  S_axis: 23
+  total: 121
+  verification: "Sum = 8+6+4+60+10+10+23 = 121 ✓"
+
+# ---------------------------------------------------------------------------
+# NOTES
+# ---------------------------------------------------------------------------
+notes:
+  - "Chapter numbering is unified: the same chapter number refers to different
+     systems depending on MODEL (Q100=AIR-T, Q10=SPACE-T)"
+  - "Chapter 057 example: ATA 57 Wings in Q100 air context; Solar Arrays /
+     Deployment Panels in Q10 space context"
+  - "The MODEL code disambiguates context; no renumbering is required"
+  - "3-digit format is normative from this version; legacy 2-digit codes
+     (ATA 00–98) are zero-padded automatically by the identifier module"
+  - "Chapters 013 and 017 have never been allocated and are permanently void"
+  - "Chapters 113→123 and 117→124 reassignment is authoritative"

@@ -12,11 +12,11 @@
 
 ## 1. Purpose
 
-This document defines the **canonical identifier grammar** for all engineering and publication artifacts within the AMPEL360 Q100 program. It ensures every record is traceable from aircraft-level down to sub-subject deliverables and maps into the OPT-IN Framework's 5-axis / 25-subdomain structure.
+This document defines the **canonical identifier grammar** for all engineering and publication artifacts within the AMPEL360 Q100/Q10 program. It ensures every record is traceable from aircraft-level down to sub-subject deliverables and maps into the OPT-IN Framework's 7-axis / 33-subdomain structure.
 
 **Normative references:**
 - **TLI v2.1** — Canonical lifecycle phase definitions, packages, baselines, gates (L1 authority)
-- **OPT-IN Framework Index v3** — Domain/sub-domain topology, ATA chapter mapping, novel technology designations
+- **OPT-IN Framework Index v4** — Domain/sub-domain topology, ATA chapter mapping, novel technology designations
 
 ---
 
@@ -42,35 +42,47 @@ This vocabulary operates at **L2/L4**. The scaffold generator operates at **L5**
 
 ## 3. OPT-IN Domain & Sub-Domain Topology
 
-### 3.1 Complete Structure (5 Domains, 25 Sub-Domains)
+### 3.1 Complete Structure (7 Domains, 33 Sub-Domains)
 
 | Domain | Sub-Domain | Code | ATA Chapters | Type | Description |
 |--------|-----------|------|--------------|------|-------------|
-| **O** Organizations | Authoritative | **A** | 00, 04, 05 | — | Agency, regulatory, legal-derived requirements |
-| **O** Organizations | Business Enforcement | **B** | 01, 02, 03 | — | Operator business policies and enforcement |
-| **P** Programs | Product Definition | **P** | 06, 08, 11 | — | What the product is — dimensions, weight, markings |
-| **P** Programs | Service Instruction | **S** | 07, 09, 10, 12 | — | How you handle it — lifting, towing, servicing |
-| **T** Technologies | Airframe & Cabins | **A** | 20, 25, 44, 50–57 | Standard | Structures, furnishings, doors, windows, wings |
-| **T** Technologies | Mechanics | **M** | 27, 29, 32 | Standard | Flight controls, hydraulics, landing gear |
-| **T** Technologies | Environment | **E1** | 21, 26, 30, 35–38, 47 | Standard | ECS, fire, ice/rain, oxygen, pneumatic, water |
-| **T** Technologies | Data | **D** | 31, 45 | Standard | Indicating/recording, CMS |
-| **T** Technologies | Information | **I** | 46 | Standard | Information systems |
-| **T** Technologies | Energy | **E2** | 24, 49 | Standard | Electrical power, APU |
-| **T** Technologies | Electrics | **E3** | 33, 39 | Standard | Lights, panels/components |
+| **O** Organizations | Authoritative | **A** | 001, 002, 018 | — | Agency, regulatory, legal-derived requirements |
+| **O** Organizations | Business Enforcement | **B** | 003, 004, 012 | — | Operator business policies and enforcement |
+| **P** Programs | Product Definition | **P** | 000, 006, 008, 011 | — | What the product is — dimensions, weight, markings |
+| **P** Programs | Service Instruction | **S** | 005, 007, 009, 010 | — | How you handle it — lifting, towing, servicing |
+| **R** Reserved | Reserved | **R** | 014–016, 019 | — | Reserved for future programme allocation (excl. 013, 017) |
+| **T** Technologies | Airframe & Cabins | **A** | 020, 025, 044, 050–057 | Standard | Structures, furnishings, doors, windows, wings |
+| **T** Technologies | Mechanics | **M** | 027, 029, 032 | Standard | Flight controls, hydraulics, landing gear |
+| **T** Technologies | Environment | **E1** | 021, 026, 030, 035–038, 047 | Standard | ECS, fire, ice/rain, oxygen, pneumatic, water |
+| **T** Technologies | Data | **D** | 031, 045 | Standard | Indicating/recording, CMS |
+| **T** Technologies | Information | **I** | 046 | Standard | Information systems |
+| **T** Technologies | Energy | **E2** | 024, 049 | Standard | Electrical power, APU |
+| **T** Technologies | Electrics | **E3** | 033, 039 | Standard | Lights, panels/components |
 | **T** Technologies | Logics | **L1** | *(reserved)* | Future | Reserved for future systems |
-| **T** Technologies | Links | **L2** | 34 | Standard | Navigation |
-| **T** Technologies | Comms | **C1** | 23 | Standard | Communications |
-| **T** Technologies | Cryogenic Cells | **C2** | 28 | ⭐ Novel | H₂ cryogenic fuel storage and distribution |
-| **T** Technologies | Intelligence | **I2** | 95, 97 | ⭐ Novel | AI/ML models, synthetic data validation |
-| **T** Technologies | Avionics | **A2** | 22, 42 | Standard | Auto flight, IMA |
-| **T** Technologies | Operating Systems | **O** | 40 | Standard | Multisystem |
-| **T** Technologies | Propulsion | **P** | 60–61, 71–80 | ⭐ Novel | H₂ powerplant, fuel cells, engine systems |
-| **I** Infrastructures | Manufacturing Facilities | **M1** | 85 | — | Production lines, test rigs, assembly benches |
-| **I** Infrastructures | Maintenance Environments | **M2** | 08I, 10I, 12I | — | In-line, hangars, shops |
-| **I** Infrastructures | Operations & Service Structures | **O** | 03I, IN | — | Airport facilities, fuel logistics, ground services |
-| **N** Neural Networks | Digital Thread & Traceability | **D** | 96 | — | Ledger, DPP, hash chain, identifiers, audit packs |
-| **N** Neural Networks | AI Governance & Assurance | **A** | *(governance)* | — | Certification pathway, ethics, human authority, explainability |
-| **N** Neural Networks | Program Reserved | **P*** | 98 | — | Expansion slot for future systems |
+| **T** Technologies | Links | **L2** | 034 | Standard | Navigation |
+| **T** Technologies | Comms | **C1** | 023 | Standard | Communications |
+| **T** Technologies | Cryogenic Cells | **C2** | 028 | ⭐ Novel | H₂ cryogenic fuel storage and distribution |
+| **T** Technologies | Intelligence | **I2** | 095, 097 | ⭐ Novel | AI/ML models, synthetic data validation |
+| **T** Technologies | Avionics | **A2** | 022, 042 | Standard | Auto flight, IMA |
+| **T** Technologies | Operating Systems | **O** | 040 | Standard | Multisystem |
+| **T** Technologies | Propulsion | **P** | 060–061, 071–079 | ⭐ Novel | H₂ powerplant, fuel cells, engine systems |
+| **I** Infrastructures | Manufacturing Facilities | **M1** | 080–083 | — | Production lines, test rigs, assembly benches |
+| **I** Infrastructures | Maintenance Environments | **M2** | 084–086 | — | In-line, hangars, shops |
+| **I** Infrastructures | Operations & Service Structures | **O** | 087–089 | — | Airport facilities, fuel logistics, ground services |
+| **N** Neural Networks | Digital Thread & Traceability | **D** | 090–093 | — | Ledger, DPP, hash chain, identifiers, audit packs |
+| **N** Neural Networks | AI Governance & Assurance | **A** | 094, 096 | — | Certification pathway, ethics, human authority, explainability |
+| **N** Neural Networks | Program Reserved | **P*** | 098–099 | — | Expansion slot for future systems |
+| **S** SimTest & Digital Twin | Geometry & Mesh | **G** | 100–102 | — | CAD geometry, mesh generation, outer mold-line |
+| **S** SimTest & Digital Twin | CFD / FEM Simulation | **X** | 103–105 | — | Computational fluid dynamics and finite element models |
+| **S** SimTest & Digital Twin | Thermal Simulation | **T** | 106–108 | — | Thermal analysis models and heat transfer |
+| **S** SimTest & Digital Twin | Validation | **V** | 109–111 | — | Model validation against test data |
+| **S** SimTest & Digital Twin | Functional Simulation | **F** | 112, 114–116 | — | System-level functional and mission simulations |
+| **S** SimTest & Digital Twin | UQ — Uncertainty Quantification | **U** | 118–123 | — | Monte Carlo, surrogate models, sensitivity analysis |
+| **S** SimTest & Digital Twin | Extended Reality (XR/AR/VR) | **R** | 124 | — | AR/VR/MR training, XR cockpit, immersive digital twin |
+
+> **ATA chapter range:** 000–124 (3-digit zero-padded). Chapters 013, 017, 113, 117 permanently excluded (X13/X17 cultural exclusion policy). See `OPT-IN_FRAMEWORK/AMPEL360-OPTIN-CULTURAL-EXCLUSION-001.yaml`.
+> 
+> **Backward compat:** Legacy 2-digit chapter codes (ATA 00–98) are zero-padded to 3 digits automatically by the identifier module. e.g. "25" → "025".
 
 ### 3.2 Novel Technology Designation (⭐)
 
@@ -97,29 +109,29 @@ ENGINEERING_SSOT is a **publication surface**, not a lifecycle domain. Artifacts
 ## 4. Identifier Hierarchy
 
 ```
-AMPEL360-Q100-MSN{nnn}-ATA{cc}-{ss}-{ss}-LC{nn}-{ArtifactType}-{Seq}
-│         │      │        │      │    │     │       │             │
-│         │      │        │      │    │     │       │             └─ Sequence (001–999)
-│         │      │        │      │    │     │       └─ Artifact type code
-│         │      │        │      │    │     └─ Lifecycle phase (LC01–LC14)
-│         │      │        │      │    └─ Sub-subject (00–99)
-│         │      │        │      └─ Subject (00–99)
-│         │      │        └─ ATA chapter (00–98, IN)
-│         │      └─ Manufacturer Serial Number (001–999)
-│         └─ Model designation
-└─ Aircraft program
+AMPEL360-{MODEL}-MSN{nnn}-ATA{ccc}-{ss}-{ss}-LC{nn}-{ArtifactType}-{Seq}
+│         │       │        │        │    │     │       │             │
+│         │       │        │        │    │     │       │             └─ Sequence (001–999)
+│         │       │        │        │    │     │       └─ Artifact type code
+│         │       │        │        │    │     └─ Lifecycle phase (LC01–LC14)
+│         │       │        │        │    └─ Sub-subject (00–99)
+│         │       │        │        └─ Subject (00–99)
+│         │       │        └─ ATA chapter (000–124, excl. X13/X17, or IN/infra suffix)
+│         │       └─ Manufacturer Serial Number (001–999)
+│         └─ Model designation (Q100 = AIR-T, Q10 = SPACE-T)
+└─ Aircraft/Spacecraft program
 ```
 
 ### 4.1 Compact Form
 
 ```
-AMPEL360_Q100_MSN001_ATA25-10-00_LC02_REQ_001
+AMPEL360_Q100_MSN001_ATA025-10-00_LC02_REQ_001
 ```
 
 ### 4.2 URN Form
 
 ```
-urn:ampel360:q100:msn001:ata25-10-00:lc02:req:001
+urn:ampel360:q100:msn001:ata025-10-00:lc02:req:001
 ```
 
 ---

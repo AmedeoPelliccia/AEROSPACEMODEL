@@ -10,9 +10,11 @@ PBS Grammar:
 WBS Grammar:
     WBS-{PHASE_CODE}-{HIERARCHY}
 
+OPT-IN Framework: 7 domains, 33 sub-domains (O, P, T, I, N, S, R).
+
 Author: ASIT (Aircraft Systems Information Transponder)
-Document: AMPEL360-CV-003 v3.0
-Date: 2026-02-18
+Document: AMPEL360-CV-003 v4.0
+Date: 2026-02-24
 """
 
 import re
@@ -28,16 +30,20 @@ class OPTINAxis(Enum):
     T = "T"  # Technologies
     I = "I"  # Infrastructures
     N = "N"  # Neural Networks
+    S = "S"  # SimTest & Digital Twin
+    R = "R"  # Reserved
 
 
-# OPT-IN Sub-domain codes mapping
+# OPT-IN Sub-domain codes mapping — 7 domains, 33 sub-domains
 SUBDOMAIN_CODES = {
     "O": ["A", "B"],  # Authoritative, Business Enforcement
     "P": ["P", "S"],  # Product Definition, Service Instruction
-    "T": ["A", "M", "E1", "D", "I", "E2", "E3", "L1", "L2", "C1", 
+    "T": ["A", "M", "E1", "D", "I", "E2", "E3", "L1", "L2", "C1",
           "C2", "I2", "A2", "O", "P"],  # Technology subdomains
     "I": ["M1", "M2", "O"],  # Infrastructure subdomains
     "N": ["D", "A", "P*"],  # Neural Network subdomains
+    "S": ["G", "X", "T", "V", "F", "U", "R"],  # SimTest & Digital Twin subdomains
+    "R": ["R"],  # Reserved subdomain
 }
 
 # Novel Technology designations
@@ -89,7 +95,7 @@ class PBSID:
         """Validate all PBS ID components."""
         # Axis validation
         if self.axis not in [e.value for e in OPTINAxis]:
-            raise ValueError(f"Invalid axis: {self.axis}. Must be O, P, T, I, or N")
+            raise ValueError(f"Invalid axis: {self.axis}. Must be O, P, T, I, N, S, or R")
         
         # Sub-domain validation
         valid_subdomains = SUBDOMAIN_CODES.get(self.axis, [])
@@ -237,7 +243,7 @@ class PBSParser:
     """Parse PBS identifiers."""
     
     PBS_PATTERN = re.compile(
-        r'^PBS-([OPTIN])([A-Z0-9\*]+)-ATA(\d{2}I?|IN)-(\d{2})-(\d{2})-([A-Z0-9_]+)$'
+        r'^PBS-([OPTINSR])([A-Z0-9\*]+)-ATA(\d{2}I?|IN)-(\d{2})-(\d{2})-([A-Z0-9_]+)$'
     )
     
     @classmethod
@@ -371,7 +377,7 @@ def create_pbs_id(axis: str, subdomain: str, ata_chapter: str,
     Create a PBS identifier string.
     
     Args:
-        axis: OPT-IN axis (O, P, T, I, N)
+        axis: OPT-IN axis (O, P, T, I, N, S, R)
         subdomain: Sub-domain code
         ata_chapter: ATA chapter
         section: Section code

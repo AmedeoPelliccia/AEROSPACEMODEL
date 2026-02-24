@@ -1,0 +1,142 @@
+---
+# =============================================================================
+# AMPEL360 OPT-IN CULTURAL EXCLUSION POLICY
+# =============================================================================
+#
+# Policy:  Permanent exclusion of ATA-SpaceT chapter numbers containing
+#          the substrings "13" or "17".
+#
+# Applies: AMPEL360-AIR-T (Q100) and AMPEL360-SPACE-T (Q10 PLUS)
+#          within the unified primary code 000–124.
+#
+# Authority:  ASIT (Aircraft Systems Information Transponder)
+# Document:   AMPEL360-OPTIN-CULTURAL-EXCLUSION-001
+# Date:       2026-02-24
+# Status:     APPROVED
+# =============================================================================
+
+metadata:
+  document_id: "AMPEL360-OPTIN-CULTURAL-EXCLUSION-001"
+  title: "AMPEL360 OPT-IN Cultural Exclusion Policy — X13/X17 Chapter Exclusions"
+  version: "1.0.0"
+  date: "2026-02-24"
+  status: "APPROVED"
+  authority: "ASIT"
+  normative: true
+
+# ---------------------------------------------------------------------------
+# POLICY STATEMENT
+# ---------------------------------------------------------------------------
+policy:
+  statement: >
+    Within the AMPEL360 unified primary code (chapters 000–124), any chapter
+    whose 3-digit string representation contains the substring "13" or "17" is
+    permanently excluded from allocation and use.
+  enforcement: "NORMATIVE — validated at module level in identifiers.py"
+  scope:
+    - "AMPEL360-AIR-T (Q100 BWB aircraft)"
+    - "AMPEL360-SPACE-T (Q10 PLUS spacecraft)"
+  effective_date: "2026-02-24"
+
+# ---------------------------------------------------------------------------
+# RATIONALE
+# ---------------------------------------------------------------------------
+rationale:
+  primary: >
+    Cultural convention in programme-origin countries (Italy, and the broader
+    Mediterranean/Latin tradition) treats the numbers 13 and 17 as unlucky.
+    The exclusion follows established airline industry practice:
+  industry_precedents:
+    - operator: "ITA Airways (Italy)"
+      exclusion: "No row 17 on aircraft"
+    - operator: "Ryanair (Ireland/Europe)"
+      exclusion: "No row 13 on aircraft"
+    - operator: "Air France"
+      exclusion: "No row 13 on aircraft"
+    - operator: "United Airlines"
+      exclusion: "No row 13 on aircraft"
+    - operator: "Lufthansa"
+      exclusion: "No row 17 on aircraft (some fleets)"
+  consistency: >
+    Consistent with programme-origin country (Italy) cultural expectations
+    and the broader European/Mediterranean convention. Avoids any ambiguity
+    or discomfort among stakeholders, operators, and personnel.
+
+# ---------------------------------------------------------------------------
+# EXCLUDED CHAPTERS (within 000–124)
+# ---------------------------------------------------------------------------
+excluded_chapters:
+  - chapter: "013"
+    substring_match: "13"
+    rule_triggered: "X13"
+    allocation_status: "VOID — never allocated"
+    disposition: "Permanently excluded; not reassigned"
+
+  - chapter: "017"
+    substring_match: "17"
+    rule_triggered: "X17"
+    allocation_status: "VOID — never allocated"
+    disposition: "Permanently excluded; not reassigned"
+
+  - chapter: "113"
+    substring_match: "13"
+    rule_triggered: "X13"
+    original_intent: "UQ / Monte Carlo Platform"
+    disposition: "Content reassigned to chapter 123"
+    reassigned_to: "123"
+
+  - chapter: "117"
+    substring_match: "17"
+    rule_triggered: "X17"
+    original_intent: "XR Platform Governance"
+    disposition: "Content reassigned to chapter 124"
+    reassigned_to: "124"
+
+# ---------------------------------------------------------------------------
+# REASSIGNMENTS
+# ---------------------------------------------------------------------------
+reassignments:
+  - original_chapter: "113"
+    new_chapter: "123"
+    content: "UQ / Monte Carlo Platform Governance"
+    rationale: >
+      Chapter 123 is the next available chapter above 122 in the S/U
+      (Uncertainty Quantification) subdomain that does not trigger the
+      X13/X17 exclusion.
+
+  - original_chapter: "117"
+    new_chapter: "124"
+    content: "XR (Extended Reality) Platform Governance"
+    rationale: >
+      Chapter 124 is the next available chapter above 123 in the S/R
+      (Extended Reality) subdomain that does not trigger the X17 exclusion.
+      Chapter 124 is the final chapter in the unified primary code.
+
+# ---------------------------------------------------------------------------
+# IMPACT SUMMARY
+# ---------------------------------------------------------------------------
+impact:
+  r_reserved_axis: >
+    The R-RESERVED axis originally would have included chapters 013 and 017.
+    These are permanently void; the R axis retains chapters 014–016 and 019.
+  s_simtest_axis: >
+    The S-SIMTEST axis loses chapters 113 and 117 from its sequential
+    allocation. Their content is carried at 123 and 124 respectively.
+  total_active_chapters: 121
+  total_possible_chapters: 125  # (000–124 inclusive)
+  excluded_count: 4
+  verification: "125 - 4 = 121 active chapters ✓"
+
+# ---------------------------------------------------------------------------
+# NORMATIVE REFERENCE
+# ---------------------------------------------------------------------------
+normative_references:
+  - ref: "CHAPTER_MASTER_TABLE.yaml"
+    description: "Authoritative chapter list reflecting exclusions"
+  - ref: "src/aerospacemodel/ampel360/identifiers.py"
+    description: >
+      Module-level constant EXCLUDED_CHAPTERS enforces this policy at
+      runtime. Any attempt to create an identifier with an excluded chapter
+      raises a ValueError.
+  - ref: "OPT-IN_FRAMEWORK/00_INDEX.md"
+    description: "Framework index updated to reflect 7-axis, 33-subdomain, 121-chapter system"

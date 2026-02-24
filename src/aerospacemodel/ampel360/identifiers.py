@@ -1,25 +1,42 @@
 """
-AMPEL360 Q100 Identifier Grammar Module
+AMPEL360 Q100/Q10 Identifier Grammar Module
 
 This module implements the canonical identifier grammar for AMPEL360 Q100
-artifacts per CV-003 specification.
+(AIR-T) and Q10 (SPACE-T) artifacts per CV-003 specification.
 
 Grammar:
-    AMPEL360-Q100-MSN{nnn}-ATA{cc}-{ss}-{ss}-LC{nn}-{Type}-{Seq}
+    AMPEL360-{MODEL}-MSN{nnn}-ATA{ccc}-{ss}-{ss}-LC{nn}-{Type}-{Seq}
 
 Formats:
-    - Compact: AMPEL360_Q100_MSN001_ATA25-10-00_LC02_REQ_001
-    - URN:     urn:ampel360:q100:msn001:ata25-10-00:lc02:req:001
+    - Compact: AMPEL360_Q100_MSN001_ATA025-10-00_LC02_REQ_001
+    - URN:     urn:ampel360:q100:msn001:ata025-10-00:lc02:req:001
+
+Chapter system: 7-axis / 33-subdomain / 3-digit (000–124), excl. X13/X17.
 
 Author: ASIT (Aircraft Systems Information Transponder)
-Document: AMPEL360-CV-003 v3.0
-Date: 2026-02-18
+Document: AMPEL360-CV-003 v4.0
+Date: 2026-02-24
 """
 
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional, Tuple
 from enum import Enum
+
+# ---------------------------------------------------------------------------
+# Module-level constants for the unified primary code system
+# ---------------------------------------------------------------------------
+
+#: Maximum chapter number in the AMPEL360 unified primary code.
+MAX_CHAPTER = 124
+
+#: Chapters permanently excluded under the X13/X17 cultural exclusion policy.
+#: Any 3-digit code in 000–124 that contains the substring "13" or "17" is excluded.
+EXCLUDED_CHAPTERS: frozenset = frozenset(
+    f"{i:03d}"
+    for i in range(MAX_CHAPTER + 1)
+    if "13" in f"{i:03d}" or "17" in f"{i:03d}"
+)
 
 
 class IDFormat(Enum):
@@ -38,15 +55,19 @@ class PhaseType(Enum):
 @dataclass
 class ArtifactID:
     """
-    AMPEL360 Q100 Artifact Identifier.
-    
+    AMPEL360 Q100/Q10 Artifact Identifier.
+
     Represents a canonical artifact identifier with all components
     per CV-003 specification.
+
+    ATA chapter uses 3-digit zero-padded format (000–124, excl. X13/X17).
+    Two-digit codes provided for backward compatibility are zero-padded to
+    3 digits internally (e.g. "25" → "025").
     """
     aircraft_id: str = "AMPEL360"
     model_id: str = "Q100"
     msn: str = ""  # MSN001, MSN042, etc.
-    ata_chapter: str = ""  # 00-98 or IN
+    ata_chapter: str = ""  # 000-124 (excl. X13/X17), IN, or infra suffix (08I…)
     section: str = "00"  # 00-99
     subject: str = "00"  # 00-99
     lc_phase: str = ""  # LC01-LC14
@@ -69,14 +90,27 @@ class ArtifactID:
         if not re.match(r'^MSN\d{3}$', self.msn):
             raise ValueError(f"Invalid MSN: {self.msn}. Must be MSNnnn (e.g., MSN001)")
         
-        # ATA chapter validation: 00-98, IN, or infrastructure suffix (08I, 10I, 12I)
-        if not re.match(r'^(\d{2}I?|IN)$', self.ata_chapter):
-            raise ValueError(f"Invalid ATA chapter: {self.ata_chapter}. Must be 00-98, IN, or infrastructure suffix (e.g., 08I)")
+        # ATA chapter validation: 000-124 (excl. X13/X17), IN, or infra suffix (08I, 10I, 12I)
+        if not re.match(r'^(\d{2,3}I?|IN)$', self.ata_chapter):
+            raise ValueError(
+                f"Invalid ATA chapter: {self.ata_chapter}. "
+                "Must be 000-124, IN, or infrastructure suffix (e.g., 08I)"
+            )
         if self.ata_chapter not in ("IN",) and not self.ata_chapter.endswith('I'):
-            # Validate numeric range for standard chapters (not infrastructure)
+            # Pure numeric code: zero-pad 2-digit to 3-digit for backward compatibility
+            if len(self.ata_chapter) == 2:
+                self.ata_chapter = f"0{self.ata_chapter}"
             value = int(self.ata_chapter)
-            if not (0 <= value <= 98):
-                raise ValueError(f"Invalid ATA chapter: {self.ata_chapter}. Must be 00-98, IN, or infrastructure suffix")
+            if not (0 <= value <= MAX_CHAPTER):
+                raise ValueError(
+                    f"Invalid ATA chapter: {self.ata_chapter}. "
+                    f"Must be 000-{MAX_CHAPTER:03d}, IN, or infrastructure suffix"
+                )
+            if self.ata_chapter in EXCLUDED_CHAPTERS:
+                raise ValueError(
+                    f"Invalid ATA chapter: {self.ata_chapter}. "
+                    "Chapter is permanently excluded (X13/X17 cultural exclusion policy)"
+                )
         
         # Section and subject validation
         if not re.match(r'^\d{2}$', self.section):
@@ -104,7 +138,7 @@ class ArtifactID:
         Generate compact form identifier.
         
         Returns:
-            AMPEL360_Q100_MSN001_ATA25-10-00_LC02_REQ_001
+            AMPEL360_Q100_MSN001_ATA025-10-00_LC02_REQ_001
         """
         return (f"{self.aircraft_id}_{self.model_id}_{self.msn}_"
                 f"ATA{self.ata_chapter}-{self.section}-{self.subject}_"
@@ -115,7 +149,7 @@ class ArtifactID:
         Generate hyphenated form identifier.
         
         Returns:
-            AMPEL360-Q100-MSN001-ATA25-10-00-LC02-REQ-001
+            AMPEL360-Q100-MSN001-ATA025-10-00-LC02-REQ-001
         """
         return (f"{self.aircraft_id}-{self.model_id}-{self.msn}-"
                 f"ATA{self.ata_chapter}-{self.section}-{self.subject}-"
@@ -126,7 +160,7 @@ class ArtifactID:
         Generate URN form identifier.
         
         Returns:
-            urn:ampel360:q100:msn001:ata25-10-00:lc02:req:001
+            urn:ampel360:q100:msn001:ata025-10-00:lc02:req:001
         """
         return (f"urn:ampel360:q100:{self.msn.lower()}:"
                 f"ata{self.ata_chapter.lower()}-{self.section}-{self.subject}:"
@@ -189,17 +223,17 @@ class IDParser:
     
     # Regex patterns for different formats
     COMPACT_PATTERN = re.compile(
-        r'^AMPEL360_Q100_(MSN\d{3})_ATA(\d{2}I?|IN)-(\d{2})-(\d{2})_'
+        r'^AMPEL360_Q100_(MSN\d{3})_ATA(\d{2,3}I?|IN)-(\d{2})-(\d{2})_'
         r'(LC(?:0[1-9]|1[0-4]))_([A-Z0-9\-]+)_(\d{3})$'
     )
     
     HYPHENATED_PATTERN = re.compile(
-        r'^AMPEL360-Q100-(MSN\d{3})-ATA(\d{2}I?|IN)-(\d{2})-(\d{2})-'
+        r'^AMPEL360-Q100-(MSN\d{3})-ATA(\d{2,3}I?|IN)-(\d{2})-(\d{2})-'
         r'(LC(?:0[1-9]|1[0-4]))-([A-Z0-9\-]+)-(\d{3})$'
     )
     
     URN_PATTERN = re.compile(
-        r'^urn:ampel360:q100:(msn\d{3}):ata(\d{2}i?|in)-(\d{2})-(\d{2}):'
+        r'^urn:ampel360:q100:(msn\d{3}):ata(\d{2,3}i?|in)-(\d{2})-(\d{2}):'
         r'(lc(?:0[1-9]|1[0-4])):([a-z0-9\-]+):(\d{3})$'
     )
     
