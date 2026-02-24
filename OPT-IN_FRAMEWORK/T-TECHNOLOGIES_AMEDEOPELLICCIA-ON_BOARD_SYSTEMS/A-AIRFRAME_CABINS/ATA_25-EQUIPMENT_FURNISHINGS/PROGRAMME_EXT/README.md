@@ -16,6 +16,7 @@ Authoritative programme content lives in the respective programme repositories.
 |-----------|----------------|
 | **WTW** | `AMPEL360-WTW/T-TECHNOLOGIES/A-AIRFRAME_CABINS/ATA_25/PROGRAMME_EXT/...` |
 | **BWB** | `AMPEL360-BWB/T-TECHNOLOGIES/A-AIRFRAME_CABINS/ATA_25/PROGRAMME_EXT/...` |
+| **RSP** | `AMPEL360-RSP/T-TECHNOLOGIES/A-AIRFRAME_CABINS/ATA_25/PROGRAMME_EXT/...` |
 
 ---
 

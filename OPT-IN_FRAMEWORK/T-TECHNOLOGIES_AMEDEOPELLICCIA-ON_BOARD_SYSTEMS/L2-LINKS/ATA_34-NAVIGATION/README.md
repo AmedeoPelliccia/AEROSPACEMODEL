@@ -35,6 +35,7 @@ Core scaffold is SHARED in this repository. Programme-specific extensions live i
 |-----------|---------------|
 | **WTW** | `AMPEL360-WTW/T-TECHNOLOGIES/L2-LINKS/ATA_34/PROGRAMME_EXT/...` |
 | **BWB** | `AMPEL360-BWB/T-TECHNOLOGIES/L2-LINKS/ATA_34/PROGRAMME_EXT/...` |
+| **RSP** | `AMPEL360-RSP/T-TECHNOLOGIES/L2-LINKS/ATA_34/PROGRAMME_EXT/...` |
 
 ---
 

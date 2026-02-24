@@ -16,6 +16,7 @@ Authoritative programme content lives in the respective programme repositories.
 |-----------|----------------|
 | **WTW** | `AMPEL360-WTW/T-TECHNOLOGIES/A2-AVIONICS/ATA_42/PROGRAMME_EXT/...` |
 | **BWB** | `AMPEL360-BWB/T-TECHNOLOGIES/A2-AVIONICS/ATA_42/PROGRAMME_EXT/...` |
+| **RSP** | `AMPEL360-RSP/T-TECHNOLOGIES/A2-AVIONICS/ATA_42/PROGRAMME_EXT/...` |
 
 ---
 

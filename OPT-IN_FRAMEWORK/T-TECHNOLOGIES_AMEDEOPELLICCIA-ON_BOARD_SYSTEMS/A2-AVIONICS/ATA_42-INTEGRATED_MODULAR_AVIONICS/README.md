@@ -35,6 +35,7 @@ Core scaffold is SHARED in this repository. Programme-specific extensions live i
 |-----------|---------------|
 | **WTW** | `AMPEL360-WTW/T-TECHNOLOGIES/A2-AVIONICS/ATA_42/PROGRAMME_EXT/...` |
 | **BWB** | `AMPEL360-BWB/T-TECHNOLOGIES/A2-AVIONICS/ATA_42/PROGRAMME_EXT/...` |
+| **RSP** | `AMPEL360-RSP/T-TECHNOLOGIES/A2-AVIONICS/ATA_42/PROGRAMME_EXT/...` |
 
 ---
 
