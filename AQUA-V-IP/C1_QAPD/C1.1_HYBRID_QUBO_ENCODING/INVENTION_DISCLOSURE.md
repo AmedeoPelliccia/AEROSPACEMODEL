@@ -61,6 +61,11 @@ class AerospaceConstraintPenalty:
 
 For each constraint type:
 
+General penalty transformation follows:
+- Equality constraints: P(x) = λ(Σ_i w_i x_i − C)^2
+- Inequality constraints: transformed with slack variables and expanded to Σ_{i≤j} Q_ij x_i x_j
+- Coefficients λ are physically scaled, not arbitrarily selected, from severity metrics of constraint violation.
+
 **Cryogenic thermal constraint:** Penalises material choices that do not maintain structural integrity below −253°C
 - Penalty = λ_cryo × Σ_{m ∉ cryo_compatible} b_m × (allocation variable)
 
@@ -72,6 +77,19 @@ For each constraint type:
 
 **Geometric packaging constraint:** Penalises configurations that violate CG envelope or volume bounds
 - Penalty = λ_geom × max(0, CG_deviation(x) − CG_tolerance)²
+
+### 3.4 Non-Linear Precision in Binary Registers
+
+Conventional QUBO discretisations typically use linear mappings, for example:
+- x = x_min + Δx × Σ_{i=0}^{n-1} 2^i q_i
+
+In aerospace design, sensitivity is not uniform across the full design space. Regions proximate to critical fatigue, thermal, or aeroelastic thresholds require finer granularity than nominal operating regions. To improve qubit efficiency, the invention applies a non-linear binary register mapping (for example logarithmic spacing or Chebyshev nodes) from binary states to the continuous domain.
+
+Accordingly, the numerical spacing between adjacent binary states is non-uniform:
+- micro-step resolution near critical safety thresholds;
+- macro-step resolution in nominal regions.
+
+This non-linear precision allocation enables representation of strongly non-linear aerospace effects with fewer binary variables than uniform linear discretisation while preserving high-fidelity modeling where it is safety-relevant.
 
 ---
 

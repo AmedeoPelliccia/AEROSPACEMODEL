@@ -21,7 +21,7 @@
 
 (d) receiving a set of domain-specific aerospace constraints comprising at least one of: a cryogenic temperature constraint specifying material structural integrity requirements at or below −253°C; a material compatibility constraint specifying compatibility of materials with hydrogen fuel systems; a Design Assurance Level (DAL) failure probability constraint derived from a safety assessment; or an aerodynamic packaging constraint specifying centre-of-gravity or volumetric bounds;
 
-(e) constructing, for each domain-specific aerospace constraint, a quadratic penalty term over the first and second sets of binary variables, wherein a penalty coefficient for each penalty term is determined based on a physical severity metric associated with the corresponding constraint; and
+(e) constructing, for each domain-specific aerospace constraint, a quadratic penalty term over the first and second sets of binary variables, wherein equality constraints are formulated as P(x) = λ(Σ_i w_i x_i − C)^2 and inequality constraints are transformed using slack variables before expansion into a quadratic matrix form Σ_{i≤j} Q_ij x_i x_j, and wherein a penalty coefficient λ for each penalty term is determined dynamically from a physical severity metric associated with the corresponding constraint; and
 
 (f) assembling a QUBO cost matrix comprising an objective function expressed as a quadratic form over the first and second sets of binary variables, plus the sum of the constructed penalty terms, wherein the assembled QUBO instance is executable on a quantum processing unit or hybrid quantum-classical solver.
 
@@ -55,6 +55,12 @@ assembling a QUBO cost matrix combining the objective function and penalty terms
 **7.** The method of claim 1, wherein the number of bits in the binary register for a continuous design parameter is selected as the smallest integer n such that the quantisation error (x_max − x_min) / (2^n − 1) is less than a specified precision tolerance for the parameter.
 
 **8.** The method of claim 1, further comprising generating a constraint schema record that maps each penalty term to: a reference in a technical standards document (ATA chapter, DO-178C section, CS-25 subpart, or ARP4761 section); a lifecycle phase identifier; and a regulatory authority identifier.
+
+**9.** The method of claim 1, wherein the penalty coefficient (λ) for a cryogenic temperature constraint is dynamically calculated as a function of a coefficient-of-thermal-expansion mismatch between adjacent materials, and is increased exponentially when modeled thermo-mechanical stress exceeds a yield strength threshold at −253°C.
+
+**10.** The method of claim 1, wherein penalty coefficients for safety-critical domain constraints are scaled to be greater than a maximum possible variation of the objective function, such that any physically invalid aerospace configuration corresponds to a higher QUBO energy state than a worst-performing valid configuration.
+
+**11.** The method of claim 1, wherein the binary register encoding a continuous design parameter uses a non-linear mapping function to translate binary variables into a continuous range, such that numerical distance between adjacent binary states is non-uniform to provide higher parameter resolution proximate to critical aerospace safety thresholds and lower resolution in nominal operating regions, thereby reducing a total number of required qubits.
 
 ---
 
