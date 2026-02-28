@@ -64,9 +64,9 @@ For each constraint type:
 
 General penalty transformation follows:
 - Equality constraints: P(x) = λ(Σ_{i=1}^n w_i x_i - C)^2
-- Inequality constraints: transformed with slack variables and expanded to Σ_{i=1}^n Σ_{j=i}^n Q_ij x_i x_j
+- Inequality constraints: transformed with slack variables, where each slack variable is itself encoded as one or more additional binary variables appended to the QUBO variable vector, and the resulting expanded form is written as Σ_{i=1}^n Σ_{j=i}^n Q_ij x_i x_j
 - Coefficients λ are physically scaled, not arbitrarily selected, from severity metrics of constraint violation.
-- Here n denotes the number of binary variables participating in the constraint term.
+- Here n denotes the total number of binary variables (including any slack-variable bits) participating in the constraint term and indexed within the QUBO variable vector.
 
 **Cryogenic thermal constraint:** Penalises material choices that do not maintain structural integrity below −253°C
 - Penalty = λ_cryo × Σ_{m ∉ cryo_compatible} b_m × (allocation variable)
