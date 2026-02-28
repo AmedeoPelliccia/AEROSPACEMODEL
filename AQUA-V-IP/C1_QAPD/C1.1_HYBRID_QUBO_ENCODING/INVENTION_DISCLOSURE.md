@@ -40,6 +40,7 @@ The invention introduces a two-tier variable encoding:
 **Tier 2 — Continuous variables in binary registers:** Represent continuous parameters with configurable precision
 - A continuous variable x ∈ [x_min, x_max] is encoded as an n-bit binary register: x ≈ x_min + (x_max - x_min) × (Σ_{i=0}^{n-1} b_i × 2^i) / (2^n - 1)
 - The precision n is selected based on the sensitivity of the objective function to the variable
+- Indexing starts at i = 0 for register bit positions and at i = 1 for generic constraint-variable sums; this difference is notational only and does not change mathematical content when each formula is interpreted using its stated convention.
 
 ### 3.2 Aerospace Constraint Schema
 
@@ -61,6 +62,12 @@ class AerospaceConstraintPenalty:
 
 For each constraint type:
 
+General penalty transformation follows:
+- Equality constraints: P(x) = λ(Σ_{i=1}^n w_i x_i - C)^2
+- Inequality constraints: transformed with slack variables, where each slack variable is itself encoded as one or more additional binary variables appended to the QUBO variable vector, and the resulting expanded form is written as Σ_{i=1}^n Σ_{j=i}^n Q_ij x_i x_j
+- Coefficients λ are physically scaled, not arbitrarily selected, from severity metrics of constraint violation.
+- Here n denotes the total number of binary variables (including any slack-variable bits) participating in the constraint term and indexed within the QUBO variable vector.
+
 **Cryogenic thermal constraint:** Penalises material choices that do not maintain structural integrity below −253°C
 - Penalty = λ_cryo × Σ_{m ∉ cryo_compatible} b_m × (allocation variable)
 
@@ -72,6 +79,19 @@ For each constraint type:
 
 **Geometric packaging constraint:** Penalises configurations that violate CG envelope or volume bounds
 - Penalty = λ_geom × max(0, CG_deviation(x) − CG_tolerance)²
+
+### 3.4 Non-Linear Precision in Binary Registers
+
+Conventional QUBO discretisations typically use linear mappings, for example:
+- x = x_min + Δx × Σ_{i=0}^{n-1} 2^i q_i
+
+In aerospace design, sensitivity is not uniform across the full design space. Regions near critical fatigue, thermal, or aeroelastic thresholds require finer granularity than nominal operating regions. To improve qubit efficiency, the invention applies a non-linear binary register mapping (for example logarithmic spacing or Chebyshev nodes) from binary states to the continuous domain.
+
+Accordingly, the numerical spacing between adjacent binary states is non-uniform:
+- micro-step resolution near critical safety thresholds;
+- macro-step resolution in nominal regions.
+
+This non-linear precision allocation enables representation of strongly non-linear aerospace effects with fewer binary variables than uniform linear discretisation while preserving high-fidelity modeling where it is safety-relevant.
 
 ---
 
