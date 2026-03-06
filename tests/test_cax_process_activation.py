@@ -120,7 +120,7 @@ class TestDomainActivation:
         assert "domain_activation" in cax_data
 
     def test_at_least_19_domains(self, cax_data: dict):
-        """20 domains expected: O, P, 15 T-subdomains, I, N."""
+        """At least 19 domains expected: O, P, up to 15 T-subdomains, I, N."""
         assert len(cax_data["domain_activation"]) >= 19
 
     def test_all_domains_have_cax_list(self, cax_data: dict):
