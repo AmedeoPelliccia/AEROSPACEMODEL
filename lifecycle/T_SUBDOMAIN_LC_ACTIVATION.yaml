@@ -155,6 +155,7 @@ subdomains:
     ata_scope: ["ATA_28-FUEL"]
     doa_criticality: "CRITICAL"
     novel_technology: true
+    cax: [CAD, CAE, CFD, CAM, CAPP, VP, PDM-PLM, SCM, MRP-ERP, CIM, CAI, CAA, CASE, KBE, CAT]
     special_conditions:
       - "SC-28-H2-001: Hydrogen storage and distribution"
       - "SC-28-CRYO-002: Cryogenic temperature handling"
@@ -259,6 +260,7 @@ subdomains:
     ata_scope: ["ATA_71-POWER_PLANT", "ATA_72-ENGINE", "ATA_73-ENGINE_FUEL_AND_CONTROL"]
     doa_criticality: "CRITICAL"
     novel_technology: true
+    cax: [CAD, CAE, CFD, CAM, CAPP, VP, PDM-PLM, SCM, MRP-ERP, CIM, CAI, CAA, CASE, KBE, CAT]
     special_conditions:
       - "SC-71-FUELCELL-001: Fuel cell power plant certification"
 
@@ -367,6 +369,7 @@ subdomains:
     ata_scope: ["ATA_95-AI_ML_MODELS", "ATA_97-SYNTHETIC_DATA_VALIDATION"]
     doa_criticality: "VARIES"
     novel_technology: true
+    cax: [CAI, CASE, KBE, PDM-PLM, CAA, CAT]
     special_conditions:
       - "SC-AI-ASSURANCE-001: AI model assurance and explainability"
       - "EU_AI_ACT: High-risk AI system compliance"
@@ -490,6 +493,7 @@ subdomains:
     doa_criticality: "STANDARD"
     novel_technology: false
     profile: "standard_profile"
+    cax: [PDM-PLM, CASE, CAA, KBE]
     description: "Agency, regulatory, and legal-derived requirements — airworthiness mandates and certification framework."
     cross_links:
       - target: "P_PRODUCT_DEFINITION"
@@ -512,6 +516,7 @@ subdomains:
     doa_criticality: "STANDARD"
     novel_technology: false
     profile: "standard_profile"
+    cax: [PDM-PLM, CASE, CAA, KBE]
     description: "Operator business policies and enforcement — maintenance programs, operations org, and support logistics."
     cross_links:
       - target: "P_SERVICE_INSTRUCTION"
@@ -532,6 +537,7 @@ subdomains:
     doa_criticality: "STANDARD"
     novel_technology: false
     profile: "standard_profile"
+    cax: [PDM-PLM, SCM, CAA, CASE]
     description: "What the product is — dimensions, weight, markings. Feeds configuration management."
     cross_links:
       - target: "O_AUTHORITATIVE"
@@ -548,6 +554,7 @@ subdomains:
     doa_criticality: "STANDARD"
     novel_technology: false
     profile: "standard_profile"
+    cax: [PDM-PLM, SCM, CAA, CASE]
     description: "How you handle it — lifting, towing, servicing. Feeds ground operations manuals."
     cross_links:
       - target: "O_BUSINESS_ENFORCEMENT"
@@ -572,6 +579,7 @@ subdomains:
     doa_criticality: "STANDARD"
     novel_technology: false
     profile: "standard_profile"
+    cax: [CAD, CAM, CAPP, CIM, PDM-PLM, SCM, MRP-ERP, CAA]
     description: "Factory-floor infrastructure — production lines, test rigs, assembly benches."
 
   I_MAINTENANCE_ENVIRONMENTS:
@@ -581,6 +589,7 @@ subdomains:
     doa_criticality: "STANDARD"
     novel_technology: false
     profile: "standard_profile"
+    cax: [CAD, CAM, CAPP, CIM, PDM-PLM, SCM, MRP-ERP, CAA]
     description: "Maintenance ecosystem — line stations, hangars, component shops."
 
   I_OPERATIONS_SERVICE_STRUCTURES:
@@ -590,6 +599,7 @@ subdomains:
     doa_criticality: "VARIES"
     novel_technology: false
     profile: "standard_profile"
+    cax: [CAD, CAM, CAPP, CIM, PDM-PLM, SCM, MRP-ERP, CAA]
     description: "Airport and logistics infrastructure including H₂ supply chain."
 
 # =============================================================================
@@ -603,6 +613,7 @@ subdomains:
     doa_criticality: "STANDARD"
     novel_technology: false
     profile: "standard_profile"
+    cax: [CASE, CAI, CAA, KBE, PDM-PLM]
     description: "Ledger, DPP, hash chain, identifiers, schemas, audit packs."
 
   N_AI_GOVERNANCE_ASSURANCE:
@@ -612,6 +623,7 @@ subdomains:
     doa_criticality: "VARIES"
     novel_technology: false
     profile: "standard_profile"
+    cax: [CASE, CAI, CAA, KBE, PDM-PLM]
     description: "Governance wrapper over AI/ML lifecycle — certification, ethics, human authority, explainability."
 
   N_PROGRAM_RESERVED:
@@ -621,6 +633,7 @@ subdomains:
     doa_criticality: "VARIES"
     novel_technology: false
     profile: "standard_profile"
+    cax: [CASE, CAI, CAA, KBE, PDM-PLM]
     description: "Expansion slot for future program-specific AI governance and neural network systems."
 
 # =============================================================================

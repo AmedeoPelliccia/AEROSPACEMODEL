@@ -1,0 +1,255 @@
+# =============================================================================
+# CAx PROCESS ACTIVATION MAP
+# Domain → Computer-Aided Process (CAx) Activation Rules
+# Program: AMPEL360 Q100
+# =============================================================================
+#
+# This file defines which CAx (Computer-Aided) processes are activated for
+# each domain and subdomain within the OPT-IN_FRAMEWORK. Only activated
+# processes should have directories created.
+#
+# The 15 canonical CAx processes are:
+#   CAD, CAE, CFD, CAM, CAPP, VP, PDM-PLM, SCM, MRP-ERP, CIM,
+#   CAI, CAA, CASE, KBE, CAT
+#
+# Novel Technology domains (⭐) may activate all 15 processes.
+# Standard domains activate a subset relevant to their scope.
+# =============================================================================
+
+meta:
+  schema_version: "1.0.0"
+  file_version: "1.0.0"
+  program: "AMPEL360 Q100"
+  owner: "ASIT"
+  status: "ACTIVE"
+  date: "2026-03-06"
+  canonical_lc_source: "lifecycle/T_SUBDOMAIN_LC_ACTIVATION.yaml"
+  schema: "lifecycle/schemas/cax_process_activation.schema.json"
+
+# =============================================================================
+# CAx Process Definitions
+# =============================================================================
+
+cax_processes:
+  CAD:
+    name: "Computer-Aided Design"
+    description: "3D modeling, geometry definition, DMU creation"
+  CAE:
+    name: "Computer-Aided Engineering"
+    description: "Structural, thermal, and multiphysics analysis"
+  CFD:
+    name: "Computational Fluid Dynamics"
+    description: "Aerodynamic and thermal flow simulation"
+  CAM:
+    name: "Computer-Aided Manufacturing"
+    description: "CNC programming, toolpath generation, additive manufacturing"
+  CAPP:
+    name: "Computer-Aided Process Planning"
+    description: "Manufacturing process routing and sequencing"
+  VP:
+    name: "Virtual Prototyping"
+    description: "Digital mock-up, virtual testing, simulation"
+  PDM-PLM:
+    name: "Product Data Management / Product Lifecycle Management"
+    description: "Data management, configuration control, lifecycle tracking"
+  SCM:
+    name: "Supply Chain Management"
+    description: "Supplier management, procurement, logistics"
+  MRP-ERP:
+    name: "Materials Resource Planning / Enterprise Resource Planning"
+    description: "Material planning, resource scheduling, enterprise integration"
+  CIM:
+    name: "Computer-Integrated Manufacturing"
+    description: "Factory automation, MES, production control"
+  CAI:
+    name: "Computer-Aided Intelligence"
+    description: "AI/ML integration, analytics, decision support"
+  CAA:
+    name: "Computer-Aided Automation"
+    description: "Process automation, robotic integration, workflow orchestration"
+  CASE:
+    name: "Computer-Aided Software Engineering"
+    description: "Software development tools, model-based systems engineering"
+  KBE:
+    name: "Knowledge-Based Engineering"
+    description: "Design automation, rule engines, parametric templates"
+  CAT:
+    name: "Computer-Aided Testing"
+    description: "Test automation, instrumentation, data acquisition"
+
+# =============================================================================
+# Domain → CAx Activation Map
+# Only activated processes should have directories created
+# =============================================================================
+
+domain_activation:
+
+  # ── O-ORGANIZATIONS ───────────────────────────────────────────────
+  O-ORGANIZATIONS:
+    cax: [PDM-PLM, CASE, CAA, KBE]
+    opt_in: true
+    rationale: >
+      Governance docs, regulatory tracking, policy automation.
+
+  # ── P-PROGRAMS ────────────────────────────────────────────────────
+  P-PROGRAMS:
+    cax: [PDM-PLM, SCM, CAA, CASE]
+    opt_in: true
+    rationale: >
+      Program management, servicing procedures, configuration.
+
+  # ── T-TECHNOLOGIES (per subdomain) ────────────────────────────────
+
+  T/A-AIRFRAME_CABINS:
+    cax: [CAD, CAE, CFD, CAM, CAPP, VP, PDM-PLM, SCM, CIM, KBE, CAT]
+    opt_in: true
+
+  T/M-MECHANICS:
+    cax: [CAD, CAE, CAM, CAPP, VP, PDM-PLM, SCM, KBE, CAT]
+    opt_in: true
+
+  T/E1-ENVIRONMENT:
+    cax: [CAD, CAE, CFD, PDM-PLM, CAT]
+    opt_in: true
+
+  T/D-DATA:
+    cax: [CASE, PDM-PLM, CAI, CAT]
+    opt_in: true
+
+  T/I-INFORMATION:
+    cax: [CASE, PDM-PLM, CAI, CAT]
+    opt_in: true
+
+  T/E2-ENERGY:
+    cax: [CAD, CAE, PDM-PLM, SCM, CAT]
+    opt_in: true
+
+  T/E3-ELECTRICS:
+    cax: [CAD, CAE, PDM-PLM, CAT]
+    opt_in: true
+
+  T/L1-LOGICS:
+    cax: [CASE, KBE, PDM-PLM]
+    opt_in: true
+
+  T/L2-LINKS:
+    cax: [CAD, CAE, CASE, PDM-PLM, CAT]
+    opt_in: true
+
+  T/C1-COMMS:
+    cax: [CAD, CAE, CASE, PDM-PLM, CAT]
+    opt_in: true
+
+  T/C2-CIRCULAR_CRYOGENIC_CELLS:  # ⭐ Novel Technology
+    cax: [CAD, CAE, CFD, CAM, CAPP, VP, PDM-PLM, SCM, MRP-ERP, CIM, CAI, CAA, CASE, KBE, CAT]
+    opt_in: true
+    note: >
+      Full CAx activation — all 15 processes applicable for novel
+      LH2 cryogenic technology with Special Conditions.
+
+  T/I2-INTELLIGENCE:              # ⭐ Novel Technology
+    cax: [CAI, CASE, KBE, PDM-PLM, CAA, CAT]
+    opt_in: true
+    note: >
+      AI/ML lifecycle — training, inference, validation, assurance.
+
+  T/A2-AVIONICS:
+    cax: [CAD, CAE, CASE, VP, PDM-PLM, KBE, CAT]
+    opt_in: true
+
+  T/O-OPERATING_SYSTEMS:
+    cax: [CASE, PDM-PLM, CAI, CAA, KBE]
+    opt_in: true
+
+  T/P-PROPULSION:                 # ⭐ Novel Technology
+    cax: [CAD, CAE, CFD, CAM, CAPP, VP, PDM-PLM, SCM, MRP-ERP, CIM, CAI, CAA, CASE, KBE, CAT]
+    opt_in: true
+    note: >
+      Full CAx activation — all 15 processes applicable for novel
+      fuel-cell propulsion with Special Conditions.
+
+  # ── I-INFRASTRUCTURES ─────────────────────────────────────────────
+  I-INFRASTRUCTURES:
+    cax: [CAD, CAM, CAPP, CIM, PDM-PLM, SCM, MRP-ERP, CAA]
+    opt_in: true
+    rationale: >
+      Manufacturing facilities, maintenance environments, H2 GSE.
+
+  # ── N-NEURAL_NETWORKS ─────────────────────────────────────────────
+  N-NEURAL_NETWORKS:
+    cax: [CASE, CAI, CAA, KBE, PDM-PLM]
+    opt_in: true
+    rationale: >
+      AI governance, digital thread, DPP, ledger systems.
+
+# =============================================================================
+# Subdomain → OPT-IN_FRAMEWORK Path Mapping
+# =============================================================================
+
+path_mapping:
+  O-ORGANIZATIONS: "OPT-IN_FRAMEWORK/O-ORGANIZATIONS"
+  P-PROGRAMS: "OPT-IN_FRAMEWORK/P-PROGRAMS"
+  T/A-AIRFRAME_CABINS: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/A-AIRFRAME_CABINS"
+  T/M-MECHANICS: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/M-MECHANICS"
+  T/E1-ENVIRONMENT: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/E1-ENVIRONMENT"
+  T/D-DATA: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/D-DATA"
+  T/I-INFORMATION: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/I-INFORMATION"
+  T/E2-ENERGY: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/E2-ENERGY"
+  T/E3-ELECTRICS: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/E3-ELECTRICS"
+  T/L1-LOGICS: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/L1-LOGICS"
+  T/L2-LINKS: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/L2-LINKS"
+  T/C1-COMMS: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C1-COMMS"
+  T/C2-CIRCULAR_CRYOGENIC_CELLS: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CELLS"
+  T/I2-INTELLIGENCE: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/I2-INTELLIGENCE"
+  T/A2-AVIONICS: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/A2-AVIONICS"
+  T/O-OPERATING_SYSTEMS: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/O-OPERATING_SYSTEMS"
+  T/P-PROPULSION: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/P-PROPULSION"
+  I-INFRASTRUCTURES: "OPT-IN_FRAMEWORK/I-INFRASTRUCTURES"
+  N-NEURAL_NETWORKS: "OPT-IN_FRAMEWORK/N-NEURAL_NETWORKS"
+
+# =============================================================================
+# Validation Rules
+# =============================================================================
+
+validation_rules:
+  - id: "CAX-VAL-001"
+    name: "All CAx entries must reference canonical processes"
+    rule: "Every entry in a domain's cax list must be one of the 15 canonical CAx process identifiers"
+    enforcement: "block"
+
+  - id: "CAX-VAL-002"
+    name: "PDM-PLM mandatory for all domains"
+    rule: "Every domain must include PDM-PLM in its activated CAx list"
+    enforcement: "block"
+    rationale: "Configuration management and data lifecycle are universal requirements"
+
+  - id: "CAX-VAL-003"
+    name: "Novel technology full activation"
+    rule: "Domains marked as Novel Technology (T/C2, T/P) must activate all 15 CAx processes"
+    enforcement: "block"
+    applies_to: ["T/C2-CIRCULAR_CRYOGENIC_CELLS", "T/P-PROPULSION"]
+
+  - id: "CAX-VAL-004"
+    name: "No duplicate CAx entries"
+    rule: "Each domain's cax list must contain unique process identifiers only"
+    enforcement: "block"
+
+  - id: "CAX-VAL-005"
+    name: "opt_in flag required"
+    rule: "Every domain activation entry must have an opt_in boolean field"
+    enforcement: "block"
+
+# =============================================================================
+# CI Hints
+# =============================================================================
+
+ci_hints:
+  yamllint:
+    max_line_length: 200
+    truthy: disable
+  validation_script: "scripts/validate_cax_activation.py"
+  schema: "lifecycle/schemas/cax_process_activation.schema.json"
+
+# =============================================================================
+# End of CAx Process Activation Map
+# =============================================================================
