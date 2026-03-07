@@ -1,0 +1,92 @@
+record_id: "{{ record_id }}"
+aircraft_id: "AMPEL360"
+model_id: "Q100"
+msn: "{{ msn }}"
+
+# ATA Classification
+ata_chapter: "03"
+ata_chapter_title: "Ground Support Equipment and Tooling"
+section: "{{ ata_section }}"
+section_title: "{{ section_title }}"
+subject: "{{ ata_subject }}"
+subject_title: "{{ subject_title }}"
+
+# OPT-IN Framework Axes
+optin_axis: "I"
+optin_subaxis: "O"
+optin_subaxis_name: "Operations & Service Structures"
+
+# Novel Technology Flag
+novel_technology: {{ novel_technology | lower }}
+
+# Lifecycle Classification
+phase_type: "{{ lc_phase_type }}"
+lc_phase: "{{ lc_phase }}"
+lc_canonical_name: "{{ lc_canonical_name }}"
+package_origin: "{{ package_origin }}"
+
+# Lifecycle Applicability
+lifecycle_applicability:
+  - phase: "LC04"
+    description: "Infrastructure design and specifications"
+  - phase: "LC06"
+    description: "Infrastructure testing and commissioning"
+  - phase: "LC10"
+    description: "Infrastructure production and deployment"
+  - phase: "LC11"
+    description: "Customer infrastructure integration"
+  - phase: "LC12"
+    description: "Infrastructure maintenance and upgrades"
+
+# Artifact Classification
+artifact_type: "{{ artifact_type }}"
+artifact_type_name: "{{ artifact_type_name }}"
+artifact_title: "{{ artifact_title }}"
+
+# Administrative
+owner_aor: "ASIT/I-INFRASTRUCTURES/O-OPERATIONS"
+status: "{{ status }}"
+revision: "01"
+prepared_by: "cgen_ata03.py"
+date_created: "{{ cgen_timestamp }}"
+date_modified: "{{ cgen_timestamp }}"
+classification: "UNCLASSIFIED"
+
+# SSOT Paths
+ssot_root: "OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES"
+ssot_dir: "{{ ssot_dir }}"
+
+# Gate Information
+gate_id: "{{ gate_id }}"
+
+# BREX Compliance Reference
+brex_reference:
+  brex_id: "{{ brex_id }}"
+  standard: "S1000D Issue 5.0"
+  validated: true
+
+# Cross-references
+{% if cross_refs %}
+cross_references:
+{% for ref in cross_refs %}
+  - "{{ ref }}"
+{% endfor %}
+{% else %}
+cross_references: []
+{% endif %}
+
+# Notes
+{% if notes %}
+notes: "{{ notes }}"
+{% else %}
+notes: ""
+{% endif %}
+
+# CGen Generation Metadata
+cgen:
+  generated_by: "cgen_ata03.py"
+  generated_at: "{{ cgen_timestamp }}"
+  cgen_version: "{{ cgen_version }}"
+  template: "templates/cgen/ata03_meta.yaml.j2"
+  target_dir: "OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES/ATA_03-SUPPORT_INFRA"
+  idempotent: true

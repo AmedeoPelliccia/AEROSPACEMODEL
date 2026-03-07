@@ -1,0 +1,85 @@
+record_id: "AMPEL360_Q100_MSN001_ATA03-60-00_LC10_DES_001"
+aircraft_id: "AMPEL360"
+model_id: "Q100"
+msn: "MSN001"
+
+# ATA Classification
+ata_chapter: "03"
+ata_chapter_title: "Ground Support Equipment and Tooling"
+section: "60"
+section_title: "Safety Equipment"
+subject: "00"
+subject_title: "Safety and Protective Equipment"
+
+# OPT-IN Framework Axes
+optin_axis: "I"
+optin_subaxis: "O"
+optin_subaxis_name: "Operations & Service Structures"
+
+# Novel Technology Flag
+novel_technology: false
+
+# Lifecycle Classification
+phase_type: "PLM"
+lc_phase: "LC10"
+lc_canonical_name: "Industrial & Supply Chain"
+package_origin: "INDUSTRIAL"
+
+# Lifecycle Applicability
+lifecycle_applicability:
+  - phase: "LC04"
+    description: "Infrastructure design and specifications"
+  - phase: "LC06"
+    description: "Infrastructure testing and commissioning"
+  - phase: "LC10"
+    description: "Infrastructure production and deployment"
+  - phase: "LC11"
+    description: "Customer infrastructure integration"
+  - phase: "LC12"
+    description: "Infrastructure maintenance and upgrades"
+
+# Artifact Classification
+artifact_type: "DES"
+artifact_type_name: "Design Document"
+artifact_title: "ATA 03-60 Safety and Protective Equipment"
+
+# Administrative
+owner_aor: "ASIT/I-INFRASTRUCTURES/O-OPERATIONS"
+status: "DRAFT"
+revision: "01"
+prepared_by: "cgen_ata03.py"
+date_created: "2026-03-07T03:00:00Z"
+date_modified: "2026-03-07T03:00:00Z"
+classification: "UNCLASSIFIED"
+
+# SSOT Paths
+ssot_root: "OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES"
+ssot_dir: "OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES/ATA_03-SUPPORT_INFRA"
+
+# Gate Information
+gate_id: "G-LC10-PBL"
+
+# BREX Compliance Reference
+brex_reference:
+  brex_id: "BREX-S1000D-5.0-DEFAULT"
+  standard: "S1000D Issue 5.0"
+  validated: true
+
+# Cross-references
+
+cross_references: []
+
+
+# Notes
+
+notes: "Personal protective equipment and safety systems for ground operations."
+
+
+# CGen Generation Metadata
+cgen:
+  generated_by: "cgen_ata03.py"
+  generated_at: "2026-03-07T03:00:00Z"
+  cgen_version: "1.0.0"
+  template: "templates/cgen/ata03_meta.yaml.j2"
+  target_dir: "OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES/ATA_03-SUPPORT_INFRA"
+  idempotent: true

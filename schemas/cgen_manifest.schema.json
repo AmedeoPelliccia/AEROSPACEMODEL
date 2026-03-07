@@ -1,0 +1,126 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ampel360.com/schemas/cgen_manifest.schema.json",
+  "title": "AMPEL360 CGen Manifest Schema",
+  "description": "JSON Schema for validating the CGen generation manifest (cd/reports/cgen_manifest.json). Records all files generated in a CGen run with SHA-256 checksums.",
+  "type": "object",
+  "required": ["manifest_id", "generated_at", "cgen_version", "run_mode", "dry_run", "summary", "files"],
+  "additionalProperties": false,
+  "properties": {
+    "manifest_id": {
+      "type": "string",
+      "description": "Unique identifier for this manifest run",
+      "pattern": "^CGEN-MANIFEST-[0-9]{8}T[0-9]{6}Z$"
+    },
+    "generated_at": {
+      "type": "string",
+      "description": "ISO 8601 UTC timestamp when manifest was generated",
+      "format": "date-time"
+    },
+    "cgen_version": {
+      "type": "string",
+      "description": "Version of the CGen scripts used",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "run_mode": {
+      "type": "string",
+      "description": "CGen execution mode",
+      "enum": ["full", "docs-only", "indexes-only"]
+    },
+    "dry_run": {
+      "type": "boolean",
+      "description": "Whether this was a dry run (no files written)"
+    },
+    "summary": {
+      "type": "object",
+      "description": "High-level summary of the generation run",
+      "required": ["total_files", "files_created", "files_updated", "files_unchanged", "targets"],
+      "additionalProperties": false,
+      "properties": {
+        "total_files": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of files processed"
+        },
+        "files_created": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of new files created"
+        },
+        "files_updated": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of existing files updated"
+        },
+        "files_unchanged": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of files unchanged (idempotent)"
+        },
+        "targets": {
+          "type": "array",
+          "description": "Target directories written to",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "files": {
+      "type": "array",
+      "description": "List of all files generated with checksums",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256", "action", "size_bytes"],
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Relative path from repository root"
+          },
+          "sha256": {
+            "type": "string",
+            "description": "SHA-256 checksum of file contents (hex)",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "action": {
+            "type": "string",
+            "description": "Action taken on this file",
+            "enum": ["created", "updated", "unchanged", "skipped"]
+          },
+          "size_bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "File size in bytes"
+          },
+          "generator": {
+            "type": "string",
+            "description": "Script that generated this file"
+          }
+        }
+      }
+    },
+    "guards": {
+      "type": "object",
+      "description": "Guard check results",
+      "properties": {
+        "path_fence": {
+          "type": "object",
+          "properties": {
+            "passed": {"type": "boolean"},
+            "allowed_paths": {"type": "array", "items": {"type": "string"}},
+            "violations": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "anti_deletion": {
+          "type": "object",
+          "properties": {
+            "passed": {"type": "boolean"},
+            "net_deletions": {"type": "integer"},
+            "max_allowed": {"type": "integer"}
+          }
+        }
+      }
+    }
+  }
+}
