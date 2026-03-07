@@ -309,14 +309,15 @@ artifact_title: "{context['artifact_title']}"
 
 owner_aor: "ASIT/I-INFRASTRUCTURES/O-OPERATIONS"
 status: "{context['status']}"
-revision: "01"
+revision: "{context['revision']}"
 prepared_by: "cgen_ata03.py"
 date_created: "{context['cgen_timestamp']}"
 date_modified: "{context['cgen_timestamp']}"
-classification: "UNCLASSIFIED"
+classification: "{context['classification']}"
 
-ssot_root: "OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES"
+ssot_root: "{context['ssot_root']}"
 ssot_dir: "{context['ssot_dir']}"
+ssot_filesystem_path: "{context['ssot_filesystem_path']}"
 
 gate_id: "{context['gate_id']}"
 
@@ -500,9 +501,14 @@ def run(output_dir: Path, timestamp: str, dry_run: bool) -> list:
         gate_id = phase_info.get("gate_id", f"G-{lc_phase}")
         package_origin = (phase_info.get("packages") or ["INFRA"])[0]
 
-        ssot_dir = (
-            f"OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES"
-            f"/ATA_03-SUPPORT_INFRA"
+        # ssot_root and ssot_dir per schema: enum root + canonical LC dir name
+        registry_ssot_path = phase_info.get("ssot_dir", "")
+        ssot_dir = registry_ssot_path.split("/")[-1] if registry_ssot_path else f"{lc_phase}_DESIGN_DEFINITION"
+        ssot_root = "KDB/LM/SSOT/PLM" if lc_phase_type == "PLM" else "IDB/OPS/LM"
+        # Actual filesystem path stored separately
+        ssot_filesystem_path = (
+            "OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES"
+            "/ATA_03-SUPPORT_INFRA"
         )
 
         record_id = _make_record_id(
@@ -527,12 +533,16 @@ def run(output_dir: Path, timestamp: str, dry_run: bool) -> list:
             "artifact_type_name": cat.get("artifact_type_name", artifact_types.get(cat["artifact_type"], cat["artifact_type"])),
             "artifact_title": cat["artifact_title"],
             "status": "DRAFT",
+            "revision": "1.0",
+            "classification": "SSOT",
             "novel_technology": cat.get("novel_technology", False),
             "cgen_timestamp": timestamp,
             "cgen_version": CGEN_VERSION,
             "brex_id": brex_id,
             "gate_id": gate_id,
+            "ssot_root": ssot_root,
             "ssot_dir": ssot_dir,
+            "ssot_filesystem_path": ssot_filesystem_path,
             "package_origin": package_origin,
             "notes": cat.get("notes", ""),
             "cross_refs": cat.get("cross_refs", []),

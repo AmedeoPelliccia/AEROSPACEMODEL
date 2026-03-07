@@ -46,15 +46,17 @@ artifact_title: "ATA 03-10 Towing and Taxiing Equipment"
 # Administrative
 owner_aor: "ASIT/I-INFRASTRUCTURES/O-OPERATIONS"
 status: "DRAFT"
-revision: "01"
+revision: "1.0"
 prepared_by: "cgen_ata03.py"
 date_created: "2026-03-07T03:00:00Z"
 date_modified: "2026-03-07T03:00:00Z"
-classification: "UNCLASSIFIED"
+classification: "SSOT"
 
-# SSOT Paths
-ssot_root: "OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES"
-ssot_dir: "OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES/ATA_03-SUPPORT_INFRA"
+# SSOT Paths (per TLI v2.1 canonical schema)
+ssot_root: "KDB/LM/SSOT/PLM"
+ssot_dir: "LC04_DESIGN_DEFINITION"
+# Actual filesystem location within the OPT-IN framework
+ssot_filesystem_path: "OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES/ATA_03-SUPPORT_INFRA"
 
 # Gate Information
 gate_id: "G-LC04-DBL"

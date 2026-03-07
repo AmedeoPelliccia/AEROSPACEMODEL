@@ -46,15 +46,17 @@ artifact_title: "{{ artifact_title }}"
 # Administrative
 owner_aor: "ASIT/I-INFRASTRUCTURES/O-OPERATIONS"
 status: "{{ status }}"
-revision: "01"
+revision: "{{ revision }}"
 prepared_by: "cgen_ata03.py"
 date_created: "{{ cgen_timestamp }}"
 date_modified: "{{ cgen_timestamp }}"
-classification: "UNCLASSIFIED"
+classification: "{{ classification }}"
 
-# SSOT Paths
-ssot_root: "OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES"
+# SSOT Paths (per TLI v2.1 canonical schema)
+ssot_root: "{{ ssot_root }}"
 ssot_dir: "{{ ssot_dir }}"
+# Actual filesystem location within the OPT-IN framework
+ssot_filesystem_path: "{{ ssot_filesystem_path }}"
 
 # Gate Information
 gate_id: "{{ gate_id }}"

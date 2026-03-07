@@ -34,6 +34,7 @@ import json
 import logging
 import sys
 from pathlib import Path
+from typing import Optional
 
 import yaml
 
@@ -243,7 +244,7 @@ def _generate_yaml_summary(stats: dict, timestamp: str, run_mode: str, dry_run: 
     return yaml.dump(summary, default_flow_style=False, allow_unicode=True, sort_keys=False)
 
 
-def run(output_dir: Path, timestamp: str, dry_run: bool, run_mode: str, manifest_path: Path | None) -> list:
+def run(output_dir: Path, timestamp: str, dry_run: bool, run_mode: str, manifest_path: Optional[Path]) -> list:
     """Run report generation."""
     log.info("=== CGen Reports v%s ===", CGEN_VERSION)
     log.info("Output dir : %s", output_dir)

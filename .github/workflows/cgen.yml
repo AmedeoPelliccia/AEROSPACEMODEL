@@ -12,6 +12,8 @@ name: CGen — Continuous Generation
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "OPT-IN_FRAMEWORK/I-INFRASTRUCTURES/O-OPERATIONS_SERVICE_STRUCTURES/**"
       - "lifecycle/LC_PHASE_REGISTRY.yaml"
@@ -70,6 +72,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install runtime dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
 
       - name: Resolve run mode and dry-run flag
         id: resolve-mode
@@ -429,8 +442,8 @@ jobs:
 
           # Extract deletion count from git diff --shortstat
           SHORTSTAT=$(git diff --shortstat HEAD 2>/dev/null || echo "")
-          DELETIONS=$(echo "${SHORTSTAT}" | grep -oP '\d+(?= deletion)' || echo "0")
-          INSERTIONS=$(echo "${SHORTSTAT}" | grep -oP '\d+(?= insertion)' || echo "0")
+          DELETIONS=$(echo "${SHORTSTAT}" | grep -oP '\d+(?= deletions?)' || echo "0")
+          INSERTIONS=$(echo "${SHORTSTAT}" | grep -oP '\d+(?= insertions?)' || echo "0")
           NET_DELETIONS=$(( DELETIONS - INSERTIONS ))
 
           echo "  Insertions: ${INSERTIONS}"
