@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ampel360.com/schemas/ipd/ipd_cross_reference.schema.json",
+  "title": "IPD Cross-Reference Schema",
+  "description": "Schema for cross-reference entries in an IPD module linking to AMM, CMM, TSM, SB, SRM, WDM, and KNOT documents per S1000D Issue 5.0 and AMPEL360 Q100 conventions.",
+  "type": "object",
+  "required": ["type", "ref", "title"],
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Cross-reference document type",
+      "enum": ["AMM", "CMM", "TSM", "SB", "SRM", "WDM", "KNOT"],
+      "examples": ["AMM", "CMM", "TSM"]
+    },
+    "ref": {
+      "type": "string",
+      "description": "Document Module Code (DMC) or publication reference identifier",
+      "minLength": 1,
+      "examples": [
+        "DMC-AMPEL360-A-28-20-00-00A-200A-D",
+        "DMC-AMPEL360-A-28-20-10-00A-520A-D",
+        "SB-AMPEL360-28-2001"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Human-readable title of the referenced document or task",
+      "minLength": 1,
+      "examples": [
+        "Cryogenic H₂ Shut-Off Valve – Removal Procedure",
+        "Shut-Off Valve Assembly – Component Maintenance"
+      ]
+    },
+    "ata": {
+      "type": "string",
+      "description": "ATA chapter-section-subject of the referenced document",
+      "pattern": "^[0-9]{2}-[0-9]{2}-[0-9]{2}$",
+      "examples": ["28-20-00", "28-20-10"]
+    }
+  },
+  "additionalProperties": false
+}

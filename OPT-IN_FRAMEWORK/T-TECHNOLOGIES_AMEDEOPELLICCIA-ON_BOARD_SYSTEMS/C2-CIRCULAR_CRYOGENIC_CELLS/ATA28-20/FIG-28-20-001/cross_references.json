@@ -1,0 +1,59 @@
+{
+  "$schema": "../../../../schemas/ipd/ipd_cross_reference.schema.json",
+  "_metadata": {
+    "dmc": "DMC-AMPEL360-A-28-20-00-00A-040A-D",
+    "baseline_ref": "BL-28-004",
+    "issue_date": "2026-03-07",
+    "authority": "ASIT"
+  },
+  "cross_references": [
+    {
+      "type": "AMM",
+      "ref": "DMC-AMPEL360-A-28-20-00-00A-200A-D",
+      "title": "Cryogenic H₂ Shut-Off Valve – Removal Procedure",
+      "ata": "28-20-00"
+    },
+    {
+      "type": "AMM",
+      "ref": "DMC-AMPEL360-A-28-20-00-00A-400A-D",
+      "title": "Cryogenic H₂ Shut-Off Valve – Installation Procedure",
+      "ata": "28-20-00"
+    },
+    {
+      "type": "CMM",
+      "ref": "DMC-AMPEL360-A-28-20-10-00A-520A-D",
+      "title": "Shut-Off Valve Assembly – Component Maintenance (Overhaul)",
+      "ata": "28-20-10"
+    },
+    {
+      "type": "TSM",
+      "ref": "DMC-AMPEL360-A-28-20-00-00A-700A-D",
+      "title": "Cryogenic H₂ Shut-Off Valve – Fault Isolation and Troubleshooting",
+      "ata": "28-20-00"
+    },
+    {
+      "type": "SB",
+      "ref": "SB-AMPEL360-28-2001-REV-A",
+      "title": "Cryogenic Seal Set Replacement – PTFE Grade Upgrade",
+      "ata": "28-20-01"
+    },
+    {
+      "type": "SRM",
+      "ref": "DMC-AMPEL360-A-28-20-00-00A-300A-D",
+      "title": "Valve Body Structural Repair – Allowable Damage and Repair Limits",
+      "ata": "28-20-00"
+    },
+    {
+      "type": "WDM",
+      "ref": "DMC-AMPEL360-A-28-20-02-00A-040A-D",
+      "title": "Solenoid Valve Wiring – Harness Routing and Connector Pinout",
+      "ata": "28-20-02"
+    },
+    {
+      "type": "KNOT",
+      "ref": "KNOT-ATA28-20-00-001",
+      "title": "LH₂ PTFE Seal Long-Term Cryogenic Compatibility – Open Engineering Uncertainty",
+      "ata": "28-20-01"
+    }
+  ]
+}

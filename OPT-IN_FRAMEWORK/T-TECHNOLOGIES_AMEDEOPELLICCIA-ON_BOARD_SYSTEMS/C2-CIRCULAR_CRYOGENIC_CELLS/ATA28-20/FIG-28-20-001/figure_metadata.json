@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../../schemas/ipd/ipd_figure_metadata.schema.json",
+  "_metadata": {
+    "dmc": "DMC-AMPEL360-A-28-20-00-00A-040A-D",
+    "baseline_ref": "BL-28-004",
+    "issue_date": "2026-03-07",
+    "authority": "ASIT"
+  },
+  "figure_id": "FIG-28-20-001",
+  "revision": "A",
+  "issue_date": "2026-03-07",
+  "title": "H₂ Cryogenic Shut-Off Valve – Assembly Breakdown",
+  "dmc": "DMC-AMPEL360-A-28-20-00-00A-040A-D",
+  "ata_chapter": "28-20-00",
+  "sheet": "1 of 1",
+  "scale": "NTS",
+  "drawn_by": "APL",
+  "checked_by": "STK_ENG",
+  "hotspot_map": {
+    "A": { "item": 0,  "x_pct": 50.0, "y_pct": 15.0 },
+    "B": { "item": 2,  "x_pct": 35.0, "y_pct": 40.0 },
+    "C": { "item": 4,  "x_pct": 50.0, "y_pct": 45.0 },
+    "D": { "item": 6,  "x_pct": 50.0, "y_pct": 30.0 },
+    "E": { "item": 8,  "x_pct": 65.0, "y_pct": 30.0 },
+    "F": { "item": 10, "x_pct": 68.0, "y_pct": 42.0 },
+    "G": { "item": 12, "x_pct": 72.0, "y_pct": 22.0 },
+    "H": { "item": 14, "x_pct": 78.0, "y_pct": 35.0 },
+    "I": { "item": 16, "x_pct": 63.0, "y_pct": 55.0 },
+    "J": { "item": 18, "x_pct": 42.0, "y_pct": 58.0 },
+    "K": { "item": 20, "x_pct": 38.0, "y_pct": 52.0 },
+    "L": { "item": 22, "x_pct": 55.0, "y_pct": 65.0 },
+    "M": { "item": 24, "x_pct": 30.0, "y_pct": 28.0 },
+    "N": { "item": 26, "x_pct": 25.0, "y_pct": 45.0 }
+  },
+  "baseline_ref": "BL-28-004",
+  "provenance": {
+    "source_hash": "sha256:pending-computation",
+    "generation_contract": "KITDM-CTR-LM-CSDB_ATA28_H2"
+  }
+}
