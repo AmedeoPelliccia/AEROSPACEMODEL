@@ -1,0 +1,74 @@
+{
+  "$schema": "../../../../schemas/ipd/ipd_source_data.schema.json",
+  "_metadata": {
+    "dmc": "DMC-AMPEL360-A-28-20-00-00A-040A-D",
+    "baseline_ref": "BL-28-004",
+    "issue_date": "2026-03-07",
+    "authority": "ASIT"
+  },
+  "sources": [
+    {
+      "id": "AMPEL-VP-2820-001",
+      "title": "Shut-Off Valve Assembly – Primary Source (Body, Disc, Stem, Heat Shield)",
+      "vendor": "Parker Hannifin Cryogenics Division",
+      "status": "APPROVED",
+      "date": "2026-01-15"
+    },
+    {
+      "id": "AMPEL-VP-2820-002",
+      "title": "Pneumatic Actuator Assembly – Primary Source (Actuator, Piston, Spring)",
+      "vendor": "Moog Aircraft Group",
+      "status": "APPROVED",
+      "date": "2026-01-20"
+    },
+    {
+      "id": "AMPEL-VP-2820-003",
+      "title": "Pilot Solenoid Valve – 28VDC Qualified Source",
+      "vendor": "Marotta Controls Inc.",
+      "status": "APPROVED",
+      "date": "2025-11-30"
+    },
+    {
+      "id": "AMPEL-VP-2820-004",
+      "title": "LVDT Position Sensor Assembly – Dual-Redundant Source",
+      "vendor": "Curtiss-Wright Defense Solutions",
+      "status": "APPROVED",
+      "date": "2025-12-10"
+    },
+    {
+      "id": "AMPEL-VP-2820-005",
+      "title": "Return Spring – Inconel 718 Cryogenic Grade",
+      "vendor": "Associated Spring (Barnes Group)",
+      "status": "APPROVED",
+      "date": "2026-02-01"
+    },
+    {
+      "id": "AMPEL-VP-2820-006",
+      "title": "PTFE Cryogenic Seal Set – –253 °C Rated",
+      "vendor": "Trelleborg Sealing Solutions",
+      "status": "APPROVED",
+      "date": "2026-01-28"
+    },
+    {
+      "id": "AMPEL-VP-2820-007",
+      "title": "Cryogenic Journal Bearing Set – PTFE/Glass-Filled",
+      "vendor": "Garlock Bearings (EnPro Industries)",
+      "status": "QUAL-TEST",
+      "date": "2026-02-14"
+    },
+    {
+      "id": "AMPEL-VP-2820-008",
+      "title": "Fastener Kit – Inconel 718 and NAS1149 Cryogenic Grade",
+      "vendor": "Lisi Aerospace",
+      "status": "APPROVED",
+      "date": "2025-10-05"
+    },
+    {
+      "id": "AMPEL-VP-2820-009",
+      "title": "Thermal Insulation Package – Heat Shield and MLI Blanket",
+      "vendor": "Technifab Products Inc.",
+      "status": "QUAL-TEST",
+      "date": "2026-02-20"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ampel360.com/schemas/ipd/ipd_part_item.schema.json",
+  "title": "IPD Part Item Schema",
+  "description": "Schema for individual part items in an Illustrated Parts Data (IPD) module per S1000D Issue 5.0, ATA iSpec 2200, and AMPEL360 Q100 program conventions.",
+  "type": "object",
+  "required": ["fig", "item", "pn", "nomenclature", "qty", "unit", "smr", "ata"],
+  "properties": {
+    "fig": {
+      "type": "string",
+      "description": "Figure identifier (e.g., FIG-28-20-001)",
+      "pattern": "^FIG-[0-9]{2}-[0-9]{2}-[0-9]{3}$",
+      "examples": ["FIG-28-20-001"]
+    },
+    "item": {
+      "type": "integer",
+      "description": "Item number within the figure (sequential, even-numbered per S1000D convention)",
+      "minimum": 0,
+      "multipleOf": 2,
+      "examples": [0, 2, 4, 10]
+    },
+    "hotspot": {
+      "type": "string",
+      "description": "Hotspot identifier linking to the technical drawing (single uppercase letter)",
+      "pattern": "^[A-Z]$",
+      "examples": ["A", "B", "C"]
+    },
+    "pn": {
+      "type": "string",
+      "description": "Part Number — manufacturer's part number as qualified",
+      "minLength": 1,
+      "examples": ["AMP-28-2001-001", "MS21042-08", "AS3209-016"]
+    },
+    "nomenclature": {
+      "type": "string",
+      "description": "Part nomenclature / description (title case per S1000D requirement)",
+      "minLength": 1,
+      "examples": ["Shut-Off Valve Assembly", "Valve Body – Cryogenic Grade"]
+    },
+    "qty": {
+      "type": ["integer", "string"],
+      "description": "Quantity per assembly; use 'AR' (As Required) for consumables",
+      "examples": [1, 2, 4, "AR"]
+    },
+    "unit": {
+      "type": "string",
+      "description": "Unit of measure",
+      "enum": ["EA", "SET", "IN", "FT", "LB", "KG", "L", "ML", "AR"],
+      "examples": ["EA", "SET"]
+    },
+    "smr": {
+      "type": "string",
+      "description": "Source, Maintainability, and Recoverability code per MIL-STD-1552",
+      "pattern": "^[XABCDFGHJKLP][ODR][ZF][0-9]$",
+      "examples": ["XBZA0", "XBZF5", "XOZA0"]
+    },
+    "csn": {
+      "type": "string",
+      "description": "Catalog Sequence Number",
+      "examples": ["28-20-001-001", "28-20-001-002"]
+    },
+    "ata": {
+      "type": "string",
+      "description": "ATA chapter-section-subject code",
+      "pattern": "^[0-9]{2}-[0-9]{2}-[0-9]{2}$",
+      "examples": ["28-20-00", "28-20-01"]
+    },
+    "effectivity": {
+      "type": "string",
+      "description": "MSN effectivity range or 'ALL'",
+      "examples": ["ALL", "MSN001-MSN050", "MSN001-UP"]
+    },
+    "source": {
+      "type": "string",
+      "description": "Approved source package identifier (AMPEL-VP-xxxx)",
+      "pattern": "^AMPEL-VP-[0-9]{4}-[0-9]{3}$",
+      "examples": ["AMPEL-VP-2820-001"]
+    },
+    "cage": {
+      "type": "string",
+      "description": "CAGE code of the approved manufacturer",
+      "pattern": "^[0-9A-Z]{5}$",
+      "examples": ["19207", "81343", "06383"]
+    },
+    "ipc_ref": {
+      "type": "string",
+      "description": "Cross-reference to vendor IPC/CMM figure and item",
+      "examples": ["CMM 28-20-10 FIG 1 ITEM 2", "IPC 28-20 FIG 3"]
+    },
+    "note": {
+      "type": "string",
+      "description": "Optional supplementary note for this part item",
+      "examples": ["Inspect per CMM 28-20-10 at each overhaul", "Use with MS21042 nut"]
+    },
+    "category": {
+      "type": "string",
+      "description": "Part category classification",
+      "enum": ["assy", "detail", "consumable", "standard"],
+      "examples": ["assy", "detail", "consumable", "standard"]
+    }
+  },
+  "additionalProperties": false
+}

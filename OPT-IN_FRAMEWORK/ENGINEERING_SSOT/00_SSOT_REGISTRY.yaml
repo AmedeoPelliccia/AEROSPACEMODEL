@@ -75,6 +75,17 @@ ssot_entries:
     status: "draft"
     special_conditions: []
 
+  - id: "SSOT-Q100-C2-004"
+    title: "H₂ Cryogenic Shut-Off Valve IPD – FIG 28-20-001"
+    ata_chapter: "28"
+    technology_domain: "C2-CIRCULAR_CRYOGENIC_CELLS"
+    baseline_ref: "BL-28-004"
+    lifecycle_phase: "LC04"
+    status: "approved"
+    special_conditions:
+      - "SC-28-H2-001"
+      - "SC-28-CRYO-002"
+
   - id: "SSOT-Q100-M-001"
     title: "Flight Controls – System SSOT"
     ata_chapter: "27"

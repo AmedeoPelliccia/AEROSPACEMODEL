@@ -1,0 +1,240 @@
+---
+# Digital Product Passport – Traceability Ledger Entry
+# ATA 28-20 — Cryogenic H₂ Shut-Off Valve, FIG 28-20-001
+# ─────────────────────────────────────────────────────────
+# Authority  : ASIT (Aircraft Systems Information Transponder)
+# Standard   : N-STD-UTTS-01 v0.1.0 / EU Digital Product Passport Regulation
+# Lifecycle  : LC04 – Design Definition
+# Contract   : KITDM-CTR-LM-CSDB_ATA28_H2
+# BREX Rules : STRUCT-001, AUTHOR-002, SAFETY-H2-001, SAFETY-H2-002, SAFETY-H2-003
+# ─────────────────────────────────────────────────────────
+
+dpp_id: "DPP-ATA28-20-001"
+
+artifact_ref: >
+  OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/
+  C2-CIRCULAR_CRYOGENIC_CELLS/ATA28-20/FIG-28-20-001/
+
+dmc: "DMC-AMPEL360-A-28-20-00-00A-040A-D"
+figure_id: "FIG-28-20-001"
+revision: "A"
+issue_date: "2026-03-07"
+
+lifecycle_phase: "LC04"
+lifecycle_phase_name: "Design Definition"
+
+baseline_ref: "BL-28-004"
+ssot_id: "SSOT-Q100-C2-004"
+
+ata_chapter: "28"
+ata_section: "20"
+ata_subject: "00"
+ata_title: "Fuel – Distribution (Cryogenic H₂ Shut-Off Valves)"
+
+technology_domain: "C2-CIRCULAR_CRYOGENIC_CELLS"
+novel_technology: true
+
+program:
+  aircraft_id: "AMPEL360"
+  model_id: "Q100"
+  msn_effectivity: "ALL"
+
+# ─── Source Artifacts ────────────────────────────────────────────────────────
+source_artifacts:
+  - id: "AMPEL360_Q100_MSN001_ATA28-20-00_LC04_IPD-PARTS_001"
+    type: "parts_list"
+    path: "FIG-28-20-001/parts_list.json"
+    schema: "schemas/ipd/ipd_part_item.schema.json"
+    item_count: 14
+
+  - id: "AMPEL360_Q100_MSN001_ATA28-20-00_LC04_IPD-XREF_001"
+    type: "cross_references"
+    path: "FIG-28-20-001/cross_references.json"
+    schema: "schemas/ipd/ipd_cross_reference.schema.json"
+    item_count: 8
+
+  - id: "AMPEL360_Q100_MSN001_ATA28-20-00_LC04_IPD-SOURCE_001"
+    type: "source_data"
+    path: "FIG-28-20-001/source_data.json"
+    schema: "schemas/ipd/ipd_source_data.schema.json"
+    item_count: 9
+
+  - id: "AMPEL360_Q100_MSN001_ATA28-20-00_LC04_IPD-FIGMETA_001"
+    type: "figure_metadata"
+    path: "FIG-28-20-001/figure_metadata.json"
+    schema: "schemas/ipd/ipd_figure_metadata.schema.json"
+    hotspot_count: 14
+
+  - id: "AMPEL360_Q100_MSN001_ATA28-20-00_LC04_DRAWING_001"
+    type: "drawing_svg"
+    path: "FIG-28-20-001/drawing.svg"
+    format: "SVG 1.1"
+
+  - id: "AMPEL360_Q100_MSN001_ATA28-20-00_LC04_VIEWER_001"
+    type: "viewer_component"
+    path: "FIG-28-20-001/viewer/IPDViewer.jsx"
+    framework: "React 18"
+
+# ─── Vendor Packages ────────────────────────────────────────────────────────
+vendor_packages:
+  - id: "AMPEL-VP-2820-001"
+    vendor: "Parker Hannifin Cryogenics Division"
+    status: "APPROVED"
+    covers: "Shut-Off Valve Assembly, Valve Body, Valve Disc, Valve Stem, Heat Shield"
+
+  - id: "AMPEL-VP-2820-002"
+    vendor: "Moog Aircraft Group"
+    status: "APPROVED"
+    covers: "Pneumatic Actuator Assembly, Actuator Piston, Return Spring"
+
+  - id: "AMPEL-VP-2820-003"
+    vendor: "Marotta Controls Inc."
+    status: "APPROVED"
+    covers: "Pilot Solenoid Valve 28VDC"
+
+  - id: "AMPEL-VP-2820-004"
+    vendor: "Curtiss-Wright Defense Solutions"
+    status: "APPROVED"
+    covers: "LVDT Position Sensor Assembly (dual-redundant)"
+
+  - id: "AMPEL-VP-2820-005"
+    vendor: "Associated Spring (Barnes Group)"
+    status: "APPROVED"
+    covers: "Return Spring – Inconel 718 Cryogenic Grade"
+
+  - id: "AMPEL-VP-2820-006"
+    vendor: "Trelleborg Sealing Solutions"
+    status: "APPROVED"
+    covers: "PTFE Cryogenic Seal Set, –253°C rated"
+
+  - id: "AMPEL-VP-2820-007"
+    vendor: "Garlock Bearings (EnPro Industries)"
+    status: "QUAL-TEST"
+    covers: "Cryogenic Journal Bearing Set, PTFE/glass-filled"
+
+  - id: "AMPEL-VP-2820-008"
+    vendor: "Lisi Aerospace"
+    status: "APPROVED"
+    covers: "Fastener Kit – Inconel 718, NAS1149, MS21042 (cryogenic grade)"
+
+  - id: "AMPEL-VP-2820-009"
+    vendor: "Technifab Products Inc."
+    status: "QUAL-TEST"
+    covers: "Heat Shield Assembly and MLI Insulation Blanket"
+
+# ─── Cross-Reference Links ────────────────────────────────────────────────────
+cross_reference_links:
+  - dmc: "DMC-AMPEL360-A-28-20-00-00A-200A-D"
+    type: "AMM"
+    title: "Cryogenic H₂ Shut-Off Valve – Removal Procedure"
+
+  - dmc: "DMC-AMPEL360-A-28-20-00-00A-400A-D"
+    type: "AMM"
+    title: "Cryogenic H₂ Shut-Off Valve – Installation Procedure"
+
+  - dmc: "DMC-AMPEL360-A-28-20-10-00A-520A-D"
+    type: "CMM"
+    title: "Shut-Off Valve Assembly – Component Maintenance (Overhaul)"
+
+  - dmc: "DMC-AMPEL360-A-28-20-00-00A-700A-D"
+    type: "TSM"
+    title: "Cryogenic H₂ Shut-Off Valve – Fault Isolation and Troubleshooting"
+
+  - dmc: "SB-AMPEL360-28-2001-REV-A"
+    type: "SB"
+    title: "Cryogenic Seal Set Replacement – PTFE Grade Upgrade"
+
+  - dmc: "DMC-AMPEL360-A-28-20-00-00A-300A-D"
+    type: "SRM"
+    title: "Valve Body Structural Repair – Allowable Damage and Repair Limits"
+
+  - dmc: "DMC-AMPEL360-A-28-20-02-00A-040A-D"
+    type: "WDM"
+    title: "Solenoid Valve Wiring – Harness Routing and Connector Pinout"
+
+  - dmc: "KNOT-ATA28-20-00-001"
+    type: "KNOT"
+    title: "LH₂ PTFE Seal Long-Term Cryogenic Compatibility – Open Engineering Uncertainty"
+
+# ─── Hash Chain (MTL₃ Ledger) ────────────────────────────────────────────────
+hash_chain:
+  algorithm: "SHA-256"
+  note: "Placeholder values – to be computed at LC07 QA gate."
+  entries:
+    - artifact: "parts_list.json"
+      hash: "sha256:pending-computation"
+    - artifact: "cross_references.json"
+      hash: "sha256:pending-computation"
+    - artifact: "source_data.json"
+      hash: "sha256:pending-computation"
+    - artifact: "figure_metadata.json"
+      hash: "sha256:pending-computation"
+    - artifact: "drawing.svg"
+      hash: "sha256:pending-computation"
+    - artifact: "viewer/IPDViewer.jsx"
+      hash: "sha256:pending-computation"
+  chain_root: "sha256:pending-computation"
+  chain_sealed: false
+  seal_gate: "LC07"
+
+# ─── Special Conditions ──────────────────────────────────────────────────────
+special_conditions:
+  - "SC-28-H2-001"
+  - "SC-28-CRYO-002"
+
+safety_classification:
+  dal: "DAL-A"
+  standard: "ARP4754A / ARP4761"
+  failure_modes:
+    - "Valve fails-open (H₂ release into airframe)"
+    - "Valve fails-closed (fuel starvation)"
+    - "Cryogenic seal failure (H₂ leak at packing)"
+  mitigation: "Fail-closed spring return, redundant position sensing, H₂ leak detection (ATA 28-41)"
+
+# ─── Governance ──────────────────────────────────────────────────────────────
+governance:
+  authority: "ASIT"
+  change_control: "ECR/ECO via CCB"
+  contract: "KITDM-CTR-LM-CSDB_ATA28_H2"
+  brex_profile: "AEROSPACEMODEL-PRJ-01"
+  approved_by: "STK_SAF"
+  approval_timeout_hours: 72
+  escalation_target: "STK_SAF"
+  audit_retention_years: 7
+
+# ─── Audit Log ───────────────────────────────────────────────────────────────
+audit_log:
+  - timestamp: "2026-03-07T16:19:42Z"
+    rule: "STRUCT-001"
+    status: "PASS"
+    context: "ATA domain classification: ATA 28-20"
+
+  - timestamp: "2026-03-07T16:19:42Z"
+    rule: "AUTHOR-002"
+    status: "PASS"
+    context: "Contract KITDM-CTR-LM-CSDB_ATA28_H2 validated"
+
+  - timestamp: "2026-03-07T16:19:42Z"
+    rule: "SAFETY-H2-001"
+    status: "ESCALATED"
+    context: "H₂ handling content – STK_SAF escalation required"
+
+  - timestamp: "2026-03-07T16:19:42Z"
+    rule: "SAFETY-H2-002"
+    status: "PASS"
+    context: "Cryogenic warnings included in drawing.svg and viewer component"
+
+  - timestamp: "2026-03-07T16:19:42Z"
+    rule: "SAFETY-H2-003"
+    status: "PASS"
+    context: "H₂ leak detection system documented in cross_references.json (CMM, TSM)"
+
+  - timestamp: "2026-03-07T16:19:42Z"
+    rule: "LC-001"
+    status: "PASS"
+    context: "Lifecycle phase LC04 validated"
+
+  - timestamp: "2026-03-07T16:19:42Z"
+    rule: "PIPELINE-004"
+    status: "PASS"
+    context: "Transformation contract-approved via pipelines/ipc_pipeline.yaml"

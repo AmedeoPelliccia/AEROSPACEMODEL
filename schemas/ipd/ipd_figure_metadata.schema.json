@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ampel360.com/schemas/ipd/ipd_figure_metadata.schema.json",
+  "title": "IPD Figure Metadata Schema",
+  "description": "Schema for technical drawing / figure metadata in an IPD module, including title block data, revision information, hotspot map, and provenance traceability per AMPEL360 Q100 conventions.",
+  "type": "object",
+  "required": ["figure_id", "revision", "issue_date", "title", "dmc", "ata_chapter", "hotspot_map"],
+  "properties": {
+    "figure_id": {
+      "type": "string",
+      "description": "Figure identifier",
+      "pattern": "^FIG-[0-9]{2}-[0-9]{2}-[0-9]{3}$",
+      "examples": ["FIG-28-20-001"]
+    },
+    "revision": {
+      "type": "string",
+      "description": "Figure revision level (single uppercase letter)",
+      "pattern": "^[A-Z]$",
+      "examples": ["A", "B", "C"]
+    },
+    "issue_date": {
+      "type": "string",
+      "description": "Issue date in ISO 8601 format (YYYY-MM-DD)",
+      "format": "date",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "examples": ["2026-03-07"]
+    },
+    "title": {
+      "type": "string",
+      "description": "Full title of the technical drawing",
+      "minLength": 1,
+      "examples": ["H₂ Cryogenic Shut-Off Valve – Assembly Breakdown"]
+    },
+    "dmc": {
+      "type": "string",
+      "description": "S1000D Data Module Code for the IPD data module",
+      "pattern": "^DMC-[A-Z0-9]+-[A-Z]-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}[A-Z]-[0-9]{3}[A-Z]-[A-Z]$",
+      "examples": ["DMC-AMPEL360-A-28-20-00-00A-040A-D"]
+    },
+    "ata_chapter": {
+      "type": "string",
+      "description": "ATA chapter-section-subject",
+      "pattern": "^[0-9]{2}-[0-9]{2}-[0-9]{2}$",
+      "examples": ["28-20-00"]
+    },
+    "sheet": {
+      "type": "string",
+      "description": "Sheet number (e.g., '1 of 1')",
+      "examples": ["1 of 1", "1 of 3"]
+    },
+    "scale": {
+      "type": "string",
+      "description": "Drawing scale (e.g., 'NTS' for Not to Scale)",
+      "examples": ["NTS", "1:2", "1:5"]
+    },
+    "drawn_by": {
+      "type": "string",
+      "description": "Author/drafter identifier or initials",
+      "examples": ["APL", "TBD"]
+    },
+    "checked_by": {
+      "type": "string",
+      "description": "Checker/reviewer identifier or initials",
+      "examples": ["STK_ENG", "TBD"]
+    },
+    "hotspot_map": {
+      "type": "object",
+      "description": "Mapping of hotspot letter codes to their associated item numbers and SVG viewport position (percentage from top-left corner)",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["item", "x_pct", "y_pct"],
+        "properties": {
+          "item": {
+            "type": "integer",
+            "description": "Part item number referenced by this hotspot",
+            "minimum": 0
+          },
+          "x_pct": {
+            "type": "number",
+            "description": "Horizontal position as percentage of SVG width (0–100)",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "y_pct": {
+            "type": "number",
+            "description": "Vertical position as percentage of SVG height (0–100)",
+            "minimum": 0,
+            "maximum": 100
+          }
+        },
+        "additionalProperties": false
+      },
+      "minProperties": 1
+    },
+    "baseline_ref": {
+      "type": "string",
+      "description": "Engineering baseline reference (matches SSOT registry)",
+      "examples": ["BL-28-004"]
+    },
+    "provenance": {
+      "type": "object",
+      "description": "Provenance and generation traceability for audit purposes",
+      "properties": {
+        "source_hash": {
+          "type": "string",
+          "description": "SHA-256 hash of the source artifact used to derive this figure metadata",
+          "examples": ["sha256:pending-computation"]
+        },
+        "generation_contract": {
+          "type": "string",
+          "description": "Contract identifier authorizing this content generation",
+          "examples": ["KITDM-CTR-LM-CSDB_ATA28_H2"]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
