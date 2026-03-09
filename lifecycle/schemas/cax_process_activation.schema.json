@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "cax_process_activation.schema.json",
+  "title": "CAx Process Activation Map Schema",
+  "description": "JSON Schema for validating the Domain → CAx Process Activation Map YAML",
+  "type": "object",
+  "required": ["meta", "cax_processes", "domain_activation", "path_mapping", "validation_rules"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["schema_version", "file_version", "program", "owner", "status"],
+      "properties": {
+        "schema_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "file_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "program": { "type": "string" },
+        "owner": { "type": "string" },
+        "status": { "type": "string", "enum": ["DRAFT", "ACTIVE", "DEPRECATED"] },
+        "date": { "type": "string" },
+        "canonical_lc_source": { "type": "string" },
+        "schema": { "type": "string" }
+      }
+    },
+    "cax_processes": {
+      "type": "object",
+      "description": "Canonical definitions of the 15 CAx processes",
+      "minProperties": 15,
+      "maxProperties": 15,
+      "patternProperties": {
+        "^[A-Z][A-Z0-9-]+$": {
+          "type": "object",
+          "required": ["name", "description"],
+          "properties": {
+            "name": { "type": "string" },
+            "description": { "type": "string" }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "domain_activation": {
+      "type": "object",
+      "description": "Maps each domain to its activated CAx processes",
+      "patternProperties": {
+        "^[A-Z/][A-Za-z0-9/_-]+$": {
+          "type": "object",
+          "required": ["cax", "opt_in"],
+          "properties": {
+            "cax": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "CAD", "CAE", "CFD", "CAM", "CAPP", "VP",
+                  "PDM-PLM", "SCM", "MRP-ERP", "CIM",
+                  "CAI", "CAA", "CASE", "KBE", "CAT"
+                ]
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "opt_in": { "type": "boolean" },
+            "rationale": { "type": "string" },
+            "note": { "type": "string" }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "path_mapping": {
+      "type": "object",
+      "description": "Maps domain keys to OPT-IN_FRAMEWORK filesystem paths",
+      "patternProperties": {
+        "^[A-Z/][A-Za-z0-9/_-]+$": {
+          "type": "string",
+          "pattern": "^OPT-IN_FRAMEWORK/"
+        }
+      },
+      "additionalProperties": false
+    },
+    "validation_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "rule", "enforcement"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^CAX-VAL-\\d{3}$" },
+          "name": { "type": "string" },
+          "rule": { "type": "string" },
+          "enforcement": { "type": "string", "enum": ["block", "warn"] },
+          "rationale": { "type": "string" },
+          "applies_to": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "ci_hints": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}
