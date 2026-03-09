@@ -50,7 +50,19 @@ This directory contains governance charters, standards, and policy frameworks th
 
 ---
 
-### 4. NPA 2025-07 Response
+### 4. ESCC Governance Standard v1.0 (DRAFT)
+**File:** `ESCC_GOVERNANCE_STANDARD_v1.0.md`  
+**Purpose:** Governance requirements for space-grade EEE (Electronic, Electrical, and Electromechanical) components within the AEROSPACEMODEL framework, aligned with ESCC (European Space Components Coordination) specifications.
+
+**Compliance:**
+- ESCC 2000-series (Generic Specifications)
+- ECSS-Q-ST-60C (EEE Component Management)
+- ECSS-E-ST-10-12C (Radiation Environment and Effects)
+- EU Space Regulation
+
+---
+
+### 5. NPA 2025-07 Response
 **File:** `NPA_2025-07_RESPONSE.md`  
 **Purpose:** Response to EASA Notice of Proposed Amendment 2025-07 on AI in aviation.
 
@@ -63,7 +75,9 @@ Digital Constitution (Foundational)
         ↓
 Human-Centric Digital Systems Charter (Re-founding)
         ↓
-EASA/ESA AI Governance Standard (Aviation-Specific)
+EASA/ESA AI Governance Standard (Aviation/Space AI)
+        ↓
+ESCC Governance Standard (Space EEE Components)
         ↓
 EAARF Charter (Industry Collaboration)
         ↓
@@ -99,6 +113,7 @@ Technical Controls & Roadmaps (Implementation)
 | HCDS 90-Day Roadmap | ✅ ACTIVE | 1.0.0 | 2026-02-12 |
 | EAARF Charter | 📝 DRAFT | 0.1 | [Date] |
 | EASA/ESA AI Governance Standard | 📝 DRAFT | 1.0 | [Date] |
+| ESCC Governance Standard | 📝 DRAFT | 1.0 | 2026-03-09 |
 | NPA 2025-07 Response | 📝 DRAFT | - | [Date] |
 
 ---

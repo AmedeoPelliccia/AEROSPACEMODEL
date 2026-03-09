@@ -37,6 +37,11 @@ class TestGovernanceDirectoryStructure:
         path = GOVERNANCE_DIR / "EAARF_CHARTER_DRAFT.md"
         assert path.exists(), "EAARF_CHARTER_DRAFT.md must exist"
 
+    def test_escc_governance_standard_exists(self):
+        """ESCC Governance Standard document must exist."""
+        path = GOVERNANCE_DIR / "ESCC_GOVERNANCE_STANDARD_v1.0.md"
+        assert path.exists(), "ESCC_GOVERNANCE_STANDARD_v1.0.md must exist"
+
 
 class TestAIGovernanceStandard:
     """Tests for EASA_ESA_AI_GOVERNANCE_STANDARD_v1.0.md structural integrity."""
@@ -181,3 +186,96 @@ class TestEAARFCharter:
     def test_references_digital_constitution(self, charter_text: str):
         """Charter must reference the Digital Constitution."""
         assert "Digital Constitution" in charter_text
+
+
+class TestESCCGovernanceStandard:
+    """Tests for ESCC_GOVERNANCE_STANDARD_v1.0.md structural integrity."""
+
+    @pytest.fixture
+    def escc_text(self) -> str:
+        path = GOVERNANCE_DIR / "ESCC_GOVERNANCE_STANDARD_v1.0.md"
+        assert path.exists(), "ESCC Governance Standard must exist"
+        return path.read_text(encoding="utf-8")
+
+    def test_defines_escc_name(self, escc_text: str):
+        """Standard must define ESCC full name."""
+        assert "European Space Components Coordination" in escc_text
+
+    def test_references_digital_constitution(self, escc_text: str):
+        """Standard must reference the Digital Constitution."""
+        assert "Model_Digital_Constitution.md" in escc_text
+
+    def test_references_escc_2000(self, escc_text: str):
+        """Standard must reference ESCC 2000-series generic specifications."""
+        assert "ESCC 2000" in escc_text
+
+    def test_references_ecss_q_st_60c(self, escc_text: str):
+        """Standard must reference ECSS-Q-ST-60C."""
+        assert "ECSS-Q-ST-60C" in escc_text
+
+    def test_qpl_qml_section(self, escc_text: str):
+        """Standard must cover QPL and QML."""
+        assert "QPL" in escc_text
+        assert "QML" in escc_text
+
+    def test_dcl_section(self, escc_text: str):
+        """Standard must cover the Declared Components List."""
+        assert "Declared Components List" in escc_text
+
+    def test_component_criticality(self, escc_text: str):
+        """Standard must define component criticality classes."""
+        assert "Class 1" in escc_text
+        assert "Class 2" in escc_text
+        assert "Class 3" in escc_text
+
+    def test_qualification_flow(self, escc_text: str):
+        """Standard must describe a qualification flow."""
+        assert "Qualification" in escc_text
+        assert "Screening" in escc_text
+
+    def test_radiation_hardness_assurance(self, escc_text: str):
+        """Standard must address radiation hardness assurance."""
+        assert "Radiation Hardness Assurance" in escc_text
+        assert "TID" in escc_text
+        assert "SEE" in escc_text
+
+    def test_brex_integration(self, escc_text: str):
+        """Standard must define ESCC-specific BREX rules."""
+        assert "ESCC-QUAL-001" in escc_text
+        assert "ESCC-DCL-001" in escc_text
+        assert "ESCC-RHA-001" in escc_text
+
+    def test_enforcement_gates(self, escc_text: str):
+        """Standard must describe sequential enforcement gates."""
+        assert "Gate 1" in escc_text or "DCL Verification" in escc_text
+
+    def test_human_oversight(self, escc_text: str):
+        """Standard must address human oversight."""
+        assert "Human Oversight" in escc_text
+
+    def test_change_history(self, escc_text: str):
+        """Standard must include a change history table."""
+        assert "Change History" in escc_text
+
+    def test_compliance_traceability_matrix(self, escc_text: str):
+        """Standard must include a Compliance Traceability Matrix."""
+        assert "Compliance Traceability Matrix" in escc_text
+        assert "ESCC-GOV-001" in escc_text
+
+    def test_audit_log_format(self, escc_text: str):
+        """Audit log must include component and lot tracking fields."""
+        assert "{component_pn}" in escc_text
+        assert "{lot_code}" in escc_text
+
+    def test_obsolescence_management(self, escc_text: str):
+        """Standard must address component obsolescence management."""
+        assert "Obsolescence" in escc_text
+
+    def test_ecss_cross_references(self, escc_text: str):
+        """Standard must include ECSS cross-references."""
+        assert "ECSS-E-ST-10-12C" in escc_text
+
+    def test_escalation_matrix(self, escc_text: str):
+        """Standard must define an escalation matrix."""
+        assert "STK_SAF" in escc_text
+        assert "CCB" in escc_text

@@ -43,6 +43,8 @@ metadata:
     - "ARP4754A DAL A"
     - "ARP4761"
     - "AS9100 Rev D"
+    - "ESCC 2000-series"
+    - "ECSS-Q-ST-60C"
   
   determinism_level: "strict"
   audit_required: true
@@ -485,6 +487,91 @@ brex_decision_rules:
     message: "S1000D schema validation required"
 
   # ===========================================================================
+  # ESCC RULES (ESCC-xxx) — Space EEE Component Governance
+  # ===========================================================================
+  
+  - rule_id: "ESCC-QUAL-001"
+    name: "ESCC Qualification Required"
+    description: |
+      EEE components for space use must be QPL-listed or have approved
+      qualification per ESCC specifications.
+    conditions:
+      - condition_type: "custom"
+        parameter: "component_qualification"
+        custom_validator: "validate_escc_qualification"
+    action_if_true: "allow"
+    action_if_false: "block"
+    severity: "critical"
+    message: "Component requires ESCC qualification or QPL listing"
+
+  - rule_id: "ESCC-QUAL-002"
+    name: "Screening Class Match"
+    description: |
+      Component screening class must match criticality classification.
+    conditions:
+      - condition_type: "custom"
+        parameter: "screening_class"
+        custom_validator: "validate_screening_class_match"
+    action_if_true: "allow"
+    action_if_false: "block"
+    severity: "error"
+    message: "Screening level must match component criticality"
+
+  - rule_id: "ESCC-DCL-001"
+    name: "DCL Listing Required"
+    description: |
+      Component must be on project Declared Components List before flight use.
+    conditions:
+      - condition_type: "custom"
+        parameter: "dcl_status"
+        custom_validator: "validate_dcl_listing"
+    action_if_true: "allow"
+    action_if_false: "block"
+    severity: "critical"
+    message: "Component not on Declared Components List"
+
+  - rule_id: "ESCC-RHA-001"
+    name: "Radiation Hardness Assurance"
+    description: |
+      Radiation-sensitive components require RHA assessment per ESCC 22400/25100.
+    conditions:
+      - condition_type: "custom"
+        parameter: "rha_status"
+        custom_validator: "validate_rha_assessment"
+    action_if_true: "allow"
+    action_if_false: "escalate"
+    escalation_target: "STK_SAF"
+    severity: "critical"
+    message: "Radiation hardness assurance assessment required"
+
+  - rule_id: "ESCC-OBS-001"
+    name: "Obsolescence Management"
+    description: |
+      Obsolete components require approved mitigation plan.
+    conditions:
+      - condition_type: "custom"
+        parameter: "obsolescence_status"
+        custom_validator: "validate_obsolescence_plan"
+    action_if_true: "allow"
+    action_if_false: "escalate"
+    escalation_target: "STK_CM"
+    severity: "error"
+    message: "Component obsolescence management required"
+
+  - rule_id: "ESCC-TRACE-001"
+    name: "Component Lot Traceability"
+    description: |
+      Full lot traceability required for flight EEE components.
+    conditions:
+      - condition_type: "custom"
+        parameter: "lot_traceability"
+        custom_validator: "validate_lot_traceability"
+    action_if_true: "allow"
+    action_if_false: "block"
+    severity: "critical"
+    message: "Lot traceability data incomplete for flight component"
+
+  # ===========================================================================
   # PIPELINE RULES (PIPELINE-xxx)
   # ===========================================================================
   
@@ -564,6 +651,14 @@ allowed_operations:
     brex_rules: ["BREX-001", "LC-003", "SAFETY-002"]
     description: "Publish content if compliance and safety rules pass"
 
+  - operation: "approve_eee_component_if"
+    brex_rules: ["ESCC-QUAL-001", "ESCC-DCL-001", "ESCC-TRACE-001"]
+    description: "Approve EEE component if ESCC qualification and DCL rules pass"
+
+  - operation: "validate_rha_if"
+    brex_rules: ["ESCC-RHA-001", "ESCC-QUAL-001"]
+    description: "Validate radiation hardness assurance if ESCC rules pass"
+
 # -----------------------------------------------------------------------------
 # PROHIBITED OPERATIONS
 # -----------------------------------------------------------------------------
@@ -597,6 +692,19 @@ prohibited_operations:
   - operation: "auto_invent_content"
     description: "ASIGT cannot auto-invent content outside approved decision paths"
     violation_action: "block"
+
+  - operation: "use_unqualified_eee_component"
+    description: "Cannot use EEE component without ESCC qualification in space BOM"
+    violation_action: "block"
+
+  - operation: "skip_eee_lot_traceability"
+    description: "Cannot omit lot traceability for flight EEE components"
+    violation_action: "block"
+
+  - operation: "bypass_rha_assessment"
+    description: "Cannot bypass radiation hardness assurance for rad-sensitive parts"
+    violation_action: "escalate"
+    escalation_target: "STK_SAF"
 
 # -----------------------------------------------------------------------------
 # UNDEFINED CONDITION HANDLING
