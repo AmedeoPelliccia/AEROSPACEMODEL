@@ -1,13 +1,13 @@
-# AMPEL360 Q100 — Circular Cryogenic Cells (C2) Example
+# AMPEL360 Q100 — Circular Cryogenic Carriers (C2) Example
 
 > **Program:** AMPEL360 Q100  
-> **Novel Technology:** C2 — Circular Cryogenic Cells  
+> **Novel Technology:** C2 — Circular Cryogenic Carriers  
 > **ATA Chapter:** 28 — Fuel System (LH₂)
 
 ## Overview
 
 This example demonstrates the AEROSPACEMODEL framework applied to the
-**AMPEL360 Q100** aircraft's **Circular Cryogenic Cells (C2)** fuel system.
+**AMPEL360 Q100** aircraft's **Circular Cryogenic Carriers (C2)** fuel system.
 The C2 system uses four circular-section cryogenic cells to store liquid
 hydrogen (LH₂) at -253°C for fuel cell propulsion.
 
@@ -32,7 +32,7 @@ ampel360_q100/
 
 ## Key Features
 
-### Circular Cryogenic Cells (C2)
+### Circular Cryogenic Carriers (C2)
 - 4 circular-section LH₂ cells (1200 kg total capacity)
 - Vacuum-jacketed MLI insulation
 - Boil-off rate < 0.5% per day (design target)

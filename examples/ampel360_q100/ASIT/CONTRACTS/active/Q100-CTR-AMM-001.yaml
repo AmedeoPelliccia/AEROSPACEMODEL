@@ -9,7 +9,7 @@ contract:
 
   metadata:
     title: "Aircraft Maintenance Manual — ATA 28 C2 Cryogenic Fuel System"
-    description: "Generate AMM for AMPEL360 Q100 Circular Cryogenic Cells fuel system"
+    description: "Generate AMM for AMPEL360 Q100 Circular Cryogenic Carriers fuel system"
     created_date: "2026-02-14"
     created_by: "Configuration Management"
     brex_contract_ref: "KITDM-CTR-LM-CSDB_ATA28"
@@ -23,7 +23,7 @@ source:
 
   scope:
     ata_chapters:
-      - "28"  # Fuel (LH₂ Circular Cryogenic Cells)
+      - "28"  # Fuel (LH₂ Circular Cryogenic Carriers)
     content_types:
       - "requirements"
       - "tasks"

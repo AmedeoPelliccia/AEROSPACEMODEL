@@ -30,7 +30,7 @@ ATA28 = (
     REPO_ROOT
     / "OPT-IN_FRAMEWORK"
     / "T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS"
-    / "C2-CIRCULAR_CRYOGENIC_CELLS"
+    / "C2-CIRCULAR_CRYOGENIC_CARRIERS"
     / "ATA_28-FUEL"
 )
 
@@ -137,7 +137,7 @@ class TestMetaFileContent:
         path = NEW_BASE / subdir / filename
         with open(path) as f:
             data = yaml.safe_load(f)
-        assert data.get("domain") == "C2-CIRCULAR_CRYOGENIC_CELLS"
+        assert data.get("domain") == "C2-CIRCULAR_CRYOGENIC_CARRIERS"
 
 
 # =========================================================================

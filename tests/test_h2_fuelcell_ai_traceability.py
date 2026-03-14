@@ -9,8 +9,8 @@ T_SUBDOMAIN_LC_ACTIVATION.yaml, per the requirement:
    corresponding T/N domains"
 
 Coverage:
-- C2_CIRCULAR_CRYOGENIC_CELLS (H₂/ATA 28) → N_DIGITAL_THREAD_TRACEABILITY
-- P_PROPULSION (Fuel Cell/ATA 71) → C2_CIRCULAR_CRYOGENIC_CELLS, N_DIGITAL_THREAD_TRACEABILITY
+- C2_CIRCULAR_CRYOGENIC_CARRIERS (H₂/ATA 28) → N_DIGITAL_THREAD_TRACEABILITY
+- P_PROPULSION (Fuel Cell/ATA 71) → C2_CIRCULAR_CRYOGENIC_CARRIERS, N_DIGITAL_THREAD_TRACEABILITY
 - I2_INTELLIGENCE (AI/ML/ATA 95-97) → N_AI_GOVERNANCE_ASSURANCE, N_DIGITAL_THREAD_TRACEABILITY
 - VAL-007 validation rule present in T_SUBDOMAIN_LC_ACTIVATION.yaml
 """
@@ -38,53 +38,53 @@ def subdomains(lc_data: dict) -> dict:
 
 
 # =============================================================================
-# C2_CIRCULAR_CRYOGENIC_CELLS — H₂ traceability
+# C2_CIRCULAR_CRYOGENIC_CARRIERS — H₂ traceability
 # =============================================================================
 
 class TestH2CrossDomainTraceability:
-    """C2_CIRCULAR_CRYOGENIC_CELLS must trace to N_DIGITAL_THREAD_TRACEABILITY."""
+    """C2_CIRCULAR_CRYOGENIC_CARRIERS must trace to N_DIGITAL_THREAD_TRACEABILITY."""
 
     def test_c2_has_cross_domain_traceability(self, subdomains: dict):
-        assert "cross_domain_traceability" in subdomains["C2_CIRCULAR_CRYOGENIC_CELLS"], \
-            "C2_CIRCULAR_CRYOGENIC_CELLS must declare cross_domain_traceability"
+        assert "cross_domain_traceability" in subdomains["C2_CIRCULAR_CRYOGENIC_CARRIERS"], \
+            "C2_CIRCULAR_CRYOGENIC_CARRIERS must declare cross_domain_traceability"
 
     def test_c2_traces_to_n_digital_thread(self, subdomains: dict):
-        cdt = subdomains["C2_CIRCULAR_CRYOGENIC_CELLS"]["cross_domain_traceability"]
+        cdt = subdomains["C2_CIRCULAR_CRYOGENIC_CARRIERS"]["cross_domain_traceability"]
         assert "N_DIGITAL_THREAD_TRACEABILITY" in cdt, \
             "C2 (H₂) must trace to N_DIGITAL_THREAD_TRACEABILITY for DPP ledger"
 
     def test_c2_n_digital_thread_has_mandatory_phases(self, subdomains: dict):
-        cdt = subdomains["C2_CIRCULAR_CRYOGENIC_CELLS"]["cross_domain_traceability"]
+        cdt = subdomains["C2_CIRCULAR_CRYOGENIC_CARRIERS"]["cross_domain_traceability"]
         mandatory = cdt["N_DIGITAL_THREAD_TRACEABILITY"]["mandatory_at"]
         assert isinstance(mandatory, list) and len(mandatory) > 0, \
             "mandatory_at must be a non-empty list"
 
     def test_c2_n_digital_thread_mandatory_at_lc02(self, subdomains: dict):
-        cdt = subdomains["C2_CIRCULAR_CRYOGENIC_CELLS"]["cross_domain_traceability"]
+        cdt = subdomains["C2_CIRCULAR_CRYOGENIC_CARRIERS"]["cross_domain_traceability"]
         assert "LC02" in cdt["N_DIGITAL_THREAD_TRACEABILITY"]["mandatory_at"], \
             "DPP registration must be mandatory at LC02 (requirements baseline)"
 
     def test_c2_n_digital_thread_mandatory_at_lc08(self, subdomains: dict):
-        cdt = subdomains["C2_CIRCULAR_CRYOGENIC_CELLS"]["cross_domain_traceability"]
+        cdt = subdomains["C2_CIRCULAR_CRYOGENIC_CARRIERS"]["cross_domain_traceability"]
         assert "LC08" in cdt["N_DIGITAL_THREAD_TRACEABILITY"]["mandatory_at"], \
             "DPP registration must be mandatory at LC08 (certification)"
 
     def test_c2_n_digital_thread_mandatory_at_lc14(self, subdomains: dict):
-        cdt = subdomains["C2_CIRCULAR_CRYOGENIC_CELLS"]["cross_domain_traceability"]
+        cdt = subdomains["C2_CIRCULAR_CRYOGENIC_CARRIERS"]["cross_domain_traceability"]
         assert "LC14" in cdt["N_DIGITAL_THREAD_TRACEABILITY"]["mandatory_at"], \
             "DPP closure must be mandatory at LC14 (end-of-life)"
 
     def test_c2_n_digital_thread_link_type(self, subdomains: dict):
-        cdt = subdomains["C2_CIRCULAR_CRYOGENIC_CELLS"]["cross_domain_traceability"]
+        cdt = subdomains["C2_CIRCULAR_CRYOGENIC_CARRIERS"]["cross_domain_traceability"]
         assert cdt["N_DIGITAL_THREAD_TRACEABILITY"]["link_type"] == "allocates_to"
 
     def test_c2_n_digital_thread_has_rationale(self, subdomains: dict):
-        cdt = subdomains["C2_CIRCULAR_CRYOGENIC_CELLS"]["cross_domain_traceability"]
+        cdt = subdomains["C2_CIRCULAR_CRYOGENIC_CARRIERS"]["cross_domain_traceability"]
         rationale = cdt["N_DIGITAL_THREAD_TRACEABILITY"].get("rationale", "")
         assert len(rationale) > 0, "cross_domain_traceability link must include rationale"
 
     def test_c2_n_digital_thread_path_is_valid(self, subdomains: dict):
-        cdt = subdomains["C2_CIRCULAR_CRYOGENIC_CELLS"]["cross_domain_traceability"]
+        cdt = subdomains["C2_CIRCULAR_CRYOGENIC_CARRIERS"]["cross_domain_traceability"]
         path = cdt["N_DIGITAL_THREAD_TRACEABILITY"]["path"]
         assert "N-NEURAL_NETWORKS" in path and "D-DIGITAL_THREAD_TRACEABILITY" in path
 
@@ -94,7 +94,7 @@ class TestH2CrossDomainTraceability:
 # =============================================================================
 
 class TestFuelCellCrossDomainTraceability:
-    """P_PROPULSION must trace to C2_CIRCULAR_CRYOGENIC_CELLS and N_DIGITAL_THREAD_TRACEABILITY."""
+    """P_PROPULSION must trace to C2_CIRCULAR_CRYOGENIC_CARRIERS and N_DIGITAL_THREAD_TRACEABILITY."""
 
     def test_p_has_cross_domain_traceability(self, subdomains: dict):
         assert "cross_domain_traceability" in subdomains["P_PROPULSION"], \
@@ -102,32 +102,32 @@ class TestFuelCellCrossDomainTraceability:
 
     def test_p_traces_to_c2(self, subdomains: dict):
         cdt = subdomains["P_PROPULSION"]["cross_domain_traceability"]
-        assert "C2_CIRCULAR_CRYOGENIC_CELLS" in cdt, \
+        assert "C2_CIRCULAR_CRYOGENIC_CARRIERS" in cdt, \
             "Fuel cell (P) must trace to C2 (H₂ supply interface)"
 
     def test_p_c2_mandatory_at_lc02(self, subdomains: dict):
         cdt = subdomains["P_PROPULSION"]["cross_domain_traceability"]
-        assert "LC02" in cdt["C2_CIRCULAR_CRYOGENIC_CELLS"]["mandatory_at"], \
+        assert "LC02" in cdt["C2_CIRCULAR_CRYOGENIC_CARRIERS"]["mandatory_at"], \
             "H₂ supply interface ICD must be traced at LC02 (requirements)"
 
     def test_p_c2_mandatory_at_lc04(self, subdomains: dict):
         cdt = subdomains["P_PROPULSION"]["cross_domain_traceability"]
-        assert "LC04" in cdt["C2_CIRCULAR_CRYOGENIC_CELLS"]["mandatory_at"], \
+        assert "LC04" in cdt["C2_CIRCULAR_CRYOGENIC_CARRIERS"]["mandatory_at"], \
             "H₂ supply interface must be traced at LC04 (design)"
 
     def test_p_c2_link_type(self, subdomains: dict):
         cdt = subdomains["P_PROPULSION"]["cross_domain_traceability"]
-        assert cdt["C2_CIRCULAR_CRYOGENIC_CELLS"]["link_type"] == "derives_from"
+        assert cdt["C2_CIRCULAR_CRYOGENIC_CARRIERS"]["link_type"] == "derives_from"
 
     def test_p_c2_has_rationale(self, subdomains: dict):
         cdt = subdomains["P_PROPULSION"]["cross_domain_traceability"]
-        rationale = cdt["C2_CIRCULAR_CRYOGENIC_CELLS"].get("rationale", "")
+        rationale = cdt["C2_CIRCULAR_CRYOGENIC_CARRIERS"].get("rationale", "")
         assert len(rationale) > 0
 
     def test_p_c2_path_is_valid(self, subdomains: dict):
         cdt = subdomains["P_PROPULSION"]["cross_domain_traceability"]
-        path = cdt["C2_CIRCULAR_CRYOGENIC_CELLS"]["path"]
-        assert "C2-CIRCULAR_CRYOGENIC_CELLS" in path
+        path = cdt["C2_CIRCULAR_CRYOGENIC_CARRIERS"]["path"]
+        assert "C2-CIRCULAR_CRYOGENIC_CARRIERS" in path
 
     def test_p_traces_to_n_digital_thread(self, subdomains: dict):
         cdt = subdomains["P_PROPULSION"]["cross_domain_traceability"]
@@ -253,7 +253,7 @@ class TestVAL007ValidationRule:
     def test_val007_applies_to_c2(self, lc_data: dict):
         rule = next(r for r in lc_data["validation_rules"] if r["id"] == "VAL-007")
         applies = rule.get("applies_to", [])
-        assert "C2_CIRCULAR_CRYOGENIC_CELLS" in applies
+        assert "C2_CIRCULAR_CRYOGENIC_CARRIERS" in applies
 
     def test_val007_applies_to_p(self, lc_data: dict):
         rule = next(r for r in lc_data["validation_rules"] if r["id"] == "VAL-007")

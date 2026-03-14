@@ -65,7 +65,7 @@ Located in `controls/`:
 - **LC10 (Industrial & Supply Chain):** HAZMAT procurement, storage design, waste management
 
 ### OPT-IN Domains
-- **T/C2-CIRCULAR_CRYOGENIC_CELLS:** LH₂ handling safety (NFPA 2/55 primary interface)
+- **T/C2-CIRCULAR_CRYOGENIC_CARRIERS:** LH₂ handling safety (NFPA 2/55 primary interface)
 - **T/P-PROPULSION:** Fuel cell production chemicals and coolants
 - **M1/02_OHS_SAFETY_WORKPLACE:** Personnel safety coordination
 

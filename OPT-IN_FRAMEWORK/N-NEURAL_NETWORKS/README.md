@@ -139,7 +139,7 @@ The N-NEURAL_NETWORKS domain is organized into three subdomains that separate di
 ## Novel Technology Considerations
 
 As a governance and infrastructure domain, N-NEURAL_NETWORKS supports novel technologies:
-- **C2-CIRCULAR_CRYOGENIC_CELLS:** Hydrogen component traceability
+- **C2-CIRCULAR_CRYOGENIC_CARRIERS:** Hydrogen component traceability
 - **I2-INTELLIGENCE:** AI model governance and traceability
 - **P-PROPULSION:** Fuel cell component lifecycle tracking
 

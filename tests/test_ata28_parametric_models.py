@@ -2,7 +2,7 @@
 Tests for ATA 28-10-00 Parametric Models in KDB/DEV/models/.
 
 Validates the LC05 parametric model YAML records created for the C2
-Circular Cryogenic Cells fuel storage system: tank geometry
+Circular Cryogenic Carriers fuel storage system: tank geometry
 optimisation, MLI thermal stack-up, and mounting / load path analysis.
 """
 
@@ -18,7 +18,7 @@ MODELS = (
     REPO_ROOT
     / "OPT-IN_FRAMEWORK"
     / "T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS"
-    / "C2-CIRCULAR_CRYOGENIC_CELLS"
+    / "C2-CIRCULAR_CRYOGENIC_CARRIERS"
     / "ATA_28-FUEL"
     / "28-10-storage"
     / "28-10-00-fuel-storage-general"
@@ -296,7 +296,7 @@ class TestArtifactCatalogModels:
             REPO_ROOT
             / "OPT-IN_FRAMEWORK"
             / "T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS"
-            / "C2-CIRCULAR_CRYOGENIC_CELLS"
+            / "C2-CIRCULAR_CRYOGENIC_CARRIERS"
             / "ATA_28-FUEL"
             / "INDEX"
             / "ARTIFACT_CATALOG.yaml"
@@ -327,7 +327,7 @@ class TestFBLEvidencePackageModels:
             REPO_ROOT
             / "OPT-IN_FRAMEWORK"
             / "T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS"
-            / "C2-CIRCULAR_CRYOGENIC_CELLS"
+            / "C2-CIRCULAR_CRYOGENIC_CARRIERS"
             / "ATA_28-FUEL"
             / "28-10-storage"
             / "28-10-00-fuel-storage-general"
@@ -365,7 +365,7 @@ class TestKNUPlanModels:
             REPO_ROOT
             / "OPT-IN_FRAMEWORK"
             / "T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS"
-            / "C2-CIRCULAR_CRYOGENIC_CELLS"
+            / "C2-CIRCULAR_CRYOGENIC_CARRIERS"
             / "ATA_28-FUEL"
             / "28-10-storage"
             / "28-10-00-fuel-storage-general"
@@ -395,7 +395,7 @@ class TestTraceLCModels:
             REPO_ROOT
             / "OPT-IN_FRAMEWORK"
             / "T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS"
-            / "C2-CIRCULAR_CRYOGENIC_CELLS"
+            / "C2-CIRCULAR_CRYOGENIC_CARRIERS"
             / "ATA_28-FUEL"
             / "28-10-storage"
             / "28-10-00-fuel-storage-general"

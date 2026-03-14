@@ -49,7 +49,7 @@ standard:
       - 85-00-00
     opt_in_domains:
       - I-INFRASTRUCTURES/M1
-      - T/C2-CIRCULAR_CRYOGENIC_CELLS
+      - T/C2-CIRCULAR_CRYOGENIC_CARRIERS
       - T/P-PROPULSION
 links:
   reqs: []

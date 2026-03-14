@@ -2,7 +2,7 @@
 Tests for ATA 28 Canonical Directory Structure in OPT-IN_FRAMEWORK.
 
 Validates the complete ATA chapter directory tree for ATA_28-FUEL
-(Circular Cryogenic Cells) per the canonical structure specification.
+(Circular Cryogenic Carriers) per the canonical structure specification.
 """
 
 from __future__ import annotations
@@ -17,7 +17,7 @@ ATA28 = (
     REPO_ROOT
     / "OPT-IN_FRAMEWORK"
     / "T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS"
-    / "C2-CIRCULAR_CRYOGENIC_CELLS"
+    / "C2-CIRCULAR_CRYOGENIC_CARRIERS"
     / "ATA_28-FUEL"
 )
 SECTION = ATA28 / "28-10-storage"

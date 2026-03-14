@@ -90,7 +90,7 @@ Located in `EASA_FAA/`:
 ### OPT-IN Domains
 - **O-ORGANIZATIONS/A-AUTHORITATIVE:** Airworthiness requirements and limitations
 - **M1/01_QUALITY:** QMS integration (AS9100 supports POA/PC quality system requirements)
-- **T/C2-CIRCULAR_CRYOGENIC_CELLS:** Novel technology may require Special Conditions (SC-28-H2-001)
+- **T/C2-CIRCULAR_CRYOGENIC_CARRIERS:** Novel technology may require Special Conditions (SC-28-H2-001)
 - **T/P-PROPULSION:** Novel technology may require Special Conditions (SC-71-FUELCELL-001)
 
 ---

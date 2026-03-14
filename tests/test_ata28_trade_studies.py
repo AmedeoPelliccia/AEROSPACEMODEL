@@ -2,7 +2,7 @@
 Tests for ATA 28-10-00 Trade Studies in KDB/DEV/trade-studies/.
 
 Validates the trade study YAML records created during LC04 design
-definition for the C2 Circular Cryogenic Cells fuel storage
+definition for the C2 Circular Cryogenic Carriers fuel storage
 architecture.
 """
 
@@ -18,7 +18,7 @@ TRADE_STUDIES = (
     REPO_ROOT
     / "OPT-IN_FRAMEWORK"
     / "T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS"
-    / "C2-CIRCULAR_CRYOGENIC_CELLS"
+    / "C2-CIRCULAR_CRYOGENIC_CARRIERS"
     / "ATA_28-FUEL"
     / "28-10-storage"
     / "28-10-00-fuel-storage-general"
@@ -179,7 +179,7 @@ class TestArtifactCatalogTradeStudies:
             REPO_ROOT
             / "OPT-IN_FRAMEWORK"
             / "T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS"
-            / "C2-CIRCULAR_CRYOGENIC_CELLS"
+            / "C2-CIRCULAR_CRYOGENIC_CARRIERS"
             / "ATA_28-FUEL"
             / "INDEX"
             / "ARTIFACT_CATALOG.yaml"

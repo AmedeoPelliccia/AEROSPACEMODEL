@@ -257,7 +257,7 @@ The **[OPT-IN_FRAMEWORK](OPT-IN_FRAMEWORK/)** provides the canonical ATA iSpec 2
 | **N — Neural Networks** | AI governance, DPP, ledger | AI/ML systems | — |
 
 **Novel Technology Subdomains** (full LC01–LC14 activation):
-- **C2 — Circular Cryogenic Cells** — LH₂ storage (-253°C), cryogenic handling, boil-off management (Special Conditions: SC-28-H2-001, SC-28-CRYO-002)
+- **C2 — Circular Cryogenic Carriers** — LH₂ storage (-253°C), cryogenic handling, boil-off management (Special Conditions: SC-28-H2-001, SC-28-CRYO-002)
 - **P — Propulsion** — Fuel cell stacks, balance of plant, thermal management (Special Condition: SC-71-FUELCELL-001)
 - **I2 — Intelligence** — AI/ML models, synthetic data (ATA 97), adversarial testing, EU AI Act compliance (Special Condition: SC-AI-ASSURANCE-001)
 
@@ -554,7 +554,7 @@ Special Conditions are formally registered for novel hydrogen and fuel-cell tech
 The MTL enforces version-locked traceability: every AI model trained on MTL tokens is bound to the exact MTL version, and any library update triggers an automatic HOLD until revalidation.
 
 > 📖 Canonical standard: [`ASIT/STANDARDS/MTL_META/`](ASIT/STANDARDS/MTL_META/) — `MTL-META-CORE v1.0.0`  
-> 📖 Reference implementation: [`OPT-IN_FRAMEWORK/.../KDB/DEV/mtl/`](OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CELLS/ATA_28-FUEL/28-11-lh2-primary-tank/28-11-00-lh2-primary-tank-general/KDB/DEV/mtl/) (MTL-28-11-00)
+> 📖 Reference implementation: [`OPT-IN_FRAMEWORK/.../KDB/DEV/mtl/`](OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CARRIERS/ATA_28-FUEL/28-11-lh2-primary-tank/28-11-00-lh2-primary-tank-general/KDB/DEV/mtl/) (MTL-28-11-00)
 
 ---
 

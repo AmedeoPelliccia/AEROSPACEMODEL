@@ -76,7 +76,7 @@ Located in `controls/`:
 - **LC10 (Industrial & Supply Chain):** AM machine procurement, powder supply chain
 
 ### OPT-IN Domains
-- **T/C2-CIRCULAR_CRYOGENIC_CELLS:** AM brackets and supports for LH₂ tanks
+- **T/C2-CIRCULAR_CRYOGENIC_CARRIERS:** AM brackets and supports for LH₂ tanks
 - **T/P-PROPULSION:** AM fuel cell bipolar plates and heat exchangers (potential future application)
 - **M1/01_QUALITY:** AM quality gate integration with QMS
 

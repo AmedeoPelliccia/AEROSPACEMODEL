@@ -19,7 +19,7 @@ MTL_DIR = (
     REPO_ROOT
     / "OPT-IN_FRAMEWORK"
     / "T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS"
-    / "C2-CIRCULAR_CRYOGENIC_CELLS"
+    / "C2-CIRCULAR_CRYOGENIC_CARRIERS"
     / "ATA_28-FUEL"
     / "28-11-lh2-primary-tank"
     / "28-11-00-lh2-primary-tank-general"
@@ -341,7 +341,7 @@ class TestArtifactCatalog5D:
             REPO_ROOT
             / "OPT-IN_FRAMEWORK"
             / "T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS"
-            / "C2-CIRCULAR_CRYOGENIC_CELLS"
+            / "C2-CIRCULAR_CRYOGENIC_CARRIERS"
             / "ATA_28-FUEL"
             / "INDEX"
             / "ARTIFACT_CATALOG.yaml"

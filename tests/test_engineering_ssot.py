@@ -100,7 +100,7 @@ class TestSSOTRegistry:
     def test_novel_technology_entries_exist(self, registry):
         """Registry must include entries from novel technology domains."""
         domains = {e["technology_domain"] for e in registry["ssot_entries"]}
-        assert "C2-CIRCULAR_CRYOGENIC_CELLS" in domains
+        assert "C2-CIRCULAR_CRYOGENIC_CARRIERS" in domains
         assert "P-PROPULSION" in domains
         assert "I2-INTELLIGENCE" in domains
 
@@ -108,7 +108,7 @@ class TestSSOTRegistry:
         """C2 entries must reference hydrogen special conditions."""
         c2_entries = [
             e for e in registry["ssot_entries"]
-            if e["technology_domain"] == "C2-CIRCULAR_CRYOGENIC_CELLS"
+            if e["technology_domain"] == "C2-CIRCULAR_CRYOGENIC_CARRIERS"
         ]
         assert len(c2_entries) >= 1
         for entry in c2_entries:

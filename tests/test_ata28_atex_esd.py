@@ -42,7 +42,7 @@ ATA28 = (
     REPO_ROOT
     / "OPT-IN_FRAMEWORK"
     / "T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS"
-    / "C2-CIRCULAR_CRYOGENIC_CELLS"
+    / "C2-CIRCULAR_CRYOGENIC_CARRIERS"
     / "ATA_28-FUEL"
 )
 
@@ -158,7 +158,7 @@ class TestAtexZoneClassificationContent:
         assert atex_meta["ata"] == "28-41-00"
 
     def test_atex_meta_domain(self, atex_meta):
-        assert atex_meta["domain"] == "C2-CIRCULAR_CRYOGENIC_CELLS"
+        assert atex_meta["domain"] == "C2-CIRCULAR_CRYOGENIC_CARRIERS"
 
     def test_atex_meta_has_atex_tag(self, atex_meta):
         assert "atex" in atex_meta.get("tags", [])
@@ -235,7 +235,7 @@ class TestEsdBondingGroundingContent:
         assert esd_meta["ata"] == "28-00-00"
 
     def test_esd_meta_domain(self, esd_meta):
-        assert esd_meta["domain"] == "C2-CIRCULAR_CRYOGENIC_CELLS"
+        assert esd_meta["domain"] == "C2-CIRCULAR_CRYOGENIC_CARRIERS"
 
     def test_esd_meta_has_esd_tag(self, esd_meta):
         assert "esd" in esd_meta.get("tags", [])

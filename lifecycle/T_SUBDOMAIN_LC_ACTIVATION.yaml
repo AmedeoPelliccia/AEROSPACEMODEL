@@ -9,7 +9,7 @@
 # or skipped for each technology subdomain.
 #
 # Novel Technology Subdomains (Full LC01-LC14 activation):
-#   - C2_CIRCULAR_CRYOGENIC_CELLS (LH₂ cryogenic fuel systems)
+#   - C2_CIRCULAR_CRYOGENIC_CARRIERS (LH₂ cryogenic fuel systems)
 #   - P_PROPULSION (Advanced propulsion: fuel-cell, electric)
 #   - I2_INTELLIGENCE (AI/ML models and synthetic data)
 #
@@ -144,14 +144,14 @@ defaults:
       - "G-LC10-PBL"
 
 # =============================================================================
-# SUBDOMAIN: C2_CIRCULAR_CRYOGENIC_CELLS
+# SUBDOMAIN: C2_CIRCULAR_CRYOGENIC_CARRIERS
 # ATA 28 – Hydrogen Cryogenic Fuel Systems
 # =============================================================================
 
 subdomains:
-  C2_CIRCULAR_CRYOGENIC_CELLS:
-    title: "Circular Cryogenic Cells (LH₂ Fuel Systems)"
-    optin_path: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CELLS"
+  C2_CIRCULAR_CRYOGENIC_CARRIERS:
+    title: "Circular Cryogenic Carriers (LH₂ Fuel Systems)"
+    optin_path: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CARRIERS"
     ata_scope: ["ATA_28-FUEL"]
     doa_criticality: "CRITICAL"
     novel_technology: true
@@ -338,8 +338,8 @@ subdomains:
         rationale: "Fuel cell stack decommissioning and material recovery"
 
     cross_domain_traceability:
-      C2_CIRCULAR_CRYOGENIC_CELLS:
-        path: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CELLS"
+      C2_CIRCULAR_CRYOGENIC_CARRIERS:
+        path: "OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CARRIERS"
         rationale: "Fuel cell H₂ supply interface (ATA 28-22) is owned by C2; P_PROPULSION ICD requirements must derive_from C2 FBL requirements"
         mandatory_at: ["LC02", "LC04"]
         link_type: "derives_from"
@@ -496,8 +496,8 @@ subdomains:
         relationship: "ATA_04/05 airworthiness limitations constrain product configuration (ATA 06/08/11)"
       - target: "P_SERVICE_INSTRUCTION"
         relationship: "ATA_05 time limits constrain servicing intervals (ATA 12) and storage requirements (ATA 10)"
-      - target: "C2_CIRCULAR_CRYOGENIC_CELLS"
-        relationship: "ATA_04/05 airworthiness mandates apply to novel cryogenic fuel systems (C2_CIRCULAR_CRYOGENIC_CELLS)"
+      - target: "C2_CIRCULAR_CRYOGENIC_CARRIERS"
+        relationship: "ATA_04/05 airworthiness mandates apply to novel cryogenic fuel systems (C2_CIRCULAR_CRYOGENIC_CARRIERS)"
       - target: "P_PROPULSION"
         relationship: "ATA_04/05 airworthiness mandates apply to advanced propulsion technologies (P_PROPULSION)"
       - target: "I2_INTELLIGENCE"
@@ -662,10 +662,10 @@ validation_rules:
     name: "Cross-Domain Traceability for Novel Technologies"
     rule: "Novel technology subdomains (C2, P, I2) must declare cross_domain_traceability links to corresponding T/N domains at mandatory lifecycle phases"
     enforcement: "block"
-    applies_to: ["C2_CIRCULAR_CRYOGENIC_CELLS", "P_PROPULSION", "I2_INTELLIGENCE"]
+    applies_to: ["C2_CIRCULAR_CRYOGENIC_CARRIERS", "P_PROPULSION", "I2_INTELLIGENCE"]
     details:
-      C2_CIRCULAR_CRYOGENIC_CELLS: "Must link to N_DIGITAL_THREAD_TRACEABILITY at LC02, LC08, LC14"
-      P_PROPULSION: "Must link to C2_CIRCULAR_CRYOGENIC_CELLS at LC02, LC04 and N_DIGITAL_THREAD_TRACEABILITY at LC02, LC08, LC14"
+      C2_CIRCULAR_CRYOGENIC_CARRIERS: "Must link to N_DIGITAL_THREAD_TRACEABILITY at LC02, LC08, LC14"
+      P_PROPULSION: "Must link to C2_CIRCULAR_CRYOGENIC_CARRIERS at LC02, LC04 and N_DIGITAL_THREAD_TRACEABILITY at LC02, LC08, LC14"
       I2_INTELLIGENCE: "Must link to N_AI_GOVERNANCE_ASSURANCE at LC01, LC02, LC08 and N_DIGITAL_THREAD_TRACEABILITY at LC02, LC05, LC08, LC14"
 
 # =============================================================================

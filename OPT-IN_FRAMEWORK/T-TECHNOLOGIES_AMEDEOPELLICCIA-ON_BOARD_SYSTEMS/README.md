@@ -52,7 +52,7 @@ Navigation systems and positioning.
 Communications systems.
 - **ATA Chapters:** 23
 
-### **C2-CIRCULAR_CRYOGENIC_CELLS** ⭐ **Novel Technology**
+### **C2-CIRCULAR_CRYOGENIC_CARRIERS** ⭐ **Novel Technology**
 Hydrogen cryogenic fuel systems (LH₂ storage, distribution, and handling).
 - **ATA Chapters:** 28 (Fuel)
 - **Special Conditions:** SC-28-H2-001, SC-28-CRYO-002
@@ -87,7 +87,7 @@ Power plant and propulsion systems, including fuel cell and electric propulsion.
 
 Three subdomains are designated as **Novel Technology** with full LC01–LC14 lifecycle activation and special certification requirements:
 
-### 1. C2-CIRCULAR_CRYOGENIC_CELLS (Hydrogen Cryogenic Fuel)
+### 1. C2-CIRCULAR_CRYOGENIC_CARRIERS (Hydrogen Cryogenic Fuel)
 **Technology Focus:**
 - Liquid hydrogen (LH₂) storage at -253°C
 - Cryogenic insulation systems

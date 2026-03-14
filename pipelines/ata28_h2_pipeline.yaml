@@ -16,7 +16,7 @@ pipeline:
     name: "ATA 28 Hydrogen Cryogenic Fuel System Pipeline"
     description: |
       End-to-end transformation pipeline for generating S1000D publications
-      for hydrogen cryogenic fuel systems, including Circular Cryogenic Cells
+      for hydrogen cryogenic fuel systems, including Circular Cryogenic Carriers
       (C2) and conventional LH₂ tanks.
     version: "1.0.0"
     publication_type: "AMM"

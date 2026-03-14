@@ -1,5 +1,5 @@
 """
-Tests for AMPEL360 Q100 — ATA 28 Circular Cryogenic Cells (C2).
+Tests for AMPEL360 Q100 — ATA 28 Circular Cryogenic Carriers (C2).
 
 Validates:
 - YAML structure of program config, requirements, contract, BREX rules, and pipeline
@@ -61,7 +61,7 @@ class TestProgramConfig:
         assert "Liquid Hydrogen" in config["program"]["aircraft"]["fuel"]["type"]
 
     def test_tank_type_c2(self, config):
-        assert "Circular Cryogenic Cells" in config["program"]["aircraft"]["fuel"]["tank_type"]
+        assert "Circular Cryogenic Carriers" in config["program"]["aircraft"]["fuel"]["tank_type"]
 
     def test_special_conditions(self, config):
         scs = config["certification"]["special_conditions"]
@@ -71,7 +71,7 @@ class TestProgramConfig:
 
     def test_novel_technology_c2(self, config):
         domains = [nt["domain"] for nt in config["certification"]["novel_technology"]]
-        assert "C2_CIRCULAR_CRYOGENIC_CELLS" in domains
+        assert "C2_CIRCULAR_CRYOGENIC_CARRIERS" in domains
 
     def test_s1000d_issue(self, config):
         assert config["standards"]["s1000d"]["issue"] == "5.0"
@@ -98,7 +98,7 @@ class TestC2Requirements:
         assert reqs["metadata"]["program"] == "AMPEL360 Q100"
 
     def test_metadata_novel_technology(self, reqs):
-        assert reqs["metadata"]["novel_technology"] == "C2_CIRCULAR_CRYOGENIC_CELLS"
+        assert reqs["metadata"]["novel_technology"] == "C2_CIRCULAR_CRYOGENIC_CARRIERS"
 
     def test_has_requirements(self, reqs):
         assert len(reqs["requirements"]) > 0
@@ -219,7 +219,7 @@ class TestC2BREXRules:
         assert brex["brex"]["ata_chapter"] == "28"
 
     def test_brex_novel_technology(self, brex):
-        assert brex["brex"]["novel_technology"] == "C2_CIRCULAR_CRYOGENIC_CELLS"
+        assert brex["brex"]["novel_technology"] == "C2_CIRCULAR_CRYOGENIC_CARRIERS"
 
     def test_has_rules(self, brex):
         assert len(brex["brex"]["rules"]) >= 10
@@ -402,7 +402,7 @@ class TestC2Documentation:
         path = REPO_ROOT / "docs" / "ATA_28_C2_AMPEL360_Q100.md"
         text = path.read_text(encoding="utf-8")
         assert "AMPEL360 Q100" in text
-        assert "Circular Cryogenic Cells" in text
+        assert "Circular Cryogenic Carriers" in text
         assert "SC-28-H2-001" in text
         assert "SC-28-CRYO-002" in text
 

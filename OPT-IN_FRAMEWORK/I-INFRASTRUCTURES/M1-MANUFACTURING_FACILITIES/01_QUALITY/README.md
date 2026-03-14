@@ -63,7 +63,7 @@ Located in `templates/`:
 - **LC08 (Certification):** Quality records support type certification and production organization approval
 
 ### OPT-IN Domains
-- **T/C2-CIRCULAR_CRYOGENIC_CELLS:** LH₂ tank manufacturing quality requirements
+- **T/C2-CIRCULAR_CRYOGENIC_CARRIERS:** LH₂ tank manufacturing quality requirements
 - **T/P-PROPULSION:** Fuel cell stack assembly quality requirements
 - **I/M2-MAINTENANCE_ENVIRONMENTS:** MRO quality system coordination
 
