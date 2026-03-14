@@ -74,7 +74,7 @@ def generate_meta_content(
         'lc_phase': lc_phase,
         'work_package': work_package['id'],
         'ata': work_package.get('ata', '28-00-00'),
-        'domain': work_package.get('domain', 'C2-CIRCULAR_CRYOGENIC_CELLS'),
+        'domain': work_package.get('domain', 'C2-CIRCULAR_CRYOGENIC_CARRIERS'),
         'created_on': 'to be set during baseline finalization',
         'last_updated_on': 'to be set during baseline finalization',
         'integrity': {
@@ -133,7 +133,7 @@ def process_work_package(
             'status': work_package.get('status', 'draft'),
             'lc_phase': extract_lc_phase_from_path(output['meta_file']),
             'ata': work_package.get('ata', '28-00-00'),
-            'domain': work_package.get('domain', 'C2-CIRCULAR_CRYOGENIC_CELLS'),
+            'domain': work_package.get('domain', 'C2-CIRCULAR_CRYOGENIC_CARRIERS'),
             'created_on': 'to be set during baseline finalization',
             'last_updated_on': 'to be set during baseline finalization',
             'integrity': {
@@ -173,9 +173,9 @@ def main():
     import argparse
     
     parser = argparse.ArgumentParser(description='Generate .meta.yaml files for WBS outputs')
-    parser.add_argument('--wbs-file', default='OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CELLS/ATA_28-FUEL/WBS/WBS_LEVEL_2.yaml',
+    parser.add_argument('--wbs-file', default='OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CARRIERS/ATA_28-FUEL/WBS/WBS_LEVEL_2.yaml',
                         help='Path to WBS_LEVEL_2.yaml file')
-    parser.add_argument('--base-path', default='OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CELLS/ATA_28-FUEL',
+    parser.add_argument('--base-path', default='OPT-IN_FRAMEWORK/T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CARRIERS/ATA_28-FUEL',
                         help='Base path for output files')
     parser.add_argument('--dry-run', action='store_true',
                         help='Show what would be generated without creating files')

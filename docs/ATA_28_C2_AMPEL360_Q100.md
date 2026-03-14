@@ -1,6 +1,6 @@
 # ATA 28 – Fuel System Structure for AMPEL360 Q100
 
-> **Circular Cryogenic Cells (C2) – LH₂ Focus**
+> **Circular Cryogenic Carriers (C2) – LH₂ Focus**
 >
 > **Compliance:** S1000D Issue 5.0, EASA CS-25, SC-28-H2-001, SC-28-CRYO-002
 
@@ -10,7 +10,7 @@
 
 This document defines the architecture, components, and governance for
 the **cryogenic hydrogen fuel system** of the AMPEL360 Q100 aircraft,
-using **Circular Cryogenic Cells (C2)** for liquid hydrogen storage.
+using **Circular Cryogenic Carriers (C2)** for liquid hydrogen storage.
 
 **Scope:**
 - LH₂ storage, distribution, boil-off management, and safety systems.
@@ -42,7 +42,7 @@ using **Circular Cryogenic Cells (C2)** for liquid hydrogen storage.
 - **BREX Rules:** SAFETY-002, SAFETY-H2-001.
 - **Special Conditions:** SC-28-H2-001, SC-28-CRYO-002.
 
-### Section 10: Fuel Storage — Circular Cryogenic Cells (28-10-xx)
+### Section 10: Fuel Storage — Circular Cryogenic Carriers (28-10-xx)
 
 | ATA Code | Subject | Info Code | Type |
 |----------|---------|-----------|------|

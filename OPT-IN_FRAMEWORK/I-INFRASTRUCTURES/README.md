@@ -73,7 +73,7 @@ Ground support equipment and tooling infrastructure.
 - Supply chain logistics and traceability
 
 **Special Considerations:**
-- Must interface with C2-CIRCULAR_CRYOGENIC_CELLS (ATA 28)
+- Must interface with C2-CIRCULAR_CRYOGENIC_CARRIERS (ATA 28)
 - Requires special safety training and procedures
 - Subject to hydrogen safety regulations
 - Environmental impact assessment (LC09)
@@ -103,7 +103,7 @@ Infrastructure domain follows adapted lifecycle profile:
 ## Related Aircraft Systems
 
 This domain supports the following on-board systems:
-- **C2-CIRCULAR_CRYOGENIC_CELLS** (ATA 28): Hydrogen fuel systems
+- **C2-CIRCULAR_CRYOGENIC_CARRIERS** (ATA 28): Hydrogen fuel systems
 - **P-PROPULSION** (ATA 71): Fuel cell power plants
 - **Standard systems:** Electrical servicing, hydraulic servicing, etc.
 
@@ -112,7 +112,7 @@ This domain supports the following on-board systems:
 ## Related Documents
 
 - [OPT-IN_FRAMEWORK Main README](../README.md)
-- [T-TECHNOLOGIES C2 Subdomain](../T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CELLS/)
+- [T-TECHNOLOGIES C2 Subdomain](../T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CARRIERS/)
 - [ATA 28 H2 Cryogenic Instructions](../../.github/instructions/ata28_h2_cryogenic.instructions.md)
 
 ---

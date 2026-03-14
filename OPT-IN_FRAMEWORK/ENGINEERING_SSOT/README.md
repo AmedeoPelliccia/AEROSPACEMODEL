@@ -35,7 +35,7 @@ The registry captures the canonical SSOT entries for the AMPEL360 Q100 program. 
 - `id` — Unique SSOT identifier (e.g., `SSOT-Q100-C2-001`)
 - `title` — Human-readable title
 - `ata_chapter` — ATA chapter (e.g., `28`)
-- `technology_domain` — Technology subdomain (e.g., `C2-CIRCULAR_CRYOGENIC_CELLS`)
+- `technology_domain` — Technology subdomain (e.g., `C2-CIRCULAR_CRYOGENIC_CARRIERS`)
 - `baseline_ref` — Reference to the controlling baseline
 - `lifecycle_phase` — Primary lifecycle phase (LC01–LC14)
 - `status` — `draft`, `in_review`, or `approved`

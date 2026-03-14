@@ -1,17 +1,17 @@
 # =============================================================================
-# AMPEL360 Q100 — BREX Rules for C2 Circular Cryogenic Cells
+# AMPEL360 Q100 — BREX Rules for C2 Circular Cryogenic Carriers
 # =============================================================================
 # Project-specific BREX rules governing ATA 28 content for the
-# Circular Cryogenic Cells (C2) fuel system.
+# Circular Cryogenic Carriers (C2) fuel system.
 # =============================================================================
 
 brex:
   id: "Q100-BREX-C2-001"
   version: "1.0.0"
-  title: "BREX Rules — C2 Circular Cryogenic Cells"
+  title: "BREX Rules — C2 Circular Cryogenic Carriers"
   program: "AMPEL360 Q100"
   ata_chapter: "28"
-  novel_technology: "C2_CIRCULAR_CRYOGENIC_CELLS"
+  novel_technology: "C2_CIRCULAR_CRYOGENIC_CARRIERS"
 
   authority:
     owner: "ASIT"
@@ -32,14 +32,14 @@ brex:
       category: "structure"
       condition: "ata_domain MUST be '28' for C2 content"
       enforcement: "block"
-      message: "C2 Circular Cryogenic Cells content requires ATA 28 classification"
+      message: "C2 Circular Cryogenic Carriers content requires ATA 28 classification"
 
     - id: "C2-STRUCT-002"
       name: "C2 novel technology tag required"
       category: "structure"
-      condition: "novel_technology MUST include 'C2_CIRCULAR_CRYOGENIC_CELLS'"
+      condition: "novel_technology MUST include 'C2_CIRCULAR_CRYOGENIC_CARRIERS'"
       enforcement: "block"
-      message: "Content must be tagged with C2_CIRCULAR_CRYOGENIC_CELLS domain"
+      message: "Content must be tagged with C2_CIRCULAR_CRYOGENIC_CARRIERS domain"
 
     # Contract Rules
     - id: "C2-CTR-001"

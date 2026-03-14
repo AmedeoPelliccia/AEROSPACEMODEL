@@ -1,7 +1,7 @@
 # =============================================================================
-# AMPEL360 Q100 — ATA 28 Circular Cryogenic Cells (C2) Fuel System
+# AMPEL360 Q100 — ATA 28 Circular Cryogenic Carriers (C2) Fuel System
 # =============================================================================
-# LH₂ cryogenic fuel system requirements for Circular Cryogenic Cells.
+# LH₂ cryogenic fuel system requirements for Circular Cryogenic Carriers.
 # Structured per ATA iSpec 2200 with EASA Special Conditions.
 # =============================================================================
 
@@ -9,10 +9,10 @@ metadata:
   source: "KDB"
   domain: "requirements"
   ata_chapter: "28"
-  title: "Circular Cryogenic Cells (C2) — LH₂ Fuel System"
+  title: "Circular Cryogenic Carriers (C2) — LH₂ Fuel System"
   baseline: "DBL-Q100-2026-Q2"
   program: "AMPEL360 Q100"
-  novel_technology: "C2_CIRCULAR_CRYOGENIC_CELLS"
+  novel_technology: "C2_CIRCULAR_CRYOGENIC_CARRIERS"
 
 requirements:
   # ---------------------------------------------------------------------------
@@ -28,7 +28,7 @@ requirements:
 
     content:
       summary: |
-        The AMPEL360 Q100 employs a Circular Cryogenic Cells (C2) architecture
+        The AMPEL360 Q100 employs a Circular Cryogenic Carriers (C2) architecture
         for liquid hydrogen storage and distribution to the fuel cell propulsion
         system.
 
@@ -114,11 +114,11 @@ requirements:
         - EN 17124: Hydrogen purity specification
 
   # ---------------------------------------------------------------------------
-  # Section 10: Fuel Storage — Circular Cryogenic Cells
+  # Section 10: Fuel Storage — Circular Cryogenic Carriers
   # ---------------------------------------------------------------------------
   - id: "REQ-Q100-C2-010"
     type: "descriptive"
-    title: "Circular Cryogenic Cells Design"
+    title: "Circular Cryogenic Carriers Design"
     ata_code: "28-10-00"
     info_code: "040"
     applicability: "APP-Q100-ALL"

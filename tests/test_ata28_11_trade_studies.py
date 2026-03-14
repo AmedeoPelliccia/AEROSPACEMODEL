@@ -2,7 +2,7 @@
 Tests for ATA 28-11-00 Trade Studies in KDB/DEV/trade-studies/.
 
 Validates the trade study YAML records created during LC04 design
-definition for the C2 Circular Cryogenic Cells LH2 primary tank
+definition for the C2 Circular Cryogenic Carriers LH2 primary tank
 architecture.
 """
 
@@ -18,7 +18,7 @@ TRADE_STUDIES = (
     REPO_ROOT
     / "OPT-IN_FRAMEWORK"
     / "T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS"
-    / "C2-CIRCULAR_CRYOGENIC_CELLS"
+    / "C2-CIRCULAR_CRYOGENIC_CARRIERS"
     / "ATA_28-FUEL"
     / "28-11-lh2-primary-tank"
     / "28-11-00-lh2-primary-tank-general"
@@ -212,7 +212,7 @@ class TestArtifactCatalogTradeStudies:
             REPO_ROOT
             / "OPT-IN_FRAMEWORK"
             / "T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS"
-            / "C2-CIRCULAR_CRYOGENIC_CELLS"
+            / "C2-CIRCULAR_CRYOGENIC_CARRIERS"
             / "ATA_28-FUEL"
             / "INDEX"
             / "ARTIFACT_CATALOG.yaml"

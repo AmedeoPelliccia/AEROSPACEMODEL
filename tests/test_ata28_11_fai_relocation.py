@@ -19,7 +19,7 @@ ATA28 = (
     REPO_ROOT
     / "OPT-IN_FRAMEWORK"
     / "T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS"
-    / "C2-CIRCULAR_CRYOGENIC_CELLS"
+    / "C2-CIRCULAR_CRYOGENIC_CARRIERS"
     / "ATA_28-FUEL"
 )
 
@@ -106,7 +106,7 @@ class TestMetaYamlContent:
         assert meta["ata"] == "28-11-00"
 
     def test_domain(self, meta):
-        assert meta["domain"] == "C2-CIRCULAR_CRYOGENIC_CELLS"
+        assert meta["domain"] == "C2-CIRCULAR_CRYOGENIC_CARRIERS"
 
     def test_file_paths_use_canonical_prefix(self, meta):
         for entry in meta["files"]:

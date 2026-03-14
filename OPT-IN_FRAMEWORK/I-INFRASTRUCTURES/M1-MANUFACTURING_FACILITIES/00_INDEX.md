@@ -64,7 +64,7 @@
 - Spill Response Plan
 
 **Interfaces:**
-- T/C2-CIRCULAR_CRYOGENIC_CELLS (Hydrogen Cryogenic Fuel Systems)
+- T/C2-CIRCULAR_CRYOGENIC_CARRIERS (Hydrogen Cryogenic Fuel Systems)
 
 ---
 
@@ -167,7 +167,7 @@
 | **LC07** | `../../../lifecycle/LC_PHASE_REGISTRY.yaml` | QA & Process Compliance |
 | **LC10** | `../../../lifecycle/LC_PHASE_REGISTRY.yaml` | Industrial & Supply Chain |
 | **LC12** | `../../../lifecycle/LC_PHASE_REGISTRY.yaml` | Continued Airworthiness & MRO |
-| **T/C2** | `../../T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CELLS/` | Hydrogen Cryogenic Fuel Systems (NFPA 2/55 interface) |
+| **T/C2** | `../../T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS/C2-CIRCULAR_CRYOGENIC_CARRIERS/` | Hydrogen Cryogenic Fuel Systems (NFPA 2/55 interface) |
 | **Master BREX Authority** | `../../../ASIT/GOVERNANCE/master_brex_authority.yaml` | BREX decision rules |
 
 ---

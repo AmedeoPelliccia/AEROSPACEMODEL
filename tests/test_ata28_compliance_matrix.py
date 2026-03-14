@@ -17,7 +17,7 @@ TRADE_STUDIES = (
     REPO_ROOT
     / "OPT-IN_FRAMEWORK"
     / "T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS"
-    / "C2-CIRCULAR_CRYOGENIC_CELLS"
+    / "C2-CIRCULAR_CRYOGENIC_CARRIERS"
     / "ATA_28-FUEL"
     / "28-10-storage"
     / "28-10-00-fuel-storage-general"
@@ -247,7 +247,7 @@ class TestArtifactCatalogComplianceMatrix:
             REPO_ROOT
             / "OPT-IN_FRAMEWORK"
             / "T-TECHNOLOGIES_AMEDEOPELLICCIA-ON_BOARD_SYSTEMS"
-            / "C2-CIRCULAR_CRYOGENIC_CELLS"
+            / "C2-CIRCULAR_CRYOGENIC_CARRIERS"
             / "ATA_28-FUEL"
             / "INDEX"
             / "ARTIFACT_CATALOG.yaml"

@@ -65,7 +65,7 @@ class TestMetaGeneration:
             'revision': '0.1.0',
             'status': 'draft',
             'ata': '28-11-00',
-            'domain': 'C2-CIRCULAR_CRYOGENIC_CELLS',
+            'domain': 'C2-CIRCULAR_CRYOGENIC_CARRIERS',
             'tags': ['cryogenic', 'LH2']
         }
         
@@ -87,7 +87,7 @@ class TestMetaGeneration:
         assert meta['lc_phase'] == 'LC04_DESIGN_DEFINITION'
         assert meta['work_package'] == 'WP-28-03-01'
         assert meta['ata'] == '28-11-00'
-        assert meta['domain'] == 'C2-CIRCULAR_CRYOGENIC_CELLS'
+        assert meta['domain'] == 'C2-CIRCULAR_CRYOGENIC_CARRIERS'
         assert 'cryogenic' in meta['tags']
         assert 'LH2' in meta['tags']
         assert meta['integrity']['algorithm'] == 'sha256'

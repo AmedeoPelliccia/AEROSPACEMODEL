@@ -70,7 +70,7 @@ Located in `controls/`:
 - **LC10 (Industrial & Supply Chain):** Production line safety design, PPE procurement
 
 ### OPT-IN Domains
-- **T/C2-CIRCULAR_CRYOGENIC_CELLS:** Cryogenic handling safety (NFPA 2/55 interface)
+- **T/C2-CIRCULAR_CRYOGENIC_CARRIERS:** Cryogenic handling safety (NFPA 2/55 interface)
 - **T/P-PROPULSION:** Fuel cell electrical safety, thermal hazards
 - **M1/03_ENVIRONMENT_HAZMAT:** Hazardous material safety coordination
 

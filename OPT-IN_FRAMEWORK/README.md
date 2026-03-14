@@ -48,7 +48,7 @@ This is the largest domain and covers aircraft systems from airframe to propulsi
 - **L1-LOGICS**: Reserved for logical control systems  
 - **L2-LINKS**: Navigation systems  
 - **C1-COMMS**: Communications systems  
-- **C2-CIRCULAR_CRYOGENIC_CELLS**: Hydrogen cryogenic fuel systems (**Novel Technology**)  
+- **C2-CIRCULAR_CRYOGENIC_CARRIERS**: Hydrogen cryogenic fuel systems (**Novel Technology**)  
 - **I2-INTELLIGENCE**: AI/ML models and synthetic data (**Novel Technology**)  
 - **A2-AVIONICS**: Auto-flight and integrated modular avionics  
 - **O-OPERATING_SYSTEMS**: Multisystem integration  
@@ -76,7 +76,7 @@ AI governance, traceability systems, Digital Product Passport (DPP), and ledger 
 
 Three subdomains are designated as **Novel Technology** with full LC01–LC14 lifecycle activation.
 
-### C2-CIRCULAR_CRYOGENIC_CELLS (Hydrogen Cryogenic Fuel Systems)
+### C2-CIRCULAR_CRYOGENIC_CARRIERS (Hydrogen Cryogenic Fuel Systems)
 
 - **ATA Scope:** ATA 28 – Fuel  
 - **Special Conditions:** SC-28-H2-001, SC-28-CRYO-002  

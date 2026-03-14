@@ -1,14 +1,14 @@
 # =============================================================================
 # AMPEL360 Q100 — Program Configuration
 # =============================================================================
-# 100-seat hydrogen-electric aircraft with Circular Cryogenic Cells (C2).
+# 100-seat hydrogen-electric aircraft with Circular Cryogenic Carriers (C2).
 # Novel certification with hydrogen-specific Special Conditions.
 # =============================================================================
 
 program:
   name: "AMPEL360 Q100"
   model_code: "Q100"
-  description: "100-seat hydrogen-electric aircraft with Circular Cryogenic Cells"
+  description: "100-seat hydrogen-electric aircraft with Circular Cryogenic Carriers"
 
   organization:
     name: "AMPEL Aerospace"
@@ -30,7 +30,7 @@ program:
     fuel:
       type: "Liquid Hydrogen (LH2)"
       temperature_c: -253
-      tank_type: "Circular Cryogenic Cells (C2)"
+      tank_type: "Circular Cryogenic Carriers (C2)"
       tank_count: 4
       capacity_kg: 1200
 
@@ -78,7 +78,7 @@ certification:
     - "Exemption for non-kerosene fuel (CS 25.1309 equivalent)"
 
   novel_technology:
-    - domain: "C2_CIRCULAR_CRYOGENIC_CELLS"
+    - domain: "C2_CIRCULAR_CRYOGENIC_CARRIERS"
       description: "Circular cryogenic cells for LH2 storage"
       ata_chapter: "28"
     - domain: "P_PROPULSION"

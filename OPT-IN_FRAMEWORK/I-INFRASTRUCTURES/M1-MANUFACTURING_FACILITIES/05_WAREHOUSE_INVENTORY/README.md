@@ -63,7 +63,7 @@ Located in `controls/`:
 - **LC12 (Continued Airworthiness & MRO):** Spare parts inventory, traceability continuity
 
 ### OPT-IN Domains
-- **T/C2-CIRCULAR_CRYOGENIC_CELLS:** LH₂ tank material traceability
+- **T/C2-CIRCULAR_CRYOGENIC_CARRIERS:** LH₂ tank material traceability
 - **T/P-PROPULSION:** Fuel cell component traceability
 - **I/M2-MAINTENANCE_ENVIRONMENTS:** Spare parts coordination
 
