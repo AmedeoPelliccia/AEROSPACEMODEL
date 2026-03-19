@@ -17,8 +17,8 @@ hypersonic point-to-point transport as an equivalent mission class.
 ## Vehicle Description
 
 Reusable integrated airframe-propulsion orbital vehicle with cryogenic
-LH₂/LOX propellant architecture, metallic/CMC TPS, and horizontal runway
-take-off and landing.
+LH₂/LOX propellant architecture, metallic/Ceramic Matrix Composite (CMC)
+TPS, and horizontal runway take-off and landing.
 
 ### System Breakdown (ATA References)
 
@@ -50,7 +50,7 @@ take-off and landing.
 | Orbit             | ~200 km circular LEO                |
 | Reusability       | Full vehicle reuse, no discard      |
 | Turnaround        | ≤ 48 hours (aspiration)             |
-| Cost target       | < $10M/mission (stress-test)        |
+| Cost target       | < USD 10M/mission (stress-test)     |
 
 ## Configuration
 

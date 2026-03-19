@@ -73,7 +73,7 @@ The study shall generate evidence in nine areas:
 - **Payload:** 5–10 metric tons to ~200 km circular LEO
 - **Reusability:** Full vehicle reuse without primary hardware discard
 - **Turnaround aspiration:** ≤ 48 hours (subject to technical validation)
-- **Cost stress-test target:** < $10M per mission
+- **Cost stress-test target:** < USD 10M per mission
 - **Safety:** Decomposed by loss-of-mission, loss-of-vehicle, loss-of-crew, and public-risk
 
 ### 7. Primary Uncertainties
