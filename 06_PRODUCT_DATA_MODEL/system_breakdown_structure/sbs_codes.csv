@@ -6,7 +6,6 @@ SYS-120,Doors and Exits,2,SYS-100,A-AIRFRAME,Passenger cargo and service doors i
 SYS-130,Windows and Canopies,2,SYS-100,A-AIRFRAME,Flight deck cabin and inspection windows,56
 SYS-140,Flight Controls,2,SYS-100,A-AIRFRAME,Primary and secondary flight control surfaces and actuation interfaces,27
 SYS-150,Landing Gear,2,SYS-100,A-AIRFRAME,Landing gear extension retraction steering and braking interfaces,32
-
 SYS-200,Propulsion,1,SYS-000,P-PROPULSION,Propulsion system,71;72;73;74;75;76;77;78;79;80
 SYS-210,Powerplant Core,2,SYS-200,P-PROPULSION,Engine or prime mover core assemblies,72
 SYS-220,Propulsion Control,2,SYS-200,P-PROPULSION,Engine control and monitoring functions,73
@@ -14,7 +13,6 @@ SYS-230,Thrust Generation,2,SYS-200,P-PROPULSION,Fan propeller rotor or distribu
 SYS-240,Exhaust and Reverser,2,SYS-200,P-PROPULSION,Exhaust flow and thrust reverser systems,78
 SYS-250,Lubrication,2,SYS-200,P-PROPULSION,Lubrication storage distribution and monitoring,79
 SYS-260,Starting,2,SYS-200,P-PROPULSION,Engine or power unit starting provisions,80
-
 SYS-300,Electrical,1,SYS-000,E-ELECTRICAL,Electrical system,24
 SYS-310,Power Generation,2,SYS-300,E-ELECTRICAL,Electrical generation sources and interfaces,24
 SYS-320,Power Distribution,2,SYS-300,E-ELECTRICAL,Primary and secondary electrical distribution architecture,24
@@ -23,39 +21,33 @@ SYS-340,Energy Storage,2,SYS-300,E-ELECTRICAL,Batteries and electrical energy st
 SYS-350,Fuel and Energy Storage,2,SYS-300,E-ELECTRICAL,Conventional fuel or alternative energy storage and supply interfaces,24;28
 SYS-360,Hydraulic Power,2,SYS-300,E-ELECTRICAL,Hydraulic generation storage distribution and actuation energy,29
 SYS-370,Lighting,2,SYS-300,E-ELECTRICAL,Internal and external aircraft lighting systems,33
-
-SYS-400,Avionics,1,SYS-000,A-AVIONICS,Avionics systems,22;23;31;34;42;45;46
-SYS-410,Communications,2,SYS-400,A-AVIONICS,Air-ground and internal communication systems,23
-SYS-420,Indicating and Recording,2,SYS-400,A-AVIONICS,Cockpit displays recorders and central warning interfaces,31
-SYS-430,Navigation,2,SYS-400,A-AVIONICS,Positioning navigation and guidance sensors and processors,34
-SYS-440,Autoflight,2,SYS-400,A-AVIONICS,Automatic flight guidance and control,22
-SYS-450,Integrated Modular Avionics,2,SYS-400,A-AVIONICS,Shared computing platforms and hosted avionics functions,42
-SYS-460,Central Maintenance,2,SYS-400,A-AVIONICS,Built-in test maintenance messaging and fault isolation,45
-SYS-470,Information Systems,2,SYS-400,A-AVIONICS,Networked information and mission support systems,46
-
+SYS-400,Avionics,1,SYS-000,V-AVIONICS,Avionics systems,22;23;31;34;42;45;46
+SYS-410,Communications,2,SYS-400,V-AVIONICS,Air-ground and internal communication systems,23
+SYS-420,Indicating and Recording,2,SYS-400,V-AVIONICS,Cockpit displays recorders and central warning interfaces,31
+SYS-430,Navigation,2,SYS-400,V-AVIONICS,Positioning navigation and guidance sensors and processors,34
+SYS-440,Autoflight,2,SYS-400,V-AVIONICS,Automatic flight guidance and control,22
+SYS-450,Integrated Modular Avionics,2,SYS-400,V-AVIONICS,Shared computing platforms and hosted avionics functions,42
+SYS-460,Central Maintenance,2,SYS-400,V-AVIONICS,Built-in test maintenance messaging and fault isolation,45
+SYS-470,Information Systems,2,SYS-400,V-AVIONICS,Networked information and mission support systems,46
 SYS-500,Software,1,SYS-000,S-SOFTWARE,Embedded and ground software,
 SYS-510,Airborne Operational Software,2,SYS-500,S-SOFTWARE,Embedded airborne software performing operational functions,
 SYS-520,Airborne Safety-Critical Software,2,SYS-500,S-SOFTWARE,Software performing safety-critical airborne functions,
 SYS-530,Ground Support Software,2,SYS-500,S-SOFTWARE,Ground-based engineering maintenance and operational support software,
 SYS-540,Data and Cybersecurity Services,2,SYS-500,S-SOFTWARE,Security integrity access control and protected data services,
-
-SYS-600,Environmental and Crew Systems,1,SYS-000,ENV-ENVIRONMENTAL,Cabin and crew environmental support systems,21;25;30;35;36;38
-SYS-610,Air Conditioning and Pressurization,2,SYS-600,ENV-ENVIRONMENTAL,Thermal conditioning ventilation and pressurization,21
-SYS-620,Equipment and Furnishings,2,SYS-600,ENV-ENVIRONMENTAL,Cabin and flight deck equipment furnishings and stowage,25
-SYS-630,Ice and Rain Protection,2,SYS-600,ENV-ENVIRONMENTAL,Ice detection anti-ice and de-ice functions,30
-SYS-640,Oxygen,2,SYS-600,ENV-ENVIRONMENTAL,Crew and passenger oxygen storage and delivery,35
-SYS-650,Pneumatic,2,SYS-600,ENV-ENVIRONMENTAL,Pneumatic supply distribution and control,36
-SYS-660,Water and Waste,2,SYS-600,ENV-ENVIRONMENTAL,Potable water and waste management systems,38
-
+SYS-600,Environmental and Crew Systems,1,SYS-000,G-ENVIRONMENTAL,Cabin and crew environmental support systems,21;25;30;35;36;38
+SYS-610,Air Conditioning and Pressurization,2,SYS-600,G-ENVIRONMENTAL,Thermal conditioning ventilation and pressurization,21
+SYS-620,Equipment and Furnishings,2,SYS-600,G-ENVIRONMENTAL,Cabin and flight deck equipment furnishings and stowage,25
+SYS-630,Ice and Rain Protection,2,SYS-600,G-ENVIRONMENTAL,Ice detection anti-ice and de-ice functions,30
+SYS-640,Oxygen,2,SYS-600,G-ENVIRONMENTAL,Crew and passenger oxygen storage and delivery,35
+SYS-650,Pneumatic,2,SYS-600,G-ENVIRONMENTAL,Pneumatic supply distribution and control,36
+SYS-660,Water and Waste,2,SYS-600,G-ENVIRONMENTAL,Potable water and waste management systems,38
 SYS-700,Safety and Protection,1,SYS-000,Q-SAFETY,Protective and emergency systems,26
 SYS-710,Fire Protection,2,SYS-700,Q-SAFETY,Detection isolation extinguishing and crew alerting for fire events,26
 SYS-720,Emergency and Crashworthiness,2,SYS-700,Q-SAFETY,Emergency evacuation occupant protection and crash-related provisions,
-
 SYS-800,Maintenance and Supportability,1,SYS-000,M-MAINTAINABILITY,Maintenance-enabling and supportability functions,12;45
 SYS-810,Servicing,2,SYS-800,M-MAINTAINABILITY,Routine servicing replenishment and access functions,12
 SYS-820,Built-In Test and Diagnostics,2,SYS-800,M-MAINTAINABILITY,Embedded testability and fault isolation capability,45
 SYS-830,Ground Support Interfaces,2,SYS-800,M-MAINTAINABILITY,Interfaces for support equipment loading charging and maintenance,
-
 SYS-900,Human System Integration,1,SYS-000,H-HUMAN_FACTORS,Crew passenger and maintainer interaction aspects,25;31;44;45
 SYS-910,Flight Deck HMI,2,SYS-900,H-HUMAN_FACTORS,Human-machine interfaces for pilots and flight crew,31
 SYS-920,Maintainer Interfaces,2,SYS-900,H-HUMAN_FACTORS,Interfaces supporting troubleshooting servicing and maintenance execution,45
