@@ -1,0 +1,5 @@
+knot_id,title,lifecycle_phase,obligation_source,status,owner,created_date,description,clause_refs,knu_refs,compliance_status,notes
+KNOT-HAPSSE-LC01-0001,Operational Need Definition,LC01,Mission Concept,IN_PROGRESS,ASIT,2026-03-19,Define the persistent stratospheric connectivity and sensing operational need that HAPS-SE addresses,,KNU-HAPSSE-LC01-0001,IN_PROGRESS,
+KNOT-HAPSSE-LC01-0002,Mission Context Definition,LC01,Mission Concept,IN_PROGRESS,ASIT,2026-03-19,Establish the mission context including target altitude band 18–22 km station-keeping and endurance requirements,,KNU-HAPSSE-LC01-0002,IN_PROGRESS,
+KNOT-HAPSSE-LC01-0003,Stakeholder Needs Capture,LC01,ARP4754A,IN_PROGRESS,ASIT,2026-03-19,Capture stakeholder needs for communications EO and ISR payload capability endurance station-keeping and regulatory compliance,,KNU-HAPSSE-LC01-0003;KNU-HAPSSE-LC01-0004,IN_PROGRESS,
+KNOT-HAPSSE-LC01-0004,Constraint Identification,LC01,Regulatory,IN_PROGRESS,ASIT,2026-03-19,Identify top-level constraints including ICAO airspace gap ITU spectrum and solar energy availability,,KNU-HAPSSE-LC01-0005,IN_PROGRESS,
