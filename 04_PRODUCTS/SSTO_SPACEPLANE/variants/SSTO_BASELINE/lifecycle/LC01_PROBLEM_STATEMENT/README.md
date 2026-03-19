@@ -446,7 +446,7 @@ The following uncertainties govern a **reusable integrated airframe-propulsion S
 | **GU-03** | Forebody-inlet-engine operability |
 | **GU-04** | Mode-transition controllability |
 | **GU-05** | Dry-mass fraction and volume closure |
-| **GU-06** | LH2/LOX cryogenic integration and CG management |
+| **GU-06** | Cryogenic integration |
 | **GU-07** | TPS and active cooling reuse closure |
 | **GU-08** | Thermal-structural life under cyclic loading |
 | **GU-09** | GN&C robustness across all regimes |
