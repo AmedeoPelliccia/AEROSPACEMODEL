@@ -1,0 +1,2 @@
+knot_id,title,lifecycle_phase,obligation_source,status,owner,created_date,description,clause_refs,knu_refs,compliance_status,notes
+KNOT-PROD-LC01-0001,<KNOT title>,LC01,<obligation source>,DRAFT,<owner>,<YYYY-MM-DD>,<description>,<clause refs>,<knu refs>,NOT_STARTED,

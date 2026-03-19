@@ -1,0 +1,48 @@
+# Lifecycle Alias Schema — AEROSPACEMODEL
+# Path: 00_META/schemas/lc_alias.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+lc_aliases:
+  LC01:
+    canonical: Problem Statement
+    aliases: [PS, ProbStmt, LC1]
+  LC02:
+    canonical: Requirements
+    aliases: [REQ, Reqs, LC2]
+  LC03:
+    canonical: Architecture
+    aliases: [ARCH, Arch, LC3]
+  LC04:
+    canonical: Design Definition
+    aliases: [DD, Design, LC4]
+  LC05:
+    canonical: Analysis and Simulation
+    aliases: [ANALSIM, Analysis, LC5]
+  LC06:
+    canonical: Verification and Validation
+    aliases: [VV, V&V, LC6]
+  LC07:
+    canonical: Quality and Assurance
+    aliases: [QA, Quality, LC7]
+  LC08:
+    canonical: Industrialization and Production
+    aliases: [PROD, Industrialization, LC8]
+  LC09:
+    canonical: Certification and Compliance
+    aliases: [CERT, Certification, LC9]
+  LC10:
+    canonical: Entry Into Service
+    aliases: [EIS, EntryService, LC10]
+  LC11:
+    canonical: Operations
+    aliases: [OPS, Ops, LC11]
+  LC12:
+    canonical: Maintenance and Continued Airworthiness
+    aliases: [MCA, Maintenance, LC12]
+  LC13:
+    canonical: Modifications and Retrofit
+    aliases: [MOD, Modification, LC13]
+  LC14:
+    canonical: Retirement and End of Life
+    aliases: [EOL, Retirement, LC14]

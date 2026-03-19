@@ -1,0 +1,39 @@
+# Artefact Classes — AEROSPACEMODEL
+# Path: 00_META/taxonomies/artefact_classes.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+artefact_classes:
+  - id: REQ
+    name: Requirement
+    description: A stated need, expectation, or constraint
+  - id: SPEC
+    name: Specification
+    description: Technical specification document
+  - id: PLAN
+    name: Plan
+    description: Planning document
+  - id: PROC
+    name: Procedure
+    description: Operational or technical procedure
+  - id: RPT
+    name: Report
+    description: Analysis, test, or audit report
+  - id: DRAW
+    name: Drawing
+    description: Engineering drawing
+  - id: MODEL
+    name: Model
+    description: Digital model (CAD, simulation, etc.)
+  - id: RECORD
+    name: Record
+    description: Objective evidence record
+  - id: CERT
+    name: Certificate
+    description: Certification or compliance certificate
+  - id: MAP
+    name: Mapping
+    description: Traceability or compliance mapping
+  - id: REG
+    name: Register
+    description: Controlled register or list

@@ -1,0 +1,24 @@
+# Requirement Classes — AEROSPACEMODEL
+# Path: 06_PRODUCT_DATA_MODEL/requirements_model/requirement_classes.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+requirement_classes:
+  - class: MISSION
+    description: Mission-level requirements defining operational goals
+  - class: SYSTEM
+    description: System-level requirements
+  - class: FUNCTIONAL
+    description: Functional requirements specifying what the system shall do
+  - class: PERFORMANCE
+    description: Performance requirements specifying measurable performance
+  - class: INTERFACE
+    description: Interface requirements between system elements
+  - class: SAFETY
+    description: Safety requirements derived from safety assessment
+  - class: CERTIFICATION
+    description: Requirements derived from certification basis
+  - class: MAINTAINABILITY
+    description: Requirements for maintenance and supportability
+  - class: ENVIRONMENTAL
+    description: Environmental qualification requirements

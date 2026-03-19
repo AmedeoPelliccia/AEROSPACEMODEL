@@ -1,0 +1,15 @@
+# Audit Record Template
+# Path: 00_META/templates/audit_record.template.yaml
+
+audit_id: AUD-<PRODUCT>-<SEQ>
+audit_type: INTERNAL
+scope: <scope description>
+lead_auditor: <name>
+date: <YYYY-MM-DD>
+status: DRAFT
+findings: []
+nonconformances: []
+observations: []
+corrective_actions: []
+signoff_date: null
+signoff_authority: null

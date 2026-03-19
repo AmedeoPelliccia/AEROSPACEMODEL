@@ -1,0 +1,34 @@
+# KNU Schema — AEROSPACEMODEL
+# Path: 00_META/schemas/knu_schema.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+knu_record:
+  required_fields:
+    - knu_id        # Format: KNU-<PRODUCT>-<PHASE>-<SEQ>
+    - title
+    - lifecycle_phase
+    - knot_ref       # Parent KNOT ID
+    - knu_class
+    - status
+    - owner
+    - created_date
+  optional_fields:
+    - description
+    - evidence_refs  # semicolon-delimited list of OIDs
+    - compliance_status
+    - start_date
+    - end_date
+    - notes
+
+knu_classes:
+  - ARTEFACT
+  - WORK_ITEM
+  - RECORD
+  - ANALYSIS_PACKAGE
+  - VALIDATION_OBJECT
+  - PROCEDURE
+  - REPORT
+  - OTHER
+
+knu_id_format: "KNU-{PRODUCT}-{LC_CODE}-{SEQ:04d}"

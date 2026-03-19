@@ -1,0 +1,40 @@
+# CI Pipeline — AEROSPACEMODEL
+# Path: 08_AUTOMATION/ci/pipeline.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+name: AEROSPACEMODEL CI Pipeline
+
+triggers:
+  - push
+  - pull_request
+
+stages:
+  - name: validate_structure
+    script: python3 02_LIFECYCLE_OS/validators/validate_structure.py
+    on_failure: FAIL
+
+  - name: validate_knots
+    script: python3 02_LIFECYCLE_OS/validators/validate_knots.py
+    on_failure: FAIL
+    depends_on: [validate_structure]
+
+  - name: validate_knus
+    script: python3 02_LIFECYCLE_OS/validators/validate_knus.py
+    on_failure: FAIL
+    depends_on: [validate_structure]
+
+  - name: validate_mappings
+    script: python3 02_LIFECYCLE_OS/validators/validate_mappings.py
+    on_failure: FAIL
+    depends_on: [validate_knots, validate_knus]
+
+  - name: validate_evidence
+    script: python3 02_LIFECYCLE_OS/validators/validate_evidence.py
+    on_failure: WARN
+    depends_on: [validate_knus]
+
+  - name: validate_audit_records
+    script: python3 02_LIFECYCLE_OS/validators/validate_audit_records.py
+    on_failure: WARN
+    depends_on: [validate_structure]

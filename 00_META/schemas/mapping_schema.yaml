@@ -1,0 +1,30 @@
+# Mapping Schema — AEROSPACEMODEL
+# Path: 00_META/schemas/mapping_schema.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+clause_to_knu_mapping:
+  required_fields:
+    - mapping_id
+    - standard
+    - clause_id
+    - clause_title
+    - lifecycle_phase
+    - compliance_status
+  optional_fields:
+    - knot_ref
+    - knu_ref
+    - notes
+    - exemption_ref
+
+lc_phase_mapping:
+  required_fields:
+    - mapping_id
+    - standard
+    - clause_id
+    - lifecycle_phase
+    - applicability
+  optional_fields:
+    - notes
+
+multi_value_delimiter: ";"

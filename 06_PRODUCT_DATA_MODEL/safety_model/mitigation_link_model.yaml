@@ -1,0 +1,23 @@
+# Mitigation Link Model — AEROSPACEMODEL
+# Path: 06_PRODUCT_DATA_MODEL/safety_model/mitigation_link_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+mitigation_link:
+  required_fields:
+    - link_id
+    - hazard_ref
+    - mitigation_type
+    - mitigation_ref
+    - effectiveness
+  optional_fields:
+    - verification_evidence
+    - notes
+
+mitigation_types:
+  - DESIGN_FEATURE
+  - REDUNDANCY
+  - MONITORING
+  - PROCEDURE
+  - MAINTENANCE_TASK
+  - LIMITATION

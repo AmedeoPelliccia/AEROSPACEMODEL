@@ -1,0 +1,16 @@
+# Release Gates — AEROSPACEMODEL
+# Path: 08_AUTOMATION/ci/release_gates.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+release_gates:
+  minor_release:
+    required_checks: [validate_structure, validate_knots, validate_knus, validate_mappings]
+    required_approvals: 1
+    required_roles: [ASIT]
+
+  major_release:
+    required_checks: [validate_structure, validate_knots, validate_knus, validate_mappings, validate_evidence, validate_audit_records]
+    required_approvals: 2
+    required_roles: [ASIT, QA Authority]
+    compliance_dashboard_required: true

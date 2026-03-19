@@ -1,0 +1,6 @@
+metric_id,metric_name,description,unit,target,frequency,owner
+QM-001,KNOT Compliance Rate,Percentage of KNOTs at COMPLIANT status,percent,100,Monthly,QA Authority
+QM-002,Evidence Register Completeness,Percentage of KNUs with registered evidence,percent,100,Monthly,QA Authority
+QM-003,NCR Open Count,Number of open NCRs,count,0,Weekly,QA Authority
+QM-004,Audit Finding Closure Rate,Percentage of findings closed on time,percent,95,Monthly,QA Authority
+QM-005,CI Pipeline Pass Rate,Percentage of CI runs that pass,percent,100,Daily,ASIT

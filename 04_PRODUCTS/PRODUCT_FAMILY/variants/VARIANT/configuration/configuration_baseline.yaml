@@ -1,0 +1,11 @@
+# Configuration Baseline — VARIANT
+# Path: 04_PRODUCTS/PRODUCT_FAMILY/variants/VARIANT/configuration/configuration_baseline.yaml
+# Status: DRAFT
+
+variant: VARIANT
+product_family: PRODUCT_FAMILY
+baseline_type: AS_DESIGNED
+declared_date: null
+declared_by: null
+status: DRAFT
+configuration_items: []

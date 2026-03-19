@@ -1,0 +1,18 @@
+# Issue Severity Model — AEROSPACEMODEL
+# Path: 02_LIFECYCLE_OS/core_models/issue_severity_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+severity_levels:
+  - level: CRITICAL
+    description: Safety-critical issue; immediate action required
+    response_time: 24 hours
+  - level: MAJOR
+    description: Significant compliance or quality issue
+    response_time: 5 working days
+  - level: MINOR
+    description: Minor nonconformance or process deviation
+    response_time: 30 calendar days
+  - level: OBSERVATION
+    description: Opportunity for improvement
+    response_time: As planned

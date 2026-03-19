@@ -1,0 +1,22 @@
+# Trace Link Types — AEROSPACEMODEL
+# Path: 03_SHARED_SERVICES/traceability/trace_link_types.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+link_types:
+  - type: DERIVES
+    description: Object B is derived from Object A
+  - type: SATISFIES
+    description: Object B satisfies the obligation of Object A
+  - type: VERIFIES
+    description: Object B verifies Object A
+  - type: VALIDATES
+    description: Object B validates Object A
+  - type: IMPLEMENTS
+    description: Object B implements Object A
+  - type: ALLOCATES_TO
+    description: Requirement A is allocated to element B
+  - type: REFINES
+    description: Object B is a refinement of Object A
+  - type: SUPERSEDES
+    description: Object B supersedes Object A

@@ -1,0 +1,16 @@
+# Effectivity Model — AEROSPACEMODEL
+# Path: 06_PRODUCT_DATA_MODEL/configuration_management/effectivity_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+effectivity_types:
+  - type: SERIAL_NUMBER
+    description: Applies to specific aircraft serial numbers
+  - type: MANUFACTURING_BLOCK
+    description: Applies to a production block range
+  - type: DATE_BASED
+    description: Applies from a specific date
+  - type: MODIFICATION_STATUS
+    description: Applies based on modification incorporation status
+  - type: UNIVERSAL
+    description: Applies to all aircraft of this type

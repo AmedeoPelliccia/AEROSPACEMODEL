@@ -1,0 +1,10 @@
+# Allocation Rules — AEROSPACEMODEL
+# Path: 06_PRODUCT_DATA_MODEL/requirements_model/allocation_rules.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+allocation_rules:
+  - rule: Every system requirement must be allocated to at least one domain element
+  - rule: Safety requirements must be allocated with traceability to the safety assessment source
+  - rule: Allocated requirements must be verified at the element level
+  - rule: Unallocated requirements are nonconformances

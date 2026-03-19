@@ -1,0 +1,34 @@
+# Dependency Rules — AEROSPACEMODEL
+# Path: 02_LIFECYCLE_OS/schedulers/dependency_rules.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+phases:
+  - id: LC01
+    depends_on: []
+  - id: LC02
+    depends_on: [LC01]
+  - id: LC03
+    depends_on: [LC02]
+  - id: LC04
+    depends_on: [LC03]
+  - id: LC05
+    depends_on: [LC04]
+  - id: LC06
+    depends_on: [LC04, LC05]
+  - id: LC07
+    depends_on: [LC06]
+  - id: LC08
+    depends_on: [LC07]
+  - id: LC09
+    depends_on: [LC06, LC07, LC08]
+  - id: LC10
+    depends_on: [LC09]
+  - id: LC11
+    depends_on: [LC10]
+  - id: LC12
+    depends_on: [LC11]
+  - id: LC13
+    depends_on: [LC11]
+  - id: LC14
+    depends_on: [LC12]

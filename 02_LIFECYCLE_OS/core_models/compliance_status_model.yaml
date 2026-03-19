@@ -1,0 +1,17 @@
+# Compliance Status Model — AEROSPACEMODEL
+# Path: 02_LIFECYCLE_OS/core_models/compliance_status_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+propagation_rules:
+  knu_to_knot:
+    description: A KNOT is COMPLIANT when all linked KNUs are COMPLIANT
+    partial_rule: If any KNU is PARTIAL, KNOT is PARTIAL
+    non_compliant_rule: If any KNU is NON_COMPLIANT, KNOT is NON_COMPLIANT
+
+  knot_to_phase:
+    description: A phase is COMPLIANT when all governing KNOTs are COMPLIANT or EXEMPT
+    partial_rule: If any KNOT is PARTIAL, phase is PARTIAL
+
+  phase_to_product:
+    description: A product compliance status is the lowest status across all active phases

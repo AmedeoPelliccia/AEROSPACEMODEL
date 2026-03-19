@@ -1,0 +1,14 @@
+object_type,action,approving_authority,secondary_authority,notes
+Governance Document,CREATE,ASIT,,
+Governance Document,MODIFY,ASIT,,
+Governance Document,OBSOLETE,ASIT,,
+Baseline,DECLARE,ASIT,QA Authority,
+Baseline,MODIFY,ASIT,,Requires CR
+KNOT,CREATE,Product Owner,ASIT,
+KNOT,MODIFY,Product Owner,ASIT,Requires CR if baselined
+KNU,CREATE,Product Owner,,
+KNU,MODIFY,Product Owner,,Requires CR if baselined
+Evidence,ACCEPT,QA Authority,,
+Audit,CLOSE,Audit Authority,,
+Deviation,APPROVE,ASIT,QA Authority,
+Waiver,APPROVE,ASIT,Certification Authority,

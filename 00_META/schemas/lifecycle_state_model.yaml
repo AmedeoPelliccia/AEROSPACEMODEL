@@ -1,0 +1,29 @@
+# Lifecycle State Model Schema — AEROSPACEMODEL
+# Path: 00_META/schemas/lifecycle_state_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+states:
+  - id: DRAFT
+    description: Object created, not yet submitted for review
+    transitions_to: [REVIEW, OBSOLETE]
+  - id: REVIEW
+    description: Under formal review
+    transitions_to: [APPROVED, DRAFT, OBSOLETE]
+  - id: APPROVED
+    description: Formally approved by authority
+    transitions_to: [BASELINED, SUPERSEDED, OBSOLETE]
+  - id: BASELINED
+    description: Part of a formal baseline
+    transitions_to: [SUPERSEDED, OBSOLETE]
+  - id: SUPERSEDED
+    description: Replaced by a newer version
+    transitions_to: [OBSOLETE]
+  - id: OBSOLETE
+    description: No longer applicable
+    transitions_to: []
+
+terminal_states:
+  - OBSOLETE
+
+initial_state: DRAFT

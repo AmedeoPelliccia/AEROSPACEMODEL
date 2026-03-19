@@ -1,0 +1,31 @@
+# Service Bulletin Model — AEROSPACEMODEL
+# Path: 06_PRODUCT_DATA_MODEL/maintenance_model/service_bulletin_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+service_bulletin:
+  required_fields:
+    - sb_id
+    - title
+    - category
+    - effectivity
+    - compliance_category
+    - reason
+    - description
+    - status
+  optional_fields:
+    - ad_ref
+    - man_hours
+    - parts_required
+    - release_date
+    - revision
+
+sb_categories:
+  - MANDATORY
+  - ALERT
+  - RECOMMENDED
+  - OPTIONAL
+
+compliance_categories:
+  - MANDATORY
+  - OPTIONAL

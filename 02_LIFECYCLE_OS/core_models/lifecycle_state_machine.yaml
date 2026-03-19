@@ -1,0 +1,62 @@
+# Lifecycle State Machine — AEROSPACEMODEL
+# Path: 02_LIFECYCLE_OS/core_models/lifecycle_state_machine.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+phases:
+  - id: LC01
+    name: Problem Statement
+    next: [LC02]
+    previous: []
+  - id: LC02
+    name: Requirements
+    next: [LC03]
+    previous: [LC01]
+  - id: LC03
+    name: Architecture
+    next: [LC04]
+    previous: [LC02]
+  - id: LC04
+    name: Design Definition
+    next: [LC05, LC06]
+    previous: [LC03]
+  - id: LC05
+    name: Analysis and Simulation
+    next: [LC06]
+    previous: [LC04]
+  - id: LC06
+    name: Verification and Validation
+    next: [LC07, LC09]
+    previous: [LC04, LC05]
+  - id: LC07
+    name: Quality and Assurance
+    next: [LC08, LC09]
+    previous: [LC06]
+  - id: LC08
+    name: Industrialization and Production
+    next: [LC09, LC10]
+    previous: [LC07]
+  - id: LC09
+    name: Certification and Compliance
+    next: [LC10]
+    previous: [LC06, LC07, LC08]
+  - id: LC10
+    name: Entry Into Service
+    next: [LC11]
+    previous: [LC09]
+  - id: LC11
+    name: Operations
+    next: [LC12, LC13]
+    previous: [LC10]
+  - id: LC12
+    name: Maintenance and Continued Airworthiness
+    next: [LC13, LC14]
+    previous: [LC11]
+  - id: LC13
+    name: Modifications and Retrofit
+    next: [LC11, LC12]
+    previous: [LC11, LC12]
+  - id: LC14
+    name: Retirement and End of Life
+    next: []
+    previous: [LC12]

@@ -1,0 +1,17 @@
+# Uncertainty Model — AEROSPACEMODEL
+# Path: 03_SHARED_SERVICES/risk/uncertainty_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+uncertainty_types:
+  - type: EPISTEMIC
+    description: Uncertainty due to lack of knowledge; reducible with more data
+  - type: ALEATORY
+    description: Inherent randomness; irreducible
+  - type: MODEL
+    description: Uncertainty in the model used for analysis
+
+management_approach:
+  EPISTEMIC: Increase testing and analysis coverage
+  ALEATORY: Probabilistic safety assessment
+  MODEL: Model validation and sensitivity analysis

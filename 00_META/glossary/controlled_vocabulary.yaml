@@ -1,0 +1,101 @@
+# Controlled Vocabulary — AEROSPACEMODEL
+# Path: 00_META/glossary/controlled_vocabulary.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+lifecycle_phases:
+  - code: LC01
+    name: Problem Statement
+  - code: LC02
+    name: Requirements
+  - code: LC03
+    name: Architecture
+  - code: LC04
+    name: Design Definition
+  - code: LC05
+    name: Analysis and Simulation
+  - code: LC06
+    name: Verification and Validation
+  - code: LC07
+    name: Quality and Assurance
+  - code: LC08
+    name: Industrialization and Production
+  - code: LC09
+    name: Certification and Compliance
+  - code: LC10
+    name: Entry Into Service
+  - code: LC11
+    name: Operations
+  - code: LC12
+    name: Maintenance and Continued Airworthiness
+  - code: LC13
+    name: Modifications and Retrofit
+  - code: LC14
+    name: Retirement and End of Life
+
+status_codes:
+  - code: ACTIVE
+    meaning: Currently in use and governed
+  - code: DRAFT
+    meaning: Under development, not yet baselined
+  - code: REVIEW
+    meaning: Under formal review
+  - code: APPROVED
+    meaning: Formally approved
+  - code: BASELINED
+    meaning: Formally baselined
+  - code: SUPERSEDED
+    meaning: Replaced by a newer version
+  - code: OBSOLETE
+    meaning: No longer applicable
+  - code: EXEMPT
+    meaning: Explicitly exempted from a mapping requirement
+
+compliance_status_codes:
+  - code: NOT_STARTED
+    meaning: Work not yet initiated
+  - code: IN_PROGRESS
+    meaning: Work in progress
+  - code: PENDING_REVIEW
+    meaning: Complete, awaiting review
+  - code: COMPLIANT
+    meaning: Fully compliant with obligation
+  - code: PARTIAL
+    meaning: Partially compliant
+  - code: NON_COMPLIANT
+    meaning: Does not meet obligation
+  - code: EXEMPT
+    meaning: Explicitly exempted with authority
+
+baseline_types:
+  - AS_DESIGNED
+  - AS_VERIFIED
+  - AS_BUILT
+  - AS_CERTIFIED
+  - AS_OPERATED
+
+domain_codes:
+  - code: A-AIRFRAME
+    name: Airframe
+  - code: P-PROPULSION
+    name: Propulsion
+  - code: E-ELECTRICAL
+    name: Electrical
+  - code: S-SOFTWARE
+    name: Software
+  - code: A-AVIONICS
+    name: Avionics
+  - code: H-HUMAN_FACTORS
+    name: Human Factors
+  - code: M-MAINTAINABILITY
+    name: Maintainability
+  - code: C-CERTIFICATION
+    name: Certification
+  - code: Q-QUALITY
+    name: Quality
+  - code: L-LOGISTICS
+    name: Logistics
+  - code: O-OPERATIONS
+    name: Operations
+  - code: I-INFRASTRUCTURES
+    name: Infrastructures

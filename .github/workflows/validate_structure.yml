@@ -1,0 +1,31 @@
+name: Validate Structure
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+permissions:
+  contents: read
+
+jobs:
+  validate_structure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate repository structure
+        run: python3 02_LIFECYCLE_OS/validators/validate_structure.py
+
+      - name: Validate KNOTs
+        run: python3 02_LIFECYCLE_OS/validators/validate_knots.py
+
+      - name: Validate KNUs
+        run: python3 02_LIFECYCLE_OS/validators/validate_knus.py

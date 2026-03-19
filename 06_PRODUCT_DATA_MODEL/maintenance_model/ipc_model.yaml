@@ -1,0 +1,17 @@
+# IPC Model — AEROSPACEMODEL
+# Path: 06_PRODUCT_DATA_MODEL/maintenance_model/ipc_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+ipc_item:
+  required_fields:
+    - fig_item
+    - part_number
+    - description
+    - quantity_per_assembly
+    - effectivity
+  optional_fields:
+    - supersedure
+    - vendor_code
+    - interchangeable_parts
+    - notes

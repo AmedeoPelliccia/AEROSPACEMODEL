@@ -1,0 +1,28 @@
+# Nonconformity Model — AEROSPACEMODEL
+# Path: 03_SHARED_SERVICES/audit/nonconformity_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+nonconformity_record:
+  required_fields:
+    - ncr_id
+    - title
+    - description
+    - severity
+    - source_audit
+    - raised_date
+    - raised_by
+    - owner
+    - status
+  optional_fields:
+    - root_cause
+    - corrective_action_ref
+    - closure_date
+    - closure_authority
+
+ncr_statuses:
+  - OPEN
+  - IN_PROGRESS
+  - PENDING_VERIFICATION
+  - CLOSED
+  - REJECTED

@@ -1,0 +1,9 @@
+knu_class,description,typical_artefacts,applicable_phases
+ARTEFACT,A produced document or deliverable,Specification; Report; Drawing; Model,LC01;LC02;LC03;LC04;LC05;LC06;LC07;LC08;LC09;LC10;LC11;LC12;LC13;LC14
+WORK_ITEM,An executable task or action,Task; Review; Meeting; Decision,LC01;LC02;LC03;LC04;LC05;LC06;LC07;LC08;LC09;LC10;LC11;LC12;LC13;LC14
+RECORD,An objective evidence record,Test Record; Audit Record; Inspection Log,LC05;LC06;LC07;LC08;LC09;LC10;LC11;LC12
+ANALYSIS_PACKAGE,A structured analysis set,Safety Analysis; Trade Study; Simulation Package,LC03;LC04;LC05;LC06;LC09
+VALIDATION_OBJECT,An object used for validation,Test Bench; Prototype; Simulation Model,LC05;LC06
+PROCEDURE,An operational or technical procedure,Test Procedure; Maintenance Procedure; Inspection Procedure,LC05;LC06;LC07;LC08;LC11;LC12
+REPORT,A formal report document,Test Report; Audit Report; Analysis Report,LC05;LC06;LC07;LC09
+OTHER,Other type not covered above,Various,LC01;LC02;LC03;LC04;LC05;LC06;LC07;LC08;LC09;LC10;LC11;LC12;LC13;LC14

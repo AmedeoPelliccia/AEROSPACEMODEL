@@ -1,0 +1,2 @@
+risk_id,title,description,probability,impact,risk_level,owner,status,mitigation,contingency,review_date,closure_date
+RISK-TEMPLATE-0001,Template Risk Entry,Template entry,1,1,LOW,ASIT,OPEN,,,, 

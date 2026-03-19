@@ -1,0 +1,38 @@
+# Standard Taxonomy — AEROSPACEMODEL
+# Path: 00_META/taxonomies/standard_taxonomy.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+standards:
+  quality_management:
+    - id: AS9100
+      name: AS9100 Rev D
+      domain: Quality Management
+    - id: EN9100
+      name: EN9100:2018
+      domain: Quality Management
+  software:
+    - id: DO178C
+      name: DO-178C
+      domain: Airborne Software
+    - id: DO330
+      name: DO-330
+      domain: Software Tool Qualification
+  hardware:
+    - id: DO254
+      name: DO-254
+      domain: Airborne Electronic Hardware
+  systems:
+    - id: ARP4754A
+      name: ARP4754A
+      domain: System Development
+    - id: ARP4761A
+      name: ARP4761A
+      domain: Safety Assessment
+  technical_publications:
+    - id: S1000D
+      name: S1000D Issue 5.0
+      domain: Technical Publications
+    - id: ATA_iSpec2200
+      name: ATA iSpec 2200
+      domain: Technical Publications

@@ -1,0 +1,34 @@
+# Audit Schema — AEROSPACEMODEL
+# Path: 00_META/schemas/audit_schema.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+audit_record:
+  required_fields:
+    - audit_id
+    - audit_type
+    - scope
+    - lead_auditor
+    - date
+    - status
+  optional_fields:
+    - findings
+    - nonconformances
+    - observations
+    - corrective_actions
+    - signoff_date
+    - signoff_authority
+
+audit_types:
+  - INTERNAL
+  - EXTERNAL
+  - SURVEILLANCE
+  - CERTIFICATION
+  - SUPPLIER
+  - PROCESS
+  - PRODUCT
+
+finding_types:
+  - NONCONFORMANCE
+  - OBSERVATION
+  - OPPORTUNITY_FOR_IMPROVEMENT

@@ -1,0 +1,22 @@
+# Dependency Model — AEROSPACEMODEL
+# Path: 02_LIFECYCLE_OS/core_models/dependency_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+dependency_types:
+  - type: SEQUENTIAL
+    description: Phase B cannot start until Phase A is complete
+  - type: CONCURRENT
+    description: Phases may proceed in parallel
+  - type: CONDITIONAL
+    description: Phase B starts only if Phase A meets specific criteria
+  - type: ITERATIVE
+    description: Phases may cycle until convergence criteria are met
+
+knot_dependency_types:
+  - type: BLOCKS
+    description: KNOT A must be COMPLIANT before KNOT B can start
+  - type: INFORMS
+    description: KNOT A output is an input to KNOT B
+  - type: VALIDATES
+    description: KNOT A validates the output of KNOT B

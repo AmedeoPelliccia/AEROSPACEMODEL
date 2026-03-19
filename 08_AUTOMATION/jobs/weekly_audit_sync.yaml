@@ -1,0 +1,13 @@
+# Weekly Audit Sync Job
+# Path: 08_AUTOMATION/jobs/weekly_audit_sync.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+name: weekly_audit_sync
+schedule: "0 6 * * 1"
+steps:
+  - name: validate_audit_records
+    script: python3 02_LIFECYCLE_OS/validators/validate_audit_records.py
+  - name: generate_audit_report
+    script: python3 08_AUTOMATION/scripts/generate_audit_report.py
+notify_on_failure: ASIT

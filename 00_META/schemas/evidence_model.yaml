@@ -1,0 +1,40 @@
+# Evidence Model Schema — AEROSPACEMODEL
+# Path: 00_META/schemas/evidence_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+evidence_record:
+  required_fields:
+    - oid          # Objective Evidence Identifier
+    - title
+    - evidence_type
+    - lifecycle_phase
+    - knot_ref
+    - knu_ref
+    - status
+    - created_date
+    - author
+  optional_fields:
+    - description
+    - file_path
+    - external_ref
+    - review_date
+    - reviewer
+    - signoff_date
+    - signoff_authority
+
+evidence_types:
+  - TEST_REPORT
+  - ANALYSIS_REPORT
+  - INSPECTION_RECORD
+  - AUDIT_RECORD
+  - QUALIFICATION_RECORD
+  - ACCEPTANCE_TEST_REPORT
+  - FIRST_ARTICLE_INSPECTION
+  - CERTIFICATE_OF_CONFORMITY
+  - SAFETY_ASSESSMENT_REPORT
+  - VERIFICATION_COMPLIANCE_RECORD
+  - DESIGN_REVIEW_RECORD
+  - PROCEDURE
+  - TRAINING_RECORD
+  - OTHER
