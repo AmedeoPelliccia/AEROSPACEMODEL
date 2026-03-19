@@ -1,0 +1,11 @@
+knu_id,title,lifecycle_phase,knot_ref,knu_class,status,owner,created_date,description,evidence_refs,compliance_status,start_date,end_date,notes
+KNU-SSTO-LC03-0001,Forebody Geometry Definition,LC03,KNOT-SSTO-LC03-0001,ARTEFACT,DRAFT,ASIT,2026-03-19,3D geometry model and aerodynamic definition of the waverider-derived forebody,,NOT_STARTED,,,
+KNU-SSTO-LC03-0002,TPS Thermal Analysis - Forebody,LC03,KNOT-SSTO-LC03-0001,ANALYSIS_PACKAGE,DRAFT,ASIT,2026-03-19,Thermal analysis confirming TPS capability at peak temperatures exceeding 1600 K during re-entry,,NOT_STARTED,,,
+KNU-SSTO-LC03-0003,Wing Aerodynamic Design Document,LC03,KNOT-SSTO-LC03-0002,ARTEFACT,DRAFT,ASIT,2026-03-19,Aerodynamic design document for low AR delta/strake wing with lifting body blend,,NOT_STARTED,,,
+KNU-SSTO-LC03-0004,Multi-Regime Aerodynamic Analysis,LC03,KNOT-SSTO-LC03-0002,ANALYSIS_PACKAGE,DRAFT,ASIT,2026-03-19,Aerodynamic performance analysis across all Mach regimes from subsonic to hypersonic,,NOT_STARTED,,,
+KNU-SSTO-LC03-0005,Propulsion System Architecture Document,LC03,KNOT-SSTO-LC03-0003,ARTEFACT,DRAFT,ASIT,2026-03-19,Combined-cycle or rocket engine architecture definition covering all ATA 71-78 systems,,NOT_STARTED,,,
+KNU-SSTO-LC03-0006,LH2/LOX Propulsion Performance Analysis,LC03,KNOT-SSTO-LC03-0003,ANALYSIS_PACKAGE,DRAFT,ASIT,2026-03-19,Propulsion performance analysis for LH2/LOX propellants across trajectory phases,,NOT_STARTED,,,
+KNU-SSTO-LC03-0007,TPS Material and Panel Design Document,LC03,KNOT-SSTO-LC03-0004,ARTEFACT,DRAFT,ASIT,2026-03-19,Design definition for metallic/CMC TPS panels with active cooling channels,,NOT_STARTED,,,
+KNU-SSTO-LC03-0008,Active Cooling System Architecture,LC03,KNOT-SSTO-LC03-0004,ARTEFACT,DRAFT,ASIT,2026-03-19,Architecture definition for TPS active coolant loop fed from cryogenic tanks,,NOT_STARTED,,,
+KNU-SSTO-LC03-0009,Cryogenic Tank Structural Design Document,LC03,KNOT-SSTO-LC03-0005,ARTEFACT,DRAFT,ASIT,2026-03-19,Structural design of integral LH2 + LOX tanks serving as primary structure,,NOT_STARTED,,,
+KNU-SSTO-LC03-0010,Propellant and Coolant Systems Integration Plan,LC03,KNOT-SSTO-LC03-0005,ARTEFACT,DRAFT,ASIT,2026-03-19,Integration plan for dual-use cryogenic tanks supplying both propulsion and TPS cooling,,NOT_STARTED,,,

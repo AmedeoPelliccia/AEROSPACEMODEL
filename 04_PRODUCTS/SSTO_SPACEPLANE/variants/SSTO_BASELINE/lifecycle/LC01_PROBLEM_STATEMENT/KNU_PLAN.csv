@@ -1,0 +1,3 @@
+knu_id,title,lifecycle_phase,knot_ref,knu_class,status,owner,created_date,description,evidence_refs,compliance_status,start_date,end_date,notes
+KNU-SSTO-LC01-0001,Mission Need Statement,LC01,KNOT-SSTO-LC01-0001,ARTEFACT,DRAFT,ASIT,2026-03-19,Document the mission need for SSTO hypersonic transport capability including stakeholder requirements and operational concept,,NOT_STARTED,,,
+KNU-SSTO-LC01-0002,Operational Concept Document,LC01,KNOT-SSTO-LC01-0001,ARTEFACT,DRAFT,ASIT,2026-03-19,Define operational scenarios covering all trajectory phases from runway take-off through orbit/apex to runway landing,,NOT_STARTED,,,

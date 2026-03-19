@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSTO Spaceplane – Configuration Analysis Dashboard</title>
+  <style>
+    /* ── Reset & base ─────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #1a1a2e;
+      color: #e0e0e0;
+      min-height: 100vh;
+      padding: 24px 16px 48px;
+    }
+    h1, h2, h3 { font-weight: 600; }
+
+    /* ── Layout ───────────────────────────────────────────────────────── */
+    .page-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .page-header .subtitle {
+      color: #9e9e9e;
+      font-size: 0.9rem;
+      margin-top: 4px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .section-label {
+      text-align: center;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 14px;
+    }
+    .panel {
+      background: #252540;
+      border-radius: 14px;
+      padding: 28px 24px 24px;
+      margin-bottom: 28px;
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .divider {
+      border: none;
+      border-top: 1px dashed #444;
+      max-width: 960px;
+      margin: 0 auto 28px;
+    }
+
+    /* ── Vehicle architecture ─────────────────────────────────────────── */
+    .vehicle-title {
+      text-align: center;
+      margin-bottom: 6px;
+      font-size: 1.15rem;
+    }
+    .vehicle-subtitle {
+      text-align: center;
+      color: #aaa;
+      font-size: 0.82rem;
+      margin-bottom: 22px;
+      line-height: 1.5;
+    }
+    .arch-row {
+      display: flex;
+      align-items: stretch;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .arch-card {
+      border-radius: 10px;
+      padding: 14px 16px;
+      flex: 1;
+    }
+    .arch-card .card-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .arch-card .card-body {
+      font-size: 0.8rem;
+      line-height: 1.5;
+      opacity: 0.85;
+    }
+    .arch-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      padding: 0 2px;
+    }
+    .coolant-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 0 6px;
+      flex-shrink: 0;
+    }
+    .coolant-connector span { font-size: 0.72rem; color: #9e9e9e; }
+
+    /* ATA colours */
+    .card-forebody   { background: #6b2020; border: 2px solid #a03030; }
+    .card-wing       { background: #1a5c50; border: 2px solid #2d9070; }
+    .card-propulsion { background: #6b4a00; border: 2px solid #c08000; color: #f5d76e; }
+    .card-propulsion .card-body { color: #f5d76e; opacity: 1; }
+    .card-tps        { background: #6b2020; border: 2px solid #a03030; }
+    .card-cryo       { background: #1a3a7a; border: 2px solid #2a60c0; }
+    .card-cryo-wide  { flex: 2; }
+
+    /* ── Mission trajectory ───────────────────────────────────────────── */
+    .trajectory-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+    .traj-card {
+      border-radius: 8px;
+      padding: 10px 14px;
+      min-width: 100px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .traj-card .traj-title { font-weight: 700; font-size: 0.9rem; }
+    .traj-card .traj-mach  { font-size: 0.75rem; opacity: 0.8; margin-top: 3px; }
+    .traj-arrow {
+      color: #888;
+      font-size: 1.1rem;
+      padding: 0 4px;
+      flex-shrink: 0;
+    }
+    .traj-takeoff    { background: #1a5c50; border: 2px solid #2d9070; }
+    .traj-transonic  { background: #1a5c50; border: 2px solid #2d9070; }
+    .traj-supersonic { background: #6b2020; border: 2px solid #a03030; }
+    .traj-hypersonic { background: #6b2020; border: 2px solid #a03030; }
+    .traj-orbit      { background: #3d2080; border: 2px solid #7050d0; color: #c0a0ff; }
+    .traj-orbit .traj-mach { color: #c0a0ff; opacity: 1; }
+    .traj-reentry    { background: #6b2020; border: 2px solid #a03030; }
+    .traj-return-label { text-align: center; font-size: 0.76rem; color: #9e9e9e; margin-top: 10px; }
+    .traj-return-arrow {
+      display: flex; align-items: center; justify-content: center;
+      color: #777; font-size: 0.8rem; margin-top: 2px;
+    }
+
+    /* ── Critical KNOTs ──────────────────────────────────────────────── */
+    .knots-hint {
+      text-align: center;
+      font-style: italic;
+      font-size: 0.82rem;
+      color: #888;
+      margin-bottom: 18px;
+    }
+    .knots-grid   { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 14px; max-width:960px; margin-left:auto; margin-right:auto; }
+    .knots-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width:960px; margin-left:auto; margin-right:auto; }
+
+    .knot-card {
+      border-radius: 10px;
+      padding: 16px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      border: 2px solid transparent;
+      user-select: none;
+    }
+    .knot-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
+    .knot-card.active { box-shadow: 0 0 0 3px #fff3, 0 6px 24px rgba(0,0,0,0.5); transform: translateY(-3px); }
+    .knot-card .knot-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 5px; }
+    .knot-card .knot-sub   { font-size: 0.78rem; opacity: 0.8; }
+
+    .knot-mode-sw  { background: #6b2020; border-color: #a03030; }
+    .knot-tps-re   { background: #6b2020; border-color: #a03030; }
+    .knot-abort    { background: #6b2020; border-color: #a03030; }
+    .knot-dual-reg { background: #6b4a00; border-color: #c08000; color: #f5d76e; }
+    .knot-cryo     { background: #6b4a00; border-color: #c08000; color: #f5d76e; }
+    .knot-dual-reg .knot-sub, .knot-cryo .knot-sub { opacity: 1; color: #e8c060; }
+
+    /* ── KNOT Detail Panel ───────────────────────────────────────────── */
+    #knot-detail {
+      display: none;
+      background: #1e1e38;
+      border: 1px solid #444;
+      border-radius: 12px;
+      padding: 22px 24px;
+      max-width: 960px;
+      margin: 16px auto 28px;
+      animation: fadeIn 0.2s ease;
+    }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+    .detail-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .detail-id    { font-size: 0.72rem; letter-spacing: 0.1em; color: #888; font-family: monospace; margin-bottom: 4px; }
+    .detail-title { font-size: 1.05rem; font-weight: 700; }
+    .detail-close {
+      background: none; border: 1px solid #555; color: #aaa;
+      border-radius: 6px; padding: 4px 10px; cursor: pointer;
+      font-size: 0.8rem; white-space: nowrap; flex-shrink: 0;
+    }
+    .detail-close:hover { border-color: #aaa; color: #fff; }
+    .detail-desc {
+      font-size: 0.85rem; color: #bbb; line-height: 1.6; margin-bottom: 16px;
+      border-left: 3px solid #555; padding-left: 12px;
+    }
+    .knu-list-title {
+      font-size: 0.8rem; text-transform: uppercase;
+      letter-spacing: 0.1em; color: #888; margin-bottom: 10px;
+    }
+    .knu-item {
+      background: #2a2a48; border-radius: 7px; padding: 10px 14px; margin-bottom: 8px;
+      display: grid; grid-template-columns: auto 1fr auto; align-items: start; gap: 10px;
+    }
+    .knu-id    { font-family: monospace; font-size: 0.72rem; color: #888; white-space: nowrap; padding-top: 2px; }
+    .knu-title { font-size: 0.87rem; font-weight: 600; }
+    .knu-desc  { font-size: 0.78rem; color: #aaa; margin-top: 3px; }
+    .knu-class-badge {
+      font-size: 0.68rem; padding: 2px 7px; border-radius: 4px;
+      background: #3a3a60; color: #b0b0d0; white-space: nowrap; margin-top: 2px;
+    }
+
+    /* ── Responsive ──────────────────────────────────────────────────── */
+    @media (max-width: 680px) {
+      .arch-row { flex-direction: column; }
+      .arch-arrow, .coolant-connector { display: none; }
+      .knots-grid   { grid-template-columns: 1fr; }
+      .knots-grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Page header ─────────────────────────────────────────────────── -->
+<div class="page-header">
+  <p class="subtitle">Spaceplane configuration analysis &nbsp;&middot;&nbsp; SSTO / hypersonic transport</p>
+  <h1>SSTO_BASELINE &mdash; Configuration Analysis</h1>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION 1 · Integrated airframe-propulsion vehicle
+     ═══════════════════════════════════════════════════ -->
+<div class="panel">
+  <div class="vehicle-title">Integrated airframe-propulsion vehicle</div>
+  <div class="vehicle-subtitle">
+    Waverider-derived, metallic TPS, M 0&ndash;25+<br>Shock system feeds inlet
+  </div>
+
+  <!-- Top row: Forebody → Wing → Propulsion -->
+  <div class="arch-row">
+    <div class="arch-card card-forebody">
+      <div class="card-title">Forebody (ATA 53)</div>
+      <div class="card-body">Shock pre-compression<br>Peak TPS: 1 600+ K</div>
+    </div>
+    <div class="arch-arrow">&#8594;</div>
+    <div class="arch-card card-wing">
+      <div class="card-title">Wing (ATA 57)</div>
+      <div class="card-body">Low AR delta / strake<br>Lifting body blend</div>
+    </div>
+    <div class="arch-arrow">&#8594;</div>
+    <div class="arch-card card-propulsion">
+      <div class="card-title">Propulsion (ATA 71&ndash;78)</div>
+      <div class="card-body">Combined-cycle or<br>rocket (LH&#8322;/LOX)</div>
+    </div>
+  </div>
+
+  <!-- Bottom row: TPS ← Coolant ← Cryo tanks -->
+  <div class="arch-row">
+    <div class="arch-card card-tps">
+      <div class="card-title">Thermal protection (ATA 51)</div>
+      <div class="card-body">Metallic / CMC, active cooling</div>
+    </div>
+    <div class="coolant-connector">
+      <span>Coolant</span>
+      <span style="font-size:1.2rem; color:#aaa;">&#8592;</span>
+    </div>
+    <div class="arch-card card-cryo card-cryo-wide">
+      <div class="card-title">Cryo tanks (ATA 28)</div>
+      <div class="card-body">LH&#8322; + LOX, integral structure</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- ═══════════════════════════════════
+     SECTION 2 · Mission trajectory
+     ═══════════════════════════════════ -->
+<p class="section-label">Mission trajectory phases</p>
+<div class="panel" style="padding-bottom:18px;">
+  <div class="trajectory-row">
+    <div class="traj-card traj-takeoff">
+      <div class="traj-title">Takeoff</div>
+      <div class="traj-mach">M 0&ndash;0.9</div>
+    </div>
+    <div class="traj-arrow">&#8594;</div>
+    <div class="traj-card traj-transonic">
+      <div class="traj-title">Transonic</div>
+      <div class="traj-mach">M 0.9&ndash;1.5</div>
+    </div>
+    <div class="traj-arrow">&#8594;</div>
+    <div class="traj-card traj-supersonic">
+      <div class="traj-title">Supersonic</div>
+      <div class="traj-mach">M 1.5&ndash;5</div>
+    </div>
+    <div class="traj-arrow">&#8594;</div>
+    <div class="traj-card traj-hypersonic">
+      <div class="traj-title">Hypersonic</div>
+      <div class="traj-mach">M 5&ndash;25</div>
+    </div>
+    <div class="traj-arrow">&#8594;</div>
+    <div class="traj-card traj-orbit">
+      <div class="traj-title">Orbit / apex</div>
+      <div class="traj-mach">M 25+ / coast</div>
+    </div>
+    <div class="traj-arrow">&#8594;</div>
+    <div class="traj-card traj-reentry">
+      <div class="traj-title">Re-entry</div>
+      <div class="traj-mach">TPS critical</div>
+    </div>
+  </div>
+  <div class="traj-return-label">&#8593;</div>
+  <div class="traj-return-arrow">
+    &larr;&larr;&nbsp; Subsonic glide + powered approach + runway landing &nbsp;&larr;&larr;
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- ═══════════════════════════════════════
+     SECTION 3 · Critical KNOTs
+     ═══════════════════════════════════════ -->
+<p class="section-label">Critical KNOTs (certification unknowns)</p>
+
+<!-- Row 1 -->
+<div class="knots-grid">
+  <div class="knot-card knot-mode-sw" onclick="showKnot('mode-sw', this)">
+    <div class="knot-title">Mode switching</div>
+    <div class="knot-sub">Propulsion transition</div>
+  </div>
+  <div class="knot-card knot-tps-re" onclick="showKnot('tps-re', this)">
+    <div class="knot-title">TPS reusability</div>
+    <div class="knot-sub">Inspect, certify, re-fly</div>
+  </div>
+  <div class="knot-card knot-abort" onclick="showKnot('abort', this)">
+    <div class="knot-title">Abort coverage</div>
+    <div class="knot-sub">Full-envelope safe return</div>
+  </div>
+</div>
+<!-- Row 2 -->
+<div class="knots-grid-2" style="margin-bottom:4px;">
+  <div class="knot-card knot-dual-reg" onclick="showKnot('dual-reg', this)">
+    <div class="knot-title">Dual regulatory framework</div>
+    <div class="knot-sub">Airworthiness + launch licence</div>
+  </div>
+  <div class="knot-card knot-cryo" onclick="showKnot('cryo', this)">
+    <div class="knot-title">Cryo reuse cycle</div>
+    <div class="knot-sub">LH&#8322;/LOX turnaround, fatigue</div>
+  </div>
+</div>
+
+<p class="knots-hint" style="margin-top:12px;"><em>Click any KNOT to explore the uncertainty and required KNUs</em></p>
+
+<!-- ── KNOT Detail Panel ─────────────────────────────────────────────── -->
+<div id="knot-detail">
+  <div class="detail-header">
+    <div>
+      <div class="detail-id"  id="detail-id"></div>
+      <div class="detail-title" id="detail-title"></div>
+    </div>
+    <button class="detail-close" onclick="closeKnot()">&#10005; Close</button>
+  </div>
+  <div class="detail-desc" id="detail-desc"></div>
+  <div class="knu-list-title">Required KNUs</div>
+  <div id="knu-list"></div>
+</div>
+
+<script>
+const KNOTS = {
+  "mode-sw": {
+    id:    "KNOT-SSTO-LC09-0001",
+    title: "Mode Switching \u2014 Propulsion Transition Certification",
+    desc:  "Certify the safe transition between propulsion modes (air-breathing to rocket and back) " +
+           "across the full flight envelope. Covers ignition sequencing, failure modes and abort " +
+           "capability during the transition window.",
+    knus: [
+      { id: "KNU-SSTO-LC09-0001", cls: "VALIDATION_OBJECT",
+        title: "Mode Transition Test Programme",
+        desc:  "Test programme for combined-cycle engine mode transition across the full Mach range, " +
+               "including failure mode verification." },
+      { id: "KNU-SSTO-LC09-0002", cls: "ANALYSIS_PACKAGE",
+        title: "Propulsion Transition Failure Mode Analysis",
+        desc:  "FMEA / FTA covering all failure modes during propulsion mode switching with safety " +
+               "mitigation evidence." },
+      { id: "KNU-SSTO-LC09-0003", cls: "RECORD",
+        title: "Mode Switching Certification Compliance Document",
+        desc:  "Compliance document demonstrating mode switching safety against the applicable " +
+               "certification basis." }
+    ]
+  },
+  "tps-re": {
+    id:    "KNOT-SSTO-LC09-0002",
+    title: "TPS Reusability Certification",
+    desc:  "Establish and certify the inspection criteria, maintenance procedures and re-flight " +
+           "authorisation process for the metallic / CMC TPS following each hypersonic re-entry. " +
+           "No existing certification basis covers reusable metallic TPS re-flight authorisation.",
+    knus: [
+      { id: "KNU-SSTO-LC09-0004", cls: "PROCEDURE",
+        title: "TPS Inspection Criteria and Procedure",
+        desc:  "Inspection criteria and procedure for TPS panel assessment after each hypersonic " +
+               "re-entry mission (erosion, delamination, thermal damage)." },
+      { id: "KNU-SSTO-LC09-0005", cls: "PROCEDURE",
+        title: "TPS Re-flight Authorisation Process",
+        desc:  "Formal re-flight authorisation process defining pass/fail criteria and signoff " +
+               "authority for TPS re-use." },
+      { id: "KNU-SSTO-LC09-0006", cls: "REPORT",
+        title: "TPS Reusability Test and Demonstration Report",
+        desc:  "Test and demonstration report evidencing TPS reusability across the required " +
+               "number of flight cycles." }
+    ]
+  },
+  "abort": {
+    id:    "KNOT-SSTO-LC09-0003",
+    title: "Abort Coverage \u2014 Full-Envelope Safe Return",
+    desc:  "Demonstrate abort capability and safe return-to-landing across the full flight " +
+           "envelope from takeoff through orbit / apex and re-entry. Full-envelope abort coverage " +
+           "is required for both airworthiness and launch licensing.",
+    knus: [
+      { id: "KNU-SSTO-LC09-0007", cls: "ANALYSIS_PACKAGE",
+        title: "Abort Mode Analysis \u2014 Full Envelope",
+        desc:  "Analysis of abort modes and trajectories covering all mission phases: subsonic, " +
+               "transonic, supersonic, hypersonic and orbital abort cases." },
+      { id: "KNU-SSTO-LC09-0008", cls: "VALIDATION_OBJECT",
+        title: "Return-to-Landing Capability Verification",
+        desc:  "Flight simulation and test verification of return-to-landing capability from " +
+               "each abort scenario." },
+      { id: "KNU-SSTO-LC09-0009", cls: "RECORD",
+        title: "Abort Coverage Compliance Statement",
+        desc:  "Formal compliance statement with evidence references demonstrating full-envelope " +
+               "abort coverage." }
+    ]
+  },
+  "dual-reg": {
+    id:    "KNOT-SSTO-LC09-0004",
+    title: "Dual Regulatory Framework \u2014 Airworthiness and Launch Licence",
+    desc:  "Establish the dual regulatory compliance framework addressing both civil airworthiness " +
+           "(EASA / FAA) and space launch licensing (AST / CAA-S) obligations for a runway-based " +
+           "SSTO vehicle. No precedent certification basis combines airworthiness and launch " +
+           "licence for a single vehicle.",
+    knus: [
+      { id: "KNU-SSTO-LC09-0010", cls: "ARTEFACT",
+        title: "Airworthiness Certification Basis Document",
+        desc:  "Defines the applicable airworthiness certification basis for the subsonic / " +
+               "transonic flight phases (EASA CS / FAA FAR applicable parts)." },
+      { id: "KNU-SSTO-LC09-0011", cls: "ARTEFACT",
+        title: "Launch Licence Compliance Plan",
+        desc:  "Plan for compliance with space launch licensing requirements covering " +
+               "supersonic / hypersonic and orbital phases." },
+      { id: "KNU-SSTO-LC09-0012", cls: "RECORD",
+        title: "Dual Framework Regulatory Interface Agreement",
+        desc:  "Formal agreement between airworthiness and launch licensing authorities defining " +
+               "responsibilities and interface." }
+    ]
+  },
+  "cryo": {
+    id:    "KNOT-SSTO-LC09-0005",
+    title: "Cryo Reuse Cycle \u2014 LH\u2082/LOX Turnaround and Fatigue",
+    desc:  "Certify the reuse cycle of the LH\u2082/LOX cryogenic integral-structural tanks including " +
+           "thermal fatigue limits, inspection intervals and allowable refuelling cycles. " +
+           "Cryogenic fatigue in integral structural tanks is a key certification unknown for " +
+           "reusable SSTO vehicles.",
+    knus: [
+      { id: "KNU-SSTO-LC09-0013", cls: "ANALYSIS_PACKAGE",
+        title: "Cryo Tank Fatigue Analysis",
+        desc:  "Structural fatigue analysis for LH\u2082/LOX integral tanks under cryogenic thermal " +
+               "cycling and pressure load spectra." },
+      { id: "KNU-SSTO-LC09-0014", cls: "PROCEDURE",
+        title: "Cryo Tank Inspection and Turnaround Procedure",
+        desc:  "Inspection and turnaround procedure defining minimum inspection intervals and " +
+               "allowable re-use life." },
+      { id: "KNU-SSTO-LC09-0015", cls: "RECORD",
+        title: "Cryo Reuse Certification Evidence Package",
+        desc:  "Evidence package demonstrating airworthiness of the cryo reuse cycle including " +
+               "fatigue data and inspection records." }
+    ]
+  }
+};
+
+let activeKey = null;
+
+function showKnot(key, cardEl) {
+  if (activeKey === key) { closeKnot(); return; }
+  activeKey = key;
+
+  document.querySelectorAll('.knot-card').forEach(c => c.classList.remove('active'));
+  cardEl.classList.add('active');
+
+  const k = KNOTS[key];
+  document.getElementById('detail-id').textContent    = k.id;
+  document.getElementById('detail-title').textContent = k.title;
+  document.getElementById('detail-desc').textContent  = k.desc;
+
+  document.getElementById('knu-list').innerHTML = k.knus.map(knu => `
+    <div class="knu-item">
+      <div class="knu-id">${knu.id}</div>
+      <div>
+        <div class="knu-title">${knu.title}</div>
+        <div class="knu-desc">${knu.desc}</div>
+      </div>
+      <div class="knu-class-badge">${knu.cls}</div>
+    </div>
+  `).join('');
+
+  const panel = document.getElementById('knot-detail');
+  panel.style.display = 'block';
+  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function closeKnot() {
+  activeKey = null;
+  document.getElementById('knot-detail').style.display = 'none';
+  document.querySelectorAll('.knot-card').forEach(c => c.classList.remove('active'));
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+# Portfolio — SSTO_SPACEPLANE
+# Path: 04_PRODUCTS/SSTO_SPACEPLANE/portfolio.yaml
+# Status: DRAFT
+
+product_family: SSTO_SPACEPLANE
+description: >
+  Single-Stage-To-Orbit spaceplane for hypersonic transport. Waverider-derived,
+  metallic TPS, M 0-25+. Shock system feeds inlet. Combined-cycle or rocket
+  propulsion (LH2/LOX). Runway take-off and landing.
+variants:
+  - id: SSTO_BASELINE
+    description: Baseline integrated airframe-propulsion vehicle
+    status: DRAFT
+programmes: []
