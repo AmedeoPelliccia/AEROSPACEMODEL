@@ -1,4 +1,4 @@
-````markdown
+
 # AEROSPACEMODEL — The Lifecycle Operating System for Aerospace Products
 
 **Authority:** ASIT  
