@@ -1,0 +1,24 @@
+# Product Taxonomy — AEROSPACEMODEL
+# Path: 00_META/taxonomies/product_taxonomy.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+product_categories:
+  - id: AIRCRAFT
+    name: Aircraft
+    subcategories: [FIXED_WING, ROTARY_WING, UAV, HYBRID]
+  - id: PROPULSION
+    name: Propulsion System
+    subcategories: [TURBOFAN, TURBOPROP, TURBOSHAFT, PISTON, ELECTRIC, HYBRID]
+  - id: SUBSYSTEM
+    name: Subsystem
+    subcategories: [AVIONICS, ELECTRICAL, HYDRAULIC, FUEL, ENVIRONMENTAL_CONTROL, LANDING_GEAR]
+  - id: EQUIPMENT
+    name: Equipment Item
+    subcategories: [LRU, SRU, COMPONENT, ACCESSORY]
+  - id: SOFTWARE
+    name: Software Item
+    subcategories: [AIRBORNE_SOFTWARE, GROUND_SOFTWARE, TOOL]
+  - id: HARDWARE
+    name: Airborne Electronic Hardware
+    subcategories: [FPGA, ASIC, PLD, COMPLEX_HARDWARE]

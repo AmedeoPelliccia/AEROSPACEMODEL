@@ -1,0 +1,20 @@
+# Hazard Model — AEROSPACEMODEL
+# Path: 06_PRODUCT_DATA_MODEL/safety_model/hazard_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+hazard_record:
+  required_fields:
+    - hazard_id
+    - title
+    - description
+    - phase
+    - severity
+    - probability
+    - risk_level
+    - mitigation_refs
+  optional_fields:
+    - sar_ref
+    - residual_risk
+    - accepted_by
+    - acceptance_date

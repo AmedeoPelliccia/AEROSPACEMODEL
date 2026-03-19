@@ -1,0 +1,17 @@
+# Nightly Integrity Check Job
+# Path: 08_AUTOMATION/jobs/nightly_integrity_check.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+name: nightly_integrity_check
+schedule: "0 2 * * *"
+steps:
+  - name: validate_structure
+    script: python3 02_LIFECYCLE_OS/validators/validate_structure.py
+  - name: validate_knots
+    script: python3 02_LIFECYCLE_OS/validators/validate_knots.py
+  - name: validate_knus
+    script: python3 02_LIFECYCLE_OS/validators/validate_knus.py
+  - name: detect_orphans
+    script: python3 08_AUTOMATION/scripts/detect_orphans.py
+notify_on_failure: ASIT

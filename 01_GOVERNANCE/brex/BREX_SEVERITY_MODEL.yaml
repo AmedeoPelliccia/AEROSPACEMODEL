@@ -1,0 +1,15 @@
+# BREX Severity Model — AEROSPACEMODEL
+# Path: 01_GOVERNANCE/brex/BREX_SEVERITY_MODEL.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+severity_levels:
+  - level: ERROR
+    description: Blocks merge; must be resolved before integration
+    ci_action: FAIL
+  - level: WARNING
+    description: Advisory; should be resolved but does not block merge
+    ci_action: WARN
+  - level: INFO
+    description: Informational; no action required
+    ci_action: LOG

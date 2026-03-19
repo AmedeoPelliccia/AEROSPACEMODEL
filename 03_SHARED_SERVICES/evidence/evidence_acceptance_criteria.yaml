@@ -1,0 +1,26 @@
+# Evidence Acceptance Criteria — AEROSPACEMODEL
+# Path: 03_SHARED_SERVICES/evidence/evidence_acceptance_criteria.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+criteria:
+  TEST_REPORT:
+    required: [test_id, pass_fail_status, date, tester_signature]
+    review_required: true
+    signoff_required: true
+  ANALYSIS_REPORT:
+    required: [analysis_id, conclusions, date, author_signature]
+    review_required: true
+    signoff_required: true
+  INSPECTION_RECORD:
+    required: [inspection_id, result, date, inspector]
+    review_required: false
+    signoff_required: true
+  AUDIT_RECORD:
+    required: [audit_id, findings, date, lead_auditor]
+    review_required: true
+    signoff_required: true
+  CERTIFICATE_OF_CONFORMITY:
+    required: [cert_id, conformance_statement, date, authorized_signatory]
+    review_required: false
+    signoff_required: true

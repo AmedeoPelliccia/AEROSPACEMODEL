@@ -1,0 +1,35 @@
+# KPI Model — AEROSPACEMODEL
+# Path: 03_SHARED_SERVICES/metrics/kpi_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+kpis:
+  - id: KPI-001
+    name: Traceability Completeness
+    description: Percentage of KNUs with full traceability chain
+    target: 100%
+    frequency: Monthly
+
+  - id: KPI-002
+    name: Compliance Coverage
+    description: Percentage of clauses with COMPLIANT or EXEMPT status
+    target: 100%
+    frequency: Per phase gate
+
+  - id: KPI-003
+    name: NCR Closure Rate
+    description: Percentage of NCRs closed within target date
+    target: 95%
+    frequency: Monthly
+
+  - id: KPI-004
+    name: Evidence Acceptance Rate
+    description: Percentage of evidence items accepted on first review
+    target: 90%
+    frequency: Monthly
+
+  - id: KPI-005
+    name: Orphan KNU Rate
+    description: Percentage of KNUs without a KNOT reference
+    target: 0%
+    frequency: Weekly

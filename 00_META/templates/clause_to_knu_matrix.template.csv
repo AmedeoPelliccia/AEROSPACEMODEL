@@ -1,0 +1,2 @@
+mapping_id,standard,clause_id,clause_title,lifecycle_phase,knot_ref,knu_ref,compliance_status,notes,exemption_ref
+MAP-STD-0001,<STANDARD>,<clause_id>,<clause_title>,<LC_CODE>,<knot_ref>,<knu_ref>,NOT_STARTED,,

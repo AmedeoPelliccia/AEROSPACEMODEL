@@ -1,0 +1,15 @@
+lc_code,phase_name,description,mandatory_artefacts,exit_criteria
+LC01,Problem Statement,Mission need problem framing and initial governing intent,KNOTS.csv;KNU_PLAN.csv;README.md,Problem statement approved; initial KNOTs defined
+LC02,Requirements,Capture allocation and control of requirements,KNOTS.csv;KNU_PLAN.csv;README.md,Requirements baselined; allocated to domains
+LC03,Architecture,Logical and physical architecture definition,KNOTS.csv;KNU_PLAN.csv;README.md,Architecture approved; interfaces defined
+LC04,Design Definition,Detailed design and configuration definition,KNOTS.csv;KNU_PLAN.csv;README.md,Design approved; configuration baseline declared
+LC05,Analysis and Simulation,Analytical substantiation and simulation evidence,KNOTS.csv;KNU_PLAN.csv;README.md,All analyses complete and reviewed
+LC06,Verification and Validation,Confirmation that requirements are satisfied,KNOTS.csv;KNU_PLAN.csv;README.md,All requirements verified; V&V records complete
+LC07,Quality and Assurance,Quality control assurance logic and process integrity,KNOTS.csv;KNU_PLAN.csv;README.md,QMS compliance confirmed; NCRs closed
+LC08,Industrialization and Production,Manufacturing readiness and production execution,KNOTS.csv;KNU_PLAN.csv;README.md,Production qualified; FAI complete
+LC09,Certification and Compliance,Compliance demonstration and certification trace,KNOTS.csv;KNU_PLAN.csv;README.md,Certification basis met; type certificate granted
+LC10,Entry Into Service,Controlled transition into operational service,KNOTS.csv;KNU_PLAN.csv;README.md,EIS review passed; operational release authorized
+LC11,Operations,In-service product operation,KNOTS.csv;KNU_PLAN.csv;README.md,Continuous airworthiness maintained
+LC12,Maintenance and Continued Airworthiness,Sustainment maintenance and airworthiness continuity,KNOTS.csv;KNU_PLAN.csv;README.md,Maintenance programme active; continued airworthiness confirmed
+LC13,Modifications and Retrofit,Product changes after baseline release,KNOTS.csv;KNU_PLAN.csv;README.md,Modification approved and incorporated into baseline
+LC14,Retirement and End of Life,Decommissioning withdrawal disposal and closure,KNOTS.csv;KNU_PLAN.csv;README.md,All records archived; disposal complete; lifecycle closed

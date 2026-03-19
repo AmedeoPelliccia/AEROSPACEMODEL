@@ -1,0 +1,2 @@
+knu_id,title,lifecycle_phase,knot_ref,knu_class,status,owner,created_date,description,evidence_refs,compliance_status,start_date,end_date,notes
+KNU-PROD-LC01-0001,<KNU title>,LC01,KNOT-PROD-LC01-0001,ARTEFACT,DRAFT,<owner>,<YYYY-MM-DD>,<description>,,NOT_STARTED,,,

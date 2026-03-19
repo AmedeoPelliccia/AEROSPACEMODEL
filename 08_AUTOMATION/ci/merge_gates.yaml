@@ -1,0 +1,24 @@
+# Merge Gates — AEROSPACEMODEL
+# Path: 08_AUTOMATION/ci/merge_gates.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+merge_gates:
+  feature_to_develop:
+    required_checks:
+      - validate_structure
+      - validate_knots
+      - validate_knus
+      - validate_mappings
+    required_approvals: 1
+
+  develop_to_release:
+    required_checks:
+      - validate_structure
+      - validate_knots
+      - validate_knus
+      - validate_mappings
+      - validate_evidence
+      - validate_audit_records
+    required_approvals: 2
+    required_roles: [ASIT, QA Authority]

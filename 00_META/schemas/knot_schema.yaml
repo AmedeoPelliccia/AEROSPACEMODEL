@@ -1,0 +1,23 @@
+# KNOT Schema — AEROSPACEMODEL
+# Path: 00_META/schemas/knot_schema.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+knot_record:
+  required_fields:
+    - knot_id       # Format: KNOT-<PRODUCT>-<PHASE>-<SEQ>
+    - title
+    - lifecycle_phase
+    - obligation_source
+    - status
+    - owner
+    - created_date
+  optional_fields:
+    - description
+    - parent_knot
+    - clause_refs    # semicolon-delimited list of standard clause references
+    - knu_refs       # semicolon-delimited list of linked KNU IDs
+    - compliance_status
+    - notes
+
+knot_id_format: "KNOT-{PRODUCT}-{LC_CODE}-{SEQ:04d}"

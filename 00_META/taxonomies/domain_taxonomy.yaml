@@ -1,0 +1,42 @@
+# Domain Taxonomy — AEROSPACEMODEL
+# Path: 00_META/taxonomies/domain_taxonomy.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+domains:
+  - code: A-AIRFRAME
+    name: Airframe
+    description: Structural and aerodynamic elements
+  - code: P-PROPULSION
+    name: Propulsion
+    description: Propulsion systems and power plants
+  - code: E-ELECTRICAL
+    name: Electrical
+    description: Electrical power generation, distribution, and loads
+  - code: S-SOFTWARE
+    name: Software
+    description: Airborne and ground software
+  - code: A-AVIONICS
+    name: Avionics
+    description: Avionics and electronic systems
+  - code: H-HUMAN_FACTORS
+    name: Human Factors
+    description: Human factors and ergonomics
+  - code: M-MAINTAINABILITY
+    name: Maintainability
+    description: Maintenance and serviceability
+  - code: C-CERTIFICATION
+    name: Certification
+    description: Certification and compliance
+  - code: Q-QUALITY
+    name: Quality
+    description: Quality management and assurance
+  - code: L-LOGISTICS
+    name: Logistics
+    description: Logistics and support
+  - code: O-OPERATIONS
+    name: Operations
+    description: Operational requirements and constraints
+  - code: I-INFRASTRUCTURES
+    name: Infrastructures
+    description: Ground and support infrastructure

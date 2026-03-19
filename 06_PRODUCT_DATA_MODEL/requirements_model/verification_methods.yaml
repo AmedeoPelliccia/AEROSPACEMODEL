@@ -1,0 +1,24 @@
+# Verification Methods — AEROSPACEMODEL
+# Path: 06_PRODUCT_DATA_MODEL/requirements_model/verification_methods.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+verification_methods:
+  - method: TEST
+    description: Physical test execution
+    applicable_classes: [FUNCTIONAL, PERFORMANCE, ENVIRONMENTAL]
+  - method: ANALYSIS
+    description: Mathematical or analytical verification
+    applicable_classes: [PERFORMANCE, SAFETY, STRUCTURAL]
+  - method: INSPECTION
+    description: Physical inspection or review of documentation
+    applicable_classes: [INTERFACE, INSTALLATION]
+  - method: DEMONSTRATION
+    description: Operational demonstration
+    applicable_classes: [FUNCTIONAL, MISSION]
+  - method: SIMILARITY
+    description: Verification by similarity to previously qualified item
+    applicable_classes: [ALL]
+  - method: REVIEW_OF_DESIGN
+    description: Review of design documentation
+    applicable_classes: [INTERFACE, INSTALLATION, MAINTAINABILITY]

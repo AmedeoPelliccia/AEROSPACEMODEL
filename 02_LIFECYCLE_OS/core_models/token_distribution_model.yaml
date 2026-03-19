@@ -1,0 +1,20 @@
+# Token Distribution Model — AEROSPACEMODEL
+# Path: 02_LIFECYCLE_OS/core_models/token_distribution_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+# Teknia Token (TT) distribution model for traceability value units
+
+token_model:
+  unit: TT
+  description: Tokenized traceability value unit
+
+distribution_basis:
+  - criterion: KNOT_COMPLEXITY
+    weight: 0.3
+  - criterion: EVIDENCE_COMPLETENESS
+    weight: 0.3
+  - criterion: COMPLIANCE_STATUS
+    weight: 0.2
+  - criterion: AUDIT_CLOSURE
+    weight: 0.2

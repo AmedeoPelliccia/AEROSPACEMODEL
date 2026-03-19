@@ -1,0 +1,32 @@
+# Evidence Model — AEROSPACEMODEL
+# Path: 02_LIFECYCLE_OS/core_models/evidence_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+# See also: 00_META/schemas/evidence_model.yaml for the schema definition
+
+evidence_acceptance_levels:
+  - level: 1
+    description: Documented and addressable
+  - level: 2
+    description: Reviewed by authority
+  - level: 3
+    description: Formally signed off
+  - level: 4
+    description: Part of certified baseline
+
+minimum_evidence_level_by_phase:
+  LC01: 1
+  LC02: 2
+  LC03: 2
+  LC04: 2
+  LC05: 3
+  LC06: 3
+  LC07: 3
+  LC08: 3
+  LC09: 4
+  LC10: 3
+  LC11: 2
+  LC12: 3
+  LC13: 3
+  LC14: 2

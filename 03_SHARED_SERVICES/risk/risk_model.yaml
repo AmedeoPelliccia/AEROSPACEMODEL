@@ -1,0 +1,42 @@
+# Risk Model — AEROSPACEMODEL
+# Path: 03_SHARED_SERVICES/risk/risk_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+risk_record:
+  required_fields:
+    - risk_id
+    - title
+    - description
+    - probability
+    - impact
+    - risk_level
+    - owner
+    - status
+  optional_fields:
+    - mitigation
+    - contingency
+    - review_date
+    - closure_date
+
+probability_scale:
+  1: Rare
+  2: Unlikely
+  3: Possible
+  4: Likely
+  5: Almost Certain
+
+impact_scale:
+  1: Negligible
+  2: Minor
+  3: Moderate
+  4: Major
+  5: Critical
+
+risk_matrix:
+  description: Risk level = Probability x Impact
+  thresholds:
+    LOW: 1-4
+    MEDIUM: 5-9
+    HIGH: 10-16
+    CRITICAL: 17-25

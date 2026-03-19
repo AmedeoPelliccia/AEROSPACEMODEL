@@ -1,0 +1,15 @@
+code_type,code,meaning,applicable_to
+object_status,DRAFT,Under development,All
+object_status,REVIEW,Under formal review,All
+object_status,APPROVED,Formally approved,All
+object_status,BASELINED,Part of a formal baseline,All
+object_status,SUPERSEDED,Replaced by newer version,All
+object_status,OBSOLETE,No longer applicable,All
+object_status,EXEMPT,Explicitly exempted,All
+compliance_status,NOT_STARTED,Work not yet initiated,KNOT;KNU;Clause
+compliance_status,IN_PROGRESS,Work in progress,KNOT;KNU;Clause
+compliance_status,PENDING_REVIEW,Complete awaiting review,KNOT;KNU;Clause
+compliance_status,COMPLIANT,Fully compliant,KNOT;KNU;Clause
+compliance_status,PARTIAL,Partially compliant,KNOT;KNU;Clause
+compliance_status,NON_COMPLIANT,Does not meet obligation,KNOT;KNU;Clause
+compliance_status,EXEMPT,Explicitly exempted with authority,KNOT;KNU;Clause

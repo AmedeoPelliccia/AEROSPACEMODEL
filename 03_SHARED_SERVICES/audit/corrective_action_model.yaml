@@ -1,0 +1,26 @@
+# Corrective Action Model — AEROSPACEMODEL
+# Path: 03_SHARED_SERVICES/audit/corrective_action_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+corrective_action_record:
+  required_fields:
+    - ca_id
+    - ncr_ref
+    - title
+    - description
+    - root_cause
+    - action_owner
+    - target_date
+    - status
+  optional_fields:
+    - effectiveness_check
+    - closure_date
+    - closure_authority
+
+ca_statuses:
+  - OPEN
+  - IN_PROGRESS
+  - PENDING_VERIFICATION
+  - EFFECTIVE
+  - CLOSED

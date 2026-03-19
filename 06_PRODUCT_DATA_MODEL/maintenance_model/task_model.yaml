@@ -1,0 +1,34 @@
+# Maintenance Task Model — AEROSPACEMODEL
+# Path: 06_PRODUCT_DATA_MODEL/maintenance_model/task_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+maintenance_task:
+  required_fields:
+    - task_id
+    - title
+    - task_type
+    - interval
+    - interval_unit
+    - applicable_sbs
+    - man_hours
+  optional_fields:
+    - procedure_ref
+    - tools_required
+    - parts_required
+    - certification_required
+
+task_types:
+  - SCHEDULED_INSPECTION
+  - ON_CONDITION_INSPECTION
+  - RESTORATION
+  - DISCARD
+  - FAILURE_FINDING
+  - SERVICING
+
+interval_units:
+  - FLIGHT_HOURS
+  - CYCLES
+  - CALENDAR_DAYS
+  - MONTHS
+  - YEARS

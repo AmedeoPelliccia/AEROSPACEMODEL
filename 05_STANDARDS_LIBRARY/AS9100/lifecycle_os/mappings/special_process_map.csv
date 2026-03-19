@@ -1,0 +1,4 @@
+process_id,process_name,standard_ref,lifecycle_phase,nadcap_required,qualification_method,notes
+SP-AS9100-001,Heat Treatment,AS9100 Clause 8.4,LC08,YES,NADCAP Accreditation,
+SP-AS9100-002,Non-Destructive Testing,AS9100 Clause 8.4,LC08,YES,NADCAP Accreditation,
+SP-AS9100-003,Welding,AS9100 Clause 8.4,LC08,YES,Procedure Qualification,

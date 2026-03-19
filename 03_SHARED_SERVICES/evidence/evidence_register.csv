@@ -1,0 +1,2 @@
+oid,title,evidence_type,lifecycle_phase,knot_ref,knu_ref,status,created_date,author,description,file_path,external_ref,review_date,reviewer,signoff_date,signoff_authority
+OID-TEMPLATE-LC01-0001,Template Evidence Entry,RECORD,LC01,KNOT-TEMPLATE-LC01-0001,KNU-TEMPLATE-LC01-0001,DRAFT,2026-03-19,ASIT,Template entry — replace with actual evidence,,,,,, 

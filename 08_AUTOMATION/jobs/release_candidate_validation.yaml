@@ -1,0 +1,23 @@
+# Release Candidate Validation Job
+# Path: 08_AUTOMATION/jobs/release_candidate_validation.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+name: release_candidate_validation
+trigger: manual
+steps:
+  - name: validate_structure
+    script: python3 02_LIFECYCLE_OS/validators/validate_structure.py
+  - name: validate_knots
+    script: python3 02_LIFECYCLE_OS/validators/validate_knots.py
+  - name: validate_knus
+    script: python3 02_LIFECYCLE_OS/validators/validate_knus.py
+  - name: validate_mappings
+    script: python3 02_LIFECYCLE_OS/validators/validate_mappings.py
+  - name: validate_evidence
+    script: python3 02_LIFECYCLE_OS/validators/validate_evidence.py
+  - name: detect_orphans
+    script: python3 08_AUTOMATION/scripts/detect_orphans.py
+  - name: propagate_compliance
+    script: python3 08_AUTOMATION/scripts/propagate_compliance.py
+notify_on_failure: ASIT

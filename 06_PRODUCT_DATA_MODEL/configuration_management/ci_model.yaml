@@ -1,0 +1,26 @@
+# Configuration Item Model — AEROSPACEMODEL
+# Path: 06_PRODUCT_DATA_MODEL/configuration_management/ci_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+configuration_item:
+  required_fields:
+    - ci_id
+    - name
+    - ci_type
+    - sbs_ref
+    - status
+    - baseline_ref
+  optional_fields:
+    - description
+    - version
+    - effectivity
+    - owner
+    - change_history
+
+ci_types:
+  - HARDWARE
+  - SOFTWARE
+  - FIRMWARE
+  - DOCUMENT
+  - DATA

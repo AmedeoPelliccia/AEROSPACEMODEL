@@ -1,0 +1,15 @@
+evidence_type,description,typical_format,applicable_phases
+TEST_REPORT,Formal test report documenting test execution and results,PDF;CSV,LC05;LC06
+ANALYSIS_REPORT,Formal analysis report,PDF,LC05;LC06;LC09
+INSPECTION_RECORD,Record of physical inspection,PDF;CSV,LC07;LC08
+AUDIT_RECORD,Formal audit record,YAML;PDF,LC07;LC09
+QUALIFICATION_RECORD,Qualification evidence record,PDF,LC06;LC09
+ACCEPTANCE_TEST_REPORT,Acceptance test evidence,PDF,LC06;LC08;LC10
+FIRST_ARTICLE_INSPECTION,FAI evidence package,PDF;CSV,LC08
+CERTIFICATE_OF_CONFORMITY,Conformance certificate,PDF,LC08;LC09
+SAFETY_ASSESSMENT_REPORT,Safety analysis and assessment,PDF,LC05;LC09
+VERIFICATION_COMPLIANCE_RECORD,V&V compliance mapping record,CSV;PDF,LC06;LC09
+DESIGN_REVIEW_RECORD,Design review meeting record,PDF,LC03;LC04
+PROCEDURE,Approved procedure document,PDF;MD,LC05;LC06;LC07;LC08;LC11;LC12
+TRAINING_RECORD,Training completion record,PDF;CSV,LC07;LC08;LC11
+OTHER,Other evidence type,Various,LC01;LC02;LC03;LC04;LC05;LC06;LC07;LC08;LC09;LC10;LC11;LC12;LC13;LC14

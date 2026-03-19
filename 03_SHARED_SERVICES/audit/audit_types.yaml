@@ -1,0 +1,29 @@
+# Audit Types — AEROSPACEMODEL
+# Path: 03_SHARED_SERVICES/audit/audit_types.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+audit_types:
+  - id: INTERNAL
+    description: Internal audit against AEROSPACEMODEL governance requirements
+    frequency: Quarterly
+    authority: ASIT
+  - id: EXTERNAL
+    description: External audit by customer or regulatory authority
+    authority: External Party
+  - id: SURVEILLANCE
+    description: Ongoing surveillance audit
+    frequency: Annual
+    authority: QA Authority
+  - id: CERTIFICATION
+    description: Certification-basis compliance audit
+    authority: Certification Authority
+  - id: SUPPLIER
+    description: Supplier quality audit
+    authority: QA Authority
+  - id: PROCESS
+    description: Process compliance audit
+    authority: QA Authority
+  - id: PRODUCT
+    description: Product conformity audit
+    authority: QA Authority

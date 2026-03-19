@@ -1,0 +1,7 @@
+sbs_code,name,level,parent_code,domain,description,ata_chapter
+SYS-000,Aircraft System,0,,ALL,Top-level aircraft system,
+SYS-100,Airframe,1,SYS-000,A-AIRFRAME,Structural airframe,
+SYS-200,Propulsion,1,SYS-000,P-PROPULSION,Propulsion system,
+SYS-300,Electrical,1,SYS-000,E-ELECTRICAL,Electrical system,
+SYS-400,Avionics,1,SYS-000,A-AVIONICS,Avionics systems,
+SYS-500,Software,1,SYS-000,S-SOFTWARE,Embedded and ground software,

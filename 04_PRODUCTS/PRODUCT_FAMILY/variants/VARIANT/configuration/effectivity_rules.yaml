@@ -1,0 +1,6 @@
+# Effectivity Rules — VARIANT
+# Path: 04_PRODUCTS/PRODUCT_FAMILY/variants/VARIANT/configuration/effectivity_rules.yaml
+# Status: DRAFT
+
+variant: VARIANT
+effectivity_rules: []

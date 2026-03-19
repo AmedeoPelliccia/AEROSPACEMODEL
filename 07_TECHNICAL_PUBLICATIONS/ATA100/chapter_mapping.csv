@@ -1,0 +1,12 @@
+ata_chapter,chapter_title,sbs_code,domain,notes
+ATA-21,Air Conditioning,SYS-600,E-ELECTRICAL,
+ATA-22,Auto Flight,SYS-400,A-AVIONICS,
+ATA-23,Communications,SYS-400,A-AVIONICS,
+ATA-24,Electrical Power,SYS-300,E-ELECTRICAL,
+ATA-27,Flight Controls,SYS-100,A-AIRFRAME,
+ATA-28,Fuel,SYS-200,P-PROPULSION,
+ATA-32,Landing Gear,SYS-100,A-AIRFRAME,
+ATA-34,Navigation,SYS-400,A-AVIONICS,
+ATA-49,Airborne Auxiliary Power,SYS-200,P-PROPULSION,
+ATA-70,Standard Practices Engine,SYS-200,P-PROPULSION,
+ATA-71,Power Plant,SYS-200,P-PROPULSION,

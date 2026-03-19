@@ -1,0 +1,30 @@
+# Change Object Model — AEROSPACEMODEL
+# Path: 06_PRODUCT_DATA_MODEL/configuration_management/change_object_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+change_object:
+  required_fields:
+    - change_id
+    - title
+    - change_type
+    - status
+    - raised_date
+    - author
+    - affected_cis
+  optional_fields:
+    - description
+    - justification
+    - impact_assessment
+    - approval_date
+    - approved_by
+    - implementation_date
+    - closure_date
+
+change_types:
+  - ECR
+  - ECO
+  - SERVICE_BULLETIN
+  - AIRWORTHINESS_DIRECTIVE
+  - MODIFICATION
+  - RETROFIT

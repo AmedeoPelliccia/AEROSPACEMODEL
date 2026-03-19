@@ -1,0 +1,17 @@
+# System Breakdown Structure Model — AEROSPACEMODEL
+# Path: 06_PRODUCT_DATA_MODEL/system_breakdown_structure/sbs_model.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+sbs_element:
+  required_fields:
+    - sbs_code
+    - name
+    - level
+    - parent_code
+    - domain
+  optional_fields:
+    - description
+    - ata_chapter
+    - configuration_items
+    - owner

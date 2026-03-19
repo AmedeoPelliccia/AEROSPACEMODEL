@@ -1,0 +1,45 @@
+# BREX Ruleset — AEROSPACEMODEL
+# Path: 01_GOVERNANCE/brex/BREX_RULESET.yaml
+# Authority: ASIT
+# Status: ACTIVE
+
+rules:
+  - rule_id: BREX-001
+    description: Folder names must be controlled vocabulary
+    severity: ERROR
+    validator: validate_structure.py
+
+  - rule_id: BREX-002
+    description: Every active lifecycle phase must contain KNOTS.csv
+    severity: ERROR
+    validator: validate_knots.py
+
+  - rule_id: BREX-003
+    description: Every active lifecycle phase must contain KNU_PLAN.csv
+    severity: ERROR
+    validator: validate_knus.py
+
+  - rule_id: BREX-004
+    description: KNOT IDs must follow format KNOT-<PRODUCT>-<LCCODE>-<SEQ>
+    severity: ERROR
+    validator: validate_knots.py
+
+  - rule_id: BREX-005
+    description: KNU IDs must follow format KNU-<PRODUCT>-<LCCODE>-<SEQ>
+    severity: ERROR
+    validator: validate_knus.py
+
+  - rule_id: BREX-006
+    description: Multi-value fields must use semicolon delimiter
+    severity: WARNING
+    validator: validate_mappings.py
+
+  - rule_id: BREX-007
+    description: Evidence OIDs must be registered in evidence_register.csv
+    severity: ERROR
+    validator: validate_evidence.py
+
+  - rule_id: BREX-008
+    description: Orphan KNUs must be mapped or explicitly exempted
+    severity: ERROR
+    validator: validate_knus.py

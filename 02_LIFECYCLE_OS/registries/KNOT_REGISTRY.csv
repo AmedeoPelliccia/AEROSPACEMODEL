@@ -1,0 +1,2 @@
+knot_id,title,lifecycle_phase,obligation_source,status,owner,created_date,description,clause_refs,knu_refs,compliance_status,notes
+KNOT-TEMPLATE-LC01-0001,Template KNOT — Problem Statement,LC01,Internal Governance,DRAFT,ASIT,2026-03-19,Template entry — replace with product-specific KNOTs,,,NOT_STARTED,Template only

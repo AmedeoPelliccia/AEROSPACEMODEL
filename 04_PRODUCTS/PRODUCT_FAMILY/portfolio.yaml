@@ -1,0 +1,14 @@
+# Portfolio — PRODUCT_FAMILY
+# Path: 04_PRODUCTS/PRODUCT_FAMILY/portfolio.yaml
+# Status: DRAFT
+
+product_family: PRODUCT_FAMILY
+description: <Product family description>
+variants:
+  - id: VARIANT
+    description: Template variant
+    status: DRAFT
+programmes:
+  - id: PROGRAMME
+    description: Template programme
+    status: DRAFT
