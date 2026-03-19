@@ -1,0 +1,81 @@
+# Technology Inheritance — AAM/UAM eVTOL ↔ AMPEL360 Q100 BWB
+# Path: 04_PRODUCTS/AAM_UAM_EVTOL/variants/AAM_UAM_BASE/domains/P-PROPULSION/technology_inheritance.yaml
+# Authority: ASIT
+# Status: ACTIVE_BASELINE
+
+title: Technology Inheritance — AAM/UAM eVTOL → AMPEL360 Q100 BWB
+diagram_title: "Technology inheritance: AAM/UAM → AMPEL360 Q100"
+products:
+  source:
+    id: AAM_UAM_EVTOL
+    variant: AAM_UAM_BASE
+    label: AAM / UAM eVTOL
+    specifics:
+      propulsion: 4–18 rotors, tilt
+      power: Battery-dominant
+      sw_hw: FBW + autonomous
+      certification: SC-VTOL (2026–27)
+  target:
+    id: AMPEL360_Q100_BWB
+    variant: Q100_BWB_BASE
+    label: AMPEL360 Q100 BWB
+    specifics:
+      propulsion: Open-fan, BWB
+      power: H₂ FC primary
+      sw_hw: FBW + AI monitoring
+      certification: CS-25 + SC (2030+)
+
+shared_technology_nodes:
+  - node_id: TECH-SHARED-001
+    title: Distributed electric propulsion
+    ata_refs: [ATA-61, ATA-71]
+    description: N motor-propulsor units, DC bus, motor-out certification logic
+    aam_knot: KNOT-AAMUAM-LC03-0001
+    q100_knot: KNOT-Q100BWB-LC03-0001
+    spillover_coefficient: 0.50
+
+  - node_id: TECH-SHARED-002
+    title: Power management and peak buffering
+    ata_refs: [ATA-24]
+    description: FC primary + battery buffer for transient loads
+    aam_knot: KNOT-AAMUAM-LC03-0002
+    q100_knot: KNOT-Q100BWB-LC03-0002
+    spillover_coefficient: 0.50
+
+  - node_id: TECH-SHARED-003
+    title: Battery thermal management and DPP
+    ata_refs: [ATA-24, ATA-96]
+    description: Runaway containment, SoH tracking, EU Battery Regulation compliance
+    aam_knot: KNOT-AAMUAM-LC03-0003
+    q100_knot: KNOT-Q100BWB-LC03-0003
+    spillover_coefficient: 0.50
+    note: Key spillover node — AAM battery KNOTs reduce Q100 buffer battery uncertainty
+
+  - node_id: TECH-SHARED-004
+    title: DO-178C / DO-254 motor controller assurance
+    ata_refs: []
+    standards: [DO-178C, DO-254]
+    description: DAL A/B for flight-critical electric drive
+    aam_knot: KNOT-AAMUAM-LC03-0004
+    q100_knot: KNOT-Q100BWB-LC03-0004
+    spillover_coefficient: 0.50
+
+  - node_id: TECH-SHARED-005
+    title: First-of-kind certification pathway
+    ata_refs: []
+    standards: [SC-VTOL, CS-25]
+    description: SC-VTOL precedent → Q100 Special Conditions
+    aam_knot: KNOT-AAMUAM-LC03-0005
+    q100_knot: KNOT-Q100BWB-LC03-0005
+    spillover_coefficient: 0.50
+    note: SC-VTOL type certificate precedent feeds CS-25 + Special Conditions for Q100
+
+knot_spillover_model:
+  coefficient_a: 0.50
+  description: >
+    Resolving AAM/UAM battery KNOTs reduces AMPEL360 Q100 buffer battery uncertainty
+    (and vice versa). KNOT spillover is bidirectional across all five shared technology nodes.
+  tokenomics:
+    description: TT rewards flow bidirectionally via TOKENOMICS spillover
+    direction: BIDIRECTIONAL
+    trigger: KNOT compliance state change in either product
