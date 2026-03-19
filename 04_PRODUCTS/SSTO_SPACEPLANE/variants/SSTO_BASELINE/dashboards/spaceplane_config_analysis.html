@@ -344,26 +344,41 @@
 
 <!-- Row 1 -->
 <div class="knots-grid">
-  <div class="knot-card knot-mode-sw" onclick="showKnot('mode-sw', this)">
+  <div class="knot-card knot-mode-sw"
+       role="button" tabindex="0"
+       onclick="showKnot('mode-sw', this)"
+       onkeydown="handleKnotKey(event, 'mode-sw', this)">
     <div class="knot-title">Mode switching</div>
     <div class="knot-sub">Propulsion transition</div>
   </div>
-  <div class="knot-card knot-tps-re" onclick="showKnot('tps-re', this)">
+  <div class="knot-card knot-tps-re"
+       role="button" tabindex="0"
+       onclick="showKnot('tps-re', this)"
+       onkeydown="handleKnotKey(event, 'tps-re', this)">
     <div class="knot-title">TPS reusability</div>
     <div class="knot-sub">Inspect, certify, re-fly</div>
   </div>
-  <div class="knot-card knot-abort" onclick="showKnot('abort', this)">
+  <div class="knot-card knot-abort"
+       role="button" tabindex="0"
+       onclick="showKnot('abort', this)"
+       onkeydown="handleKnotKey(event, 'abort', this)">
     <div class="knot-title">Abort coverage</div>
     <div class="knot-sub">Full-envelope safe return</div>
   </div>
 </div>
 <!-- Row 2 -->
 <div class="knots-grid-2" style="margin-bottom:4px;">
-  <div class="knot-card knot-dual-reg" onclick="showKnot('dual-reg', this)">
+  <div class="knot-card knot-dual-reg"
+       role="button" tabindex="0"
+       onclick="showKnot('dual-reg', this)"
+       onkeydown="handleKnotKey(event, 'dual-reg', this)">
     <div class="knot-title">Dual regulatory framework</div>
     <div class="knot-sub">Airworthiness + launch licence</div>
   </div>
-  <div class="knot-card knot-cryo" onclick="showKnot('cryo', this)">
+  <div class="knot-card knot-cryo"
+       role="button" tabindex="0"
+       onclick="showKnot('cryo', this)"
+       onkeydown="handleKnotKey(event, 'cryo', this)">
     <div class="knot-title">Cryo reuse cycle</div>
     <div class="knot-sub">LH&#8322;/LOX turnaround, fatigue</div>
   </div>
@@ -378,7 +393,7 @@
       <div class="detail-id"  id="detail-id"></div>
       <div class="detail-title" id="detail-title"></div>
     </div>
-    <button class="detail-close" onclick="closeKnot()">&#10005; Close</button>
+    <button class="detail-close" id="knot-detail-close" onclick="closeKnot()">&#10005; Close</button>
   </div>
   <div class="detail-desc" id="detail-desc"></div>
   <div class="knu-list-title">Required KNUs</div>
@@ -394,7 +409,7 @@ const KNOTS = {
            "across the full flight envelope. Covers ignition sequencing, failure modes and abort " +
            "capability during the transition window.",
     knus: [
-      { id: "KNU-SSTO-LC09-0001", cls: "VALIDATION_OBJECT",
+      { id: "KNU-SSTO-LC09-0001", cls: "ARTEFACT",
         title: "Mode Transition Test Programme",
         desc:  "Test programme for combined-cycle engine mode transition across the full Mach range, " +
                "including failure mode verification." },
@@ -415,11 +430,11 @@ const KNOTS = {
            "authorisation process for the metallic / CMC TPS following each hypersonic re-entry. " +
            "No existing certification basis covers reusable metallic TPS re-flight authorisation.",
     knus: [
-      { id: "KNU-SSTO-LC09-0004", cls: "PROCEDURE",
+      { id: "KNU-SSTO-LC09-0004", cls: "ARTEFACT",
         title: "TPS Inspection Criteria and Procedure",
         desc:  "Inspection criteria and procedure for TPS panel assessment after each hypersonic " +
                "re-entry mission (erosion, delamination, thermal damage)." },
-      { id: "KNU-SSTO-LC09-0005", cls: "PROCEDURE",
+      { id: "KNU-SSTO-LC09-0005", cls: "ARTEFACT",
         title: "TPS Re-flight Authorisation Process",
         desc:  "Formal re-flight authorisation process defining pass/fail criteria and signoff " +
                "authority for TPS re-use." },
@@ -440,7 +455,7 @@ const KNOTS = {
         title: "Abort Mode Analysis \u2014 Full Envelope",
         desc:  "Analysis of abort modes and trajectories covering all mission phases: subsonic, " +
                "transonic, supersonic, hypersonic and orbital abort cases." },
-      { id: "KNU-SSTO-LC09-0008", cls: "VALIDATION_OBJECT",
+      { id: "KNU-SSTO-LC09-0008", cls: "ARTEFACT",
         title: "Return-to-Landing Capability Verification",
         desc:  "Flight simulation and test verification of return-to-landing capability from " +
                "each abort scenario." },
@@ -484,7 +499,7 @@ const KNOTS = {
         title: "Cryo Tank Fatigue Analysis",
         desc:  "Structural fatigue analysis for LH\u2082/LOX integral tanks under cryogenic thermal " +
                "cycling and pressure load spectra." },
-      { id: "KNU-SSTO-LC09-0014", cls: "PROCEDURE",
+      { id: "KNU-SSTO-LC09-0014", cls: "ARTEFACT",
         title: "Cryo Tank Inspection and Turnaround Procedure",
         desc:  "Inspection and turnaround procedure defining minimum inspection intervals and " +
                "allowable re-use life." },
@@ -497,10 +512,12 @@ const KNOTS = {
 };
 
 let activeKey = null;
+let _lastCardEl = null;
 
 function showKnot(key, cardEl) {
   if (activeKey === key) { closeKnot(); return; }
   activeKey = key;
+  _lastCardEl = cardEl;
 
   document.querySelectorAll('.knot-card').forEach(c => c.classList.remove('active'));
   cardEl.classList.add('active');
@@ -524,12 +541,23 @@ function showKnot(key, cardEl) {
   const panel = document.getElementById('knot-detail');
   panel.style.display = 'block';
   panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  document.getElementById('knot-detail-close').focus();
 }
 
 function closeKnot() {
+  const prev = _lastCardEl;
   activeKey = null;
+  _lastCardEl = null;
   document.getElementById('knot-detail').style.display = 'none';
   document.querySelectorAll('.knot-card').forEach(c => c.classList.remove('active'));
+  if (prev) prev.focus();
+}
+
+function handleKnotKey(event, key, cardEl) {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    showKnot(key, cardEl);
+  }
 }
 </script>
 
