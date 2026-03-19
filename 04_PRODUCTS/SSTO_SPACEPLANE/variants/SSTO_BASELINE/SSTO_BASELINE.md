@@ -9,12 +9,16 @@
 ## Purpose
 
 Defines the SSTO_BASELINE product variant: the baseline integrated
-airframe-propulsion spaceplane configuration for SSTO / hypersonic transport.
+airframe-propulsion spaceplane configuration for orbital SSTO access.
+
+This assessment addresses the orbital SSTO mission only. It does not treat
+hypersonic point-to-point transport as an equivalent mission class.
 
 ## Vehicle Description
 
-Integrated airframe-propulsion vehicle — waverider-derived, metallic TPS,
-M 0–25+. Shock system feeds inlet.
+Reusable integrated airframe-propulsion orbital vehicle with cryogenic
+LH₂/LOX propellant architecture, metallic/CMC TPS, and horizontal runway
+take-off and landing.
 
 ### System Breakdown (ATA References)
 
@@ -37,6 +41,16 @@ M 0–25+. Shock system feeds inlet.
 | Orbit/apex  | M 25+ / coast   |                                               |
 | Re-entry    | TPS critical    |                                               |
 | Return      | Subsonic glide  | Powered approach + runway landing             |
+
+### Reference Assessment Targets
+
+| Parameter         | Target                              |
+|-------------------|-------------------------------------|
+| Payload to LEO    | 5–10 metric tons                    |
+| Orbit             | ~200 km circular LEO                |
+| Reusability       | Full vehicle reuse, no discard      |
+| Turnaround        | ≤ 48 hours (aspiration)             |
+| Cost target       | < $10M/mission (stress-test)        |
 
 ## Configuration
 
