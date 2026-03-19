@@ -1,0 +1,21 @@
+# Portfolio — HAPS
+# Path: 04_PRODUCTS/HAPS/portfolio.yaml
+# Status: ACTIVE_BASELINE
+
+product_family: HAPS
+description: >
+  High Altitude Platform Station (HAPS) — solar-electric stratospheric unmanned
+  aerial system designed for persistent station-keeping at 18–22 km altitude,
+  providing telecommunications relay, Earth observation, and ISR services.
+status: ACTIVE_BASELINE
+authority: ASIT
+
+variants:
+  - id: HAPS-SE
+    description: Solar Electric baseline configuration — ultra-high AR wing, twin-boom, composite, 4x electric propellers
+    status: ACTIVE_BASELINE
+
+programmes:
+  - id: HAPS-SE-DEV
+    description: HAPS Solar Electric development programme
+    status: ACTIVE

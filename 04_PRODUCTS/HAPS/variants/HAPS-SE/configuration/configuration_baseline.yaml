@@ -1,0 +1,73 @@
+# Configuration Baseline — HAPS-SE
+# Path: 04_PRODUCTS/HAPS/variants/HAPS-SE/configuration/configuration_baseline.yaml
+# Status: ACTIVE_BASELINE
+
+variant: HAPS-SE
+product_family: HAPS
+baseline_type: AS_DESIGNED
+declared_date: "2026-03-19"
+declared_by: ASIT
+status: ACTIVE_BASELINE
+
+configuration_items:
+
+  - ci_id: CI-HAPS-SE-001
+    name: Airframe Structure
+    ata_chapters: ["51", "52", "53", "54", "55", "56", "57"]
+    description: Ultra-high aspect ratio twin-boom composite primary structure
+    key_parameters:
+      configuration: twin-boom H-tail
+      material: composite (CFRP primary)
+      aspect_ratio: ">25"
+    status: AS_DESIGNED
+
+  - ci_id: CI-HAPS-SE-002
+    name: Wing Assembly
+    ata_chapters: ["57"]
+    description: Solar array substrate wing with flex spar and distributed solar cells
+    key_parameters:
+      aspect_ratio: ">25"
+      spar_type: flex spar
+      solar_integration: integral substrate
+    status: AS_DESIGNED
+
+  - ci_id: CI-HAPS-SE-003
+    name: Energy System
+    ata_chapters: ["24", "28"]
+    description: Solar cell array power generation combined with battery buffer for day/night cycle energy management
+    key_parameters:
+      generation_type: solar photovoltaic
+      storage_type: battery buffer
+      cycle_management: day/night automated
+    status: AS_DESIGNED
+
+  - ci_id: CI-HAPS-SE-004
+    name: Propulsion System
+    ata_chapters: ["61", "71"]
+    description: Distributed electric propulsion — 4 propeller units with electric motors and controllers
+    key_parameters:
+      propeller_count: 4
+      drive_type: electric motor
+      control: distributed motor controllers
+    status: AS_DESIGNED
+
+  - ci_id: CI-HAPS-SE-005
+    name: Payload System
+    ata_chapters: ["46"]
+    description: Multi-mission payload bay supporting Comms, Electro-Optical and ISR payloads
+    key_parameters:
+      payload_classes:
+        - Communications relay
+        - Electro-Optical (EO) sensor
+        - Intelligence Surveillance Reconnaissance (ISR)
+    status: AS_DESIGNED
+
+  - ci_id: CI-HAPS-SE-006
+    name: Tail Assembly
+    ata_chapters: ["55"]
+    description: Twin-boom H-tail stabiliser assembly
+    key_parameters:
+      configuration: H-tail
+      boom_count: 2
+      material: composite
+    status: AS_DESIGNED
