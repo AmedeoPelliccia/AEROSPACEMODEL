@@ -125,9 +125,9 @@ domain_model:
     - A-AIRFRAME
     - P-PROPULSION
     - E-ELECTRICAL
-    - A-AVIONICS
+    - V-AVIONICS
     - S-SOFTWARE
-    - ENV-ENVIRONMENTAL
+    - G-ENVIRONMENTAL
     - Q-SAFETY
     - M-MAINTAINABILITY
     - H-HUMAN_FACTORS
@@ -158,7 +158,7 @@ top_level_structure:
       domain: E-ELECTRICAL
     - sbs_code: SYS-400
       name: Avionics
-      domain: A-AVIONICS
+      domain: V-AVIONICS
     - sbs_code: SYS-500
       name: Software
       domain: S-SOFTWARE
@@ -166,7 +166,7 @@ top_level_structure:
   optional_nodes:
     - sbs_code: SYS-600
       name: Environmental and Crew Systems
-      domain: ENV-ENVIRONMENTAL
+      domain: G-ENVIRONMENTAL
     - sbs_code: SYS-700
       name: Safety and Protection
       domain: Q-SAFETY
