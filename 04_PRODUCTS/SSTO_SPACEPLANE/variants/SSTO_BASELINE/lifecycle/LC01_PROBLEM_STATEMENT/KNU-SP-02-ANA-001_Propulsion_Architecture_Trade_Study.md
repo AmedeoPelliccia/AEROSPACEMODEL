@@ -23,7 +23,7 @@
 | 0.1 | 2026-03-22 | Initial draft |
 | 0.2 | 2026-03-22 | Incorporated review corrections: reclassified as screening trade; corrected terminology; revised Branch A verdict. |
 | 0.3 | 2026-03-22 | Final review corrections: Corrected M ≤ 2.5 classification; added sensitivity indicators; softened analogues; expanded residual trajectory; tagged abort numbers as notional. |
-| 0.4 | 2026-03-22 | **Final Polish:** Softened language in Section 1 (screening limitations); standardized mass breakdown line items in Sections 4.2/4.3; added GAIA spillover qualifier; restored Review &amp; Approval table. |
+| 0.4 | 2026-03-22 | **Final Polish:** Softened language in Section 1 (screening limitations); standardized mass breakdown line items in Sections 4.2/4.3; added GAIA spillover qualifier; restored Review & Approval table. |
 
 ---
 
@@ -97,7 +97,7 @@ The selected architecture constrains all subsequent analyses:
 | **Engine mass/thrust** | –– (2–4× rocket) | ++ (Lightest) | + (Light subsystems) |
 | **Mode transitions** | –– (3 high-risk events) | ++ (0 events) | + (1 event at M 2.5) |
 | **Propellant fraction (SSTO)** | + (~82–85%) | –– (~90–92%) | – (~87–89%) |
-| **Thermal integration** | –– (Inlet &gt;2,000 K) | + (Steep climb) | 0 (Moderate) |
+| **Thermal integration** | –– (Inlet >2,000 K) | + (Steep climb) | 0 (Moderate) |
 | **Aircraft-like operability** | ++ (Full envelope) | –– (No diversion) | + (Low-speed diversion) |
 | **TRL / Heritage** | –– (No flight-proven system) | ++ (High heritage) | + (Proven subsystems) |
 
@@ -116,7 +116,7 @@ The ranking is most sensitive to:
 ## 4. Architecture-Specific Closure Assessment
 
 ### 4.1 Architecture A — TBCC
-The TBCC offers theoretical performance advantages via high Isp, reducing propellant fraction. However, the engine mass penalty (2–4× rocket) consumes much of the inert mass savings. For a vehicle requiring &lt;10–12% inert mass fraction, this penalty is critical.
+The TBCC offers theoretical performance advantages via high Isp, reducing propellant fraction. However, the engine mass penalty (2–4× rocket) consumes much of the inert mass savings. For a vehicle requiring <10–12% inert mass fraction, this penalty is critical.
 
 **Risk Profile:**
 *   **Mode Transition:** Three transitions (Turbojet → Ramjet → Scramjet → Rocket) must occur within narrow corridors. No certification framework exists for in-flight thermodynamic cycle changes.
@@ -205,7 +205,7 @@ This selection does **not** close GU-01 (Branch Convergence). Architecture C can
 
 ### 6.2 Programme Decision Required
 **Decision Point:** Definition of Branch A scope.
-The mass model (KNU-SP-05-ANA-001) cannot finalize inputs until Branch A scope is resolved. If Branch A remains a requirement for M &gt; 2.5 cruise, GU-01 cannot close under this architecture. This decision is required before the next programme review.
+The mass model (KNU-SP-05-ANA-001) cannot finalize inputs until Branch A scope is resolved. If Branch A remains a requirement for M > 2.5 cruise, GU-01 cannot close under this architecture. This decision is required before the next programme review.
 
 ---
 
