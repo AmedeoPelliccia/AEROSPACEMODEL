@@ -4,11 +4,14 @@
 
 product_family: SSTO_SPACEPLANE
 description: >
-  Single-Stage-To-Orbit spaceplane for hypersonic transport. Waverider-derived,
-  metallic TPS, M 0-25+. Shock system feeds inlet. Combined-cycle or rocket
-  propulsion (LH2/LOX). Runway take-off and landing.
+  Single-Stage-To-Orbit reusable spaceplane for orbital access. Integrated
+  airframe-propulsion vehicle with metallic/CMC TPS, M 0 to orbital insertion.
+  Cryogenic LH2/LOX propellant architecture. Combined-cycle or rocket
+  propulsion. Horizontal runway take-off and landing. Orbital SSTO mission
+  only; does not treat hypersonic point-to-point transport as an equivalent
+  mission class.
 variants:
   - id: SSTO_BASELINE
-    description: Baseline integrated airframe-propulsion vehicle
+    description: Baseline integrated airframe-propulsion orbital vehicle
     status: DRAFT
 programmes: []
