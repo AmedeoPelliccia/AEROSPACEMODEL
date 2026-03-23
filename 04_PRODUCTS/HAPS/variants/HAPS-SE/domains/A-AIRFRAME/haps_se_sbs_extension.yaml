@@ -1,0 +1,109 @@
+# HAPS-SE System Breakdown Structure Extension
+# Path: 04_PRODUCTS/HAPS/variants/HAPS-SE/domains/A-AIRFRAME/haps_se_sbs_extension.yaml
+# Status: ACTIVE_BASELINE
+# Authority: ASIT
+# Note: This file extends the canonical SBS (06_PRODUCT_DATA_MODEL/system_breakdown_structure/sbs_codes.csv)
+#       with HAPS-SE specific decomposition. It does not modify the canonical root.
+
+variant: HAPS-SE
+product_family: HAPS
+sbs_extension_version: "1.0"
+authority: ASIT
+declared_date: "2026-03-19"
+
+description: >
+  HAPS Solar Electric platform SBS extension. Maps HAPS-SE subsystems to
+  canonical SBS top-level systems and introduces product-specific decomposition
+  nodes for the ultra-high AR wing/solar array, twin-boom airframe, distributed
+  electric propulsion, stratospheric energy system, and multi-mission payload.
+
+nodes:
+
+  # ── Airframe (ATA 51–57) ─────────────────────────────────────────────────
+  - sbs_code: SYS-110-HAPS-001
+    name: HAPS Wing Assembly
+    level: 3
+    parent_code: SYS-110
+    domain: A-AIRFRAME
+    description: >
+      Ultra-high aspect ratio (AR > 25) composite wing with integrated flex spar
+      and solar array substrate. Primary lifting and energy-harvesting structure.
+    ata_chapter: "57"
+    haps_key_parameters:
+      aspect_ratio: ">25"
+      spar_type: flex spar
+      solar_substrate: integrated
+
+  - sbs_code: SYS-110-HAPS-002
+    name: HAPS Tail Assembly
+    level: 3
+    parent_code: SYS-110
+    domain: A-AIRFRAME
+    description: Twin-boom H-tail stabiliser assembly. Booms carry tail control surfaces and provide propulsion mounting points.
+    ata_chapter: "55"
+    haps_key_parameters:
+      configuration: H-tail
+      boom_count: 2
+
+  - sbs_code: SYS-110-HAPS-003
+    name: HAPS Centre Body
+    level: 3
+    parent_code: SYS-110
+    domain: A-AIRFRAME
+    description: Central fuselage pod housing avionics, battery system, and payload bay.
+    ata_chapter: "53"
+
+  # ── Propulsion (ATA 61+71) ───────────────────────────────────────────────
+  - sbs_code: SYS-230-HAPS-001
+    name: HAPS Distributed Electric Propulsion Array
+    level: 3
+    parent_code: SYS-230
+    domain: P-PROPULSION
+    description: >
+      4× distributed electric propeller units mounted along the wing leading edge.
+      Each unit comprises a propeller blade set, brushless electric motor, and motor controller.
+    ata_chapter: "61;71"
+    haps_key_parameters:
+      propeller_count: 4
+      drive_type: brushless electric motor
+      arrangement: distributed spanwise
+
+  # ── Electrical / Energy (ATA 24+28) ─────────────────────────────────────
+  - sbs_code: SYS-310-HAPS-001
+    name: HAPS Solar Cell Array
+    level: 3
+    parent_code: SYS-310
+    domain: E-ELECTRICAL
+    description: >
+      High-efficiency photovoltaic cells integrated into the wing upper surface.
+      Provides primary electrical power generation in daylight operations.
+    ata_chapter: "24"
+
+  - sbs_code: SYS-340-HAPS-001
+    name: HAPS Battery Buffer System
+    level: 3
+    parent_code: SYS-340
+    domain: E-ELECTRICAL
+    description: >
+      Rechargeable battery pack providing energy storage for night operations.
+      Managed by the energy management system to maintain day/night power continuity.
+    ata_chapter: "24;28"
+    haps_key_parameters:
+      cycle_type: day/night
+      charge_source: solar array
+
+  # ── Avionics / Payload (ATA 46) ──────────────────────────────────────────
+  - sbs_code: SYS-470-HAPS-001
+    name: HAPS Multi-Mission Payload System
+    level: 3
+    parent_code: SYS-470
+    domain: V-AVIONICS
+    description: >
+      Integrated payload bay supporting interchangeable Comms, Electro-Optical (EO),
+      and ISR mission packages. Managed via the information systems bus (ATA 46).
+    ata_chapter: "46"
+    haps_key_parameters:
+      payload_classes:
+        - Communications relay
+        - Electro-Optical (EO) sensor
+        - Intelligence Surveillance Reconnaissance (ISR)
