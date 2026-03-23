@@ -1,0 +1,49 @@
+# Power Management Architecture — AAM/UAM eVTOL
+# Path: 04_PRODUCTS/AAM_UAM_EVTOL/variants/AAM_UAM_BASE/domains/E-ELECTRICAL/power_management.yaml
+# Authority: ASIT
+# Status: ACTIVE_BASELINE
+
+title: Power Management Architecture — AAM/UAM eVTOL
+ata_chapter: ATA-24
+governing_knot: KNOT-AAMUAM-LC03-0002
+
+architecture:
+  topology: Battery-dominant with transient buffer
+  primary_source: High-capacity lithium battery pack
+  buffer_source: Supercapacitor or secondary battery buffer for peak transient loads
+  dc_bus_voltage: 800  # V nominal
+  fault_tolerance: Dual-redundant bus; motor-out capability per KNOT-AAMUAM-LC03-0001
+
+power_phases:
+  - phase: Vertical climb (VTOL)
+    power_demand: peak
+    duration_s: 60–120
+    source: Primary battery + buffer
+  - phase: Transition
+    power_demand: high
+    duration_s: 30–60
+    source: Primary battery
+  - phase: Cruise
+    power_demand: moderate
+    duration_s: 480–1500
+    source: Primary battery
+  - phase: Deceleration
+    power_demand: moderate
+    duration_s: 30–60
+    source: Primary battery (regenerative braking possible)
+  - phase: Vertical descent
+    power_demand: high
+    duration_s: 60–120
+    source: Primary battery + buffer
+
+battery_management:
+  soh_tracking: continuous
+  degradation_model: Arrhenius + cycle-count empirical model
+  dpp_compliance: EU Battery Regulation 2023/1542
+  governing_knot: KNOT-AAMUAM-LC03-0003
+
+spillover_link:
+  product: AMPEL360_Q100_BWB
+  linked_knot: KNOT-Q100BWB-LC03-0002
+  coefficient: 0.50
+  note: Advances in AAM battery buffer sizing directly inform Q100 H2 FC peak buffering design

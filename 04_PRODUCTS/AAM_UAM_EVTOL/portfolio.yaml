@@ -1,0 +1,37 @@
+# Portfolio — AAM_UAM_EVTOL
+# Path: 04_PRODUCTS/AAM_UAM_EVTOL/portfolio.yaml
+# Status: ACTIVE_BASELINE
+
+product_family: AAM_UAM_EVTOL
+description: >
+  Advanced Air Mobility / Urban Air Mobility eVTOL aircraft family for metro and regional
+  air mobility missions operating in U-space corridors (150–300 m AGL).
+variants:
+  - id: AAM_UAM_BASE
+    description: Base eVTOL configuration — 1 to 6 passengers, 30–150 km range
+    status: ACTIVE_BASELINE
+    certification_basis: SC-VTOL
+    target_entry_into_service: "2027"
+programmes:
+  - id: AAM_UAM_CERT
+    description: SC-VTOL certification programme
+    status: ACTIVE
+    milestones:
+      - id: M1
+        description: Concept of Operations accepted by EASA
+        target_date: "2026-06"
+      - id: M2
+        description: SC-VTOL type certificate application
+        target_date: "2026-12"
+      - id: M3
+        description: First flight
+        target_date: "2027-06"
+      - id: M4
+        description: Type certificate issue
+        target_date: "2027-12"
+technology_spillover:
+  linked_product: AMPEL360_Q100_BWB
+  knot_spillover_coefficient: 0.50
+  description: >
+    Resolving AAM/UAM battery KNOTs reduces AMPEL360 Q100 buffer battery uncertainty
+    and vice versa. TT rewards flow bidirectionally via TOKENOMICS spillover.

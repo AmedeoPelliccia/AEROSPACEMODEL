@@ -1,0 +1,39 @@
+# Portfolio — AMPEL360_Q100_BWB
+# Path: 04_PRODUCTS/AMPEL360_Q100_BWB/portfolio.yaml
+# Status: ACTIVE_BASELINE
+
+product_family: AMPEL360_Q100_BWB
+description: >
+  AMPEL360 Q100 Blended Wing Body aircraft with distributed electric propulsion,
+  hydrogen fuel cell primary power, and open-fan architecture for ~100 passengers.
+variants:
+  - id: Q100_BWB_BASE
+    description: Q100 BWB base configuration — H2 FC primary, open-fan distributed propulsion
+    status: ACTIVE_BASELINE
+    certification_basis: CS-25 + Special Conditions
+    target_entry_into_service: "2031"
+programmes:
+  - id: Q100_TYPE_CERT
+    description: CS-25 + Special Conditions type certification programme
+    status: ACTIVE
+    milestones:
+      - id: M1
+        description: Preliminary design review
+        target_date: "2027-06"
+      - id: M2
+        description: CS-25 + SC certification basis agreement with EASA
+        target_date: "2028-06"
+      - id: M3
+        description: First flight
+        target_date: "2030-06"
+      - id: M4
+        description: Type certificate issue
+        target_date: "2031-12"
+technology_spillover:
+  linked_product: AAM_UAM_EVTOL
+  knot_spillover_coefficient: 0.50
+  description: >
+    Resolving AMPEL360 Q100 buffer battery KNOTs reduces AAM/UAM battery uncertainty
+    and vice versa. TT rewards flow bidirectionally via TOKENOMICS spillover.
+    SC-VTOL precedent from AAM/UAM programme establishes certification basis
+    for Q100 CS-25 + Special Conditions.
