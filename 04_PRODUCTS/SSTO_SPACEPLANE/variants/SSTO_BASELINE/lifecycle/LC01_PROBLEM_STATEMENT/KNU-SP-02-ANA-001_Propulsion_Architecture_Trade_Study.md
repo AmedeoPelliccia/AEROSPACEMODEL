@@ -12,8 +12,8 @@
 | **Priority** | P0 (Programme-gate prerequisite) |
 | **Owner** | STK_SE (Systems Engineering) |
 | **Stakeholders** | STK_SAF; STK_CERT; STK_TEST |
-| **Version** | 0.4 |
-| **Date** | 2026-03-22 |
+| **Version** | 0.5 |
+| **Date** | 2026-03-25 |
 | **Status** | IN_REVIEW |
 
 ### Change Log
@@ -24,6 +24,7 @@
 | 0.2 | 2026-03-22 | Incorporated review corrections: reclassified as screening trade; corrected terminology; revised Branch A verdict. |
 | 0.3 | 2026-03-22 | Final review corrections: Corrected M ≤ 2.5 classification; added sensitivity indicators; softened analogues; expanded residual trajectory; tagged abort numbers as notional. |
 | 0.4 | 2026-03-22 | **Final Polish:** Softened language in Section 1 (screening limitations); standardized mass breakdown line items in Sections 4.2/4.3; added GAIA spillover qualifier; restored Review & Approval table. |
+| 0.5 | 2026-03-25 | Added Section 10 — ESG Real-Time Footprint (Huella) covering development, mission/operations, MRO, and reuse stages with regional impact mapping and architecture-specific sustainability assessment. |
 
 ---
 
@@ -411,18 +412,293 @@ graph TD
 
 ---
 
-## 10. Appendix — Assessment Methodology
+## 10. ESG Real-Time Footprint — Lifecycle Huella Assessment
 
-### 10.1 Scoring Basis
+A 100% carbon-neutral spaceplane is not achievable within current technology constraints. This section establishes a **real-time ESG (Environmental, Social, Governance) footprint framework** — "huella" — that maps environmental and social impact across the full lifecycle for each candidate architecture. The objective is not to greenwash, but to **bound the impact honestly**, identify reduction levers, and embed sustainability tracking into programme governance from the earliest feasibility phase.
+
+### 10.1 Lifecycle Phases and Regional Scope
+
+The ESG footprint is assessed across four lifecycle phases, each with distinct geographic and environmental characteristics:
+
+| Phase | Activities | Primary Regions | Duration |
+| :--- | :--- | :--- | :--- |
+| **Development** | Material processing, component manufacture, engine testing, structural assembly, qualification campaigns | EU (primary), US, Japan (supply chain) | 8–15 years |
+| **Mission & Operations** | Ground processing, propellant production/delivery, ascent/re-entry flight, landing/turnaround | Equatorial/mid-latitude launch sites, global corridors, designated landing sites | 20–30 year service life |
+| **MRO** | Inspection, TPS refurbishment, engine overhaul, avionics refresh, structural repair | Co-located with launch site + specialized depots (EU, US) | Per-flight + periodic deep MRO |
+| **Reuse & End-of-Life** | Vehicle reuse cycles, component harvesting, material recycling, decommissioning | Manufacturing region + specialized recycling (composite, cryogenic, alloy recovery) | End of service life |
+
+```mermaid
+graph LR
+    subgraph DEV ["Phase 1 — Development"]
+        D1["Material<br/>Processing"]
+        D2["Component<br/>Manufacture"]
+        D3["Engine<br/>Testing"]
+        D4["Vehicle<br/>Assembly"]
+        D5["Qualification<br/>Campaigns"]
+        D1 --> D2 --> D3 --> D4 --> D5
+    end
+
+    subgraph OPS ["Phase 2 — Mission & Operations"]
+        O1["Propellant<br/>Production"]
+        O2["Ground<br/>Processing"]
+        O3["Ascent<br/>Flight"]
+        O4["Re-entry &<br/>Landing"]
+        O5["Turnaround"]
+        O1 --> O2 --> O3 --> O4 --> O5
+        O5 -->|"Reuse<br/>cycle"| O1
+    end
+
+    subgraph MRO ["Phase 3 — MRO"]
+        M1["Post-Flight<br/>Inspection"]
+        M2["TPS<br/>Refurbishment"]
+        M3["Engine<br/>Overhaul"]
+        M4["Avionics &<br/>Systems"]
+        M1 --> M2 --> M3 --> M4
+    end
+
+    subgraph EOL ["Phase 4 — Reuse & End-of-Life"]
+        E1["Component<br/>Harvesting"]
+        E2["Material<br/>Recycling"]
+        E3["Decommission"]
+        E1 --> E2 --> E3
+    end
+
+    DEV --> OPS
+    OPS --> MRO
+    MRO -->|"Return to<br/>service"| OPS
+    MRO -->|"Life limit<br/>reached"| EOL
+
+    style DEV fill:#E3F2FD,color:#0D47A1,stroke:#1565C0
+    style OPS fill:#FFF3E0,color:#E65100,stroke:#FF9800
+    style MRO fill:#E8F5E9,color:#1B5E20,stroke:#2E7D32
+    style EOL fill:#F3E5F5,color:#4A148C,stroke:#7B1FA2
+```
+*Figure 8 — ESG lifecycle phase flow. The reuse cycle (Operations ↔ MRO) is the primary sustainability lever, reducing per-mission amortized environmental cost.*
+
+### 10.2 Architecture-Specific ESG Comparison
+
+#### 10.2.1 Development Phase Footprint
+
+| ESG Dimension | A: TBCC | B: Rocket-Dominant | C: Hybrid |
+| :--- | :--- | :--- | :--- |
+| **Manufacturing complexity** | Very High — variable-geometry inlet, 4 engine types, exotic high-temperature alloys | Low — single rocket engine type, conventional cryogenic tankage | Moderate — turbofan (mature supply chain) + rocket |
+| **Material intensity** | High — Ni-superalloys, CMCs, Ti for inlet; large forebody structure | Moderate — Al-Li, CFRP, Inconel for nozzles | Moderate — standard aerospace alloys + rocket section |
+| **Energy for qualification** | Very High — 3+ mode-transition test campaigns, extended ground test series | Low — rocket test heritage, fewer novel tests | Moderate — single transition qualification |
+| **Supply chain carbon** | High — specialized global supply chain, low-volume exotic materials | Low — leverages existing launch-vehicle supply chain | Moderate — turbofan from aviation supply chain + rocket |
+| **Facility footprint** | Large — requires combined-cycle test facilities (few exist globally) | Small — existing rocket test stands | Moderate — uses existing aviation + rocket infrastructure |
+
+#### 10.2.2 Mission & Operations Phase Footprint
+
+| ESG Dimension | A: TBCC | B: Rocket-Dominant | C: Hybrid |
+| :--- | :--- | :--- | :--- |
+| **Propellant type** | Jet fuel (M 0–2.5) + LH₂/LOX (rocket phase) | LH₂/LOX only | Jet fuel (M 0–2.5) + LH₂/LOX (M 2.5+) |
+| **CO₂ emissions (ascent)** | Moderate — kerosene/jet-fuel burn to M 2.5, then clean H₂/O₂ | Near-zero — H₂/O₂ produces H₂O only | Low — limited jet-fuel burn (M 0–2.5), then clean H₂/O₂ |
+| **NOₓ production** | High — sustained air-breathing to M 12+ generates significant high-altitude NOₓ | Minimal — steep climb minimizes atmospheric residence | Low — air-breathing limited to M 2.5, short atmospheric dwell |
+| **Stratospheric H₂O injection** | Very High — prolonged high-altitude air-breathing deposits H₂O in stratosphere | Moderate — rocket plume H₂O, but brief transit | Low-Moderate — rocket phase H₂O, rapid transit above M 2.5 |
+| **Noise (ground)** | High — extended air-breathing ground run | Very High — rocket ignition noise at runway | Moderate — turbofan takeoff (comparable to large commercial aircraft) |
+| **Sonic boom corridor** | Extended — sustained supersonic/hypersonic cruise | Brief — steep vertical-like ascent | Brief — rapid transition through transonic |
+| **Propellant volume per mission** | Lower (~82–85% GTOM) | Highest (~90–92% GTOM) | Moderate (~87–89% GTOM) |
+| **LH₂ production energy** | Moderate (partial LH₂ use) | Highest (all-LH₂) | Moderate-High (majority LH₂) |
+
+#### 10.2.3 MRO Phase Footprint
+
+| ESG Dimension | A: TBCC | B: Rocket-Dominant | C: Hybrid |
+| :--- | :--- | :--- | :--- |
+| **TPS refurbishment** | Most intensive — high thermal loads across extended Mach range | Moderate — steep climb reduces aero-heating duration | Moderate — standard re-entry TPS maintenance |
+| **Engine overhaul complexity** | Very High — 4 thermodynamic cycles, exotic hot-section materials, variable geometry wear | Low — single rocket engine type with established overhaul procedures | Moderate — turbofan (aviation MRO practices) + rocket overhaul |
+| **Hazardous waste (MRO)** | High — CMC fiber dust, Ni-alloy machining waste, thermal barrier coating chemicals | Low — standard cryogenic system maintenance | Low-Moderate — standard aviation + rocket MRO waste streams |
+| **MRO turnaround time** | Longest — complex multi-system inspection | Shortest — simple propulsion system | Moderate — two subsystems, both with established procedures |
+| **Regional MRO employment** | Specialized — requires combined-cycle expertise (limited workforce globally) | Leverages existing launch-vehicle workforce | Leverages aviation MRO workforce (largest skilled pool globally) |
+
+#### 10.2.4 Reuse & End-of-Life Footprint
+
+| ESG Dimension | A: TBCC | B: Rocket-Dominant | C: Hybrid |
+| :--- | :--- | :--- | :--- |
+| **Design reuse cycles** | Low — thermal/mechanical fatigue limits life of variable-geometry components | Moderate — rocket engines have established life limits (RS-25: ~55 flights designed) | Moderate-High — turbofan: high-cycle life; rocket: established limits |
+| **Material recyclability** | Low — CMCs, exotic superalloys difficult to recycle | Moderate — Al-Li, Inconel have established recycling paths | Moderate — standard aerospace alloys, established recycling |
+| **Component second-life potential** | Low — highly specialized, few alternative applications | Moderate — rocket components may transfer to other launch vehicles | High — turbofan components align with aviation second-life market |
+| **Decommissioning complexity** | High — hazardous materials in thermal coatings and inlet actuators | Low — standard rocket vehicle decommissioning | Low-Moderate — standard aerospace practices |
+
+### 10.3 Regional ESG Impact Map
+
+```mermaid
+graph TD
+    subgraph EU ["Europe — Primary Development Region"]
+        EU1["Vehicle Assembly<br/><i>Structure, integration</i>"]
+        EU2["Turbofan Supply Chain<br/><i>Mature aviation MRO</i>"]
+        EU3["Material Processing<br/><i>Al-Li, CFRP, Ti alloys</i>"]
+        EU4["Specialized Recycling<br/><i>Composite & alloy recovery</i>"]
+    end
+
+    subgraph US ["United States — Test & Supply"]
+        US1["Rocket Engine Heritage<br/><i>RS-25 / RL-10 lineage</i>"]
+        US2["Hot-Fire Test Facilities<br/><i>Stennis, Edwards</i>"]
+        US3["Cryogenic Infrastructure<br/><i>LH₂/LOX production</i>"]
+    end
+
+    subgraph LAUNCH ["Launch & Operations Region"]
+        L1["Equatorial / Mid-Latitude<br/>Launch Site"]
+        L2["Ground Processing<br/>& Turnaround"]
+        L3["Propellant Depot<br/><i>LH₂ + Jet-A</i>"]
+        L4["MRO Facility<br/><i>Co-located</i>"]
+    end
+
+    subgraph CORRIDOR ["Flight Corridor"]
+        F1["Subsonic / Transonic<br/><i>M 0 – 2.5</i><br/>NOₓ, CO₂, Noise"]
+        F2["Rocket Ascent<br/><i>M 2.5 – 25+</i><br/>H₂O injection"]
+        F3["Re-entry Corridor<br/><i>Thermal signature</i>"]
+    end
+
+    EU --> LAUNCH
+    US --> LAUNCH
+    LAUNCH --> CORRIDOR
+    CORRIDOR -->|"Landing"| LAUNCH
+    LAUNCH -->|"Deep MRO"| EU
+
+    style EU fill:#E3F2FD,color:#0D47A1,stroke:#1565C0
+    style US fill:#FFF3E0,color:#E65100,stroke:#FF9800
+    style LAUNCH fill:#E8F5E9,color:#1B5E20,stroke:#2E7D32
+    style CORRIDOR fill:#FCE4EC,color:#880E4F,stroke:#C2185B
+```
+*Figure 9 — Regional ESG impact map. Development and deep MRO concentrate in EU/US industrial regions; operational footprint is centered on launch/landing sites and flight corridors. Architecture C (Hybrid) uniquely leverages existing aviation MRO workforce and infrastructure in all regions.*
+
+### 10.4 Emissions Profile Summary
+
+#### 10.4.1 Per-Mission Atmospheric Emissions (Illustrative — Architecture C Baseline)
+
+| Emission | Source | Phase | Estimated Magnitude | Mitigation Lever |
+| :--- | :--- | :--- | :--- | :--- |
+| **CO₂** | Jet-fuel burn (M 0–2.5) | Ascent (air-breathing) | ~15–25 t per mission (comparable to a transatlantic widebody flight) | Sustainable aviation fuel (SAF); reduced M 0–2.5 dwell |
+| **H₂O** | LH₂/LOX combustion | Ascent (rocket phase) + re-entry | ~150–180 t per mission (stratospheric injection above 15 km) | Cannot be eliminated; monitor stratospheric water vapour trends |
+| **NOₓ** | High-temperature air-breathing combustion | Ascent (M 0–2.5) | Low — brief dwell, moderate altitude | Low-NOₓ combustor technology from aviation sector |
+| **Particulates** | TPS ablation (if any); minor engine soot | Re-entry; air-breathing phase | Trace — non-ablative TPS design goal | Advanced TPS materials (UHTC, oxidation-resistant coatings) |
+| **Noise** | Turbofan takeoff; sonic boom | Ground vicinity; flight corridor | Turbofan: ~90–95 dB(A) at reference; Boom: mitigated by steep climb profile | Noise-optimized flight profiles; site selection |
+
+#### 10.4.2 Per-Mission Comparison Across Architectures
+
+| Metric | A: TBCC | B: Rocket-Dominant | C: Hybrid |
+| :--- | :--- | :--- | :--- |
+| **CO₂ (ascent)** | Moderate (kerosene to M 2.5) | Near-zero | Low (jet fuel to M 2.5) |
+| **Stratospheric H₂O** | Very High (prolonged high-altitude combustion) | Moderate | Moderate |
+| **High-altitude NOₓ** | High (to M 12) | Minimal | Low (to M 2.5 only) |
+| **Ground noise** | High | Very High | Moderate (aircraft-like) |
+| **LH₂ production energy** | Moderate | Highest | Moderate-High |
+| **Reuse amortization factor** | Poor (low cycle life) | Moderate | Best (high cycle life potential) |
+
+### 10.5 Sustainability and Reuse Strategy
+
+#### 10.5.1 Reuse as the Primary ESG Lever
+
+The single most impactful ESG measure is **maximizing vehicle reuse cycles**. Amortizing development and manufacturing carbon over more flights dominates all other emission-reduction strategies.
+
+| Parameter | A: TBCC | B: Rocket-Dominant | C: Hybrid |
+| :--- | :--- | :--- | :--- |
+| **Target reuse cycles** | 20–50 (limited by inlet/hot-section fatigue) | 50–100 (rocket engine life-limited) | 100–200+ (turbofan: aviation-grade life; rocket: ~55 flights per engine set) |
+| **Manufacturing carbon per flight (amortized)** | High (low reuse ÷ high manufacturing intensity) | Moderate | **Lowest** (high reuse ÷ moderate manufacturing) |
+| **MRO carbon per flight** | High (complex overhaul) | Low (simple system) | Moderate (two systems, both established) |
+
+#### 10.5.2 LH₂ Production Pathway
+
+LH₂ is the dominant propellant for all architectures. Its carbon footprint depends entirely on the production pathway:
+
+| Production Method | Carbon Intensity | Readiness | Notes |
+| :--- | :--- | :--- | :--- |
+| **Grey H₂** (SMR) | ~10 kg CO₂/kg H₂ | Available now | Default industrial process; highest carbon |
+| **Blue H₂** (SMR + CCS) | ~2–4 kg CO₂/kg H₂ | Near-term | Requires CO₂ capture infrastructure at production site |
+| **Green H₂** (Electrolysis + renewables) | ~0.5–1 kg CO₂/kg H₂ | Medium-term | Dependent on renewable electricity scale-up; programme target |
+| **Pink H₂** (Nuclear electrolysis) | ~0.3 kg CO₂/kg H₂ | Longer-term | Baseload nuclear; minimal land use |
+
+**Programme position:** The ESG footprint of all architectures is dominated by LH₂ production pathway, not by flight emissions. Transitioning from grey to green/pink H₂ reduces the per-mission carbon footprint by an order of magnitude. This is a programme-level infrastructure decision, not an architecture selection criterion.
+
+#### 10.5.3 Circularity Indicators
+
+```mermaid
+graph TD
+    MFG["Manufacturing<br/><i>Virgin materials</i>"]
+    OPS2["Operations<br/><i>100–200+ flights</i>"]
+    MRO2["MRO<br/><i>Per-flight + deep</i>"]
+    HARVEST["Component<br/>Harvesting"]
+    RECYCLE["Material<br/>Recycling"]
+    SECOND["Second-Life<br/>Applications"]
+    SUPPLY["Supply Chain<br/>Re-entry"]
+
+    MFG --> OPS2
+    OPS2 --> MRO2
+    MRO2 -->|"Serviceable"| OPS2
+    MRO2 -->|"Life-limited<br/>components"| HARVEST
+    HARVEST --> SECOND
+    HARVEST --> RECYCLE
+    RECYCLE --> SUPPLY
+    SUPPLY -->|"Recycled<br/>feedstock"| MFG
+    SECOND -->|"Aviation<br/>turbofan parts"| EXT["External<br/>Markets"]
+
+    style MFG fill:#E3F2FD,color:#0D47A1,stroke:#1565C0
+    style OPS2 fill:#FFF3E0,color:#E65100,stroke:#FF9800
+    style MRO2 fill:#E8F5E9,color:#1B5E20,stroke:#2E7D32
+    style HARVEST fill:#F3E5F5,color:#4A148C,stroke:#7B1FA2
+    style RECYCLE fill:#F3E5F5,color:#4A148C,stroke:#7B1FA2
+    style SECOND fill:#FCE4EC,color:#880E4F,stroke:#C2185B
+    style SUPPLY fill:#E3F2FD,color:#0D47A1,stroke:#1565C0
+    style EXT fill:#ECEFF1,color:#37474F,stroke:#607D8B
+```
+*Figure 10 — Circularity model for Architecture C. Turbofan components access the large aviation second-life market; rocket components follow established launch-vehicle recycling paths. Material recycling feeds back into the manufacturing supply chain.*
+
+### 10.6 ESG Scoring Summary
+
+| ESG Dimension | A: TBCC | B: Rocket-Dominant | C: Hybrid |
+| :--- | :--- | :--- | :--- |
+| **Development carbon intensity** | –– (High) | + (Low) | 0 (Moderate) |
+| **Per-mission CO₂** | – (Moderate) | ++ (Near-zero) | + (Low) |
+| **Stratospheric impact** | –– (Very High) | 0 (Moderate) | 0 (Moderate) |
+| **Ground noise** | – (High) | –– (Very High) | + (Aircraft-like) |
+| **MRO environmental burden** | –– (High) | + (Low) | 0 (Moderate) |
+| **Reuse potential** | – (Low cycles) | + (Moderate cycles) | ++ (Highest cycles) |
+| **Workforce leverage** | –– (Specialized niche) | 0 (Rocket workforce) | ++ (Aviation + rocket) |
+| **Material circularity** | – (Exotic, hard to recycle) | 0 (Standard rocket) | + (Aviation + rocket paths) |
+| **LH₂ pathway dependency** | Moderate | Highest | Moderate-High |
+| **Overall ESG position** | **Poor** | **Mixed** | **Best available** |
+
+### 10.7 ESG Monitoring Framework
+
+Real-time ESG tracking should be embedded in programme governance from LC01 onward:
+
+| Indicator | Metric | Reporting Frequency | Owner |
+| :--- | :--- | :--- | :--- |
+| **Manufacturing carbon** | t CO₂e per vehicle unit | Per programme milestone | STK_SE |
+| **LH₂ source mix** | % green/blue/grey by volume | Per quarter (operations) | STK_OPS |
+| **Per-mission emissions** | t CO₂, t H₂O, kg NOₓ per flight | Per flight | STK_OPS |
+| **TPS waste** | kg hazardous waste per MRO cycle | Per MRO event | STK_MRO |
+| **Reuse cycle count** | Flights per airframe; flights per engine set | Continuous | STK_SE |
+| **Material recycling rate** | % by mass of decommissioned components recycled | Per decommission event | STK_MRO |
+| **Community noise exposure** | dB(A) weighted at reference points | Per flight | STK_SAF |
+| **Workforce regional impact** | FTE-years by region and skill category | Annual | STK_GOV |
+
+### 10.8 Key Finding
+
+**Architecture C (Hybrid) offers the best ESG position among the three candidates**, driven by:
+1. **Highest reuse potential** (~100–200+ cycles), amortizing manufacturing carbon most effectively.
+2. **Aircraft-like ground noise**, enabling operations from a broader range of sites.
+3. **Lowest high-altitude NOₓ**, with air-breathing limited to M ≤ 2.5.
+4. **Largest MRO workforce leverage**, drawing on the global aviation maintenance ecosystem.
+5. **Best circularity pathway**, with turbofan components accessing the aviation second-life market.
+
+None of the architectures achieves carbon neutrality. The dominant ESG variable across all architectures is **LH₂ production pathway** — a programme-infrastructure decision independent of architecture selection. The programme should target green H₂ as the baseline propellant source, with blue H₂ as the interim pathway.
+
+---
+
+## 11. Appendix — Assessment Methodology
+
+### 11.1 Scoring Basis
 Scores derived from engineering judgment, published data, historical outcomes (NASP, X-33), and certification precedent (CS-25, CS-E). No computational models executed.
 
-### 10.2 Limitations
+### 11.2 Limitations
 *   Propellant fractions are approximate (ideal rocket equation with assumed losses).
 *   TBCC engine mass estimates carry ±30–40% uncertainty.
 *   Mass breakdowns are parametric illustrations, not design-point calculations.
 *   Economic analysis deferred to KNOT-SP-14.
+*   ESG emissions estimates in Section 10 are order-of-magnitude illustrations derived from published propellant chemistry and analogous vehicle programmes; detailed lifecycle assessment (LCA) deferred to LC05.
 
-### 10.3 Review and Approval
+### 11.3 Review and Approval
 
 | Role | Name | Date | Status |
 | :--- | :--- | :--- | :--- |
@@ -430,6 +706,7 @@ Scores derived from engineering judgment, published data, historical outcomes (N
 | Reviewer (v0.1) | Programme Lead | 2026-03-22 | Complete; corrections in v0.2 |
 | Reviewer (v0.2 → v0.3) | Programme Lead | 2026-03-22 | Complete; corrections in v0.3 |
 | Reviewer (v0.3 → v0.4) | Programme Lead | 2026-03-22 | Complete; final polish |
+| Reviewer (v0.4 → v0.5) | Programme Lead | 2026-03-25 | Complete; ESG huella section added |
 | Reviewer | STK_SAF | — | Pending |
 | Reviewer | STK_CERT | — | Pending |
 | Approver | Programme Lead | — | Pending final reviews |
