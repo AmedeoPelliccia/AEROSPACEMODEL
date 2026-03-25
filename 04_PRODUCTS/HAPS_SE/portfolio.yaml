@@ -1,0 +1,18 @@
+# Portfolio — HAPS_SE
+# Path: 04_PRODUCTS/HAPS_SE/portfolio.yaml
+# Status: DRAFT
+
+product_family: HAPS_SE
+description: >
+  High Altitude Pseudo-Satellite — Solar Electric (HAPS-SE). Persistent
+  stratospheric platform operating in the coverage gap between conventional
+  aircraft (FL450 / ~14 km) and low-Earth-orbit satellites (~200+ km).
+  Solar-electric propulsion with rechargeable energy storage for multi-month
+  autonomous station-keeping at 18–22 km altitude. Payload envelope targets
+  earth observation, telecommunications relay, atmospheric science, and
+  surveillance/reconnaissance.
+variants:
+  - id: HAPSSE_BASE
+    description: Baseline solar-electric HAPS configuration
+    status: DRAFT
+programmes: []
