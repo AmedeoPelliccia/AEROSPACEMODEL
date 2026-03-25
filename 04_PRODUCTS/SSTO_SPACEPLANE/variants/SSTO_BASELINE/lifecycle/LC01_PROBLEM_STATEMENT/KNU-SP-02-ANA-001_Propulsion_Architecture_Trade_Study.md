@@ -716,7 +716,7 @@ The operations model assumes an airline-like utilization target enabled by Archi
 | **Turnaround target** | 14–21 days (complex multi-engine inspection) | 7–10 days (simple but crane-dependent) | **5–7 days** (aircraft-like ops) |
 | **Max missions/vehicle/year** | 12–18 | 20–30 | **24–36** |
 | **Airframe life (flights)** | 20–50 | 50–100 | **100–200+** |
-| **Fleet revenue lifetime** | 240–900 flights | 2,500–3,000 flights | **10,000–14,400+ flights** |
+| **Fleet cumulative missions (lifetime)** | 240–900 flights | 2,500–3,000 flights | **10,000–14,400+ flights** |
 
 ```mermaid
 graph LR
@@ -790,7 +790,7 @@ From Section 4 mass breakdowns (GTOM 250,000 kg):
 | **Test & qualification** | $5–10B (3+ transition campaigns) | $2–4B (single propulsion mode) | **$3–6B** (1 transition qualification) |
 | **Facilities & infrastructure** | $3–5B (new combined-cycle test facilities) | $1–2B (existing rocket stands) | **$1–3B** (existing aviation + rocket) |
 | **Total development** | **$35–62B** | **$14–25B** | **$18–34B** |
-| **Per-kg-to-LEO development cost** | Extremely high | Infinite (0 kg payload) | **$2,880–$5,440/kg** (amortized over fleet life) |
+| **Per-kg-to-LEO development cost** | Extremely high | Infinite (0 kg payload) | **$3,200–$6,080/kg** (baseline amortization over 900 missions) |
 
 #### 11.3.2 Development Cost Amortization
 
@@ -799,8 +799,8 @@ For Architecture C, amortizing $18–34B over the fleet revenue lifetime:
 | Scenario | Fleet Size | Total Missions | Dev Cost/Mission | Dev Cost/kg Payload |
 | :--- | :--- | :--- | :--- | :--- |
 | **Conservative** | 5 vehicles × 100 flights | 500 missions | $36M–$68M | $5,760–$10,880/kg |
-| **Baseline** | 6 vehicles × 150 flights | 900 missions | $20M–$38M | $3,200–$6,040/kg |
-| **Optimistic** | 8 vehicles × 200 flights | 1,600 missions | $11M–$21M | $1,800–$3,400/kg |
+| **Baseline** | 6 vehicles × 150 flights | 900 missions | $20M–$38M | $3,200–$6,080/kg |
+| **Optimistic** | 8 vehicles × 200 flights | 1,600 missions | $11M–$21M | $1,760–$3,360/kg |
 
 ### 11.4 Operations Cost Model (Per-Mission — Architecture C)
 
@@ -821,8 +821,8 @@ For Architecture C, amortizing $18–34B over the fleet revenue lifetime:
 | :--- | :--- | :--- | :--- |
 | **A: TBCC** | >$50,000/kg | ~$10,000–$20,000/kg | **>$60,000/kg** |
 | **B: Rocket-Dominant** | ∞ (0 kg payload) | ∞ | **Non-viable** |
-| **C: Hybrid (baseline)** | $3,200–$6,040/kg | $2,240–$4,960/kg | **$5,440–$11,000/kg** |
-| **C: Hybrid (optimistic)** | $1,800–$3,400/kg | $2,240–$4,960/kg | **$4,040–$8,360/kg** |
+| **C: Hybrid (baseline)** | $3,200–$6,080/kg | $2,240–$4,960/kg | **$5,440–$11,040/kg** |
+| **C: Hybrid (optimistic)** | $1,760–$3,360/kg | $2,240–$4,960/kg | **$4,000–$8,320/kg** |
 
 ```mermaid
 quadrantChart
@@ -869,11 +869,11 @@ The programme ROI must guarantee margins beyond pure financial return to ensure 
 
 ```mermaid
 pie title "Reinvestment Margin Allocation (Baseline — $78M/mission gross margin)"
-    "Research & Technology 17%" : 13
-    "Remanufacturing & 3D Print 12%" : 10
-    "Workforce & Jobs 12%" : 10
-    "Market Growth 17%" : 13
-    "Financial Reserve 42%" : 32
+    "Research & Technology 17%" : 17
+    "Remanufacturing & 3D Print 12%" : 12
+    "Workforce & Jobs 12%" : 12
+    "Market Growth 17%" : 17
+    "Financial Reserve 42%" : 42
 ```
 *Figure 13 — Reinvestment allocation from gross margin. Over 55% of margin flows to productive reinvestment in R&D, manufacturing capability, workforce, and market growth — not purely to capital return.*
 
@@ -951,8 +951,8 @@ graph TD
 
 | Metric | IOC | Growth | Mature | Measurement |
 | :--- | :--- | :--- | :--- | :--- |
-| **Direct FTEs** | ~7,000 | ~14,000 | ~25,000 | Headcount |
-| **Indirect/induced FTEs** | ~18,000 | ~35,000 | ~63,000 | Economic multiplier model |
+| **Direct FTEs** | 4,750–9,600 | 9,700–18,500 | 17,500–33,500 | Headcount (from Section 11.6.1) |
+| **Indirect/induced FTEs** | ~12,000–24,000 | ~24,000–46,000 | ~44,000–84,000 | Economic multiplier model (~2.5×) |
 | **STEM graduates entering programme** | ~500/yr | ~1,200/yr | ~2,500/yr | Programme intake |
 | **Apprenticeships/traineeships** | ~200/yr | ~600/yr | ~1,500/yr | Training programme data |
 | **Regional GDP contribution** | ~$2B/yr | ~$8B/yr | ~$25B/yr | Economic impact model |
@@ -1031,8 +1031,8 @@ graph TD
 3. **Lowest operations cost trajectory** — aircraft-like turnaround drives $14–31M/mission ops cost at scale.
 4. **Viable ROI (8–35% IRR)** — sufficient to attract capital while maintaining reinvestment margins.
 5. **Self-reinforcing flywheel** — R&D, additive manufacturing, workforce, and market reinvestment pools drive continuous cost reduction and revenue growth.
-6. **Largest social return** — 25,000+ direct FTEs at mature operations; 63,000+ including indirect; significant regional GDP contribution and STEM pipeline impact.
-7. **Sustainable market growth** — price trajectory to $4,000–$8,000/kg enables competitive positioning against next-generation expendable launchers.
+6. **Largest social return** — 17,500–33,500 direct FTEs at mature operations; 44,000–84,000 including indirect; significant regional GDP contribution and STEM pipeline impact.
+7. **Sustainable market growth** — price trajectory to $4,000–$8,320/kg enables competitive positioning against next-generation expendable launchers.
 
 Architecture B generates no payload and therefore no revenue; its economics are non-viable. Architecture A's extreme development cost ($35–62B) combined with low reuse life and minimal payload yields unacceptable cost-per-kilogram and no path to competitive pricing.
 
