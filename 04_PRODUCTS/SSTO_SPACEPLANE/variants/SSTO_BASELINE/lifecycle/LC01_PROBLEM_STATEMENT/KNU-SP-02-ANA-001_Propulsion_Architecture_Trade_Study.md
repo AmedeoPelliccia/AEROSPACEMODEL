@@ -12,7 +12,7 @@
 | **Priority** | P0 (Programme-gate prerequisite) |
 | **Owner** | STK_SE (Systems Engineering) |
 | **Stakeholders** | STK_SAF; STK_CERT; STK_TEST |
-| **Version** | 0.5 |
+| **Version** | 0.6 |
 | **Date** | 2026-03-25 |
 | **Status** | IN_REVIEW |
 
@@ -25,6 +25,7 @@
 | 0.3 | 2026-03-22 | Final review corrections: Corrected M ≤ 2.5 classification; added sensitivity indicators; softened analogues; expanded residual trajectory; tagged abort numbers as notional. |
 | 0.4 | 2026-03-22 | **Final Polish:** Softened language in Section 1 (screening limitations); standardized mass breakdown line items in Sections 4.2/4.3; added GAIA spillover qualifier; restored Review & Approval table. |
 | 0.5 | 2026-03-25 | Added Section 10 — ESG Real-Time Footprint (Huella) covering development, mission/operations, MRO, and reuse stages with regional impact mapping and architecture-specific sustainability assessment. |
+| 0.6 | 2026-03-25 | Added Section 11 — Lifecycle Economics: operations model, payload revenue, development/operations costs, ROI with reinvestment margins (R&D, additive manufacturing, workforce, market growth), SROI, and sustainable market growth strategy. |
 
 ---
 
@@ -686,19 +687,370 @@ None of the architectures achieves carbon neutrality. The dominant ESG variable 
 
 ---
 
-## 11. Appendix — Assessment Methodology
+## 11. Lifecycle Economics — Operations, Payload, Cost & ROI Framework
 
-### 11.1 Scoring Basis
+This section establishes the preliminary economic model for the SSTO spaceplane programme, covering predicted operations, payload-derived revenue, full-lifecycle cost structure, and ROI with reinvestment margin allocation. All figures are **screening-level parametric estimates** based on the Architecture C (Hybrid) provisional baseline. Quantitative refinement is deferred to LC05 analysis-model artefacts.
+
+### 11.1 Operations Model — Predicted Mission Rate & Fleet Utilization
+
+#### 11.1.1 Mission Rate Ramp-Up
+
+The operations model assumes an airline-like utilization target enabled by Architecture C's aircraft-like ground handling and turnaround:
+
+| Phase | Years | Vehicles in Fleet | Missions/Vehicle/Year | Total Missions/Year |
+| :--- | :--- | :--- | :--- | :--- |
+| **IOC (Initial Operating Capability)** | 1–3 | 1–2 | 6–10 | 6–20 |
+| **Growth** | 4–8 | 3–5 | 12–20 | 36–100 |
+| **Mature Operations** | 9–25+ | 5–8 | 20–30 | 100–240 |
+
+**Turnaround assumptions (Architecture C):**
+*   Post-flight inspection + TPS check: 2–3 days
+*   Propellant loading + ground processing: 1–2 days
+*   Target turnaround: **5–7 days** (comparable to Shuttle Orbiter target; enabled by turbofan ground taxi, no crane operations)
+*   Deep MRO interval: every 25–30 flights (~18 months at mature rate)
+
+#### 11.1.2 Architecture Comparison — Operational Tempo
+
+| Parameter | A: TBCC | B: Rocket-Dominant | C: Hybrid |
+| :--- | :--- | :--- | :--- |
+| **Turnaround target** | 14–21 days (complex multi-engine inspection) | 7–10 days (simple but crane-dependent) | **5–7 days** (aircraft-like ops) |
+| **Max missions/vehicle/year** | 12–18 | 20–30 | **24–36** |
+| **Airframe life (flights)** | 20–50 | 50–100 | **100–200+** |
+| **Fleet revenue lifetime** | 240–900 flights | 2,500–3,000 flights | **10,000–14,400+ flights** |
+
+```mermaid
+graph LR
+    subgraph IOC ["IOC — Years 1-3"]
+        IOC1["1–2 vehicles"]
+        IOC2["6–20 missions/yr"]
+        IOC1 --- IOC2
+    end
+
+    subgraph GROWTH ["Growth — Years 4-8"]
+        G1["3–5 vehicles"]
+        G2["36–100 missions/yr"]
+        G1 --- G2
+    end
+
+    subgraph MATURE ["Mature Ops — Years 9-25+"]
+        M1["5–8 vehicles"]
+        M2["100–240 missions/yr"]
+        M1 --- M2
+    end
+
+    IOC -->|"Prove ops<br/>tempo"| GROWTH
+    GROWTH -->|"Scale fleet<br/>& market"| MATURE
+
+    style IOC fill:#E3F2FD,color:#0D47A1,stroke:#1565C0
+    style GROWTH fill:#FFF3E0,color:#E65100,stroke:#FF9800
+    style MATURE fill:#E8F5E9,color:#1B5E20,stroke:#2E7D32
+```
+*Figure 11 — Fleet ramp-up trajectory. Architecture C's aircraft-like turnaround enables the fastest path to high-utilization mature operations.*
+
+### 11.2 Payload Revenue Baseline
+
+#### 11.2.1 Payload Capacity by Architecture
+
+From Section 4 mass breakdowns (GTOM 250,000 kg):
+
+| Architecture | Payload to LEO | Payload Fraction (% GTOM) | Revenue Viability |
+| :--- | :--- | :--- | :--- |
+| **A: TBCC** | ~2,000–4,000 kg (estimated) | ~0.8–1.6% | Marginal — high development cost offsets thin payload |
+| **B: Rocket-Dominant** | **0 kg** | 0% | **Non-viable** — no payload capacity |
+| **C: Hybrid** | **6,250 kg** | **2.5%** | **Viable** — thin but serviceable for commercial LEO |
+
+#### 11.2.2 Revenue Model (Architecture C Baseline)
+
+| Market Segment | Payload Type | Price Range ($/kg to LEO) | Revenue per Mission | Market Size |
+| :--- | :--- | :--- | :--- | :--- |
+| **Commercial LEO delivery** | Satellites, station resupply | $5,000–$15,000/kg | $31M–$94M | Large — growing constellation market |
+| **Government/institutional** | National security, science payloads | $10,000–$25,000/kg | $63M–$156M | Moderate — government contracts |
+| **Premium rapid-response** | Time-critical deployment, on-demand | $20,000–$40,000/kg | $125M–$250M | Niche — high-value, low-volume |
+| **Crew/passenger (future)** | Orbital transport (if certified) | Per-seat pricing | $50M–$150M per mission | Emerging — space tourism, point-to-point |
+
+**Blended revenue assumption:** $60M–$120M per mission at mature operations (weighted mix of commercial and government payloads).
+
+#### 11.2.3 Annual Revenue Projection
+
+| Phase | Missions/Year | Revenue/Mission | Annual Revenue |
+| :--- | :--- | :--- | :--- |
+| **IOC** | 6–20 | $60M–$80M | $360M–$1,600M |
+| **Growth** | 36–100 | $70M–$100M | $2,520M–$10,000M |
+| **Mature** | 100–240 | $80M–$120M | $8,000M–$28,800M |
+
+### 11.3 Development Cost Framework
+
+#### 11.3.1 Development Cost Estimates by Architecture
+
+| Cost Category | A: TBCC | B: Rocket-Dominant | C: Hybrid |
+| :--- | :--- | :--- | :--- |
+| **Propulsion development** | $15–25B (4 engine cycles, no heritage) | $3–6B (leverages RL-10/RS-25 heritage) | **$5–10B** (turbofan: aviation heritage; rocket: launch heritage) |
+| **Airframe & TPS** | $8–15B (complex thermal integration) | $5–8B (simpler thermal env.) | **$6–10B** (moderate thermal env.) |
+| **Avionics, GNC, integration** | $4–7B | $3–5B | **$3–5B** |
+| **Test & qualification** | $5–10B (3+ transition campaigns) | $2–4B (single propulsion mode) | **$3–6B** (1 transition qualification) |
+| **Facilities & infrastructure** | $3–5B (new combined-cycle test facilities) | $1–2B (existing rocket stands) | **$1–3B** (existing aviation + rocket) |
+| **Total development** | **$35–62B** | **$14–25B** | **$18–34B** |
+| **Per-kg-to-LEO development cost** | Extremely high | Infinite (0 kg payload) | **$2,880–$5,440/kg** (amortized over fleet life) |
+
+#### 11.3.2 Development Cost Amortization
+
+For Architecture C, amortizing $18–34B over the fleet revenue lifetime:
+
+| Scenario | Fleet Size | Total Missions | Dev Cost/Mission | Dev Cost/kg Payload |
+| :--- | :--- | :--- | :--- | :--- |
+| **Conservative** | 5 vehicles × 100 flights | 500 missions | $36M–$68M | $5,760–$10,880/kg |
+| **Baseline** | 6 vehicles × 150 flights | 900 missions | $20M–$38M | $3,200–$6,040/kg |
+| **Optimistic** | 8 vehicles × 200 flights | 1,600 missions | $11M–$21M | $1,800–$3,400/kg |
+
+### 11.4 Operations Cost Model (Per-Mission — Architecture C)
+
+| Cost Category | Per-Mission Cost | Notes |
+| :--- | :--- | :--- |
+| **Propellant (LH₂ + LOX)** | $2M–$5M | ~220 t propellant; LH₂ at $5–15/kg depending on green/grey pathway |
+| **Jet fuel (M 0–2.5 phase)** | $0.02M–$0.05M | ~5–8 t Jet-A; minor contributor |
+| **Ground operations** | $3M–$6M | Launch site staff, processing, logistics |
+| **MRO (amortized per flight)** | $4M–$8M | TPS, engine inspection, systems; deep MRO amortized over 25–30 flights |
+| **Insurance** | $3M–$8M | Vehicle + payload; decreasing with flight heritage |
+| **Range & regulatory** | $1M–$2M | Airspace, licensing, environmental compliance |
+| **Mission operations** | $1M–$2M | Flight control, planning, telemetry |
+| **Total per-mission ops cost** | **$14M–$31M** | |
+
+#### 11.4.1 Cost Per Kilogram to LEO — Architecture Comparison
+
+| Architecture | Dev Cost/kg (amortized) | Ops Cost/kg | Total Cost/kg to LEO |
+| :--- | :--- | :--- | :--- |
+| **A: TBCC** | >$50,000/kg | ~$10,000–$20,000/kg | **>$60,000/kg** |
+| **B: Rocket-Dominant** | ∞ (0 kg payload) | ∞ | **Non-viable** |
+| **C: Hybrid (baseline)** | $3,200–$6,040/kg | $2,240–$4,960/kg | **$5,440–$11,000/kg** |
+| **C: Hybrid (optimistic)** | $1,800–$3,400/kg | $2,240–$4,960/kg | **$4,040–$8,360/kg** |
+
+```mermaid
+quadrantChart
+    title Cost vs Revenue per Mission (Architecture C)
+    x-axis "Low Mission Rate" --> "High Mission Rate"
+    y-axis "Low Value" --> "High Value"
+    quadrant-1 "Profitable Mature Ops"
+    quadrant-2 "High Revenue · Low Volume"
+    quadrant-3 "Unprofitable"
+    quadrant-4 "Low Margin · High Volume"
+    "Revenue (IOC)": [0.15, 0.55]
+    "Revenue (Mature)": [0.85, 0.80]
+    "Ops Cost (IOC)": [0.15, 0.40]
+    "Ops Cost (Mature)": [0.85, 0.20]
+    "Dev Amortization": [0.50, 0.35]
+```
+*Figure 12 — Cost vs revenue positioning across mission rate ramp-up. Architecture C reaches profitability as mission rate scales and development cost is amortized.*
+
+### 11.5 ROI Framework with Reinvestment Allocation
+
+#### 11.5.1 Programme ROI Model
+
+| Parameter | Conservative | Baseline | Optimistic |
+| :--- | :--- | :--- | :--- |
+| **Development investment** | $34B | $26B | $18B |
+| **Revenue per mission (mature)** | $80M | $100M | $120M |
+| **Ops cost per mission** | $31M | $22M | $14M |
+| **Gross margin per mission** | $49M (61%) | $78M (78%) | $106M (88%) |
+| **Missions to breakeven** | ~694 | ~333 | ~170 |
+| **Years to breakeven** (at mature rate) | ~7 (from mature ops start) | ~3 (from mature ops start) | ~2 (from mature ops start) |
+| **Programme IRR (25-year ops)** | ~8–12% | ~15–22% | ~25–35% |
+
+#### 11.5.2 Reinvestment Margin Allocation
+
+The programme ROI must guarantee margins beyond pure financial return to ensure long-term sustainability. The gross margin per mission is allocated across five strategic reinvestment pools:
+
+| Reinvestment Pool | Allocation (% of Gross Margin) | Baseline $/Mission | Purpose |
+| :--- | :--- | :--- | :--- |
+| **Research & Technology Advancement** | 15–20% | $12M–$16M | Next-generation propulsion, materials, autonomy; TRL advancement for TBCC fallback path |
+| **Remanufacturing & Additive Manufacturing** | 10–15% | $8M–$12M | 3D-printed TPS tiles, rocket nozzle components, structural repair parts; in-situ manufacturing capability |
+| **Workforce Development & Job Creation** | 10–15% | $8M–$12M | STEM training, apprenticeships, regional skills centres; social return on workforce |
+| **Sustainable Market Growth** | 15–20% | $12M–$16M | Fleet expansion, new vehicle variants, market development, customer acquisition |
+| **Financial Reserve & Debt Service** | 30–40% | $23M–$31M | Capital return to investors, debt repayment, programme contingency |
+
+```mermaid
+pie title "Reinvestment Margin Allocation (Baseline — $78M/mission gross margin)"
+    "Research & Technology 17%" : 13
+    "Remanufacturing & 3D Print 12%" : 10
+    "Workforce & Jobs 12%" : 10
+    "Market Growth 17%" : 13
+    "Financial Reserve 42%" : 32
+```
+*Figure 13 — Reinvestment allocation from gross margin. Over 55% of margin flows to productive reinvestment in R&D, manufacturing capability, workforce, and market growth — not purely to capital return.*
+
+#### 11.5.3 Research & Technology Reinvestment Detail
+
+| R&D Investment Area | Annual Allocation (Mature Ops) | Objective |
+| :--- | :--- | :--- |
+| **Next-gen propulsion** | $150M–$300M | Advance TBCC/hybrid variants for future vehicles; precooled engine studies |
+| **Advanced materials** | $80M–$150M | Self-healing TPS, ultra-high-temperature ceramics, metamaterial structures |
+| **Autonomy & operations** | $60M–$120M | Reduced ground crew; AI-assisted MRO; autonomous flight operations |
+| **Green H₂ infrastructure** | $50M–$100M | Co-investment in green hydrogen production to reduce propellant carbon |
+| **GAIA / AMPEL360 spillover** | $40M–$80M | Technology transfer to Q100 BWB and space launcher programmes |
+
+#### 11.5.4 Remanufacturing & Additive Manufacturing (3D Printing)
+
+| Capability | Investment Phase | Operational Impact |
+| :--- | :--- | :--- |
+| **TPS tile printing** | Development → IOC | On-demand TPS replacement tiles; eliminates long-lead ceramic supply chain. Reduces TPS MRO time by ~40%. |
+| **Rocket nozzle components** | Growth phase | Additively manufactured Inconel nozzle sections; reduces component cost by ~30% and lead time by ~60%. |
+| **Structural repair patches** | IOC → Mature | In-situ repair of composite and metallic structures; extends airframe life without full panel replacement. |
+| **Turbofan hot-section parts** | Mature ops | Leverages aviation AM ecosystem (GE/Safran precedent); commonality with AMPEL360 Q100 MRO. |
+| **Regional print centres** | Growth → Mature | Decentralized manufacturing near MRO/launch sites; reduces logistics carbon and creates regional technical employment. |
+
+```mermaid
+graph TD
+    DESIGN["Digital Twin<br/><b>Component Design</b>"]
+    AM["Additive Manufacturing<br/><b>3D Print Centre</b>"]
+    QA["Quality Assurance<br/><b>CT Scan + Test</b>"]
+    MRO3["MRO Integration<br/><b>Install & Certify</b>"]
+    FLEET["Return to<br/><b>Fleet Service</b>"]
+
+    DESIGN --> AM
+    AM --> QA
+    QA -->|"Pass"| MRO3
+    QA -->|"Fail → Recycle"| AM
+    MRO3 --> FLEET
+
+    SUPPLY2["Recycled<br/>Feedstock"] -->|"Powder / Wire"| AM
+    FLEET -->|"Component<br/>life data"| DESIGN
+
+    style DESIGN fill:#E3F2FD,color:#0D47A1,stroke:#1565C0
+    style AM fill:#FFF3E0,color:#E65100,stroke:#FF9800
+    style QA fill:#E8F5E9,color:#1B5E20,stroke:#2E7D32
+    style MRO3 fill:#F3E5F5,color:#4A148C,stroke:#7B1FA2
+    style FLEET fill:#E8F5E9,color:#1B5E20,stroke:#2E7D32
+    style SUPPLY2 fill:#ECEFF1,color:#37474F,stroke:#607D8B
+```
+*Figure 14 — Additive manufacturing integration in MRO cycle. Digital twin data drives on-demand component production; failed prints are recycled as feedstock, closing the material loop.*
+
+### 11.6 Social Return on Investment (SROI)
+
+#### 11.6.1 Direct Job Creation
+
+| Job Category | IOC Phase | Growth Phase | Mature Operations | Skill Level |
+| :--- | :--- | :--- | :--- | :--- |
+| **Engineering (design, systems, test)** | 2,000–4,000 | 3,000–6,000 | 4,000–8,000 | Graduate + postgraduate |
+| **Manufacturing & assembly** | 1,500–3,000 | 3,000–5,000 | 5,000–8,000 | Technician + skilled trades |
+| **Ground operations & launch** | 500–1,000 | 1,500–3,000 | 3,000–6,000 | Technician + operations |
+| **MRO technicians** | 200–500 | 1,000–2,000 | 3,000–6,000 | Skilled trades (aviation + rocket) |
+| **Additive manufacturing** | 50–100 | 200–500 | 500–1,500 | Specialist technician |
+| **Programme management, support** | 500–1,000 | 1,000–2,000 | 2,000–4,000 | Professional |
+| **Total direct** | **4,750–9,600** | **9,700–18,500** | **17,500–33,500** | |
+| **Indirect (supply chain multiplier ~2.5×)** | ~12,000–24,000 | ~24,000–46,000 | ~44,000–84,000 | |
+
+#### 11.6.2 Regional Workforce Strategy
+
+| Region | Primary Roles | Social Return Mechanism |
+| :--- | :--- | :--- |
+| **EU — Manufacturing hub** | Assembly, integration, turbofan MRO, materials R&D | High-skill STEM employment; revitalizes aerospace industrial base; apprenticeship programmes |
+| **US — Test & rocket heritage** | Engine test, rocket MRO, cryogenic systems | Sustains rocket workforce post-SLS/Artemis; cross-trains on hybrid propulsion |
+| **Launch site region** | Ground ops, turnaround, local MRO, propellant logistics | Creates permanent technical employment at launch site; community infrastructure investment |
+| **Additive manufacturing centres** | 3D print operations, quality assurance, materials recycling | Decentralized high-tech employment; transferable skills to aviation, automotive, medical sectors |
+
+#### 11.6.3 SROI Metrics
+
+| Metric | IOC | Growth | Mature | Measurement |
+| :--- | :--- | :--- | :--- | :--- |
+| **Direct FTEs** | ~7,000 | ~14,000 | ~25,000 | Headcount |
+| **Indirect/induced FTEs** | ~18,000 | ~35,000 | ~63,000 | Economic multiplier model |
+| **STEM graduates entering programme** | ~500/yr | ~1,200/yr | ~2,500/yr | Programme intake |
+| **Apprenticeships/traineeships** | ~200/yr | ~600/yr | ~1,500/yr | Training programme data |
+| **Regional GDP contribution** | ~$2B/yr | ~$8B/yr | ~$25B/yr | Economic impact model |
+| **Tax revenue to host governments** | ~$0.3B/yr | ~$1.2B/yr | ~$4B/yr | Tax receipts |
+| **Technology spinoff ventures** | 5–10 | 20–40 | 50–100+ | Patent + venture tracking |
+
+### 11.7 Sustainable Market Growth Strategy
+
+#### 11.7.1 Market Scaling Trajectory
+
+| Phase | Market Strategy | Revenue Target | Reinvestment Focus |
+| :--- | :--- | :--- | :--- |
+| **IOC (Years 1–3)** | Government anchor contracts (institutional payloads, demonstrators); build flight heritage and operational credibility | $0.4B–$1.6B/yr | Technology maturation; operational learning |
+| **Growth (Years 4–8)** | Expand to commercial constellation operators; establish price competitiveness with expendable launchers | $2.5B–$10B/yr | Fleet expansion; additive manufacturing scale-up |
+| **Mature (Years 9–25+)** | Dominant reusable LEO access provider; premium rapid-response service; crew transport (if certified) | $8B–$29B/yr | Next-gen vehicles; market diversification; GAIA/AMPEL360 synergies |
+| **Next-Gen (Year 15+)** | Second-generation vehicle incorporating R&D reinvestment outcomes; TBCC option if TRL matures | Scale with market | Full technology cycle closure |
+
+#### 11.7.2 Competitive Positioning
+
+| Differentiator | Architecture C Advantage |
+| :--- | :--- |
+| **Reusability** | 100–200+ flights vs. expendable or limited-reuse competitors |
+| **Aircraft-like operations** | Runway takeoff/landing; no ocean recovery; faster turnaround |
+| **Payload flexibility** | 6,250 kg to LEO; accommodates diverse payloads without reconfiguration |
+| **Operational resilience** | Diversion capability (turbofan); go-around; weather flexibility |
+| **Lower $/kg trajectory** | $4,000–$11,000/kg at scale, declining with fleet maturation |
+| **ESG advantage** | Lowest environmental footprint among candidates; green H₂ pathway |
+| **Social licence** | Largest workforce impact; regional employment; technology transfer |
+
+#### 11.7.3 Reinvestment Flywheel
+
+```mermaid
+graph TD
+    REV["Mission Revenue<br/><b>$80–120M/flight</b>"]
+    MARGIN["Gross Margin<br/><b>61–88%</b>"]
+    RD["R&D Reinvestment<br/><b>15–20%</b>"]
+    AM2["Additive Mfg<br/><b>10–15%</b>"]
+    WORK["Workforce Dev<br/><b>10–15%</b>"]
+    MARKET["Market Growth<br/><b>15–20%</b>"]
+    FIN["Financial Reserve<br/><b>30–40%</b>"]
+
+    REV --> MARGIN
+    MARGIN --> RD
+    MARGIN --> AM2
+    MARGIN --> WORK
+    MARGIN --> MARKET
+    MARGIN --> FIN
+
+    RD -->|"Better vehicles<br/>Lower cost"| COST_DOWN["Reduced<br/>Ops Cost"]
+    AM2 -->|"Faster MRO<br/>Lower parts cost"| COST_DOWN
+    WORK -->|"Skilled workforce<br/>Higher productivity"| COST_DOWN
+    MARKET -->|"More missions<br/>Higher utilization"| MORE_REV["Increased<br/>Revenue"]
+    FIN -->|"Fleet expansion<br/>New vehicles"| MORE_REV
+
+    COST_DOWN -->|"Higher margin"| MARGIN
+    MORE_REV -->|"More revenue"| REV
+
+    style REV fill:#1565C0,color:#fff,stroke:#0D47A1
+    style MARGIN fill:#2E7D32,color:#fff,stroke:#1B5E20
+    style RD fill:#E3F2FD,color:#0D47A1,stroke:#1565C0
+    style AM2 fill:#FFF3E0,color:#E65100,stroke:#FF9800
+    style WORK fill:#E8F5E9,color:#1B5E20,stroke:#2E7D32
+    style MARKET fill:#F3E5F5,color:#4A148C,stroke:#7B1FA2
+    style FIN fill:#ECEFF1,color:#37474F,stroke:#607D8B
+    style COST_DOWN fill:#FFF9C4,color:#F57F17,stroke:#F9A825
+    style MORE_REV fill:#FFF9C4,color:#F57F17,stroke:#F9A825
+```
+*Figure 15 — Reinvestment flywheel. Revenue flows through five reinvestment pools, each driving either cost reduction or revenue growth, creating a self-reinforcing cycle of margin expansion and capability improvement.*
+
+### 11.8 Economic Key Finding
+
+**Architecture C (Hybrid) is the only architecture with a viable economic model**, driven by:
+
+1. **Non-zero payload (6,250 kg)** — the prerequisite for any revenue generation.
+2. **Highest reuse life (100–200+ flights)** — amortizes $18–34B development cost to $11–38M/mission.
+3. **Lowest operations cost trajectory** — aircraft-like turnaround drives $14–31M/mission ops cost at scale.
+4. **Viable ROI (8–35% IRR)** — sufficient to attract capital while maintaining reinvestment margins.
+5. **Self-reinforcing flywheel** — R&D, additive manufacturing, workforce, and market reinvestment pools drive continuous cost reduction and revenue growth.
+6. **Largest social return** — 25,000+ direct FTEs at mature operations; 63,000+ including indirect; significant regional GDP contribution and STEM pipeline impact.
+7. **Sustainable market growth** — price trajectory to $4,000–$8,000/kg enables competitive positioning against next-generation expendable launchers.
+
+Architecture B generates no payload and therefore no revenue; its economics are non-viable. Architecture A's extreme development cost ($35–62B) combined with low reuse life and minimal payload yields unacceptable cost-per-kilogram and no path to competitive pricing.
+
+---
+
+## 12. Appendix — Assessment Methodology
+
+### 12.1 Scoring Basis
 Scores derived from engineering judgment, published data, historical outcomes (NASP, X-33), and certification precedent (CS-25, CS-E). No computational models executed.
 
-### 11.2 Limitations
+### 12.2 Limitations
 *   Propellant fractions are approximate (ideal rocket equation with assumed losses).
 *   TBCC engine mass estimates carry ±30–40% uncertainty.
 *   Mass breakdowns are parametric illustrations, not design-point calculations.
-*   Economic analysis deferred to KNOT-SP-14.
 *   ESG emissions estimates in Section 10 are order-of-magnitude illustrations derived from published propellant chemistry and analogous vehicle programmes; detailed lifecycle assessment (LCA) deferred to LC05.
+*   Economic and ROI estimates in Section 11 are parametric screening-level projections; market pricing and cost models require validation against actual launch-service pricing and industrial cost databases in LC05.
 
-### 11.3 Review and Approval
+### 12.3 Review and Approval
 
 | Role | Name | Date | Status |
 | :--- | :--- | :--- | :--- |
@@ -707,6 +1059,7 @@ Scores derived from engineering judgment, published data, historical outcomes (N
 | Reviewer (v0.2 → v0.3) | Programme Lead | 2026-03-22 | Complete; corrections in v0.3 |
 | Reviewer (v0.3 → v0.4) | Programme Lead | 2026-03-22 | Complete; final polish |
 | Reviewer (v0.4 → v0.5) | Programme Lead | 2026-03-25 | Complete; ESG huella section added |
+| Reviewer (v0.5 → v0.6) | Programme Lead | 2026-03-25 | Complete; lifecycle economics section added |
 | Reviewer | STK_SAF | — | Pending |
 | Reviewer | STK_CERT | — | Pending |
 | Approver | Programme Lead | — | Pending final reviews |
