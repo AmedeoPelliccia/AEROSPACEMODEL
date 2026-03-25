@@ -568,8 +568,8 @@ graph TD
 
 | Emission | Source | Phase | Estimated Magnitude | Mitigation Lever |
 | :--- | :--- | :--- | :--- | :--- |
-| **CO₂** | Jet-fuel burn (M 0–2.5) | Ascent (air-breathing) | ~15–25 t per mission (comparable to a transatlantic widebody flight) | Sustainable aviation fuel (SAF); reduced M 0–2.5 dwell |
-| **H₂O** | LH₂/LOX combustion | Ascent (rocket phase) + re-entry | ~150–180 t per mission (stratospheric injection above 15 km) | Cannot be eliminated; monitor stratospheric water vapour trends |
+| **CO₂** | Jet-fuel burn (M 0–2.5) | Ascent (air-breathing) | ~15–25 t per mission — basis: ~5,000–8,000 kg jet fuel at M 0–2.5 phase × 3.16 kg CO₂/kg fuel; comparable to a transatlantic widebody flight | Sustainable aviation fuel (SAF); reduced M 0–2.5 dwell |
+| **H₂O** | LH₂/LOX combustion | Ascent (rocket phase) + re-entry | ~170–200 t per mission — basis: ~200,000 kg LH₂/LOX at O/F 6:1, yielding ~28,500 kg LH₂ × 6.75 kg H₂O/kg H₂ (fuel-rich); stratospheric injection above 15 km | Cannot be eliminated; monitor stratospheric water vapour trends |
 | **NOₓ** | High-temperature air-breathing combustion | Ascent (M 0–2.5) | Low — brief dwell, moderate altitude | Low-NOₓ combustor technology from aviation sector |
 | **Particulates** | TPS ablation (if any); minor engine soot | Re-entry; air-breathing phase | Trace — non-ablative TPS design goal | Advanced TPS materials (UHTC, oxidation-resistant coatings) |
 | **Noise** | Turbofan takeoff; sonic boom | Ground vicinity; flight corridor | Turbofan: ~90–95 dB(A) at reference; Boom: mitigated by steep climb profile | Noise-optimized flight profiles; site selection |
@@ -593,7 +593,7 @@ The single most impactful ESG measure is **maximizing vehicle reuse cycles**. Am
 
 | Parameter | A: TBCC | B: Rocket-Dominant | C: Hybrid |
 | :--- | :--- | :--- | :--- |
-| **Target reuse cycles** | 20–50 (limited by inlet/hot-section fatigue) | 50–100 (rocket engine life-limited) | 100–200+ (turbofan: aviation-grade life; rocket: ~55 flights per engine set) |
+| **Target reuse cycles** | 20–50 (limited by inlet/hot-section fatigue) | 50–100 (rocket engine life-limited) | 100–200+ airframe life (turbofan: aviation-grade cycle life; rocket engine sets: ~55 flights each, replaced 2–4× over airframe life via scheduled MRO) |
 | **Manufacturing carbon per flight (amortized)** | High (low reuse ÷ high manufacturing intensity) | Moderate | **Lowest** (high reuse ÷ moderate manufacturing) |
 | **MRO carbon per flight** | High (complex overhaul) | Low (simple system) | Moderate (two systems, both established) |
 
