@@ -1,0 +1,20 @@
+{
+  "include_project_structure": true,
+  "max_file_size_kb": 500,
+  "included_extensions": [
+    ".md",
+    ".csv",
+    ".yaml",
+    ".yml",
+    ".json",
+    ".py"
+  ],
+  "excluded_paths": [
+    ".git",
+    "__pycache__",
+    "node_modules",
+    "dist",
+    "build"
+  ],
+  "output_format": "markdown"
+}

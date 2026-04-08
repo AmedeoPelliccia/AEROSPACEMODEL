@@ -28,3 +28,6 @@ Thumbs.db
 # Reports output (generated artefacts)
 10_REPORTING/**/*.html
 10_REPORTING/**/*.pdf
+
+# Snapshots (generated AI interaction files — keep config and README, ignore snapshot files)
+snapshots/snapshot_*.md
