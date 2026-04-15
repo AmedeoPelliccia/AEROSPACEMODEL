@@ -15,5 +15,6 @@
 5. Empty directories must contain a `.gitkeep` file to preserve structure.
 6. Product variant folders must follow the canonical structure defined in `04_PRODUCTS/<PRODUCT_FAMILY>/variants/<VARIANT>/`.
 7. Programmes must be organized by craft class and family: `04_PRODUCTS/<PRODUCT_FAMILY>/<CRAFT_CLASS>/<FAMILY>/programmes/<PROGRAMME>/`.
+   - Exception: STATIONS/GAIA uses `04_PRODUCTS/<PRODUCT_FAMILY>/STATIONS/GAIA/OPT-INS/` instead of `programmes/`.
 8. Valid craft classes are: `CRAFT_CREWED`, `CRAFT_UNCREWED`, `STATIONS`.
 9. Valid family identities are: `AMPEL` (crewed), `ROBBBO-T` (uncrewed), `GAIA` (stations).
