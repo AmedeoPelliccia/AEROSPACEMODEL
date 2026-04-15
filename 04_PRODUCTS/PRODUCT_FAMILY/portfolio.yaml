@@ -29,7 +29,7 @@ taxonomy:
       description: Family of stations and fixed or semi-fixed infrastructure platforms
 
   path_template: >
-    04_PRODUCTS/PRODUCT_FAMILY/{CRAFT_CREWED|CRAFT_UNCREWED|STATIONS}/{AMPEL|ROBBBO-T|GAIA}/programmes/{PROGRAMME}/work_packages/
+    04_PRODUCTS/PRODUCT_FAMILY/{CRAFT_CREWED|CRAFT_UNCREWED|STATIONS}/{AMPEL|ROBBBO-T|GAIA}/{programmes/{PROGRAMME}|OPT-INS}/work_packages/
 
 variants:
   - id: VARIANT
@@ -42,10 +42,10 @@ programmes:
     family: AMPEL
     description: Template programme (crewed)
     status: DRAFT
-  - id: PROGRAMME_UNCREWED
+  - id: OPT-INS
     craft_class: CRAFT_UNCREWED
     family: ROBBBO-T
-    description: Template programme (uncrewed)
+    description: Opt-ins (uncrewed)
     status: DRAFT
   - id: PROGRAMME_STATIONS
     craft_class: STATIONS

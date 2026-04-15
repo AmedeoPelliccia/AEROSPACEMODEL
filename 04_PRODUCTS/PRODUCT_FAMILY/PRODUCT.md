@@ -33,7 +33,7 @@ The AEROSPACEMODEL product taxonomy distinguishes first between **crewed craft**
 ### Canonical path template
 
 ```text
-04_PRODUCTS/PRODUCT_FAMILY/{CRAFT_CREWED|CRAFT_UNCREWED|STATIONS}/{AMPEL|ROBBBO-T|GAIA}/programmes/{PROGRAMME}/work_packages/
+04_PRODUCTS/PRODUCT_FAMILY/{CRAFT_CREWED|CRAFT_UNCREWED|STATIONS}/{AMPEL|ROBBBO-T|GAIA}/{programmes/{PROGRAMME}|OPT-INS}/work_packages/
 ```
 
 ## Product Family Description
@@ -49,5 +49,5 @@ See `variants/` for product variant instances.
 Programmes are organized by craft class and family identity:
 
 - `CRAFT_CREWED/AMPEL/programmes/` — crewed craft programmes
-- `CRAFT_UNCREWED/ROBBBO-T/programmes/` — uncrewed craft programmes
+- `CRAFT_UNCREWED/ROBBBO-T/OPT-INS/` — uncrewed craft opt-ins
 - `STATIONS/GAIA/programmes/` — station programmes

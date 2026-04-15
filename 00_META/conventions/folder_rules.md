@@ -14,6 +14,6 @@
 4. The `evidence/` subfolder is mandatory in every active lifecycle phase.
 5. Empty directories must contain a `.gitkeep` file to preserve structure.
 6. Product variant folders must follow the canonical structure defined in `04_PRODUCTS/<PRODUCT_FAMILY>/variants/<VARIANT>/`.
-7. Programmes must be organized by craft class and family: `04_PRODUCTS/<PRODUCT_FAMILY>/<CRAFT_CLASS>/<FAMILY>/programmes/<PROGRAMME>/`.
+7. Programmes must be organized by craft class and family: `04_PRODUCTS/<PRODUCT_FAMILY>/<CRAFT_CLASS>/<FAMILY>/programmes/<PROGRAMME>/`. For ROBBBO-T (uncrewed), the path is `04_PRODUCTS/<PRODUCT_FAMILY>/CRAFT_UNCREWED/ROBBBO-T/OPT-INS/`.
 8. Valid craft classes are: `CRAFT_CREWED`, `CRAFT_UNCREWED`, `STATIONS`.
 9. Valid family identities are: `AMPEL` (crewed), `ROBBBO-T` (uncrewed), `GAIA` (stations).
