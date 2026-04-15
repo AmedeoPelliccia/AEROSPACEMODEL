@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hypersonic Vehicle – LH₂ Propulsion &amp; Flight Profile</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: #f0f0f0;
+  color: #111;
+  font-size: 14px;
+}
+
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 56px 72px;
+  margin-bottom: 48px;
+  box-shadow: 0 1px 16px rgba(0,0,0,0.07);
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 1 – LH₂ THERMAL-PROPULSION COUPLING
+═══════════════════════════════════════════════════ */
+
+.diagram-title {
+  text-align: center;
+  color: #c8c8c8;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  margin-bottom: 48px;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 2 – FLIGHT PROFILE DASHBOARD
+═══════════════════════════════════════════════════ */
+
+.chart-caption {
+  text-align: center;
+  color: #888;
+  font-size: 13.5px;
+  margin-top: 10px;
+  margin-bottom: 32px;
+}
+
+.phase-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 32px;
+}
+
+.phase-tab {
+  flex: 1;
+  padding: 14px 12px 12px;
+  background: transparent;
+  border: none;
+  border-right: 1px solid #e4e4e4;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 13px;
+  color: #bbb;
+  line-height: 1.35;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.phase-tab:last-child { border-right: none; }
+
+.phase-tab.active {
+  background: #1e3d6e;
+  color: #fff;
+  border-radius: 6px;
+}
+
+.phase-tab .tab-num {
+  font-weight: 700;
+  font-size: 13.5px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.phase-tab .tab-mach {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.phase-tab.active .tab-mach {
+  color: rgba(255,255,255,0.82);
+  opacity: 1;
+}
+
+/* Phase detail */
+.phase-detail { margin-bottom: 28px; }
+
+.phase-heading {
+  font-size: 16px;
+  font-weight: 500;
+  color: #c8c8c8;
+  margin-bottom: 18px;
+  transition: color 0.15s;
+}
+
+.phase-heading.is-active { color: #1e3d6e; }
+
+.detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 18px;
+}
+
+.detail-table td {
+  padding: 5px 0;
+  font-size: 13.5px;
+  vertical-align: top;
+  color: #c8c8c8;
+  transition: color 0.15s;
+}
+
+.detail-table td:first-child {
+  width: 190px;
+  padding-right: 16px;
+}
+
+.detail-table.is-active td { color: #666; }
+.detail-table.is-active td:first-child { color: #999; }
+
+.phase-desc {
+  font-size: 13.5px;
+  line-height: 1.68;
+  color: #c8c8c8;
+  transition: color 0.15s;
+}
+
+.phase-desc.is-active { color: #333; }
+
+/* Stats */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.stat-card {
+  background: #2a2a2a;
+  border-radius: 6px;
+  padding: 16px 14px;
+  color: #fff;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #aaa;
+  margin-bottom: 7px;
+}
+
+.stat-value {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.stat-value.small { font-size: 17px; }
+
+/* Thermal load bar */
+.thermal-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.thermal-label {
+  font-size: 12.5px;
+  color: #888;
+  white-space: nowrap;
+}
+
+.thermal-bar-bg {
+  flex: 1;
+  height: 7px;
+  background: #e8e8e8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.thermal-bar-fill {
+  height: 100%;
+  background: #28aa88;
+  border-radius: 4px;
+  transition: width 0.35s ease;
+}
+
+.thermal-pct {
+  font-size: 12.5px;
+  color: #888;
+  flex: 0 0 32px;
+  text-align: right;
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 1 – LH₂ Thermal-Propulsion Coupling (Cruise Phase)
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="card">
+    <div class="diagram-title">LH₂ thermal-propulsion coupling (cruise phase)</div>
+
+    <!--
+      SVG viewBox: 0 0 900 585
+      Coordinate reference (x, y):
+        LH₂ tank      : (0,   8,  220, 70)
+        LH₂ pump      : (630,  8,  200, 70)
+        Regen circuit : (0, 175,  900, 88)   bottom y=263
+        Aero heating  : (0, 355,  218, 78)
+        Forebody inlet: (342,355, 216, 78)
+        Scramjet      : (684,355, 216, 78)
+        Exhaust nozzle: (684,505, 216, 68)
+        Key insight   : (0, 505,  320, 68)
+    -->
+    <svg viewBox="0 0 900 585" xmlns="http://www.w3.org/2000/svg"
+         width="100%" style="overflow:visible" aria-label="LH₂ thermal-propulsion coupling diagram">
+      <defs>
+        <marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#aaa"/>
+        </marker>
+      </defs>
+
+      <!-- ── LH₂ tank (ATA 28) ── -->
+      <rect x="0"   y="8"  width="220" height="70" rx="8" fill="#1e4288"/>
+      <text x="110" y="39" fill="white" font-size="15" font-weight="700" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">LH₂ tank (ATA 28)</text>
+      <text x="110" y="60" fill="rgba(255,255,255,0.86)" font-size="13" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">20 K, 2–3 bar</text>
+
+      <!-- ── LH₂ pump ── -->
+      <rect x="630" y="8"  width="200" height="70" rx="8" fill="#3d3d3d"/>
+      <text x="730" y="37" fill="white" font-size="15" font-weight="700" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">LH₂ pump</text>
+      <text x="730" y="58" fill="rgba(255,255,255,0.86)" font-size="13" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Pressurize to 50 bar</text>
+
+      <!-- Arrow: LH₂ tank → pump (horizontal) -->
+      <line x1="220" y1="43" x2="628" y2="43" stroke="#aaa" stroke-width="1.3"
+            marker-end="url(#ah)"/>
+
+      <!-- Arrow: pump ↓ regen (vertical, Cold LH₂ in) -->
+      <line x1="730" y1="78" x2="730" y2="173" stroke="#aaa" stroke-width="1.3"
+            marker-end="url(#ah)"/>
+      <text x="742" y="133" fill="#aaa" font-size="12"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Cold LH₂ in</text>
+
+      <!-- ── Regenerative cooling circuit (ATA 51 + 57 leading edges) ── -->
+      <rect x="0" y="175" width="900" height="88" rx="8" fill="#7a2010"/>
+      <text x="450" y="208" fill="white" font-size="15" font-weight="700" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+        Regenerative cooling circuit (ATA 51 + 57 leading edges)
+      </text>
+      <text x="450" y="232" fill="rgba(255,255,255,0.86)" font-size="13" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+        LH₂ absorbs ~3 MJ/kg: 20 K → 800+ K — pre-heated before combustion
+      </text>
+
+      <!-- Arrow: aero heating ↑ regen (Q into skin) -->
+      <line x1="109" y1="353" x2="109" y2="265" stroke="#aaa" stroke-width="1.3"
+            marker-end="url(#ah)"/>
+      <text x="120" y="315" fill="#aaa" font-size="12"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Q into skin</text>
+
+      <!-- Arrow: regen ↓ scramjet (Hot H₂ gas) -->
+      <line x1="792" y1="263" x2="792" y2="353" stroke="#aaa" stroke-width="1.3"
+            marker-end="url(#ah)"/>
+      <text x="802" y="313" fill="#aaa" font-size="12"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Hot H₂ gas</text>
+
+      <!-- ── Aero heating ── -->
+      <rect x="0"   y="355" width="218" height="78" rx="8" fill="#7a2010"/>
+      <text x="109" y="385" fill="white" font-size="15" font-weight="700" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Aero heating</text>
+      <text x="109" y="409" fill="rgba(255,255,255,0.86)" font-size="13" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Stag. T: 2 000+ K at M 7</text>
+
+      <!-- ── Forebody inlet ── -->
+      <rect x="342" y="355" width="216" height="78" rx="8" fill="#1a5e50"/>
+      <text x="450" y="385" fill="white" font-size="15" font-weight="700" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Forebody inlet</text>
+      <text x="450" y="409" fill="rgba(255,255,255,0.86)" font-size="13" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Shock compression</text>
+
+      <!-- Arrow: forebody → scramjet (Compressed air) -->
+      <line x1="558" y1="394" x2="682" y2="394" stroke="#aaa" stroke-width="1.3"
+            marker-end="url(#ah)"/>
+      <text x="620" y="388" fill="#aaa" font-size="12" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Compressed air</text>
+
+      <!-- ── Scramjet (ATA 72) ── -->
+      <rect x="684" y="355" width="216" height="78" rx="8" fill="#7a6010"/>
+      <text x="792" y="383" fill="white" font-size="15" font-weight="700" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Scramjet (ATA 72)</text>
+      <text x="792" y="406" fill="rgba(255,255,255,0.86)" font-size="13" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Combustion at M 2–3 int.</text>
+
+      <!-- Arrow: scramjet ↓ exhaust nozzle -->
+      <line x1="792" y1="433" x2="792" y2="503" stroke="#aaa" stroke-width="1.3"
+            marker-end="url(#ah)"/>
+
+      <!-- ── Key insight ── -->
+      <rect x="0" y="505" width="322" height="72" rx="8" fill="none"
+            stroke="#d0d0d0" stroke-width="1.5" stroke-dasharray="6 4"/>
+      <text x="161" y="530" fill="#c8c8c8" font-size="13" font-weight="700" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Key insight</text>
+      <text x="161" y="551" fill="#c8c8c8" font-size="12.5" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+        Thermal energy absorbed by LH₂ is recovered as propulsive work
+      </text>
+
+      <!-- ── Exhaust nozzle (ATA 78) ── -->
+      <rect x="684" y="505" width="216" height="68" rx="8" fill="#3d3d3d"/>
+      <text x="792" y="545" fill="white" font-size="15" font-weight="700" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Exhaust nozzle (ATA 78)</text>
+    </svg>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 2 – Flight Profile Dashboard
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="card">
+
+    <!--
+      Altitude chart SVG
+      X-axis : 0–90 min  →  SVG x = 58 + (min/90)*820   (plot area: x 58–878)
+      Y-axis : 0–60 km   →  SVG y = 258 - (km/60)*248   (plot area: y 10–258)
+
+      Phase x boundaries (minutes → SVG x):
+        Accel climb  :  0–15 min  →  x  58–195
+        Transition   : 15–24 min  →  x 195–276
+        Cruise M5–8  : 24–65 min  →  x 276–650
+        Decel        : 65–78 min  →  x 650–768
+        Approach     : 78–90 min  →  x 768–878
+
+      Altitude polyline points (min, km):
+        (0,0)→(5,3)→(10,12)→(14,21)→(18,37)→(22,52)→(27,56)→(35,57)
+        →(50,58)→(60,57)→(65,55)→(70,46)→(75,30)→(80,13)→(85,5)→(90,1)
+    -->
+    <svg id="flightChart" viewBox="0 0 940 320" xmlns="http://www.w3.org/2000/svg"
+         width="100%" aria-label="Altitude vs time flight profile chart">
+
+      <!-- Phase background fills -->
+      <rect x="58"  y="10" width="137" height="248" fill="rgba(160,215,190,0.32)"/><!-- Accel climb -->
+      <rect x="195" y="10" width="81"  height="248" fill="rgba(255,195,175,0.30)"/><!-- Transition -->
+      <rect x="276" y="10" width="374" height="248" fill="rgba(255,195,175,0.30)"/><!-- Cruise -->
+      <rect x="650" y="10" width="118" height="248" fill="rgba(255,195,175,0.30)"/><!-- Decel -->
+      <rect x="768" y="10" width="110" height="248" fill="rgba(160,215,190,0.32)"/><!-- Approach -->
+
+      <!-- Y gridlines -->
+      <line x1="58" y1="258" x2="878" y2="258" stroke="#e0e0e0" stroke-width="1"/>
+      <line x1="58" y1="196" x2="878" y2="196" stroke="#e0e0e0" stroke-width="1"/>
+      <line x1="58" y1="134" x2="878" y2="134" stroke="#e0e0e0" stroke-width="1"/>
+      <line x1="58" y1="72"  x2="878" y2="72"  stroke="#e0e0e0" stroke-width="1"/>
+      <line x1="58" y1="10"  x2="878" y2="10"  stroke="#e0e0e0" stroke-width="1"/>
+
+      <!-- Y axis labels -->
+      <text x="50" y="262" fill="#888" font-size="11" text-anchor="end"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">0 km</text>
+      <text x="50" y="200" fill="#888" font-size="11" text-anchor="end"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">15 km</text>
+      <text x="50" y="138" fill="#888" font-size="11" text-anchor="end"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">30 km</text>
+      <text x="50" y="76"  fill="#888" font-size="11" text-anchor="end"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">45 km</text>
+      <text x="50" y="14"  fill="#888" font-size="11" text-anchor="end"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">60 km</text>
+
+      <!-- X axis labels -->
+      <text x="58"  y="278" fill="#888" font-size="11" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">0</text>
+      <text x="195" y="278" fill="#888" font-size="11" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">15 min</text>
+      <text x="331" y="278" fill="#888" font-size="11" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">30 min</text>
+      <text x="468" y="278" fill="#888" font-size="11" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">45 min</text>
+      <text x="604" y="278" fill="#888" font-size="11" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">1 h</text>
+      <text x="878" y="278" fill="#888" font-size="11" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">1.5 h</text>
+
+      <!-- Phase labels below x-axis -->
+      <text x="127" y="298" fill="#888" font-size="11" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Accel climb</text>
+      <text x="236" y="298" fill="#888" font-size="11" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Transition</text>
+      <text x="463" y="298" fill="#888" font-size="11" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Cruise M 5–8</text>
+      <text x="709" y="298" fill="#888" font-size="11" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Decel</text>
+      <text x="823" y="298" fill="#888" font-size="11" text-anchor="middle"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Approach</text>
+
+      <!--
+        Polyline points: x = 58 + (min/90)*820,  y = 258 - (km/60)*248
+        (0,0)   → (58,  258)
+        (5,3)   → (103, 245.6)
+        (10,12) → (149, 208.4)   ← red dot
+        (14,21) → (186, 171.2)
+        (18,37) → (222, 105.3)
+        (22,52) → (259,  42.9)
+        (27,56) → (304,  25.7)
+        (35,57) → (377,  21.6)
+        (50,58) → (514,  17.4)
+        (60,57) → (604,  21.6)
+        (65,55) → (649,  30.0)
+        (70,46) → (695,  67.3)
+        (75,30) → (740, 134.0)
+        (80,13) → (786, 204.3)
+        (85,5)  → (831, 237.3)
+        (90,1)  → (878, 253.9)
+      -->
+      <polyline
+        points="58,258 103,246 149,208 186,171 222,105 259,43 304,26 377,22 514,17 604,22 649,30 695,67 740,134 786,204 831,237 878,254"
+        fill="none" stroke="#cc4422" stroke-width="2.2"
+        stroke-linejoin="round" stroke-linecap="round"/>
+
+      <!-- Phase-1 marker dot at (10 min, 12 km) = (149, 208) -->
+      <circle id="phaseDot" cx="149" cy="208" r="5.5" fill="#cc4422"/>
+    </svg>
+
+    <div class="chart-caption">London → Sydney: ~17 000 km, ~90 min block time</div>
+
+    <!-- Phase tabs -->
+    <div class="phase-tabs" id="phaseTabs">
+      <button class="phase-tab active" onclick="selectPhase(0)">
+        <span class="tab-num">1. Takeoff + climb</span>
+        <span class="tab-mach">M 0 – 2.0</span>
+      </button>
+      <button class="phase-tab" onclick="selectPhase(1)">
+        <span class="tab-num">2. Mode transition</span>
+        <span class="tab-mach">M 2.0 – 5.0</span>
+      </button>
+      <button class="phase-tab" onclick="selectPhase(2)">
+        <span class="tab-num">3. Hypersonic<br>cruise</span>
+        <span class="tab-mach">M 5.0 – 8.0</span>
+      </button>
+      <button class="phase-tab" onclick="selectPhase(3)">
+        <span class="tab-num">4. Decelerating</span>
+        <span class="tab-mach">M 8.0 – 2.0</span>
+      </button>
+      <button class="phase-tab" onclick="selectPhase(4)">
+        <span class="tab-num">5. Approach +<br>land</span>
+        <span class="tab-mach">M 2.0 – 0</span>
+      </button>
+    </div>
+
+    <!-- Phase detail section -->
+    <div class="phase-detail">
+      <div class="phase-heading is-active" id="phaseHeading"></div>
+
+      <table class="detail-table is-active" id="detailTable">
+        <tbody>
+          <tr><td>Mach range</td><td id="d-mach"></td></tr>
+          <tr><td>Altitude</td><td id="d-alt"></td></tr>
+          <tr><td>Duration</td><td id="d-dur"></td></tr>
+          <tr><td>Propulsion</td><td id="d-prop"></td></tr>
+          <tr><td>Skin temp</td><td id="d-skin"></td></tr>
+          <tr><td>Thermal mgmt</td><td id="d-therm"></td></tr>
+          <tr><td>Fuel flow</td><td id="d-fuel"></td></tr>
+          <tr><td>Cert. basis</td><td id="d-cert"></td></tr>
+        </tbody>
+      </table>
+
+      <div class="phase-desc is-active" id="phaseDesc"></div>
+    </div>
+
+    <!-- Summary stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Peak Mach</div>
+        <div class="stat-value" id="s-mach"></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Peak altitude</div>
+        <div class="stat-value" id="s-alt"></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Peak skin T</div>
+        <div class="stat-value" id="s-skin"></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Propulsion</div>
+        <div class="stat-value small" id="s-prop"></div>
+      </div>
+    </div>
+
+    <!-- Thermal load progress bar -->
+    <div class="thermal-row">
+      <div class="thermal-label">Thermal load (% of TPS design limit)</div>
+      <div class="thermal-bar-bg">
+        <div class="thermal-bar-fill" id="thermalBar"></div>
+      </div>
+      <div class="thermal-pct" id="thermalPct"></div>
+    </div>
+
+  </div><!-- /.card -->
+</div><!-- /.page -->
+
+<script>
+/* ─────────────────────────────────────────────────────
+   Phase data
+───────────────────────────────────────────────────── */
+var PHASES = [
+  {
+    heading : "Phase 1 – Takeoff and accelerating climb",
+    mach    : "0 – 2.0",
+    alt     : "0 – 15 km",
+    dur     : "~45 min",
+    prop    : "Variable cycle turbofan (dry)",
+    skin    : "200 – 420 K (benign)",
+    therm   : "Passive – convective cooling sufficient",
+    fuel    : "LH\u2082 to turbofan combustors",
+    cert    : "CS-25 + CS-X (conventional)",
+    desc    : "Conventional takeoff from runway (TOFL ~3\u202f000\u202fm). Turbofan operates in standard thermodynamic cycle. Noise footprint is the primary constraint \u2014 afterburner prohibited near airports. LH\u2082 vaporised from tanks at modest flow rates. All systems operate within existing certification envelopes.",
+    peakMach: "1.8",
+    peakAlt : "15 km",
+    peakSkin: "420 K",
+    peakProp: "Turbofan",
+    thermal : 8,
+    dotX    : 149, dotY: 208
+  },
+  {
+    heading : "Phase 2 – Mode transition",
+    mach    : "2.0 – 5.0",
+    alt     : "15 – 32 km",
+    dur     : "~10 min",
+    prop    : "Turbofan \u2192 Ramjet transition",
+    skin    : "420 – 900 K",
+    therm   : "Active cooling initiated; LH\u2082 pre-cooling of leading edges",
+    fuel    : "LH\u2082 to ramjet combustors",
+    cert    : "CS-25 + Special Condition (SC-H)",
+    desc    : "Transition from turbofan to ramjet propulsion. Engine mode switch occurs at approximately M\u202f2.5. Aerodynamic heating begins to dominate \u2014 leading edges require active LH\u2082 cooling. Aircraft climbs steeply through the stratosphere to reduce drag and improve propulsive efficiency.",
+    peakMach: "5.0",
+    peakAlt : "32 km",
+    peakSkin: "900 K",
+    peakProp: "Ramjet",
+    thermal : 35,
+    dotX    : 259, dotY: 43
+  },
+  {
+    heading : "Phase 3 – Hypersonic cruise",
+    mach    : "5.0 – 8.0",
+    alt     : "32 – 55 km",
+    dur     : "~50 min",
+    prop    : "Scramjet (ATA 72)",
+    skin    : "900 – 1\u202f800 K",
+    therm   : "Regenerative LH\u2082 cooling (ATA 51 + 57); absorbs ~3\u202fMJ/kg",
+    fuel    : "LH\u2082 through regen cooling \u2192 scramjet combustors",
+    cert    : "Special Conditions \u2013 hypersonic regime",
+    desc    : "Peak performance phase. Scramjet sustains combustion at M\u202f2\u20133 internal flow. LH\u2082 acts as both propellant and coolant, absorbing ~3\u202fMJ/kg through the regenerative circuit before entering combustors pre-heated to 800+\u202fK. Stagnation temperature exceeds 2\u202f000\u202fK at M\u202f7.",
+    peakMach: "8.0",
+    peakAlt : "55 km",
+    peakSkin: "1\u202f800 K",
+    peakProp: "Scramjet",
+    thermal : 95,
+    dotX    : 514, dotY: 17
+  },
+  {
+    heading : "Phase 4 – Decelerating",
+    mach    : "8.0 – 2.0",
+    alt     : "55 – 15 km",
+    dur     : "~15 min",
+    prop    : "Scramjet \u2192 Ramjet \u2192 Turbofan",
+    skin    : "1\u202f800 \u2192 420 K",
+    therm   : "LH\u2082 cooling tapered; thermal soak management",
+    fuel    : "Reducing LH\u2082 flow rate",
+    cert    : "Special Conditions \u2013 reusable hypersonic vehicle",
+    desc    : "Controlled deceleration from hypersonic cruise. Engine mode transitions are reversed. Thermal soak from the hot structure must be managed during cooldown. The LH\u2082 cooling circuit is gradually de-activated as skin temperatures fall below critical thresholds.",
+    peakMach: "8.0",
+    peakAlt : "55 km",
+    peakSkin: "1\u202f500 K",
+    peakProp: "Scramjet \u2192 Turbofan",
+    thermal : 70,
+    dotX    : 695, dotY: 67
+  },
+  {
+    heading : "Phase 5 – Approach and landing",
+    mach    : "2.0 – 0",
+    alt     : "15 – 0 km",
+    dur     : "~10 min",
+    prop    : "Variable cycle turbofan (dry)",
+    skin    : "200 – 420 K (cooling)",
+    therm   : "Passive \u2013 residual heat dissipation",
+    fuel    : "LH\u2082 to turbofan combustors",
+    cert    : "CS-25 + CS-X (conventional)",
+    desc    : "Subsonic approach and conventional runway landing. Turbofan provides all thrust. Thermal protection system cools passively. All systems revert to the conventional operational envelope. Noise constraints apply as during departure.",
+    peakMach: "2.0",
+    peakAlt : "15 km",
+    peakSkin: "420 K",
+    peakProp: "Turbofan",
+    thermal : 8,
+    dotX    : 831, dotY: 237
+  }
+];
+
+/* ─────────────────────────────────────────────────────
+   selectPhase(index)  – zero-based
+───────────────────────────────────────────────────── */
+function selectPhase(idx) {
+  var d = PHASES[idx];
+
+  /* tabs */
+  var tabs = document.querySelectorAll('.phase-tab');
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].classList.toggle('active', i === idx);
+  }
+
+  /* heading */
+  var heading = document.getElementById('phaseHeading');
+  heading.textContent = d.heading;
+  heading.className = 'phase-heading is-active';
+
+  /* detail table */
+  document.getElementById('d-mach').textContent  = d.mach;
+  document.getElementById('d-alt').textContent   = d.alt;
+  document.getElementById('d-dur').textContent   = d.dur;
+  document.getElementById('d-prop').textContent  = d.prop;
+  document.getElementById('d-skin').textContent  = d.skin;
+  document.getElementById('d-therm').textContent = d.therm;
+  document.getElementById('d-fuel').textContent  = d.fuel;
+  document.getElementById('d-cert').textContent  = d.cert;
+  document.getElementById('detailTable').className = 'detail-table is-active';
+
+  /* description */
+  var desc = document.getElementById('phaseDesc');
+  desc.textContent = d.desc;
+  desc.className = 'phase-desc is-active';
+
+  /* stats */
+  document.getElementById('s-mach').textContent = d.peakMach;
+  document.getElementById('s-alt').textContent  = d.peakAlt;
+  document.getElementById('s-skin').textContent = d.peakSkin;
+  document.getElementById('s-prop').textContent = d.peakProp;
+
+  /* thermal bar */
+  document.getElementById('thermalBar').style.width = d.thermal + '%';
+  document.getElementById('thermalPct').textContent  = d.thermal + '%';
+
+  /* move chart dot */
+  var dot = document.getElementById('phaseDot');
+  if (dot) {
+    dot.setAttribute('cx', d.dotX);
+    dot.setAttribute('cy', d.dotY);
+  }
+}
+
+/* Initialise with phase 1 */
+selectPhase(0);
+</script>
+</body>
+</html>
