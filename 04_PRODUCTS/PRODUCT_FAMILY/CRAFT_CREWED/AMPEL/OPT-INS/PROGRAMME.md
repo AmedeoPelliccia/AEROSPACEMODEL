@@ -1,6 +1,6 @@
 # PROGRAMME — Programme Definition (AMPEL / Crewed Craft)
 
-**Path:** `04_PRODUCTS/PRODUCT_FAMILY/CRAFT_CREWED/AMPEL/programmes/PROGRAMME/PROGRAMME.md`  
+**Path:** `04_PRODUCTS/PRODUCT_FAMILY/CRAFT_CREWED/AMPEL/OPT-INS/PROGRAMME.md`  
 **Authority:** ASIT  
 **Status:** DRAFT
 
