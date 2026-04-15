@@ -10,7 +10,7 @@
 
 This file defines an opt-in governed under the **GAIA** family (stations).
 
-Replace `OPT-INS` with the actual opt-in name (e.g., orbital node).
+Replace `OPT-INS` with the actual opt-in name (e.g., ORBITAL-NODE).
 
 ## Family
 
