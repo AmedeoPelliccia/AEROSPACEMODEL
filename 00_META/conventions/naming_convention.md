@@ -10,6 +10,9 @@
 
 - Folder names use UPPERCASE with underscores for top-level controlled directories.
 - Product family folders use UPPERCASE: `PRODUCT_FAMILY`.
+- Craft class folders use UPPERCASE: `CRAFT_CREWED`, `CRAFT_UNCREWED`, `STATIONS`.
+- Family identity folders use UPPERCASE: `AMPEL`, `ROBBBO-T`, `GAIA`.
+- Programme folders are lowercase: `programmes/`.
 - Variant folders use UPPERCASE: `VARIANT`.
 - Lifecycle phase folders follow the pattern: `LC<NN>_<PHASE_NAME>`.
 

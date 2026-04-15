@@ -4,11 +4,51 @@
 
 product_family: PRODUCT_FAMILY
 description: <Product family description>
+
+taxonomy:
+  charter: >
+    The AEROSPACEMODEL product taxonomy shall distinguish first between
+    crewed craft, uncrewed craft, and stations. Crewed craft shall be
+    organized under AMPEL, uncrewed craft under ROBBBO-T, and stations
+    under GAIA.
+
+  craft_classes:
+    - id: CRAFT_CREWED
+      label: Crewed Craft
+      family: AMPEL
+      description: Family of crewed aerospace craft
+
+    - id: CRAFT_UNCREWED
+      label: Uncrewed Craft
+      family: ROBBBO-T
+      description: Family of uncrewed aerospace craft
+
+    - id: STATIONS
+      label: Stations
+      family: GAIA
+      description: Family of stations and fixed or semi-fixed infrastructure platforms
+
+  path_template: >
+    04_PRODUCTS/PRODUCT_FAMILY/{CRAFT_CREWED|CRAFT_UNCREWED|STATIONS}/{AMPEL|ROBBBO-T|GAIA}/programmes/{PROGRAMME}/work_packages/
+
 variants:
   - id: VARIANT
     description: Template variant
     status: DRAFT
+
 programmes:
-  - id: PROGRAMME
-    description: Template programme
+  - id: PROGRAMME_CREWED
+    craft_class: CRAFT_CREWED
+    family: AMPEL
+    description: Template programme (crewed)
+    status: DRAFT
+  - id: PROGRAMME_UNCREWED
+    craft_class: CRAFT_UNCREWED
+    family: ROBBBO-T
+    description: Template programme (uncrewed)
+    status: DRAFT
+  - id: PROGRAMME_STATIONS
+    craft_class: STATIONS
+    family: GAIA
+    description: Template programme (stations)
     status: DRAFT
