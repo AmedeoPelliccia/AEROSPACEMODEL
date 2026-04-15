@@ -1,0 +1,2 @@
+knu_id,title,lifecycle_phase,knot_ref,knu_class,status,owner,created_date,description,evidence_refs,compliance_status,start_date,end_date,notes
+KNU-HAPSSE-LC01-0001,Operational Gap Analysis,LC01,KNOT-HAPSSE-LC01-0001,ARTEFACT,IN_PROGRESS,ASIT,2026-03-19,Analyse gap between satellite and conventional aircraft coverage and HAPS-SE capability envelope,,IN_PROGRESS,2026-03-19,,
