@@ -50,4 +50,4 @@ Programmes are organized by craft class and family identity:
 
 - `CRAFT_CREWED/AMPEL/programmes/` — crewed craft programmes
 - `CRAFT_UNCREWED/ROBBBO-T/programmes/` — uncrewed craft programmes
-- `STATIONS/GAIA/programmes/` — station programmes
+- `STATIONS/GAIA/OPT-INS/` — station opt-ins
