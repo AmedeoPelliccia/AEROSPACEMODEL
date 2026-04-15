@@ -1,0 +1,55 @@
+# Technology Inheritance Reverse Link — AMPEL360 Q100 BWB ← AAM/UAM eVTOL
+# Path: 04_PRODUCTS/AMPEL360_Q100_BWB/variants/Q100_BWB_BASE/domains/P-PROPULSION/technology_inheritance.yaml
+# Authority: ASIT
+# Status: ACTIVE_BASELINE
+
+title: Technology Inheritance — AMPEL360 Q100 BWB ← AAM/UAM eVTOL
+note: >
+  This file documents the technology inheritance from the AAM/UAM eVTOL programme to the
+  AMPEL360 Q100 BWB. The canonical inheritance model is maintained at
+  04_PRODUCTS/AAM_UAM_EVTOL/variants/AAM_UAM_BASE/domains/P-PROPULSION/technology_inheritance.yaml
+
+canonical_reference: 04_PRODUCTS/AAM_UAM_EVTOL/variants/AAM_UAM_BASE/domains/P-PROPULSION/technology_inheritance.yaml
+
+knot_spillover_model:
+  coefficient_a: 0.50
+  direction: BIDIRECTIONAL
+  description: >
+    Resolving AMPEL360 Q100 buffer battery KNOTs (KNOT-Q100BWB-LC03-0002,
+    KNOT-Q100BWB-LC03-0003) reduces AAM/UAM battery uncertainty (and vice versa)
+    at a 50% spillover rate.
+  tokenomics:
+    description: TT rewards flow bidirectionally via TOKENOMICS spillover
+    trigger: KNOT compliance state change in either product
+
+q100_specific_nodes:
+  - node_id: TECH-Q100-001
+    title: H2 FC primary power integration
+    ata_refs: [ATA-24]
+    description: >
+      Hydrogen fuel cell primary power replaces battery-dominant topology;
+      inherits power management architecture from AAM/UAM eVTOL with H2 FC adaptation
+    q100_knot: KNOT-Q100BWB-LC03-0002
+    inherited_from: KNOT-AAMUAM-LC03-0002
+    spillover_coefficient: 0.50
+
+  - node_id: TECH-Q100-002
+    title: Cryogenic buffer battery thermal management
+    ata_refs: [ATA-96]
+    description: >
+      Cryogenic hydrogen storage environment requires adapted battery thermal management;
+      inherits runaway containment and SoH model from AAM/UAM programme
+    q100_knot: KNOT-Q100BWB-LC03-0003
+    inherited_from: KNOT-AAMUAM-LC03-0003
+    spillover_coefficient: 0.50
+
+  - node_id: TECH-Q100-003
+    title: AI health monitoring integration with FBW
+    ata_refs: []
+    standards: [DO-178C, DO-254]
+    description: >
+      AI-based health monitoring extends AAM/UAM FBW + autonomous architecture
+      to manned transport application with CS-25 DAL A objectives
+    q100_knot: KNOT-Q100BWB-LC03-0004
+    inherited_from: KNOT-AAMUAM-LC03-0004
+    spillover_coefficient: 0.50

@@ -1,0 +1,3 @@
+knot_id,title,lifecycle_phase,obligation_source,status,owner,created_date,description,clause_refs,knu_refs,compliance_status,notes
+KNOT-Q100BWB-LC01-0001,Net-zero 100-passenger transport concept,LC01,Internal Governance,APPROVED,ASIT,2026-03-19,Define operational concept for net-zero capable 100-passenger BWB transport aircraft using H2 FC primary power and distributed open-fan electric propulsion,,,NOT_STARTED,
+KNOT-Q100BWB-LC01-0002,Technology inheritance from AAM/UAM eVTOL programme,LC01,Internal Governance,APPROVED,ASIT,2026-03-19,Capture technology nodes shared with AAM/UAM eVTOL programme and define KNOT spillover model (coefficient A=0.50) for bidirectional knowledge transfer,,,NOT_STARTED,KNOT spillover model per technology_inheritance.yaml

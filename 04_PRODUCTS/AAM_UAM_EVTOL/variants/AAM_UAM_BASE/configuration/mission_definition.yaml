@@ -1,0 +1,120 @@
+# Mission Definition — AAM/UAM eVTOL Base Variant
+# Path: 04_PRODUCTS/AAM_UAM_EVTOL/variants/AAM_UAM_BASE/configuration/mission_definition.yaml
+# Authority: ASIT
+# Status: ACTIVE_BASELINE
+
+title: Mission Definition Parameters — AAM/UAM eVTOL
+product: AAM_UAM_EVTOL
+variant: AAM_UAM_BASE
+diagram_title: "AAM / UAM operational concept"
+
+# ── Mission definition (Tab 1) ───────────────────────────────────────────────
+mission_definition:
+  mission_class:
+    value: Covers altitudes across two altitude strata
+    strata: [ground–30m, 150–300m AGL]
+    governing_knot: KNOT-AAMUAM-LC02-0001
+
+  design_range_km:
+    min: 30
+    max: 150
+    note: Metro (30–80 km) and regional (up to 150 km)
+    governing_knot: KNOT-AAMUAM-LC02-0002
+
+  cruise_speed_kmh_tas:
+    min: 150
+    max: 250
+    governing_knot: KNOT-AAMUAM-LC02-0003
+
+  cruise_altitude_m_agl:
+    min: 150
+    max: 300
+    airspace_class: U-space UBL
+    governing_knot: KNOT-AAMUAM-LC02-0003
+
+  vtol_performance:
+    profile: Vertical to/from
+    noise_limit_dba_at_boundary: 80
+    governing_knot: KNOT-AAMUAM-LC02-0004
+
+  passengers:
+    min_pax: 1
+    max_pax: 6
+    pilot: Single pilot or autonomous
+    governing_knot: KNOT-AAMUAM-LC02-0005
+
+  mtom_kg:
+    min: 700
+    max: 3175
+    certification_basis: SC-VTOL Category Enhanced
+    governing_knot: KNOT-AAMUAM-LC02-0006
+
+  payload_kg:
+    min: 80
+    max: 600
+    note: Passengers + baggage
+    governing_knot: KNOT-AAMUAM-LC02-0005
+
+  reserves:
+    vfr_hold_min: 20
+    diversion: to alternate vertiport or landing site
+    governing_knot: KNOT-AAMUAM-LC02-0007
+
+  dispatch_target:
+    flights_per_vehicle_per_day: 10
+    turnaround_duration_min: 5–10
+    governing_knot: KNOT-AAMUAM-LC02-0008
+
+  weather_minima:
+    initial: VFR
+    maturity: IFR (SC-VTOL Cat 1a)
+    governing_knot: KNOT-AAMUAM-LC02-0009
+
+  infra_footprint:
+    fato_pad_min_diameter: "1.5 × D"
+    d_definition: "D = 10 × outer rotor envelope"
+    governing_knot: KNOT-AAMUAM-LC02-0010
+
+# ── Summary metrics ─────────────────────────────────────────────────────────
+summary_metrics:
+  range:
+    label: Range
+    value: "30–150 km"
+  pax:
+    label: Pax
+    value: "1–6"
+  gate_to_gate:
+    label: Gate-to-gate
+    value: "12–35 min"
+  turnaround:
+    label: Turnaround
+    value: "5–10 min"
+
+# ── Operational concept note ─────────────────────────────────────────────────
+operational_concept_note: >
+  The mission is defined by the network, not the vehicle alone. A single eVTOL has no
+  utility without vertiport pairs, airspace corridors, charging infrastructure, and UTM
+  integration. The "system" being certified is the entire operation.
+
+# ── Flight profile ───────────────────────────────────────────────────────────
+flight_profile:
+  - segment: Vertical climb
+    altitude_start_m: 0
+    altitude_end_m: 150
+    note: From Vertiport A ground pad
+  - segment: Transition
+    altitude_start_m: 150
+    altitude_end_m: 300
+    note: Conversion from hover to forward flight
+  - segment: Cruise
+    altitude_m_agl: 150–300
+    speed_kmh_tas: 150–250
+    airspace: U-space corridor
+  - segment: Decelerate
+    altitude_start_m: 300
+    altitude_end_m: 150
+    note: Reduction from cruise approaching Vertiport B
+  - segment: Vertical descent
+    altitude_start_m: 150
+    altitude_end_m: 0
+    note: To Vertiport B ground pad

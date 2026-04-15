@@ -1,0 +1,45 @@
+# Q100 BWB Configuration — Key Parameters
+# Path: 04_PRODUCTS/AMPEL360_Q100_BWB/variants/Q100_BWB_BASE/configuration/vehicle_definition.yaml
+# Authority: ASIT
+# Status: ACTIVE_BASELINE
+
+title: Vehicle Definition — AMPEL360 Q100 BWB
+product: AMPEL360_Q100_BWB
+variant: Q100_BWB_BASE
+
+configuration:
+  airframe:
+    type: Blended Wing Body (BWB)
+    seating: ~100 passengers
+    aerodynamic_efficiency: L/D > 25 target
+
+  propulsion:
+    type: Distributed open-fan electric
+    ata_chapters: [ATA-61, ATA-71]
+    primary_power: Hydrogen Fuel Cell (H2 FC)
+    buffer: Cryogenic-compatible battery buffer
+    governing_knot: KNOT-Q100BWB-LC03-0001
+
+  power_system:
+    primary: H2 FC
+    buffer: Battery (cryogenic-compatible)
+    ata_chapter: ATA-24
+    governing_knot: KNOT-Q100BWB-LC03-0002
+
+  thermal_management:
+    battery_thermal: Cryogenic-compatible buffer battery TMS
+    h2_thermal: Cryogenic H2 storage and conditioning
+    ata_chapters: [ATA-24, ATA-96]
+    governing_knot: KNOT-Q100BWB-LC03-0003
+
+  avionics:
+    flight_control: FBW + AI health monitoring
+    software_assurance: DO-178C DAL A/B
+    hardware_assurance: DO-254 DAL A/B
+    governing_knot: KNOT-Q100BWB-LC03-0004
+
+certification:
+  basis: CS-25 + Special Conditions
+  target_easa_tc: "2031"
+  precedent: SC-VTOL (from AAM/UAM eVTOL programme KNOT-AAMUAM-LC03-0005)
+  governing_knot: KNOT-Q100BWB-LC03-0005
