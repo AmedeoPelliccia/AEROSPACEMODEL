@@ -1,0 +1,8 @@
+knot_id,title,lifecycle_phase,obligation_source,status,owner,created_date,description,clause_refs,knu_refs,compliance_status,notes
+KNOT-HAPSSE-LC03-0001,Airframe Architecture Definition,LC03,ATA 51-57,IN_PROGRESS,ASIT,2026-03-19,Define the ultra-high aspect ratio twin-boom composite airframe architecture including primary structure and material system,,KNU-HAPSSE-LC03-0001,IN_PROGRESS,
+KNOT-HAPSSE-LC03-0002,Wing and Solar Architecture Definition,LC03,ATA 57,IN_PROGRESS,ASIT,2026-03-19,Define the wing architecture as solar array substrate with flex spar AR > 25 and solar cell integration,,KNU-HAPSSE-LC03-0002,IN_PROGRESS,
+KNOT-HAPSSE-LC03-0003,Energy System Architecture Definition,LC03,ATA 24+28,IN_PROGRESS,ASIT,2026-03-19,Define the energy architecture combining solar cell generation and battery buffer with day/night cycle management,,KNU-HAPSSE-LC03-0003,IN_PROGRESS,
+KNOT-HAPSSE-LC03-0004,Propulsion Architecture Definition,LC03,ATA 61+71,IN_PROGRESS,ASIT,2026-03-19,Define the distributed electric propulsion architecture with 4 propellers and motor controllers,,KNU-HAPSSE-LC03-0004,IN_PROGRESS,
+KNOT-HAPSSE-LC03-0005,Payload Architecture Definition,LC03,ATA 46,IN_PROGRESS,ASIT,2026-03-19,Define the payload bay architecture for Comms EO and ISR payload integration,,KNU-HAPSSE-LC03-0005,IN_PROGRESS,
+KNOT-HAPSSE-LC03-0006,Tail Architecture Definition,LC03,ATA 55,IN_PROGRESS,ASIT,2026-03-19,Define the twin-boom H-tail architecture including boom structure and stabiliser attachment,,KNU-HAPSSE-LC03-0006,IN_PROGRESS,
+KNOT-HAPSSE-LC03-0007,System Interface Architecture,LC03,ARP4754A,IN_PROGRESS,ASIT,2026-03-19,Define all system-level interfaces including power data mechanical and thermal interfaces between subsystems,,KNU-HAPSSE-LC03-0007,IN_PROGRESS,

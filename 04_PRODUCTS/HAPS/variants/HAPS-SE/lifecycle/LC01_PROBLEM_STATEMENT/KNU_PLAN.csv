@@ -1,0 +1,6 @@
+knu_id,title,lifecycle_phase,knot_ref,knu_class,status,owner,created_date,description,evidence_refs,compliance_status,start_date,end_date,notes
+KNU-HAPSSE-LC01-0001,Operational Gap Analysis,LC01,KNOT-HAPSSE-LC01-0001,ANALYSIS,IN_PROGRESS,ASIT,2026-03-19,Analyse gap between satellite and conventional aircraft coverage and HAPS-SE capability envelope,,IN_PROGRESS,2026-03-19,,
+KNU-HAPSSE-LC01-0002,Mission Scenario Definition,LC01,KNOT-HAPSSE-LC01-0002,REQUIREMENT_SET,IN_PROGRESS,ASIT,2026-03-19,Define primary mission scenarios: persistent comms relay EO area coverage and ISR tasking at 18–22 km,,IN_PROGRESS,2026-03-19,,
+KNU-HAPSSE-LC01-0003,Stakeholder Need Register,LC01,KNOT-HAPSSE-LC01-0003,ARTEFACT,IN_PROGRESS,ASIT,2026-03-19,Compile and prioritise stakeholder needs including endurance energy balance payload capability and station-keeping,,IN_PROGRESS,2026-03-19,,
+KNU-HAPSSE-LC01-0004,Concept of Operations (CONOPS),LC01,KNOT-HAPSSE-LC01-0003,ARTEFACT,IN_PROGRESS,ASIT,2026-03-19,Develop CONOPS document covering launch transit ascent station-keeping operations and recovery,,IN_PROGRESS,2026-03-19,,
+KNU-HAPSSE-LC01-0005,Top-Level Constraint Register,LC01,KNOT-HAPSSE-LC01-0004,ARTEFACT,IN_PROGRESS,ASIT,2026-03-19,Document top-level constraints: ICAO UA certification path ITU spectrum allocation solar energy budget and structural life,,IN_PROGRESS,2026-03-19,,

@@ -1,0 +1,17 @@
+# Effectivity Rules — HAPS-SE
+# Path: 04_PRODUCTS/HAPS/variants/HAPS-SE/configuration/effectivity_rules.yaml
+# Status: ACTIVE_BASELINE
+
+variant: HAPS-SE
+product_family: HAPS
+authority: ASIT
+
+effectivity_rules:
+  - rule_id: EFF-HAPS-SE-001
+    description: >
+      All configuration items in this baseline are effective for the
+      HAPS-SE AS_DESIGNED baseline from 2026-03-19.
+    scope: all
+    effective_from: "2026-03-19"
+    effective_to: null
+    status: ACTIVE
