@@ -17,11 +17,11 @@ Replace `PRODUCT_FAMILY` with the actual product family name.
 The AEROSPACEMODEL product taxonomy distinguishes first between **crewed craft**,
 **uncrewed craft**, and **stations**. There are three primary operational families:
 
-| Craft class | Family     | Description                                               |
-| ----------- | ---------- | --------------------------------------------------------- |
-| CREWED      | **AMPEL**    | Family of crewed aerospace craft                          |
-| UNCREWED    | **ROBBBO-T** | Family of uncrewed aerospace craft                        |
-| STATIONS    | **GAIA**     | Family of stations and fixed/semi-fixed infrastructure    |
+| Craft class    | Family     | Description                                               |
+| -------------- | ---------- | --------------------------------------------------------- |
+| CRAFT_CREWED   | **AMPEL**    | Family of crewed aerospace craft                          |
+| CRAFT_UNCREWED | **ROBBBO-T** | Family of uncrewed aerospace craft                        |
+| STATIONS       | **GAIA**     | Family of stations and fixed/semi-fixed infrastructure    |
 
 ### Taxonomy levels
 

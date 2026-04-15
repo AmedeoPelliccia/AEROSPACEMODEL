@@ -37,17 +37,17 @@ variants:
     status: DRAFT
 
 programmes:
-  - id: PROGRAMME
+  - id: PROGRAMME_CREWED
     craft_class: CRAFT_CREWED
     family: AMPEL
     description: Template programme (crewed)
     status: DRAFT
-  - id: PROGRAMME
+  - id: PROGRAMME_UNCREWED
     craft_class: CRAFT_UNCREWED
     family: ROBBBO-T
     description: Template programme (uncrewed)
     status: DRAFT
-  - id: PROGRAMME
+  - id: PROGRAMME_STATIONS
     craft_class: STATIONS
     family: GAIA
     description: Template programme (stations)
